@@ -6,8 +6,9 @@ class ProductModel extends CI_Model {
   public function getAll($filter = []){
     $this->db->select("pro.*, ekr.nama_perusahaan, COALESCE(pro.cover_product, 'thumbnail-600x400.jpg') as cover_product");
     $nama_role = !empty($this->session->userdata()['nama_role']) ? $this->session->userdata()['nama_role'] : NULL;
-    $this->db->select("@perusahaan := '{$nama_role}' = 'perusahaan'", FALSE);
-    $this->db->select("IF(!@perusahaan, 'Bukan Perusahaan', NULL) as edit_perusahaan_pr");
+    $id_perusahaan = !empty($this->session->userdata()['id_perusahaan']) ? $this->session->userdata()['id_perusahaan'] : NULL;
+    $this->db->select("@perusahaan := '{$id_perusahaan}' = pro.id_perusahaan", FALSE);
+    $this->db->select("IF(!@perusahaan, 'Bukan Perusahaan', NULL ) as edit_perusahaan_pr");
     $this->db->from("product as pro");
     $this->db->join("perusahaan as ekr", "ekr.id_perusahaan = pro.id_perusahaan");
     if(!empty($filter['id_perusahaan'])) $this->db->where('pro.id_perusahaan', $filter['id_perusahaan']);

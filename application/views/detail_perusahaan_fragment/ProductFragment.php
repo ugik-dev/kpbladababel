@@ -17,8 +17,14 @@ $(document).ready(function() {
     'id_opd': $('#product_toolbar').find('#id_opd'),
     'newBtn': $('#product_toolbar').find('#new_btn'),
   }
-  toolbar.newBtn.toggle(!dataInfo['edit_producttir']);
-
+  // console.log(dataInfo['edit_perusahaan_pr']);
+  <?php if( $this->session->userdata()['id_perusahaan'] ==  $contentData['id_perusahaan'] ){
+  ?>
+  toolbar.newBtn.toggle(true); 
+   console.log("true");
+    <?php }
+  ?>
+   // info.edit_info_btn.toggle(FALSE); 
   var product_list = $('#product-list');
 
   var dataProduct = {}
@@ -72,7 +78,11 @@ $(document).ready(function() {
           </div>
         </div>
       `);
+      // console.log(product['edit_perusahaan_pr']);
+      // toolbar.newBtn.toggle(!product['edit_perusahaan_pr']);
     });
+    console.log(product['edit_perusahaan_pr']);
+    // toolbar.newBtn.toggle(!product['edit_perusahaan_pr']);
   }
 
   toolbar.newBtn.on('click', function(e){

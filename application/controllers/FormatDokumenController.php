@@ -269,6 +269,65 @@ class FormatDokumenController extends CI_Controller {
         $pdf->Output('',$filename,false);
     }
 
+    public function format_permohonan_pergub(){
+      // try{
+      $this->SecurityModel->userOnlyGuard(TRUE);
+
+      $input = $this->input->get();
+      // if(empty($input['id_pengiriman'])) throw new UserException("Parameter 'id_pengiriman' tidak ada", 0);
+
+      // $pengiriman = $this->PengirimanModel->get($input['id_pengiriman']);
+      // $pengirimanItem = $this->PengirimanItemModel->getAll(['id_pengiriman' => $input['id_pengiriman']]);
+      // $perusahaan = $this->PerusahaanModel->get($pengiriman['id_perusahaan']);
+      // $siup = array_values($this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'id_jenis_dokumen_perusahaan' => 2]));
+      // $no_siup = !empty($siup) ? $siup[0]['no_dokumen_perusahaan'] : NULL;
+      $filename = 'Permohonan Kepada KPB_';
+      
+      // var_dump($pengirimanItem);
+      // $pengiriman = 'nama pengirim';
+      // $pengirimanItem = 'nama pengirim';
+      // $perusahaan = 'nama pengirim';
+      // $siup = 'nama pengirim';
+      // $no_siup = 'nama pengirim';
+
+
+      $phpWord = new PhpOffice\PhpWord\PhpWord();
+      $phpWord->addFontStyle('h3', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => true));
+      $phpWord->addFontStyle('paragraph', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000'));
+      // $PHPWord->addParagraphStyle('p3Style', array('align'=>'center', 'spaceAfter'=>100));
+      $phpWord->addFontStyle('paragraph_bold', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => true));
+
+      $section = $phpWord->addSection(array('marginLeft' => 1200, 'marginRight' => 600,
+      'marginTop' => 600, 'marginBottom' => 600));
+      // $section->addImage(base_url('assets/img/head_bp3l.png'),array('height' => 70, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER));
+      $header = $section->createHeader();
+
+      // Add a watermark to the header
+      $header->addWatermark(base_url('assets/img/head_bp3l.png'), array('marginTop'=>200, 'marginLeft'=>55));
+
+      $tanggal = CustomFunctions::tanggal_indonesia(date("Y-m-d"));
+      // $section->addText("Panngkalpinang, {$tanggal}", "paragraph");
+
+      $textrun = $section->addTextRun();
+      // $year = explode("-", $pengiriman['created_at'])[0];
+
+      $textrun->addText("Lampiran\t: -", 'paragraph');
+      $textrun->addTextBreak();
+      $textrun->addText("Perihal\t\t: ", 'paragraph');
+      $textrun->addText(" ", 'paragraph_bold');
+      $textrun->addTextBreak();
+  
+
+      //===
+      
+      $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+      // FileIO::headerDownloadDocx('Form Pengajuan Mutu - ' . $pengiriman['nama_pengiriman']);
+      FileIO::headerDownloadDocx($filename);
+      
+      $objWriter->save("php://output");
+    
+  }
+
     public function format_permohonan_to_kpb(){
         // try{
         $this->SecurityModel->userOnlyGuard(TRUE);

@@ -36,7 +36,7 @@ class PerusahaanModel extends CI_Model {
   public function getAll($filter){
     // var_dump($this->session->userdata());
     $this->db->select("eks.*, jp.nama_jenis_perusahaan");
-    $this->db->select("IF('{$this->session->userdata()['nama_role']}' = 'perusahaan', NULL, 'Bukan Perusahaan') as edit_perusahaan", FALSE);
+    $this->db->select("IF('{$this->session->userdata()['id_user']}' = eks.id_user , NULL, 'Bukan Perusahaan') as edit_perusahaan", FALSE);
     $this->db->from("perusahaan as eks");
     $this->db->join('jenis_perusahaan as jp', "jp.id_jenis_perusahaan = eks.id_jenis_perusahaan");
     if(!empty($filter['id_perusahaan'])) $this->db->where("eks.id_perusahaan", $filter['id_perusahaan']);

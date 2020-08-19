@@ -418,9 +418,9 @@ $(document).ready(function() {
   
   function renderInfo(){
     
-    info.an_bank.html(dataInfo['an_bank']);
-    info.no_rek_bank.html(dataInfo['no_rek_bank']);
-    info.id_bank.html(dataBank[dataInfo['id_bank']]['nama_bank']);
+    info.an_bank.html(dataInfo['an_bank'] ? dataInfo['an_bank'] : '-' );
+    info.no_rek_bank.html(dataInfo['no_rek_bank'] ? dataInfo['no_rek_bank'] : '-' );
+    if(dataInfo['id_bank'] != "" ) info.id_bank.html(dataBank[dataInfo['id_bank']]['nama_bank']);
     
     info.nama_perusahaan.html(dataInfo['nama_perusahaan']);
     info.nama_jenis_perusahaan.html(dataInfo['nama_jenis_perusahaan']);
@@ -451,7 +451,7 @@ $(document).ready(function() {
     
     informasiModal.an_bank.val(dataInfo['an_bank']);
     informasiModal.no_rek_bank.val(dataInfo['no_rek_bank']);
-    informasiModal.id_bank.val(dataBank[dataInfo['id_bank']]['nama_bank'] + ' -- '+ dataInfo['id_bank']);
+    // if(dataInfo['id_bank'] != "" ) informasiModal.id_bank.val(dataBank[dataInfo['id_bank']]['nama_bank'] + ' -- '+ dataInfo['id_bank']);
     
     informasiModal.lok_perusahaan_kec.val(dataInfo['lok_perusahaan_kec']);
     informasiModal.lok_perusahaan_kabkot.val(dataInfo['lok_perusahaan_kabkot']);
