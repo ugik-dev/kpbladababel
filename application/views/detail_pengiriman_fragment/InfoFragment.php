@@ -74,8 +74,8 @@
     </div>
     <div class="col-lg-6 m-t-n-sm">
       <button class="btn btn-success my-1 mr-sm-2" id="edit_info_btn" style="display:none"><i class='fa fa-edit'></i> Edit Pengiriman</button>
-      <button class="btn btn-success my-1 mr-sm-2" id="dok_permohonan_bp3l_btn" style="display:none"><i class='fa fa-upload'></i> Upload Permohonan ke BP3L</button>
-      <button class="btn btn-success my-1 mr-sm-2" id="dok_permohonan_bpsmb_btn" style="display:none"><i class='fa fa-upload'></i> Upload Permohonan ke BPSMB</button>
+      <button class="btn btn-success my-1 mr-sm-2" id="dok_permohonan_bp3l_btn" style="display:none"><i class='fa fa-upload'></i> Upload Permohonan</button>
+      <button hidden class="btn btn-success my-1 mr-sm-2" id="dok_permohonan_bpsmb_btn" style="display:none"><i class='fa fa-upload'></i> Upload Permohonan ke BPSMB</button>
     </div>
   </div>
   <div class="row m-t-sm">
@@ -266,25 +266,25 @@
   </div>
 </div>
 
-<div class="modal inmodal" id="dok_permohonan_bp3l_modal" tabindex="-1" opd="dialog"  aria-hidden="true">
+<div class="modal inmodal" id="dok_permohonan_all_modal" tabindex="-1" opd="dialog"  aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content animated fadeIn">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Upload Dokukmen Permohonan BP3L</h4>
+        <h4 class="modal-title">Upload Dokukmen Permohonan </h4>
         <span class="info"></span>
       </div>
       <div class="modal-body" id="modal-body">
       
-        <form opd="form" id="dok_permohonan_bp3l_form" onsubmit="return false;" type="multipart" autocomplete="off">
+        <form opd="form" id="dok_permohonan_all_form" onsubmit="return false;" type="multipart" autocomplete="off">
           <input type="hidden" id="id_pengiriman" name="id_pengiriman">
      
-          <div class="form-group" id="dokumen_permohonan_bp3l_form">
-            <label for="dokumen_disperindag_izin">Dokumen Permohonan <small>*pdf</small></label>
-            <p class="no-margins"><span id="dokumen_permohonan_bp3l">-</span></p>
+          <div class="form-group" id="dokumen_permohonan_all_form">
+            <label for="dokumen_permohonan_all">Dokumen Permohonan <small>*pdf</small></label>
+            <p class="no-margins"><span id="dokumen_permohonan_all">-</span></p>
           </div>
-          <div id='format_permohonan_pengiriman_bp3l'></div>
-          <button class="btn btn-success my-1 mr-sm-2" type="submit" id="upload_to_bp3l_btn" data-loading-text="Loading..."><strong>Simpan</strong></button>
+          <div id='format_permohonan_pengiriman_all'></div>
+          <button class="btn btn-success my-1 mr-sm-2" type="submit" id="upload_to_all_btn" data-loading-text="Loading..."><strong>Simpan</strong></button>
         </form>
         
       </div>
@@ -347,7 +347,7 @@ $(document).ready(function() {
   }
 
   $('#format_permohonan_pengiriman_bpsmb').html(downloadButtonV2("<?=site_url('FormatDokumenController/format_permohonan_to_bpsmb_mutu/')?>", "?id_pengiriman=" + id_pengiriman, "Download Format BPSMB Word"))
-  $('#format_permohonan_pengiriman_bp3l').html(downloadButtonV2("<?=site_url('FormatDokumenController/format_permohonan_to_bp3l/')?>", "?id_pengiriman=" + id_pengiriman, "Download Format BP3L Word"))
+  $('#format_permohonan_pengiriman_all').html(downloadButtonV2("<?=site_url('FormatDokumenController/format_permohonan_pergub/')?>", "?id_pengiriman=" + id_pengiriman, "Download Format Word"))
 
   var informasiModal = {
     self: $('#informasi_modal'),
@@ -371,13 +371,13 @@ $(document).ready(function() {
     save_btn: $('#dok_permohonan_bpsmb_form').find('#upload_to_bpsmb_btn'),
   }
 
-  var DokPermohonanBp3l = {
-    self: $('#dok_permohonan_bp3l_modal'),
-    form: $('#dok_permohonan_bp3l_form'),
-    'id_pengiriman': $('#dok_permohonan_bp3l_form').find('#id_pengiriman'),
-     'dokumen_permohonan_bp3l_form': $('#dok_permohonan_bp3l_form').find('#dokumen_permohonan_bp3l_form'),
-     'dokumen_permohonan_bp3l': new FileUploader($('#dok_permohonan_bp3l_form').find('#dokumen_permohonan_bp3l'), "", "dokumen_bp3l", ".pdf", false, true),
-    save_btn: $('#dok_permohonan_bp3l_form').find('#upload_to_bp3l_btn'),
+  var DokPermohonanAll = {
+    self: $('#dok_permohonan_all_modal'),
+    form: $('#dok_permohonan_all_form'),
+    'id_pengiriman': $('#dok_permohonan_all_form').find('#id_pengiriman'),
+     'dokumen_permohonan_all_form': $('#dok_permohonan_all_form').find('#dokumen_permohonan_all_form'),
+     'dokumen_permohonan_all': new FileUploader($('#dok_permohonan_all_form').find('#dokumen_permohonan_all'), "", "dokumen_permohonan", ".pdf", false, true),
+    save_btn: $('#dok_permohonan_all_form').find('#upload_to_all_btn'),
   }
 
   var pengiriman_item_table = $('#pengiriman_item_table').DataTable({
@@ -542,7 +542,7 @@ $(document).ready(function() {
     info.rencana_pengapalan.html(dataInfo['rencana_pengapalan'] ? dataInfo['rencana_pengapalan'] : '-');
     info.jumlah_berat.html(dataInfo['jumlah_berat'] ? dataInfo['jumlah_berat']+' Metric / Ton' : '-');
     info.jumlah_partai.html(dataInfo['jumlah_partai'] ? dataInfo['jumlah_partai'] : '-');
-    btnx = dataInfo['dokumen_bpsmb_mutu'] || dataInfo['dokumen_bp3l'] ? downloadButtonV2("<?=base_url('uploads/dokumen_bp3l/')?>", dataInfo['dokumen_bp3l'], "Permohonan BP3L") + '<br><br>' + downloadButtonV2("<?=base_url('uploads/dokumen_bpsmb_mutu/')?>", dataInfo['dokumen_bpsmb_mutu'], "Permohonan BPSMB"): "Tidak Ada";
+    btnx = dataInfo['dokumen_permohonan'] ? downloadButtonV2("<?=base_url('uploads/dokumen_permohonan/')?>", dataInfo['dokumen_permohonan'], "Dokumen Permohonan") : "Tidak Ada";
     info.status_dokumen_permohonan.html(btnx);
     info.status_pengiriman.html(statusPermohonan(dataInfo['status_proposal']));
     info.edit_info_btn.toggle(!dataInfo['edit_perusahaan_eks']);
@@ -575,11 +575,11 @@ $(document).ready(function() {
   });
 
   info.dok_permohonan_bp3l_btn.on('click', function(){
-    DokPermohonanBp3l.self.modal('show');
-    DokPermohonanBp3l.id_pengiriman.val(dataInfo['id_pengiriman']);
+    DokPermohonanAll.self.modal('show');
+    DokPermohonanAll.id_pengiriman.val(dataInfo['id_pengiriman']);
     // DokPermohonanBpsmb.nama_pengiriman.val(dataInfo['nama_pengiriman']);
-    DokPermohonanBp3l.dokumen_permohonan_bp3l_form.toggle(true);
-    DokPermohonanBp3l.dokumen_permohonan_bp3l.setRequired(true);
+    DokPermohonanAll.dokumen_permohonan_all_form.toggle(true);
+    DokPermohonanAll.dokumen_permohonan_all.setRequired(true);
   });
 
 
@@ -609,16 +609,16 @@ $(document).ready(function() {
     });
   });
 
-  DokPermohonanBp3l.form.on('submit', (ev) => {
+  DokPermohonanAll.form.on('submit', (ev) => {
     console.log('sub');
     ev.preventDefault();
-    buttonLoading(DokPermohonanBp3l.save_btn);
+    buttonLoading(DokPermohonanAll.save_btn);
     $.ajax({
-      url: "<?=site_url('PengirimanController/dok_permohonan_upload_bp3l')?>", type: "POST",
-      data: new FormData(DokPermohonanBp3l.form[0]),
+      url: "<?=site_url('PengirimanController/dok_permohonan_upload')?>", type: "POST",
+      data: new FormData(DokPermohonanAll.form[0]),
       contentType: false, processData: false,  
       success: (data) => {
-        buttonIdle(DokPermohonanBp3l.save_btn);
+        buttonIdle(DokPermohonanAll.save_btn);
         json = JSON.parse(data);
         if(json['error']){
           swal("Harap Menggunakan Format PDF", json['message'], "error");
@@ -627,10 +627,10 @@ $(document).ready(function() {
         dataInfo = json['data'];
         renderInfo();
         swal("Berhasil Menamkan Dokumen", 'Upload Dokumen Berhasil', "success");
-        DokPermohonanBp3l.self.modal('hide');
+        DokPermohonanAll.self.modal('hide');
       },
       error: () => {
-        buttonIdle(DokPermohonanBp3l.save_btn);
+        buttonIdle(DokPermohonanAll.save_btn);
       },
     });
   });
@@ -662,11 +662,8 @@ $(document).ready(function() {
   });
   
   info.process_btn.on('click', function(){
-    if(dataInfo['dokumen_bpsmb_mutu'] == null){
-          swal("Harap Upload Dokumen Permohonan BPSMB !!", '', "error");
-          return;
-      }else  if(dataInfo['dokumen_bp3l'] == null){
-          swal("Harap Upload Dokumen Permohonan BP3L!!", '', "error");
+    if(dataInfo['dokumen_permohonan'] == null){
+          swal("Harap Upload Dokumen Permohonan!!", '', "error");
           return;
     }  
     swal(saveConfirmation("Kirim Proposal", "Yakin kirim proposal?", "Ya, Kirim!")).then((result) => {

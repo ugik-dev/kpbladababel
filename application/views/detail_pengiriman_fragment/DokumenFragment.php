@@ -334,19 +334,19 @@ $(document).ready(function() {
     // var kpb_rek_status = statusPermohonan(dataInfo['status_kpb_rek']) + (dataInfo['status_kpb_rek'] == 'MENUNGGU' ? ': Pengiriman Proposal': '');
    
     var perusahaan_status = statusPermohonan3(dataInfo['status_proposal']) 
-    var dokbp3l = dataInfo['dokumen_bp3l'] ? downloadButtonV2("<?=base_url('uploads/dokumen_bp3l/')?>", dataInfo['dokumen_bp3l'], "Permohonan BP3L") : "Tidak Ada Dokumen BP3L";
-    var dokbpsmb = dataInfo['dokumen_bpsmb_mutu'] ? downloadButtonV2("<?=base_url('uploads/dokumen_bpsmb_mutu/')?>", dataInfo['dokumen_bpsmb_mutu'], "Permohonan BPSMB") : "Tidak Ada Dokumen";
-    if(role == 'perusahaan' || role == 'kpb'){
-      var perusahaan_dokumen = dokbp3l+'<br><br>'+dokbpsmb;
-    }else if(role == 'bp3l'){
-      var perusahaan_dokumen = dokbp3l;  
-    }else if(role == 'mutu'){
-      var perusahaan_dokumen = dokbpsmb;  
-    }
+    var dok_permohonan = dataInfo['dokumen_permohonan'] ? downloadButtonV2("<?=base_url('uploads/dokumen_permohonan/')?>", dataInfo['dokumen_permohonan'], "Permohonan") : "Tidak Ada Dokumen BP3L";
+    // var dokbpsmb = dataInfo['dokumen_bpsmb_mutu'] ? downloadButtonV2("<?=base_url('uploads/dokumen_bpsmb_mutu/')?>", dataInfo['dokumen_bpsmb_mutu'], "Permohonan BPSMB") : "Tidak Ada Dokumen";
+    // if(role == 'perusahaan' || role == 'kpb'){
+      var perusahaan_dokumen = dok_permohonan;
+    // }else if(role == 'bp3l'){
+      // var perusahaan_dokumen = dok_permohonan;  
+    // }else if(role == 'mutu'){
+      // var perusahaan_dokumen = dokbpsmb;  
+    // }
     // var perusahaan_dokumen = 
     if(!empty(dataInfo['date_proposal']))date = dataInfo['date_proposal'].split(':');
     var perusahaan_status = dataInfo['date_proposal'] ? perusahaan_status += '<br>'+date[0]+':'+date[1] : perusahaan_status;
-      renderData.push(['Perusahaan', perusahaan_status, '-', perusahaan_dokumen, '-', '-' ]);    
+    renderData.push(['Perusahaan', perusahaan_status, '-', perusahaan_dokumen, '-', '-' ]);    
    
 
     var kpb_rek_status = statusPermohonan2(dataInfo['status_kpb_rek']) + (dataInfo['status_kpb_rek'] == 'MENUNGGU' ? ': Pengiriman Proposal': '');

@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-6">
       <span class="text-center">
-        <h3><img class="col-xs-6 col-lg-6 logo" src="<?php echo base_url('assets/img/logo-babel.png');?>"></h3>
+        <h3><img class="col-xs-8 col-lg-8 logo" src="<?php echo base_url('assets/img/logo-kpb.png');?>"></h3>
         <h3 class="font-bold">SELAMAT DATANG DI SISTEM INFORMASI KANTOR PEMASARAN BERSAMA LADA BABEL</h3>
       </span>
       <h4 class="font-bold">Panduan: </h4>
