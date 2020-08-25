@@ -317,6 +317,8 @@ class FormatDokumenController extends CI_Controller
     $no_siup = !empty($siup) ? $siup[0]['no_dokumen_perusahaan'] : NULL;
     $nib = array_values($this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'id_jenis_dokumen_perusahaan' => 7]));
     $no_nib = !empty($nib) ? $nib[0]['no_dokumen_perusahaan'] : NULL;
+    $logo = array_values($this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'id_jenis_dokumen_perusahaan' => 8]));
+    $logo_img = !empty($logo) ? $logo[0]['dokumen_perusahaan'] : NULL;
     $filename = 'Surat_Permohonan_IDX_' . $input['id_pengiriman'];
 
     // var_dump($pengirimanItem);
@@ -329,12 +331,13 @@ class FormatDokumenController extends CI_Controller
 
     $phpWord = new PhpOffice\PhpWord\PhpWord();
     $phpWord->addFontStyle('h3', array('name' => 'Times New Roman', 'size' => 10, 'color' => '000000', 'bold' => true));
-    $phpWord->addFontStyle('paragraph', array('name' => 'Times New Roman', 'size' => 10, 'color' => '000000'));
+    $phpWord->addFontStyle('paragraph', array('name' => 'Times New Roman', 'size' => 10, 'color' => '000000', 'spaceAfter' => 0));
     // $PHPWord->addParagraphStyle('p3Style', array('align'=>'center', 'spaceAfter'=>100));
     $phpWord->addFontStyle('paragraph_bold', array('name' => 'Times New Roman', 'size' => 10, 'color' => '000000', 'bold' => true));
     $phpWord->addFontStyle('paragraph2', array('name' => 'Times New Roman', 'size' => 9, 'color' => '000000', 'underline' => 'single'));
     $phpWord->addFontStyle('paragraph3', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => true, 'underline' => 'single'));
     $phpWord->addFontStyle('paragraph4', array('name' => 'Times New Roman', 'size' => 13, 'color' => '000000', 'bold' => true, 'underline' => 'single'));
+    $noSpace = array('spaceAfter' => 0);
 
     $paragraphStyleName = 'pStyle';
     $phpWord->addParagraphStyle($paragraphStyleName, array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 100));
@@ -344,18 +347,31 @@ class FormatDokumenController extends CI_Controller
       'marginLeft' => 1200, 'marginRight' => 600,
       'marginTop' => 600, 'marginBottom' => 600
     ));
-    // $section->addImage(base_url('assets/img/head_bp3l.png'),array('height' => 70, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER));
-    // $header = $section->createHeader();
+    if (!empty($logo_img)) {
+      // $fancyTableStyle = array('borderSize' => 1, 'borderColor' => '000000', 'height' => 200, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
 
-    // Add a watermark to the header
-    // $header->addWatermark(base_url('assets/img/logo-kpb-tr.png'), array('marginTop'=>4000, 'marginLeft'=>55, 'width' => 470));
+      $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      $spanTableStyleName = 'Colspan Rowspan';
+      $phpWord->addTableStyle($spanTableStyleName, $fancyTableStyle);
+      $table = $section->addTable($spanTableStyleName, array('spaceAfter' => 0));
+      $table->addRow();
+      $table->addCell(2000, $cellVCentered)->addImage(base_url('uploads/dokumen_perusahaan/') . $logo_img, array('height' => 75, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,  'spaceAfter' => 0));;
+      $myCell1 = $table->addCell(7400, $cellVCentered);
+      $myCell1->addText($perusahaan['nama_perusahaan'], array('name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => true), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 10));
+      $myCell1->addText($perusahaan['lok_perusahaan_full'] . ', ' . $perusahaan['lok_perusahaan_kec'] . ' - ' . $perusahaan['lok_perusahaan_kabkot'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+      $myCell1->addText('Provinsi Kepulauan Bangka Belitung', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+      $myCell1->addText('Email : ' . $perusahaan['email'] . ' Telp : ' . $perusahaan['no_telepon'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+      $section->addLine(array('weight' => 1.25, 'width' => 465, 'height' => 0, 'color' => '38c172'), array('spaceAfter' => 0));
+    } else {
+      $section->addText('KOP PERUSAHAAN', "paragraph3", $paragraphStyleName);
+      $textrun = $section->addTextRun();
+      $textrun->addTextBreak();
+    }
+    // $textrun->addTextBreak();
+    // $textrun->addTextBreak();
     $tanggal = CustomFunctions::tanggal_indonesia(date("Y-m-d"));
-    $section->addText('KOP PERUSAHAAN', "paragraph3", $paragraphStyleName);
-    $textrun = $section->addTextRun();
-    $textrun->addTextBreak();
-    // $textrun->addTextBreak();
-    // $textrun->addTextBreak();
-    $section->addText("\t\t\t\t\t\t\t\t\tPanngkalpinang, {$tanggal}", "paragraph");
+    $section->addText("\t\t\t\t\t\t\t\t\tPanngkalpinang, {$tanggal}", "paragraph", array('spaceBefore' => 0));
 
     $section = $phpWord->addSection(['breakType' => 'continuous', 'colsNum' => 2]);
     $textrun = $section->addTextRun();
@@ -371,7 +387,6 @@ class FormatDokumenController extends CI_Controller
 
     $textrun->addTextBreak();
 
-
     $textrun->addText("Yth.", 'paragraph');
     $textrun->addTextBreak();
     $textrun->addText("          1.\t KPB Lada Prov. Kep. Bangka Belitung.", 'paragraph');
@@ -384,13 +399,11 @@ class FormatDokumenController extends CI_Controller
     $textrun->addTextBreak();
     $textrun->addText("\tTempat", 'paragraph');
 
-
     $section = $phpWord->addSection(['breakType' => 'continuous', 'colsNum' => 1]);
-    $textrun = $section->addTextRun();
+
 
     $section->addText("Dengan hormat,", 'paragraph', array('spaceAfter' => 0));
     $section->addText("Sesuai dengan Peraturan Gubernur nomor 63 tahun 2019 dalam menyelenggarakan pemasaran lada putih penugasan BUMD PT BBBS sebagai dan Peraturan Gubernur nomor 19 tahun 2020 tentang tata kelolah perdagangan lada putih Muntok White Papper maka bersama ini kami lampirkan rencana ekspor/Perdagangan lada antar Pulau dengan data sebagai berikut :", 'paragraph', 'pS2');
-    $noSpace = array('spaceAfter' => 0);
     $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
     $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
     $spanTableStyleName = 'Colspan Rowspan';
@@ -413,10 +426,10 @@ class FormatDokumenController extends CI_Controller
     $table->addCell(5000, $cellVCentered)->addText($perusahaan['lok_gudang_penyimpanan_full'] . ' ,' . $perusahaan['lok_gudang_penyimpanan_kec'] . ' - ' . $perusahaan['lok_gudang_penyimpanan_kabkot'], 'paragraph', $noSpace);
 
 
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Nomor SIUP Perusahaan', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($no_siup, 'paragraph', $noSpace);
+    // $table->addRow();
+    // $table->addCell(4000, $cellVCentered)->addText('Nomor SIUP Perusahaan', 'paragraph', $noSpace);
+    // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    // $table->addCell(5000, $cellVCentered)->addText($no_siup, 'paragraph', $noSpace);
 
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Nomor Induk Berusaha (NIB)', 'paragraph', $noSpace);
@@ -518,7 +531,6 @@ class FormatDokumenController extends CI_Controller
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Netto', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    // $table->addCell(5000, $cellVCentered)->addText($berat_total .' KG ( '.$berat .' )', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText($berat, 'paragraph', $noSpace);
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Gross', 'paragraph', $noSpace);
@@ -535,26 +547,17 @@ class FormatDokumenController extends CI_Controller
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Shipping Mark', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    // $table->addCell(5000, $cellVCentered)->addText($shipping_mark, 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
 
     $textrun = $section->addTextRun();
     $textrun->addText("Demikian permohonan kami, atas bantuan dan kerjasamanya kami ucapkan terima kasih.", 'paragraph');
     $textrun->addTextBreak();
 
-    // $textrun = $section->addTextRun();
-    // $textrun->addText("Hormat Kami,", 'paragraph');
-    // $textrun->addTextBreak();
-    // $textrun->addText("KETUA KPB PROV KEP BABEL", 'paragraph');
-    // $textrun->addTextBreak(6);
-    // $textrun->addText("(                                       )", 'paragraph_bold');
-    // $textrun->addTextBreak();
-
     $textrun = $section->addTextRun();
     $textrun->addText("Hormat Kami,", 'paragraph');
     $textrun->addTextBreak();
     $textrun->addText($perusahaan['nama_perusahaan'], 'paragraph');
-    $textrun->addTextBreak(6);
+    $textrun->addTextBreak(4);
     $textrun->addText($perusahaan['nama_pimpinan'], 'paragraph');
     $textrun->addTextBreak();
 
