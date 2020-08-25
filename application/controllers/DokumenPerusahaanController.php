@@ -28,9 +28,11 @@ class DokumenPerusahaanController extends CI_Controller
     try {
       $this->SecurityModel->userOnlyGuard(TRUE);
       $data = $this->input->post();
-      if ($data['id_jenis_dokumen'] == '8') {
-        $data['dokumen_perusahaan'] = FileIO::genericUpload('dokumen_perusahaan', 'png', NULL, $data);
+      if ($data['id_jenis_dokumen_perusahaan'] == '8') {
+        $data['dokumen_perusahaan'] = FileIO::genericUpload('dokumen_perusahaan', array('png', 'jpeg', 'jpg'), NULL, $data);
+        // echo "true";
       } else {
+        // echo "false";
         $data['dokumen_perusahaan'] = FileIO::genericUpload('dokumen_perusahaan', 'pdf', NULL, $data);
       }
       $data['id_dokumen_perusahaan'] = $this->DokumenPerusahaanModel->add($data);
