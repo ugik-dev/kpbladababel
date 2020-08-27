@@ -9,7 +9,7 @@ class DokumenPerusahaanController extends CI_Controller
     parent::__construct();
     $this->load->model(array("DokumenPerusahaanModel"));
     $this->load->helper(array('DataStructure', 'Validation'));
-    $this->db->db_debug = TRUE;
+    $this->db->db_debug = FALSE;
   }
 
   public function getAll()
@@ -30,13 +30,12 @@ class DokumenPerusahaanController extends CI_Controller
       $data = $this->input->post();
       if ($data['id_jenis_dokumen_perusahaan'] == '8') {
         $data['dokumen_perusahaan'] = FileIO::genericUpload('dokumen_perusahaan', array('png', 'jpeg', 'jpg'), NULL, $data);
-        // echo "true";
       } else {
-        // echo "false";
         $data['dokumen_perusahaan'] = FileIO::genericUpload('dokumen_perusahaan', 'pdf', NULL, $data);
       }
+      // $data['dokumen_perusahaan'] = 'adw';
       $data['id_dokumen_perusahaan'] = $this->DokumenPerusahaanModel->add($data);
-      $data = $this->DokumenPerusahaanModel->get($data['id_dokumen_perusahaan']);
+      $data = $this->DokumenPerusahaanModel->getAll(array('id_perusahaan' => $data['id_perusahaan'], 'id_jenis_dokumen_perusahaan' => $data['id_jenis_dokumen_perusahaan'], 'is_get' => '1'));
       echo json_encode(array("data" => $data));
     } catch (Exception $e) {
       ExceptionHandler::handle($e);

@@ -63,7 +63,9 @@ class UserModel extends CI_Model
 		$id_user = $this->db->insert_id();
 
 		if ($data['id_role'] == 2) {
-			$this->db->insert('perusahaan', ['id_user' => $id_user]);
+			ini_set('date.timezone', 'Asia/Jakarta');
+			$date = date("Y-m-d h:i:s");
+			$this->db->insert('perusahaan', ['id_user' => $id_user, 'date_modified' => $date]);
 			ExceptionHandler::handleDBError($this->db->error(), "Tambah User", "Perusahaan");
 		}
 

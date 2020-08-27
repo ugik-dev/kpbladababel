@@ -403,7 +403,7 @@ class FormatDokumenController extends CI_Controller
 
 
     $section->addText("Dengan hormat,", 'paragraph', array('spaceAfter' => 0));
-    $section->addText("Sesuai dengan Peraturan Gubernur nomor 63 tahun 2019 dalam menyelenggarakan pemasaran lada putih penugasan BUMD PT BBBS sebagai dan Peraturan Gubernur nomor 19 tahun 2020 tentang tata kelolah perdagangan lada putih Muntok White Papper maka bersama ini kami lampirkan rencana ekspor/Perdagangan lada antar Pulau dengan data sebagai berikut :", 'paragraph', 'pS2');
+    $section->addText("Sesuai dengan Peraturan Gubernur nomor 63 tahun 2019 dalam menyelenggarakan pemasaran lada putih penugasan BUMD PT BBBS sebagai dan Peraturan Gubernur nomor 19 tahun 2020 tentang tata kelolah perdagangan lada putih Muntok White Papper maka bersama ini kami mengajukan penggunaan IG dan Uji Laboratorium serta kami lampirkan rencana ekspor/Perdagangan lada antar Pulau dengan data sebagai berikut :", 'paragraph', 'pS2');
     $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
     $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
     $spanTableStyleName = 'Colspan Rowspan';
@@ -470,6 +470,7 @@ class FormatDokumenController extends CI_Controller
     $jenis_pengemasan = '';
     $jumlah_karung = '';
     $shipping_mark = '';
+    $ket_penggunaan = '';
     $nama_jenis_pengemasan = '';
     $nama_jenis_mutu = '';
     $nama_importir = '';
@@ -548,7 +549,10 @@ class FormatDokumenController extends CI_Controller
     $table->addCell(4000, $cellVCentered)->addText('Shipping Mark', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
-
+    $table->addRow();
+    $table->addCell(4000, $cellVCentered)->addText('Keterangan Penggunaan Produk', 'paragraph', $noSpace);
+    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
     $textrun = $section->addTextRun();
     $textrun->addText("Demikian permohonan kami, atas bantuan dan kerjasamanya kami ucapkan terima kasih.", 'paragraph');
     $textrun->addTextBreak();
@@ -586,6 +590,19 @@ class FormatDokumenController extends CI_Controller
       $i++;
     }
     $textrun = $section->addTextRun();
+
+    $section->addText('KETERANGAN PENGGUNAAN PRODUK', "paragraph3", $paragraphStyleName);
+    $textrun = $section->addTextRun();
+    $i = 1;
+    foreach ($pengirimanItem as $pi) {
+      $textrun = $section->addTextRun();
+      $textrun->addText("({$i})", 'paragraph');
+      $textrun->addTextBreak();
+      $resulket_produk = str_replace(array("\n"), "<w:br/>", $pi['keterangan_penggunaan_produk']);
+      // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
+      $textrun->addText("$resulket_produk", 'paragraph');
+      $i++;
+    }
 
 
     $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');

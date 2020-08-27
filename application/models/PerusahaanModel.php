@@ -36,24 +36,44 @@ class PerusahaanModel extends CI_Model
     return $row[$id];
   }
 
+  public function updateModifedDate($data)
+  {
+    ini_set('date.timezone', 'Asia/Jakarta');
+    $date = date("Y-m-d h:i:s");
+    $this->db->set('date_modified', $date);
+    $this->db->where('id_perusahaan', $data);
+    $this->db->update('perusahaan');
+    ExceptionHandler::handleDBError($this->db->error(), "Update Data Perusahaan", "perusahaan");
+  }
+
   public function getAll($filter)
   {
-    if ($this->session->userdata()['id_role'] == '2') {
-      if ($filter['id_perusahaan'] == $this->session->userdata()['id_perusahaan']) {
-        $this->db->select("eks.*, jp.nama_jenis_perusahaan, u.kbi_id");
-      } else {
-        $this->db->select("eks.id_perusahaan, eks.id_user, eks.id_jenis_perusahaan, eks.nama_perusahaan, eks.nama_pimpinan, eks.lok_perusahaan_full, eks.lok_perusahaan_kec, eks.lok_perusahaan_kabkot, eks.lok_unit_pengelolaan_full, eks.lok_unit_pengelolaan_kec, eks.lok_unit_pengelolaan_kabkot, lok_gudang_penyimpanan_full, eks.lok_gudang_penyimpanan_kec, eks.lok_gudang_penyimpanan_kabkot, eks.no_telepon, eks.email, jp.nama_jenis_perusahaan,  '-' as kbi_id ,  '-' as no_rek_bank ,  '-' as an_bank ,  '' as id_bank ");
-      }
+    if (!empty($filter['is_user'])) {
+      $this->db->select("eks.*, jp.nama_jenis_perusahaan, u.kbi_id");
     } else {
-      // $this->session->userdata();
-      // var_dump($this->session->userdata()['id_role']);
-      $this->db->select("eks.*, jp.nama_jenis_perusahaan, u.kbi_id as kbi_id");
+      if ($this->session->userdata()['id_role'] == '2') {
+        if ($filter['id_perusahaan'] == $this->session->userdata()['id_perusahaan']) {
+          $this->db->select("eks.*, jp.nama_jenis_perusahaan, u.kbi_id");
+        } else {
+          $this->db->select("eks.id_perusahaan, eks.id_user, eks.id_jenis_perusahaan, eks.nama_perusahaan, eks.nama_pimpinan, eks.lok_perusahaan_full, eks.lok_perusahaan_kec, eks.lok_perusahaan_kabkot, eks.lok_unit_pengelolaan_full, eks.lok_unit_pengelolaan_kec, eks.lok_unit_pengelolaan_kabkot, lok_gudang_penyimpanan_full, eks.lok_gudang_penyimpanan_kec, eks.lok_gudang_penyimpanan_kabkot, eks.no_telepon, eks.email, jp.nama_jenis_perusahaan,  '-' as kbi_id ,  '-' as no_rek_bank ,  '-' as an_bank ,  '' as id_bank ");
+        }
+      } else {
+        // $this->session->userdata();
+        // var_dump($this->session->userdata()['id_role']);
+        $this->db->select("eks.*, jp.nama_jenis_perusahaan, u.kbi_id as kbi_id");
+      }
     }
     $this->db->select("IF('{$this->session->userdata()['id_user']}' = eks.id_user , NULL, 'Bukan Perusahaan') as edit_perusahaan", FALSE);
     $this->db->from("perusahaan as eks");
     $this->db->join('jenis_perusahaan as jp', "jp.id_jenis_perusahaan = eks.id_jenis_perusahaan");
     $this->db->join('user as u', "u.id_user = eks.id_user");
-
+    if (!empty($filter['is_user'])) {
+      $this->db->where("eks.id_user", $filter['id_user']);
+      $res = $this->db->get();
+      $res = $res->result_array();
+      // var_dump($filter);
+      return $res[0]['id_perusahaan'];
+    }
     if (!empty($filter['id_perusahaan'])) $this->db->where("eks.id_perusahaan", $filter['id_perusahaan']);
     $res = $this->db->get();
     return DataStructure::keyValue($res->result_array(), 'id_perusahaan');
@@ -71,6 +91,17 @@ class PerusahaanModel extends CI_Model
 
   public function addPengiriman($data)
   {
+    $this->db->select('count(*) as num');
+    $this->db->from("dokumen_perusahaan");
+    $this->db->where('id_perusahaan', $data['id_perusahaan']);
+    $res = $this->db->get();
+    $res = $res->result_array();
+    // echo $res[0];
+    // throw new UserException($res[0]['num'], USER_NOT_FOUND_CODE);
+    if ($res[0] < '8') {
+      throw new UserException("Dokumen Perusahaan tidak lengkap.", USER_NOT_FOUND_CODE);
+    };
+
     $data['id_tahap_proposal'] = '0';
     // var_dump($data);
     $this->db->insert('pengiriman', DataStructure::slice($data, ['id_perusahaan', 'id_tahap_proposal'], true));
