@@ -368,6 +368,19 @@ class FormatDokumenController extends CI_Controller
       $textrun = $section->addTextRun();
       $textrun->addTextBreak();
     }
+    if (file_exists('./assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png')) {
+      // $pdf->Image(base_url('assets/qrcode/'.$data['id_record'].'.png'), 170, 160, -300);
+      $section->addImage(base_url('assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png'), array(
+        'height'           => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(2.4)),
+        'positioning'      => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+        'posHorizontal' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+        'posVertical' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+        'marginLeft'       => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(9)),
+        'marginTop'        => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(15)),
+      ));
+    }
+
+
     // $textrun->addTextBreak();
     // $textrun->addTextBreak();
     $tanggal = CustomFunctions::tanggal_indonesia(date("Y-m-d"));
@@ -565,6 +578,8 @@ class FormatDokumenController extends CI_Controller
     $textrun->addText($perusahaan['nama_pimpinan'], 'paragraph');
     $textrun->addTextBreak();
 
+
+
     $section = $phpWord->addSection(array(
       'marginLeft' => 1200, 'marginRight' => 600,
       'marginTop' => 600, 'marginBottom' => 600
@@ -576,7 +591,17 @@ class FormatDokumenController extends CI_Controller
 
 
     $textrun = $section->addTextRun();
-
+    if (file_exists('./assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png')) {
+      // $pdf->Image(base_url('assets/qrcode/'.$data['id_record'].'.png'), 170, 160, -300);
+      $section->addImage(base_url('assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png'), array(
+        'height'           => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(2.4)),
+        'positioning'      => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+        'posHorizontal' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+        'posVertical' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+        'marginLeft'       => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(10)),
+        'marginTop'        => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(14)),
+      ));
+    }
     $section->addText('SHIPPING MARK', "paragraph3", $paragraphStyleName);
     $textrun = $section->addTextRun();
     $i = 1;

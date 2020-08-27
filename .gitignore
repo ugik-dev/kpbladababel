@@ -23,3 +23,5 @@
 /uploads/dokumen_permohonan/*
 /uploads/dokumen_bp3l/*
 /uploads/dokumen_hasil_mutu/*
+/application/cache/*
+/assets/qrcode/*

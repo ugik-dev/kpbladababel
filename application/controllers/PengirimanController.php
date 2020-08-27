@@ -444,6 +444,31 @@ class PengirimanController extends CI_Controller
     }
   }
 
+  public function addQRCode($id_pengiriman)
+  {
+
+    $this->load->library('ciqrcode'); //pemanggilan library QR CODE
+
+    $config['cacheable']    = false; //boolean, the default is true
+    $config['cachedir']     = './assets/'; //string, the default is application/cache/
+    $config['errorlog']     = './assets/'; //string, the default is application/logs/
+    $config['imagedir']     = './assets/qrcode/'; //direktori penyimpanan qr code
+    $config['quality']      = true; //boolean, the default is true
+    $config['size']         = '600'; //interger, the default is 1024
+    $config['black']        = array(224, 255, 255); // array, default is array(255,255,255)
+    $config['white']        = array(70, 130, 180); // array, default is array(0,0,0)
+    $this->ciqrcode->initialize($config);
+
+    $image_name = $id_pengiriman . '.png'; //buat name dari qr code sesuai dengan nim
+
+    $params['data'] = site_url() . 'PengirimanController/detail?id_pengiriman=' . $id_pengiriman; //data yang akan di jadikan QR CODE
+    $params['level'] = 'S'; //H=High
+    $params['size'] = 10;
+    $params['savename'] = FCPATH . $config['imagedir'] . $image_name; //simpan image QR CODE ke folder assets/images/
+    $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
+  }
+
+
   public function duplikat()
   {
     try {
@@ -467,7 +492,7 @@ class PengirimanController extends CI_Controller
         $pi['id_pengiriman'] = $newdata['id_pengiriman'];
         $this->PengirimanItemModel->add($pi);
       };
-
+      $this->addQRCode($newdata['id_pengiriman']);
       $newdata = $this->PengirimanModel->get($newdata['id_pengiriman']);
       echo json_encode(array("data" => $newdata));
     } catch (Exception $e) {
@@ -481,8 +506,8 @@ class PengirimanController extends CI_Controller
       $this->SecurityModel->userOnlyGuard(TRUE);
       $data = $this->input->post();
       $data['id_pengiriman'] = $this->PengirimanModel->add($data);
-      echo $data['id_pengiriman'];
-      $data = $this->PengirimanModel->getPengiriman($data['id_pengiriman']);
+      $this->addQRCode($data['id_pengiriman']);
+      $data = $this->PengirimanModel->get($data['id_pengiriman']);
       echo json_encode(array("data" => $data));
     } catch (Exception $e) {
       ExceptionHandler::handle($e);
