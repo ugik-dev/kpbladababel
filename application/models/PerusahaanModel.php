@@ -98,7 +98,7 @@ class PerusahaanModel extends CI_Model
     $res = $res->result_array();
     // echo $res[0];
     // throw new UserException($res[0]['num'], USER_NOT_FOUND_CODE);
-    if ($res[0] < '8') {
+    if ($res[0]['num'] < '8') {
       throw new UserException("Dokumen Perusahaan tidak lengkap.", USER_NOT_FOUND_CODE);
     };
 
