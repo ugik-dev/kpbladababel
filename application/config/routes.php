@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -57,6 +57,8 @@ $route['news'] = 'PublicController/news';
 $route['newsx'] = 'PublicController/newsx';
 $route['create_account'] = 'UserController/create_account';
 $route['login-process'] = 'UserController/loginProcess';
+$route['register-process'] = 'UserController/registerProcess';
+$route['activator/(:num)/(:any)'] = "UserController/activator/$1/$2";
 $route['logout'] = 'UserController/logout';
 $route['change-password'] = 'UserController/changePassword';
 $route['change-password-process'] = 'UserController/changePasswordProcess';

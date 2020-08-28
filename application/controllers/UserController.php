@@ -7,7 +7,7 @@ class UserController extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model(array('UserModel', 'PerusahaanModel'));
+		$this->load->model(array('UserModel', 'PerusahaanModel', 'PengirimanModel'));
 		$this->load->helper(array('DataStructure', 'Validation'));
 		$this->db->db_debug = false;
 	}
@@ -62,13 +62,92 @@ class UserController extends CI_Controller
 
 			$data = $this->input->post();
 
-			// $data = $this->UserModel->add($loginData);
-			echo json_encode(array("error" => FALSE, "user" => $user));
+			$data = $this->UserModel->registerUser($data);
+			$this->email_send($data, 'registr');
+			echo json_encode(array("error" => FALSE, "user" => 'success'));
 		} catch (Exception $e) {
 			ExceptionHandler::handle($e);
 		}
 	}
 
+	public function activator($id, $activate)
+	{
+		try {
+			// $this->SecurityModel->guestOnlyGuard(TRUE);
+			// Validation::ajaxValidateForm($this->SecurityModel->loginValidation());
+			$data['activator'] = $activate;
+			$data['id'] = $id;
+
+
+			$data = $this->UserModel->activatorUser($data);
+			$this->email_send($data, 'activate');
+
+			$this->SecurityModel->guestOnlyGuard();
+			$pageData = array(
+				'title' => 'Masuk',
+				'activator' => $data['id']
+			);
+
+			$this->load->view('loginPage', $pageData);
+		} catch (Exception $e) {
+			ExceptionHandler::handle($e);
+		}
+	}
+
+	public function email_send($data, $action)
+	{
+		$serv = $this->PengirimanModel->getEmailConfig();
+
+		$send['to'] = $data['email']; //KPB
+		if ($action == 'activate') {
+			$send['subject'] = 'Activation KPB Lada Babel';
+			$emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+			$emailContent .= '<tr><td style="height:20px"></td></tr>';
+			$url_act = site_url("/activator/{$data['id']}/{$data['activator']}");
+			$emailContent .= "<br><br> Username :  {$data['username']}
+						<br> Password :  {$data['password_hash']}
+						<br> 
+						<br>Selamat Akun anda sudah berhasil didaftarkan, silahkan login dan lengkapi data.";
+			$emailContent .= '<tr><td style="height:20px"></td></tr>';
+			$emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+		} else {
+			$send['subject'] = 'Activation KPB Lada Babel';
+			$emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+			$emailContent .= '<tr><td style="height:20px"></td></tr>';
+			$url_act = site_url("/activator/{$data['id']}/{$data['activator']}");
+			$emailContent .= "<br><br> Username :  {$data['username']}
+						<br> Password :  {$data['password_hash']}
+						<br> Activator :  {$data['activator']}
+						<br> 
+						<br><a href='{$url_act}' target='_blank' style='text-decoration:none;color: #60d2ff;'>Click this to activate</a>
+
+						<br> manual activate = {$url_act}";
+			$emailContent .= '<tr><td style="height:20px"></td></tr>';
+			$emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+		}
+		$send['message'] = $emailContent;
+
+		$config['protocol']    = 'smtp';
+		$config['smtp_host']    = $serv['stmp_mail']['url_'];
+		$config['smtp_port']    = '587';
+		$config['smtp_timeout'] = '60';
+		$config['smtp_user']    = $serv['stmp_mail']['username'];    //Important
+		$config['smtp_pass']    = $serv['stmp_mail']['key'];  //Important
+		$config['charset']    = 'utf-8';
+		$config['newline']    = '\r\n';
+		$config['mailtype'] = 'html'; // or html
+		$config['validation'] = TRUE; // bool whether to validate email or not 
+		$send['config'] = $config;
+
+		$this->email->initialize($send['config']);
+		$this->email->set_mailtype("html");
+		$this->email->from($serv['stmp_mail']['username']);
+		$this->email->to($send['to']);
+		$this->email->subject($send['subject']);
+		$this->email->message($send['message']);
+		$this->email->send();
+		return 0;
+	}
 	public function update()
 	{
 		try {

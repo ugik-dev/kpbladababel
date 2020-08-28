@@ -6,11 +6,12 @@ class UserModel extends CI_Model
 
 	public function getAllUser($filter = [])
 	{
-		$this->db->select("u.*, r.*, eks.id_perusahaan");
+		$this->db->select("u.*, r.*, eks.id_perusahaan, b.id as id_buyer, b.region");
 
 		$this->db->from('user as u');
 		$this->db->join('role as r', 'r.id_role = u.id_role');
 		$this->db->join('perusahaan as eks', 'eks.id_user = u.id_user', 'LEFT');
+		$this->db->join('buyer as b', 'b.id_user = u.id_user', 'LEFT');
 		if (empty($filter['is_login'])) {
 			$this->db->select("NULL as password", FALSE);
 		}
@@ -24,6 +25,29 @@ class UserModel extends CI_Model
 		return DataStructure::keyValue($res->result_array(), 'id_user');
 	}
 
+	public function activatorUser($data)
+	{
+		$this->db->select("*");
+		$this->db->from('user_temp as u');
+		$this->db->where("u.id ", $data['id']);
+		$this->db->where("u.activator ", $data['activator']);
+		$res = $this->db->get();
+		$res = $res->result_array();
+		if (empty($res)) {
+			throw new UserException('Activation failed', USER_NOT_FOUND_CODE);
+		} else {
+			$this->cekUserByUsername($res[0]['username']);
+			$res[0]['id_role'] = '12';
+			$res[0]['password'] = $res[0]['password_hash'];
+			$res[0]['id_user'] = $this->addUser($res[0]);
+			$this->addBuyer($res[0]);
+			$this->db->where('id', $res[0]['id']);
+			$this->db->delete('user_temp');
+
+			return $res[0];
+		};
+	}
+
 	public function getUser($idUser = NULL)
 	{
 		$row = $this->getAllUser(['id_user' => $idUser]);
@@ -31,6 +55,14 @@ class UserModel extends CI_Model
 			throw new UserException("User yang kamu cari tidak ditemukan", USER_NOT_FOUND_CODE);
 		}
 		return $row[$idUser];
+	}
+
+	public function cekUserByUsername($username = NULL)
+	{
+		$row = $this->getAllUser(['username' => $username, 'is_login' => TRUE]);
+		if (!empty($row)) {
+			throw new UserException("User yang kamu daftarkan sudah ada", USER_NOT_FOUND_CODE);
+		}
 	}
 
 	public function getUserByUsername($username = NULL)
@@ -70,6 +102,51 @@ class UserModel extends CI_Model
 		}
 
 		return $id_user;
+	}
+
+	public function addBuyer($data)
+	{
+
+		$this->db->insert('buyer', DataStructure::slice($data, [
+			'id_user', 'nama_perusahaan', 'alamat', 'region', 'email'
+		], TRUE));
+		ExceptionHandler::handleDBError($this->db->error(), "Tambah User", "User");
+
+		$id_user = $this->db->insert_id();
+
+		if ($data['id_role'] == 2) {
+			ini_set('date.timezone', 'Asia/Jakarta');
+			$date = date("Y-m-d h:i:s");
+			$this->db->insert('perusahaan', ['id_user' => $id_user, 'date_modified' => $date]);
+			ExceptionHandler::handleDBError($this->db->error(), "Tambah User", "Perusahaan");
+		}
+
+		return $id_user;
+	}
+
+	public function registerUser($data)
+	{
+		$this->cekUserByUsername($data['username']);
+		$data['password_hash'] = $data['password'];
+		$data['password'] = md5($data['password']);
+		$permitted_activtor = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$data['activator'] =  substr(str_shuffle($permitted_activtor), 0, 20);
+		// echo $act;
+		$this->db->insert('user_temp', DataStructure::slice($data, [
+			'username', 'nama', 'password', 'password_hash', 'activator', 'email', 'nama_perusahaan', 'region', 'alamat'
+		], TRUE));
+		ExceptionHandler::handleDBError($this->db->error(), "Tambah User", "User");
+
+		$data['id']  = $this->db->insert_id();
+
+		// if ($data['id_role'] == 2) {
+		// 	ini_set('date.timezone', 'Asia/Jakarta');
+		// 	$date = date("Y-m-d h:i:s");
+		// 	$this->db->insert('perusahaan', ['id_user' => $id_user, 'date_modified' => $date]);
+		// 	ExceptionHandler::handleDBError($this->db->error(), "Tambah User", "Perusahaan");
+		// }
+
+		return $data;
 	}
 
 	public function editUser($data)
