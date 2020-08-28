@@ -22,7 +22,7 @@
             <input type="password" class="form-control" name="password" placeholder="Password" required="required" autocomplete="current-password">
           </div>
           <button type="submit" id="loginBtn" class="btn btn-primary block full-width m-b" data-loading-text="Loging In...">Login</button>
-          <a class="btn btn-default block full-width m-b" href="<?= site_url('create_account') ?>">Register Buyyer</a>
+          <a class="btn btn-default block full-width m-b" href="<?= site_url('create_account') ?>">Register as Buyer</a>
         </form>
         <p class="m-t">
           <small>Sistem Informasi Kantor Pemasaran Bersama Lada Babel</small>
