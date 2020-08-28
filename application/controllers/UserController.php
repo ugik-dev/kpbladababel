@@ -82,7 +82,6 @@ class UserController extends CI_Controller
 			$data = $this->UserModel->activatorUser($data);
 			$this->email_send($data, 'activate');
 
-			$this->SecurityModel->guestOnlyGuard();
 			$pageData = array(
 				'title' => 'Masuk',
 				'activator' => $data['id']
