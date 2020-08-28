@@ -81,13 +81,7 @@ class UserController extends CI_Controller
 
 			$data = $this->UserModel->activatorUser($data);
 			$this->email_send($data, 'activate');
-
-			$pageData = array(
-				'title' => 'Masuk',
-				'activator' => $data['id']
-			);
-
-			$this->load->view('loginPage', $pageData);
+			redirect('login');
 		} catch (Exception $e) {
 			ExceptionHandler::handle($e);
 		}
