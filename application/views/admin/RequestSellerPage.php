@@ -147,7 +147,7 @@
             });
             swal.showLoading();
             return $.ajax({
-                url: `<?php echo site_url('BuyerController/getAll/') ?>`,
+                url: `<?php echo site_url('PerusahaanController/getAll/') ?>`,
                 'type': 'GET',
                 data: toolbar.form.serialize(),
                 success: function(data) {
@@ -173,9 +173,9 @@
             var renderData = [];
             Object.values(data).forEach((user) => {
                 var button = `
-                <a type="button" class="btn btn-success my-1 mr-sm-3" href="<?php echo base_url() . 'index.php/AdminController/DetailRequest?id_buyer='; ?>${user['id']}"><i class="fal fa-eye"></i>  </a>
+                <a type="button" class="btn btn-success my-1 mr-sm-3" href="<?php echo base_url() . 'index.php/PerusahaanController/detail?id_perusahaan='; ?>${user['id_perusahaan']}"><i class="fal fa-eye"></i>  </a>
       `;
-                renderData.push([user['id_user'], user['nama_perusahaan'], user['alamat'], user['region'] == 'D' ? 'Domestic' : 'Foreig', statusVerifikasi(user['verificated']), button]);
+                renderData.push([user['id_perusahaan'], user['nama_perusahaan'], user['lok_perusahaan_full']+', '+user['lok_perusahaan_kec']+', '+user['lok_perusahaan_kabkot'], user['nama_jenis_perusahaan'], statusVerifikasi(user['verificated']), button]);
             });
             FDataTable.clear().rows.add(renderData).draw('full-hold');
         }

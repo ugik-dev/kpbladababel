@@ -107,26 +107,11 @@
         <div class="col-lg-3">
             <div class="ibox">
                 <div class="ibox-content">
-                    <button class="btn btn-primary my-1 mr-sm-2" id="btn_verifikasi"><i class='fa fa-check'></i> Verifikasi</button>
-                    <button class="btn btn-warning my-1 mr-sm-2" id="btn_dis_verifikasi"><i class='fa fa-edit'></i> Tolak / Batalkan Verifikasi</button>
+                    <button class="btn btn-primary my-1 mr-sm-2" id="btn_verifikasi" data-loading-text="Loading Verifikasi..."><i class='fa fa-check'></i> Verifikasi</button>
+                    <button class="btn btn-warning my-1 mr-sm-2" id="btn_dis_verifikasi" data-loading-text="Loading Disverifikasi"><i class='fa fa-edit'></i> Tolak / Batalkan Verifikasi</button>
 
                 </div>
             </div>
-        </div>
-
-        <!-- </div> -->
-
-        <!-- <div class="col-lg-3">
-      <div class="ibox">
-        <div class="ibox-content">
-          <p class="no-margins"><span id="layer_dokumen_pdf">-</span></p>
-        </div>
-      </div>
-    </div> -->
-    </div>
-    <div class="row">
-        <div class="col-lg-4">
-
         </div>
     </div>
     <div class="row">
@@ -147,88 +132,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal inmodal" id="informasi_modal" tabindex="-1" role="dialog" aria-hidden="true" autocomplete="off">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content animated fadeIn">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">Informasi Buyer</h4>
-                <span class="info"></span>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <form role="form" id="informasi_form" onsubmit="return false;" type="multipart">
-                    <input type="hidden" id="id" name="id">
-                    <div class="row">
-                        <div class="col-sm-9">
-                            <div class="form-group">
-                                <label for="nama_perusahaanx">Nama Perusahaan</label>
-                                <input type="text" class="form-control" id="nama_perusahaanx" name="nama_buyer" placeholder="Tidak ada">
-                            </div>
-                        </div>
-                        <!-- <div class="col-sm-3">
-              <div class="form-group">
-                <label for="id_jenis_buyerx">Jenis Usaha</label>
-                <select class="form-control mr-sm-2" id="id_jenis_buyerx" name="id_jenis_buyer" required="required"></select>
-              </div>
-            </div> -->
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="id_bankx">Bank</label>
-                                <!-- <select class="form-control mr-sm-3" id="id_bankx" name="id_bank" required="required"></select> -->
-                                <label for="id_bankx">Nama Bank</label>
-                                <input type="text" class="form-control" id="id_bankx" name="id_bank" placeholder="Tidak ada" required="required">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="an_bank">Nama Pemilik Bank</label>
-                                <input type="text" class="form-control" id="an_bankx" name="an_bank" placeholder="Tidak ada" required="required">
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="no_rek_bankx">No Rekening Bank</label>
-                                <input type="text" class="form-control" id="no_rek_bankx" name="no_rek_bank" placeholder="Tidak ada" required="required">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="no_telpx">No Telepon</label>
-                                <input type="tel" class="form-control" id="no_telpx" name="no_telp" placeholder="Tidak ada">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="no_faxx">No Fax</label>
-                                <input type="tel" class="form-control" id="no_faxx" name="no_fax" placeholder="Tidak ada">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="emailx">Email</label>
-                                <input type="email" class="form-control" id="emailx" name="email" placeholder="Tidak ada">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="alamatx">Alamat</label>
-                                <textarea rows="4" type="text" placeholder="Alamat" class="form-control" id="alamatx" name="alamat"></textarea>
-
-                                <!-- <input type="text" class="form-control" id="alamatx" name="alamat" placeholder="Tidak ada"> -->
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-success my-1 mr-sm-2" type="submit" id="save" data-loading-text="Loading..."><strong>Simpan</strong></button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -391,13 +294,11 @@
 
 
         function renderInfo() {
-
             info.an_bank.html(dataInfo['an_bank'] ? dataInfo['an_bank'] : '-');
             info.no_rek_bank.html(dataInfo['no_rek_bank'] ? dataInfo['no_rek_bank'] : '-');
             if (dataInfo['id_bank'] != "") info.id_bank.html(dataInfo['nama_bank']);
             info.kbi_id.html(dataInfo['kbi_id']);
             info.nama_buyer.html(dataInfo['nama']);
-
             info.verificated.html(statusVerifikasi(dataInfo['verificated']));
             info.region.html(dataInfo['region'] == 'D' ? 'Domestik' : 'Foreign');
             info.nama_perusahaan.html(dataInfo['nama_perusahaan'] ? dataInfo['nama_perusahaan'] : 'Tidak Ada');
@@ -412,19 +313,24 @@
 
         info.btn_verifikasi.on('click', function() {
             event.preventDefault();
+
             swal(saveConfirmation("Konfirmasi Verifikasi", "Yakin akan verifikasi data ini?", "Ya, Verifikasi!")).then((result) => {
                 if (!result.value) {
                     return;
                 }
+                buttonLoading(info.btn_verifikasi);
                 $.ajax({
                     url: "<?= site_url('AdminController/acc_buyer') ?>",
                     'type': 'POST',
                     data: {
                         'id': id,
+                        'nama_perusahaan': dataInfo['nama_perusahaan'],
+                        'email': dataInfo['email'],
                         'verificated': 'Y'
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
+                        buttonIdle(info.btn_verifikasi);
                         if (json['error']) {
                             swal("Verifikasi Gagal", json['message'], "error");
                             return;
@@ -439,19 +345,24 @@
 
         info.btn_dis_verifikasi.on('click', function() {
             event.preventDefault();
-            swal(deleteConfirmation("Konfirmasi Batalkan Verifikasi", "Yakin akan verifikasi data ini?", "Ya, Verifikasi!")).then((result) => {
+            swal(deleteConfirmation("Konfirmasi Batalkan Verifikasi", "Yakin akan tolak / batalkan data ini?", "Ya")).then((result) => {
                 if (!result.value) {
                     return;
                 }
+                buttonLoading(info.btn_dis_verifikasi);
                 $.ajax({
                     url: "<?= site_url('AdminController/acc_buyer') ?>",
                     'type': 'POST',
                     data: {
                         'id': id,
-                        'verificated': 'N'
+                        'verificated': 'N',
+                        'nama_perusahaan': dataInfo['nama_perusahaan'],
+                        'email': dataInfo['email']
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
+                        buttonIdle(info.btn_dis_verifikasi);
+
                         if (json['error']) {
                             swal("Verifikasi Gagal", json['message'], "error");
                             return;

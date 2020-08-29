@@ -93,27 +93,6 @@ class BuyerController extends CI_Controller
         }
     }
 
-    public function getAllPengiriman()
-    {
-        try {
-            $this->SecurityModel->userOnlyGuard(TRUE);
-            $data = $this->BuyerModel->getAllPengiriman($this->input->get());
-            echo json_encode(array("data" => $data));
-        } catch (Exception $e) {
-            ExceptionHandler::handle($e);
-        }
-    }
-
-    public function getPengiriman()
-    {
-        try {
-            $this->SecurityModel->userOnlyGuard(TRUE);
-            $data = $this->BuyerModel->getPengiriman($this->input->get()['id_pengiriman']);
-            echo json_encode(array("data" => $data));
-        } catch (Exception $e) {
-            ExceptionHandler::handle($e);
-        }
-    }
 
     public function dokumen_buyer_fragment()
     {
@@ -123,19 +102,6 @@ class BuyerController extends CI_Controller
                 "contentData" => ['id_buyer' => $this->input->get()['id_buyer']]
             );
             $this->load->view('detail_buyer_fragment/DokumenBuyerFragment', $pageData);
-        } catch (Exception $e) {
-            ExceptionHandler::handle($e);
-        }
-    }
-
-    public function product_fragment()
-    {
-        $this->SecurityModel->userOnlyGuard();
-        try {
-            $pageData = array(
-                "contentData" => ['id_buyer' => $this->input->get()['id_buyer']]
-            );
-            $this->load->view('detail_buyer_fragment/ProductFragment', $pageData);
         } catch (Exception $e) {
             ExceptionHandler::handle($e);
         }
@@ -159,6 +125,7 @@ class BuyerController extends CI_Controller
         try {
             $this->SecurityModel->userOnlyGuard(TRUE);
             $data = $this->BuyerModel->getAll($this->input->get());
+            // var_dump($this->input->post());
             echo json_encode(array("data" => $data));
         } catch (Exception $e) {
             ExceptionHandler::handle($e);

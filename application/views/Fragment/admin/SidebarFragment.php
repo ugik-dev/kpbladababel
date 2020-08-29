@@ -16,7 +16,9 @@
         <li id="request_buyer">
           <a href="<?= site_url('AdminController/request_buyer') ?>"><i class="fa fa-users-cog"></i> <span class="nav-label">Request Buyer</span></a>
         </li>
-
+        <li id="request_seler">
+          <a href="<?= site_url('AdminController/request_seller') ?>"><i class="fa fa-users-cog"></i> <span class="nav-label">Request Seller</span></a>
+        </li>
         <li id="kelola_harga_mwp">
           <a href="<?= site_url('AdminController/kelola_harga_mwp') ?>"><i class="fa fa-chart-line"></i> <span class="nav-label">Harga MWP</span></a>
         </li>

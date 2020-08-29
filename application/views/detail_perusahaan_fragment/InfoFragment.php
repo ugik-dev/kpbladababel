@@ -4,7 +4,8 @@
       <div class="ibox">
         <div class="ibox-content">
           <h5>Nama Perusahaan</h5>
-          <p class="no-margins"><span id="nama_perusahaan">-</span></p>
+          <p class="no-margins"><span id="nama_perusahaan">-</span>
+            <span id="verificated">-</span></p>
         </div>
       </div>
     </div>
@@ -151,6 +152,23 @@
       </div>
     </div>
 
+
+    <?php if ($this->session->userdata()['nama_role'] == 'admin' || $this->session->userdata()['nama_role'] == 'kpb') { ?>
+      <div class="col-lg-4">
+        <div class="ibox">
+          <div class="ibox-content">
+            <button class="btn btn-primary col-lg-12" id="btn_verifikasi" data-loading-text="Loading Verifikasi..."><i class='fa fa-check'></i> Verifikasi</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="ibox">
+          <div class="ibox-content">
+            <button class="btn btn-warning col-lg-12" id="btn_dis_verifikasi" data-loading-text="Loading Disverifikasi"><i class='fa fa-edit'></i> Tolak / Batalkan Verifikasi</button>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
     <div class="col-lg-3">
       <div class="ibox">
         <div class="ibox-content">
@@ -317,10 +335,83 @@
       'kbi_id': $('#info_container').find('#kbi_id'),
       'email': $('#info_container').find('#email'),
       'layer_dokumen_pdf': $('#info_container').find('#layer_dokumen_pdf'),
+      'verificated': $('#info_container').find('#verificated'),
 
       'edit_info_btn': $('#edit_info_btn')
     }
     info.edit_info_btn.prop('disabled', true);
+
+    <?php if ($this->session->userdata()['nama_role'] == 'admin' || $this->session->userdata()['nama_role'] == 'kpb') { ?>
+      btn_verifikasi = $('#btn_verifikasi');
+      btn_dis_verifikasi = $('#btn_dis_verifikasi');
+
+      btn_verifikasi.on('click', function() {
+        event.preventDefault();
+
+        swal(saveConfirmation("Konfirmasi Verifikasi", "Yakin akan verifikasi data ini?", "Ya, Verifikasi!")).then((result) => {
+          if (!result.value) {
+            return;
+          }
+          buttonLoading(btn_verifikasi);
+          $.ajax({
+            url: "<?= site_url('AdminController/acc_seller') ?>",
+            'type': 'POST',
+            data: {
+              'id': dataInfo['id_perusahaan'],
+              'nama_perusahaan': dataInfo['nama_perusahaan'],
+              'email': dataInfo['email'],
+              'verificated': 'Y'
+            },
+            success: function(data) {
+              var json = JSON.parse(data);
+              buttonIdle(btn_verifikasi);
+              if (json['error']) {
+                swal("Verifikasi Gagal", json['message'], "error");
+                return;
+              }
+
+              info.verificated.html(statusVerifikasi('Y'));
+              swal("Verifikasi Berhasil", "", "success");
+            },
+            error: function(e) {}
+          });
+        });
+      });
+
+      btn_dis_verifikasi.on('click', function() {
+        event.preventDefault();
+        swal(deleteConfirmation("Konfirmasi Batalkan Verifikasi", "Yakin akan tolak / batalkan data ini?", "Ya")).then((result) => {
+          if (!result.value) {
+            return;
+          }
+          buttonLoading(btn_dis_verifikasi);
+          $.ajax({
+            url: "<?= site_url('AdminController/acc_seller') ?>",
+            'type': 'POST',
+            data: {
+              'id': dataInfo['id_perusahaan'],
+              'verificated': 'N',
+              'nama_perusahaan': dataInfo['nama_perusahaan'],
+              'email': dataInfo['email']
+            },
+            success: function(data) {
+              var json = JSON.parse(data);
+              buttonIdle(btn_dis_verifikasi);
+
+              if (json['error']) {
+                swal("Verifikasi Gagal", json['message'], "error");
+                return;
+              }
+              info.verificated.html(statusVerifikasi('N'));
+              swal("Pembatalan Verifikasi Berhasil", "", "success");
+            },
+            error: function(e) {}
+          });
+        });
+      });
+
+    <?php }
+    5 ?>
 
     var informasiModal = {
       self: $('#informasi_modal'),
@@ -455,6 +546,16 @@
       info.edit_info_btn.toggle(!dataInfo['edit_perusahaan']);
       btnx = downloadButtonV2("<?= site_url('FormatDokumenController/pdf_profile_perusahaan/') ?>", "?id_perusahaan=" + dataInfo['id_perusahaan'], "PDF Informasi Perusahaan")
       info.layer_dokumen_pdf.html(btnx);
+      info.verificated.html(statusVerifikasi(dataInfo['verificated']));
+    }
+
+    function statusVerifikasi(status) {
+      if (status == 'R')
+        return `   <i class='fa fa-hourglass-start text-primary'>Request Verifikasi </i>`;
+      else if (status == 'Y')
+        return `   <i class='fa fa-check text-success'> Telah Diverifikasi</i>`;
+      else
+        return `   <i class='fa fa-edit text-warning'> Belum Diverifikasi</i>`;
     }
 
     info.edit_info_btn.on('click', function() {

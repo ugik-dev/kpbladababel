@@ -102,6 +102,7 @@ class PerusahaanModel extends CI_Model
       throw new UserException("Dokumen Perusahaan tidak lengkap.", USER_NOT_FOUND_CODE);
     };
 
+
     $data['id_tahap_proposal'] = '0';
     // var_dump($data);
     $this->db->insert('pengiriman', DataStructure::slice($data, ['id_perusahaan', 'id_tahap_proposal'], true));
@@ -109,6 +110,19 @@ class PerusahaanModel extends CI_Model
 
     return $this->db->insert_id();
   }
+
+  public function acc_seller($data)
+  {
+    ini_set('date.timezone', 'Asia/Jakarta');
+    $date = date("Y-m-d h:i:s");
+    $this->db->set('date_modified', $date);
+    $this->db->set('verificated', $data['verificated']);
+    $this->db->where('id_perusahaan', $data['id']);
+    $this->db->update('perusahaan');
+    ExceptionHandler::handleDBError($this->db->error(), "Update Data Buyer", "perusahaan");
+  }
+
+
   public function update($data)
   {
     if (!empty($data['id_bank'])) {
