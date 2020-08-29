@@ -107,7 +107,7 @@
 
     function getAllDokumenBuyer() {
       swal({
-        title: 'Loading pengiriman...',
+        title: 'Loading dokument...',
         allowOutsideClick: false
       });
       swal.showLoading();
@@ -214,9 +214,9 @@
               return;
             }
             var dokumenBuyer = json['data']
-            dataDokumenBuyer[dokumenBuyer['id_dokumen_buyer']] = dokumenBuyer;
+
             swal("Simpan Berhasil", "", "success");
-            renderDokumenBuyer(dataDokumenBuyer);
+            getAllDokumenBuyer();
             dokumen_buyer_modal.self.modal('hide');
           },
           error: function(e) {}

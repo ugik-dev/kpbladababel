@@ -135,7 +135,7 @@
             <div class="col-sm-9">
               <div class="form-group">
                 <label for="nama_perusahaanx">Nama Perusahaan</label>
-                <input type="text" class="form-control" id="nama_perusahaanx" name="nama_buyer" placeholder="Tidak ada">
+                <input type="text" class="form-control" id="nama_perusahaanx" name="nama_perusahaan" placeholder="Tidak ada">
               </div>
             </div>
             <!-- <div class="col-sm-3">

@@ -93,26 +93,6 @@ class BuyerModel extends CI_Model
         return $row[$id];
     }
 
-    public function addPengiriman($data)
-    {
-        $this->db->select('count(*) as num');
-        $this->db->from("dokumen_buyer");
-        $this->db->where('id_buyer', $data['id_buyer']);
-        $res = $this->db->get();
-        $res = $res->result_array();
-        // echo $res[0];
-        // throw new UserException($res[0]['num'], USER_NOT_FOUND_CODE);
-        if ($res[0]['num'] < '8') {
-            throw new UserException("Dokumen Buyer tidak lengkap.", USER_NOT_FOUND_CODE);
-        };
-
-        $data['id_tahap_proposal'] = '0';
-        // var_dump($data);
-        $this->db->insert('pengiriman', DataStructure::slice($data, ['id_buyer', 'id_tahap_proposal'], true));
-        ExceptionHandler::handleDBError($this->db->error(), "Tambah Pengiriman gagal", "pengiriman");
-
-        return $this->db->insert_id();
-    }
     public function update($data)
     {
 
