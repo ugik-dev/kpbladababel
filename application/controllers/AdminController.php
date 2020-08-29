@@ -7,13 +7,13 @@ class AdminController extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model(array('NewsModel'));
+    $this->load->model(array('NewsModel', 'BuyerModel'));
     $this->load->helper(array('DataStructure', 'Validation'));
   }
 
   public function index()
   {
-    $this->SecurityModel->roleOnlyGuard('admin');
+    $this->SecurityModel->rolesOnlyGuard(array('admin', 'kpb'));
     $pageData = array(
       'title' => 'Beranda',
       'content' => 'admin/DashboardPage',
@@ -26,7 +26,7 @@ class AdminController extends CI_Controller
 
   public function kelola_user()
   {
-    $this->SecurityModel->roleOnlyGuard('admin');
+    $this->SecurityModel->rolesOnlyGuard('admin');
     $pageData = array(
       'title' => 'Kelola User',
       'content' => 'admin/KelolaUserPage',
@@ -39,7 +39,7 @@ class AdminController extends CI_Controller
 
   public function  request_buyer()
   {
-    $this->SecurityModel->roleOnlyGuard('admin');
+    $this->SecurityModel->rolesOnlyGuard(array('admin', 'kpb'));
     $pageData = array(
       'title' => 'Kelola User',
       'content' => 'admin/RequestBuyerPage',
@@ -52,7 +52,7 @@ class AdminController extends CI_Controller
 
   public function  DetailRequest()
   {
-    $this->SecurityModel->roleOnlyGuard('admin');
+    $this->SecurityModel->rolesOnlyGuard(array('admin', 'kpb'));
 
     $pageData = array(
       'title' => 'Kelola User',
@@ -147,5 +147,19 @@ class AdminController extends CI_Controller
       ),
     );
     $this->load->view('Page', $pageData);
+  }
+
+  public function acc_buyer()
+  {
+    try {
+      $this->SecurityModel->rolesOnlyGuard(array('admin', 'kpb'));
+      $data = $this->input->post();
+      $this->BuyerModel->acc_buyer($data);
+      // $data = $data[$id];
+      // $this->BuyerModel->updateModifedDate($id);
+      echo json_encode(array("data" => $data));
+    } catch (Exception $e) {
+      ExceptionHandler::handle($e);
+    }
   }
 }

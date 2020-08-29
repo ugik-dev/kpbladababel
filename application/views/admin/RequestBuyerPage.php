@@ -154,7 +154,7 @@
                 var button = `
                 <a type="button" class="btn btn-success my-1 mr-sm-3" href="<?php echo base_url() . 'index.php/AdminController/DetailRequest?id_buyer='; ?>${user['id']}"><i class="fal fa-eye"></i>  </a>
       `;
-                renderData.push([user['id_user'], user['nama_perusahaan'], user['alamat'], user['region'] == 'D' ? 'Domestic' : 'Foreig', user['verificated'] == 'N' ? 'Belum di verifikasi' : 'Sudah verifikasi', button]);
+                renderData.push([user['id_user'], user['nama_perusahaan'], user['alamat'], user['region'] == 'D' ? 'Domestic' : 'Foreig', statusVerifikasi(user['verificated']), button]);
             });
             FDataTable.clear().rows.add(renderData).draw('full-hold');
         }
@@ -189,66 +189,13 @@
             UserModal.opd.val(currentData['id_opd']);
         });
 
-        //     UserModal.form.submit(function(event) {
-        //         event.preventDefault();
-        //         var isAdd = UserModal.addBtn.is(':visible');
-        //         var url = "<?= site_url('UserController/') ?>";
-        //         url += isAdd ? "addUser" : "editUser";
-        //         var button = isAdd ? UserModal.addBtn : UserModal.saveEditBtn;
-
-        //         swal(swalSaveConfigure).then((result) => {
-        //             if (!result.value) {
-        //                 return;
-        //             }
-        //             buttonLoading(button);
-        //             $.ajax({
-        //                 url: url,
-        //                 'type': 'POST',
-        //                 data: UserModal.form.serialize(),
-        //                 success: function(data) {
-        //                     buttonIdle(button);
-        //                     var json = JSON.parse(data);
-        //                     if (json['error']) {
-        //                         swal("Simpan Gagal", json['message'], "error");
-        //                         return;
-        //                     }
-        //                     var user = json['data']
-        //                     dataUser[user['id_user']] = user;
-        //                     swal("Simpan Berhasil", "", "success");
-        //                     renderUser(dataUser);
-        //                     UserModal.self.modal('hide');
-        //                 },
-        //                 error: function(e) {}
-        //             });
-        //         });
-        //     });
-
-        //     FDataTable.on('click', '.delete', function() {
-        //         event.preventDefault();
-        //         var id = $(this).data('id');
-        //         swal(swalDeleteConfigure).then((result) => {
-        //             if (!result.value) {
-        //                 return;
-        //             }
-        //             $.ajax({
-        //                 url: "<?= site_url('UserController/deleteUser') ?>",
-        //                 'type': 'POST',
-        //                 data: {
-        //                     'id_user': id
-        //                 },
-        //                 success: function(data) {
-        //                     var json = JSON.parse(data);
-        //                     if (json['error']) {
-        //                         swal("Delete Gagal", json['message'], "error");
-        //                         return;
-        //                     }
-        //                     delete dataUser[id];
-        //                     swal("Delete Berhasil", "", "success");
-        //                     renderUser(dataUser);
-        //                 },
-        //                 error: function(e) {}
-        //             });
-        //         });
-        //     });
+        function statusVerifikasi(status) {
+            if (status == 'R')
+                return `<i class='fa fa-hourglass-start text-primary'>Request Verifikasi </i>`;
+            else if (status == 'Y')
+                return `<i class='fa fa-check text-success'> Telah Diverifikasi</i>`;
+            else
+                return `<i class='fa fa-edit text-warning'> Belum Diverifikasi</i>`;
+        }
     });
 </script>

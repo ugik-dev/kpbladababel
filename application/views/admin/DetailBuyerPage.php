@@ -107,8 +107,8 @@
         <div class="col-lg-3">
             <div class="ibox">
                 <div class="ibox-content">
-                    <button class="btn btn-primary my-1 mr-sm-2" id="btn_verifikasi"><i class='fa fa-edit'></i>Verifikasi</button>
-                    <button class="btn btn-warning my-1 mr-sm-2" id="btn_tolak_verifikasi"><i class='fa fa-edit'></i>Tolak Verifikasi</button>
+                    <button class="btn btn-primary my-1 mr-sm-2" id="btn_verifikasi"><i class='fa fa-check'></i> Verifikasi</button>
+                    <button class="btn btn-warning my-1 mr-sm-2" id="btn_dis_verifikasi"><i class='fa fa-edit'></i> Tolak / Batalkan Verifikasi</button>
 
                 </div>
             </div>
@@ -256,7 +256,8 @@
             'email': $('#info_container').find('#email'),
             'layer_dokumen_pdf': $('#info_container').find('#layer_dokumen_pdf'),
 
-            'btn_verifikasi': $('#btn_verifikasi')
+            'btn_verifikasi': $('#btn_verifikasi'),
+            'btn_dis_verifikasi': $('#btn_dis_verifikasi'),
         }
         // info.btn_verifikasi.prop('disabled', false);
 
@@ -397,7 +398,7 @@
             info.kbi_id.html(dataInfo['kbi_id']);
             info.nama_buyer.html(dataInfo['nama']);
 
-            info.verificated.html(dataInfo['verificated'] == 'Y' ? 'Telah di verifikasi' : 'Belum di verifikasi');
+            info.verificated.html(statusVerifikasi(dataInfo['verificated']));
             info.region.html(dataInfo['region'] == 'D' ? 'Domestik' : 'Foreign');
             info.nama_perusahaan.html(dataInfo['nama_perusahaan'] ? dataInfo['nama_perusahaan'] : 'Tidak Ada');
             info.alamat.html(dataInfo['alamat'] ? dataInfo['alamat'] : 'Tidak Ada');
@@ -410,49 +411,69 @@
         }
 
         info.btn_verifikasi.on('click', function() {
-            informasiModal.self.modal('show');
-            console.log(dataInfo);
-            informasiModal.id.val(dataInfo['id']);
-            informasiModal.nama_perusahaan.val(dataInfo['nama_perusahaan']);
-            // informasiModal.id_jenis_buyer.val(dataInfo['id_jenis_buyer']);
-            // informasiModal.nama_perusahaan.val(dataInfo['nama_perusahaan']);
-            informasiModal.alamat.val(dataInfo['alamat']);
-
-            informasiModal.an_bank.val(dataInfo['an_bank']);
-            informasiModal.no_rek_bank.val(dataInfo['no_rek_bank']);
-            if (dataInfo['id_bank'] != "") informasiModal.id_bank.val(dataBank[dataInfo['id_bank']]['nama_bank'] + ' -- ' + dataInfo['id_bank']);
-
-            informasiModal.no_telp.val(dataInfo['no_telp']);
-            informasiModal.no_fax.val(dataInfo['no_fax']);
-            informasiModal.email.val(dataInfo['email']);
-        });
-
-        informasiModal.form.on('submit', (ev) => {
-            ev.preventDefault();
-            buttonLoading(informasiModal.save_btn);
-            $.ajax({
-                url: "<?= site_url('BuyerController/update') ?>",
-                type: "POST",
-                data: new FormData(informasiModal.form[0]),
-                contentType: false,
-                processData: false,
-                success: (data) => {
-                    buttonIdle(informasiModal.save_btn);
-                    json = JSON.parse(data);
-                    if (json['error']) {
-                        swal("Ganti Program Renja gagal", json['message'], "error");
-                        return;
-                    }
-                    dataInfo = json['data'];
-                    renderInfo();
-                    swal("Berhasil disimpan", 'Input Informasi Berhasil', "success");
-                    informasiModal.self.modal('hide');
-                },
-                error: () => {
-                    buttonIdle(informasiModal.save_btn);
-                },
+            event.preventDefault();
+            swal(saveConfirmation("Konfirmasi Verifikasi", "Yakin akan verifikasi data ini?", "Ya, Verifikasi!")).then((result) => {
+                if (!result.value) {
+                    return;
+                }
+                $.ajax({
+                    url: "<?= site_url('AdminController/acc_buyer') ?>",
+                    'type': 'POST',
+                    data: {
+                        'id': id,
+                        'verificated': 'Y'
+                    },
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        if (json['error']) {
+                            swal("Verifikasi Gagal", json['message'], "error");
+                            return;
+                        }
+                        info.verificated.html(statusVerifikasi('Y'));
+                        swal("Verifikasi Berhasil", "", "success");
+                    },
+                    error: function(e) {}
+                });
             });
         });
+
+        info.btn_dis_verifikasi.on('click', function() {
+            event.preventDefault();
+            swal(deleteConfirmation("Konfirmasi Batalkan Verifikasi", "Yakin akan verifikasi data ini?", "Ya, Verifikasi!")).then((result) => {
+                if (!result.value) {
+                    return;
+                }
+                $.ajax({
+                    url: "<?= site_url('AdminController/acc_buyer') ?>",
+                    'type': 'POST',
+                    data: {
+                        'id': id,
+                        'verificated': 'N'
+                    },
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        if (json['error']) {
+                            swal("Verifikasi Gagal", json['message'], "error");
+                            return;
+                        }
+                        info.verificated.html(statusVerifikasi('N'));
+                        swal("Pembatalan Verifikasi Berhasil", "", "success");
+                    },
+                    error: function(e) {}
+                });
+            });
+        });
+
+
+
+        function statusVerifikasi(status) {
+            if (status == 'R')
+                return `<i class='fa fa-hourglass-start text-primary'>Request Verifikasi </i>`;
+            else if (status == 'Y')
+                return `<i class='fa fa-check text-success'> Telah Diverifikasi</i>`;
+            else
+                return `<i class='fa fa-edit text-warning'> Belum Diverifikasi</i>`;
+        }
 
         function renderDokumenBuyer(data) {
             if (data == null || typeof data != "object") {

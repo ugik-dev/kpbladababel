@@ -115,6 +115,8 @@
   </div>
   <div class="row">
     <div class="col-lg-4">
+      <button class="btn btn-primary my-1 mr-sm-2" id="request_verifikasi" style="display:none"><i class='fa fa-check'></i> Request Verifikasi</button>
+
       <button class="btn btn-success my-1 mr-sm-2" id="edit_info_btn" style="display:none"><i class='fa fa-edit'></i> Edit Informasi</button>
     </div>
   </div>
@@ -223,9 +225,11 @@
       'email': $('#info_container').find('#email'),
       'layer_dokumen_pdf': $('#info_container').find('#layer_dokumen_pdf'),
 
-      'edit_info_btn': $('#edit_info_btn')
+      'edit_info_btn': $('#edit_info_btn'),
+      'request_verifikasi': $('#request_verifikasi')
     }
     info.edit_info_btn.prop('disabled', true);
+    info.request_verifikasi.prop('disabled', true);
 
     var informasiModal = {
       self: $('#informasi_modal'),
@@ -249,6 +253,8 @@
     $.when(getAllBank(), getProfile()).then((e) => {
       renderInfo();
       info.edit_info_btn.prop('disabled', false);
+      info.request_verifikasi.prop('disabled', false);
+
     }).fail((e) => {
       console.log(e)
     });
@@ -349,7 +355,7 @@
       info.kbi_id.html(dataInfo['kbi_id']);
       info.nama_buyer.html(dataInfo['nama']);
 
-      info.verificated.html(dataInfo['verificated'] == 'Y' ? 'Telah di verifikasi' : 'Belum di verifikasi');
+      info.verificated.html(statusVerifikasi(dataInfo['verificated']));
       info.region.html(dataInfo['region'] == 'D' ? 'Domestik' : 'Foreign');
       info.nama_perusahaan.html(dataInfo['nama_perusahaan'] ? dataInfo['nama_perusahaan'] : 'Tidak Ada');
       info.alamat.html(dataInfo['alamat'] ? dataInfo['alamat'] : 'Tidak Ada');
@@ -357,9 +363,36 @@
       info.no_telp.html(dataInfo['no_telp'] ? dataInfo['no_telp'] : 'Tidak Ada');
       info.email.html(dataInfo['email'] ? dataInfo['email'] : 'Tidak Ada');
       info.edit_info_btn.toggle(!dataInfo['edit_buyer']);
+      info.request_verifikasi.toggle(!dataInfo['edit_buyer']);
       btnx = downloadButtonV2("<?= site_url('FormatDokumenController/pdf_profile_buyer/') ?>", "?id=" + dataInfo['id'], "PDF Informasi Buyer")
       info.layer_dokumen_pdf.html(btnx);
     }
+
+    info.request_verifikasi.on('click', function() {
+      event.preventDefault();
+      swal(saveConfirmation("Konfirmasi Request", "Yakin akan data ini sudah benar dan lengkap?", "Ya!")).then((result) => {
+        if (!result.value) {
+          return;
+        }
+        $.ajax({
+          url: "<?= site_url('BuyerController/reqeust_verifikasi') ?>",
+          'type': 'POST',
+          data: {
+            'id': id,
+          },
+          success: function(data) {
+            var json = JSON.parse(data);
+            if (json['error']) {
+              swal("Verifikasi Gagal", json['message'], "error");
+              return;
+            }
+            info.verificated.html(statusVerifikasi('R'));
+            swal("Request Berhasil diajukan", "", "success");
+          },
+          error: function(e) {}
+        });
+      });
+    });
 
     info.edit_info_btn.on('click', function() {
       informasiModal.self.modal('show');
@@ -378,6 +411,15 @@
       informasiModal.no_fax.val(dataInfo['no_fax']);
       informasiModal.email.val(dataInfo['email']);
     });
+
+    function statusVerifikasi(status) {
+      if (status == 'R')
+        return `<i class='fa fa-hourglass-start text-primary'>Request Verifikasi </i>`;
+      else if (status == 'Y')
+        return `<i class='fa fa-check text-success'> Telah Diverifikasi</i>`;
+      else
+        return `<i class='fa fa-edit text-warning'> Belum Diverifikasi</i>`;
+    }
 
     informasiModal.form.on('submit', (ev) => {
       ev.preventDefault();

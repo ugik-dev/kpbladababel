@@ -191,6 +191,19 @@ class BuyerController extends CI_Controller
         }
     }
 
+    public function reqeust_verifikasi()
+    {
+        try {
+            $this->SecurityModel->rolesOnlyGuard(array('buyer'));
+            $data = $this->input->post();
+            $this->BuyerModel->reqeust_verifikasi($data);
+            echo json_encode(array("data" => $data));
+        } catch (Exception $e) {
+            ExceptionHandler::handle($e);
+        }
+    }
+
+
     public function panduan()
     {
         $this->SecurityModel->roleOnlyGuard('buyer');

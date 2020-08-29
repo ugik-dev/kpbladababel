@@ -46,6 +46,27 @@ class BuyerModel extends CI_Model
         ExceptionHandler::handleDBError($this->db->error(), "Update Data Buyer", "buyer");
     }
 
+    public function acc_buyer($data)
+    {
+        ini_set('date.timezone', 'Asia/Jakarta');
+        $date = date("Y-m-d h:i:s");
+        $this->db->set('date_modified', $date);
+        $this->db->set('verificated', $data['verificated']);
+        $this->db->where('id', $data['id']);
+        $this->db->update('buyer');
+        ExceptionHandler::handleDBError($this->db->error(), "Update Data Buyer", "buyer");
+    }
+
+
+    public function reqeust_verifikasi($data)
+    {
+
+        $this->db->set('verificated', 'R');
+        $this->db->where('id', $data['id']);
+        $this->db->update('buyer');
+        ExceptionHandler::handleDBError($this->db->error(), "Update Data Buyer", "buyer");
+    }
+
     public function getAll($filter)
     {
         // if (!empty($filter['is_user'])) {
@@ -99,7 +120,8 @@ class BuyerModel extends CI_Model
         if (!empty($data['id_bank'])) {
             $data['id_bank'] = explode(' -- ', $data['id_bank'])[1];
         }
-        $this->db->set(DataStructure::slice($data, ['nama_perusahaan', 'alamat', 'no_telp', 'no_fax', 'email', 'id_bank', 'an_bank', 'no_rek_bank']));
+        $data['verificated'] = 'N';
+        $this->db->set(DataStructure::slice($data, ['nama_perusahaan', 'alamat', 'no_telp', 'no_fax', 'email', 'id_bank', 'an_bank', 'no_rek_bank', 'verificated']));
         $this->db->where('id', $data['id']);
         $this->db->update('buyer');
         $this->updateModifedDate($data['id']);
@@ -112,6 +134,7 @@ class BuyerModel extends CI_Model
 
         $this->db->set('no_' . $data['tipe'], $data['no_dokumen']);
         $this->db->set($data['tipe'], $data[$data['tipe']]);
+        $this->db->set('verificated', 'N');
         $this->db->where('id', $data['id']);
         $this->db->update('buyer');
         ExceptionHandler::handleDBError($this->db->error(), "Update Data Buyer", "buyer");
