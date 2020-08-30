@@ -8,7 +8,7 @@
         <h3 class="font-bold">SELAMAT DATANG DI SISTEM INFORMASI KANTOR PEMASARAN BERSAMA LADA BABEL</h3>
       </span>
       <h4 class="font-bold">Panduan: </h4>
-      <div>1. <a href="<?= base_url('assets/Manual_Book_KPB_Lada_Babel.pdf?v=0.0.1') ?>" target="_blank">Buku Panduan KPB Lada Babel</a></div>
+      <div>1. <a href="<?= base_url('assets/Manual_Book_KPB_Lada_Babel_v.0.2') ?>" target="_blank">Buku Panduan KPB Lada Babel</a></div>
 
     </div>
     <div class="col-md-6">
