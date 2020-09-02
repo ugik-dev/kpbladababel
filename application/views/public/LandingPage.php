@@ -358,6 +358,7 @@
 		<li><a class="nav-link page-scroll" href="#products">Products</a></li>
 		<li><a class="nav-link page-scroll" href="#news">News</a></li>
 		<li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
+    <li><a class='nav-link page-scroll' href="http://mpms.kpbladababel.com/trading"><i class='fa fa-shopping-cart'></i> MPMS</a></li>
 		<li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i> SIM-KPBLB</a></li>
 	`)
     var dataProduct = {}
