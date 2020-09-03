@@ -364,7 +364,7 @@ class FormatDokumenController extends CI_Controller
       $myCell1->addText('Email : ' . $perusahaan['email'] . ' Telp : ' . $perusahaan['no_telepon'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
       $section->addLine(array('weight' => 1.25, 'width' => 465, 'height' => 0, 'color' => '38c172'), array('spaceAfter' => 0));
     } else {
-      $section->addText('KOP PERUSAHAAN', "paragraph3", $paragraphStyleName);
+      $section->addText('KOP SURAT', "paragraph3", $paragraphStyleName);
       $textrun = $section->addTextRun();
       $textrun->addTextBreak();
     }
