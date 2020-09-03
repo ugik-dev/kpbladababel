@@ -1,7 +1,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
-  <form class="form-inline m-b-sm" id="toolbar_form" onsubmit="return false;">
+  <!-- <form class="form-inline m-b-sm" id="toolbar_form" onsubmit="return false;">
     <button type="button" class="btn btn-success my-1 mr-sm-2" id="new_btn" disabled="disabled" data-loading-text="Loading..." style="display:none"><i class="fal fa-plus"></i> Tambah Dokumen Perusahaan</button>
-  </form>
+  </form> -->
 
   <div class="row">
     <div class="col-lg-12">
@@ -14,7 +14,7 @@
                   <th style="width: 15%; text-align:center!important">Jenis Dokumen</th>
                   <th style="width: 15%; text-align:center!important">Nomor Dokumen</th>
                   <th style="width: 15%; text-align:center!important">Dokumen</th>
-                  <th style="width: 5%; text-align:center!important">Aksi</th>
+                  <th style="width: 5%; text-align:center!important">Action</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -32,14 +32,19 @@
     <div class="modal-content animated fadeIn">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Tambah Dokumen Perusahaan</h4>
+        <h4 class="modal-title" id='textaction'>Tambah Dokumen Perusahaan</h4>
       </div>
       <div class="modal-body" id="modal-body">
         <form opd="form" id="dokumen_perusahaan_form" onsubmit="return false;" type="multipart" autocomplete="off">
-          <input type="hidden" id="id_perusahaan" name="id_perusahaan">
+          <!-- hidden  -->
+          <input type="" id="id_perusahaan" name="id_perusahaan">
+          <input type="" id="id_jenis_dokumen_perusahaan" name="id_jenis_dokumen_perusahaan">
+          <input type="" id="id_dokumen_perusahaan" name="id_dokumen_perusahaan">
+          <input type="" id="case" name="case">
+
           <div class="form-group">
             <label for="id_jenis_dokumen_perusahaan">Jenis Dokumen Perusahaan</label>
-            <select class="form-control mr-sm-2" name="id_jenis_dokumen_perusahaan" id="id_jenis_dokumen_perusahaan" required="required"></select>
+            <!-- <select class="form-control mr-sm-2" name="id_jenis_dokumen_perusahaan" id="id_jenis_dokumen_perusahaan" required="required"></select> -->
           </div>
           <div class="form-group">
             <label for="no_dokumen_perusahaan">Nomor Dokumen Perusahaan</label>
@@ -63,11 +68,11 @@
   $(document).ready(function() {
     var id_perusahaan = `<?= $contentData['id_perusahaan'] ?>`;
 
-    var toolbar = {
-      'form': $('#toolbar_form'),
-      'newBtn': $('#new_btn'),
-    }
-    toolbar.newBtn.toggle(!dataInfo['edit_perusahaan']);
+    // var toolbar = {
+    //   'form': $('#toolbar_form'),
+    //   'newBtn': $('#new_btn'),
+    // }
+    // toolbar.newBtn.toggle(!dataInfo['edit_perusahaan']);
 
     var dokumen_perusahaan_datatable = $('#dokumen_perusahaan_datatable').DataTable({
       'columnDefs': [{
@@ -89,6 +94,10 @@
       'add_btn': $('#dokumen_perusahaan_modal').find('#add_btn'),
       'id_perusahaan': $('#dokumen_perusahaan_modal').find('#id_perusahaan'),
       'id_jenis_dokumen_perusahaan': $('#dokumen_perusahaan_modal').find('#id_jenis_dokumen_perusahaan'),
+      'id_dokumen_perusahaan': $('#dokumen_perusahaan_modal').find('#id_dokumen_perusahaan'),
+      'case': $('#dokumen_perusahaan_modal').find('#case'),
+      'textaction': $('#dokumen_perusahaan_modal').find('#textaction'),
+
       'no_dokumen_perusahaan': $('#dokumen_perusahaan_modal').find('#no_dokumen_perusahaan'),
       'dokumen_perusahaan': new FileUploader($('#dokumen_perusahaan_modal').find('#dokumen_perusahaan'), "", "dokumen_perusahaan", ".png , .pdf , .jpg , .jpeg", false, true),
     }
@@ -96,8 +105,8 @@
 
     var dataDokumenPerusahaan = {}
 
-    $.when(getAllDokumenPerusahaan(), getAllJenisDokumenPerusahaan()).then((e) => {
-      toolbar.newBtn.prop('disabled', false);
+    $.when(getAllDokumenPerusahaan()).then((e) => {
+
     }).fail((e) => {
       console.log(e)
     });
@@ -139,15 +148,30 @@
         var deleteButton = `
         <a class="delete dropdown-item" data-id='${dokumen['id_dokumen_perusahaan']}'><i class='fa fa-trash'></i> Hapus Dokumen Perusahaan</a>
       `;
+        var addDokButton = `
+        <a class="add dropdown-item" data-id='${dokumen['id_dokumen_perusahaan']}' data-id_jenis_dokumen_perusahaan='${dokumen['id_jenis_dokumen_perusahaan']}' ><i class='fa fa-trash'></i> Tambah Dokumen Perusahaan</a>
+      `;
+        var changeDokButton = `
+        <a class="change dropdown-item" data-id='${dokumen['id_dokumen_perusahaan']}' data-id_jenis_dokumen_perusahaan='${dokumen['id_jenis_dokumen_perusahaan']}' data-no_dokumen_perusahaan='${dokumen['no_dokumen_perusahaan']}' data-id_dokumen_perusahaan='${dokumen['id_dokumen_perusahaan']}'><i class='fa fa-trash'></i> Perbaharui Dokumen Perusahaan</a>
+      `;
+        if (dokumen['dokumen_perusahaan'] == null) {
+          actBtn = addDokButton;
+        } else {
+          actBtn = changeDokButton;
+        }
         var button = `
         <div class="btn-group" opd="group">
           <button id="action" type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class='fa fa-bars'></i></button>
           <div class="dropdown-menu" aria-labelledby="action">
-            ${deleteButton}
+            ${actBtn}
           </div>
         </div>
       `;
-        renderData.push([dokumen['nama_jenis_dokumen_perusahaan'], dokumen['no_dokumen_perusahaan'], downloadButton("<?= base_url('uploads/dokumen_perusahaan/') ?>", dokumen['dokumen_perusahaan'], true), button]);
+        if (!dataInfo['edit_perusahaan']) {
+          renderData.push([dokumen['nama_jenis_dokumen_perusahaan'], dokumen['no_dokumen_perusahaan'], downloadButton("<?= base_url('uploads/dokumen_perusahaan/') ?>", dokumen['dokumen_perusahaan'], true), button]);
+        } else {
+          renderData.push([dokumen['nama_jenis_dokumen_perusahaan'], dokumen['no_dokumen_perusahaan'], downloadButton("<?= base_url('uploads/dokumen_perusahaan/') ?>", dokumen['dokumen_perusahaan'], true), '-']);
+        }
       });
       dokumen_perusahaan_datatable.clear().rows.add(renderData).draw('full-hold');
     }
@@ -183,11 +207,6 @@
       });
     }
 
-    toolbar.newBtn.on('click', (e) => {
-      dokumen_perusahaan_modal.form.trigger('reset');
-      dokumen_perusahaan_modal.self.modal('show');
-    });
-
     dokumen_perusahaan_modal.form.submit(function(event) {
       event.preventDefault();
       swal(saveConfirmation("Konfirmasi tambah", "Yakin akan menambahakan dokumen ini?", "Ya, Tambah!")).then((result) => {
@@ -209,9 +228,8 @@
               return;
             }
             var dokumenPerusahaan = json['data']
-            dataDokumenPerusahaan[dokumenPerusahaan['id_dokumen_perusahaan']] = dokumenPerusahaan;
             swal("Simpan Berhasil", "", "success");
-            renderDokumenPerusahaan(dataDokumenPerusahaan);
+            renderDokumenPerusahaan(dokumenPerusahaan);
             dokumen_perusahaan_modal.self.modal('hide');
           },
           error: function(e) {}
@@ -219,32 +237,39 @@
       });
     });
 
-    dokumen_perusahaan_datatable.on('click', '.delete', function() {
+    // dokumen_perusahaan_modal.form.trigger('reset');
+    // dokumen_perusahaan_modal.self.modal('show');
+
+    dokumen_perusahaan_datatable.on('click', '.change', function() {
       event.preventDefault();
       var id = $(this).data('id');
-      swal(deleteConfirmation("Konfirmasi hapus", "Yakin akan menghapus dokumen ini?", "Ya, Hapus!")).then((result) => {
-        if (!result.value) {
-          return;
-        }
-        $.ajax({
-          url: "<?= site_url('DokumenPerusahaanController/delete') ?>",
-          'type': 'POST',
-          data: {
-            'id_dokumen_perusahaan': id
-          },
-          success: function(data) {
-            var json = JSON.parse(data);
-            if (json['error']) {
-              swal("Delete Gagal", json['message'], "error");
-              return;
-            }
-            delete dataDokumenPerusahaan[id];
-            swal("Delete Berhasil", "", "success");
-            renderDokumenPerusahaan(dataDokumenPerusahaan);
-          },
-          error: function(e) {}
-        });
-      });
+      var no_dokumen_perusahaan = $(this).data('no_dokumen_perusahaan');
+      var id_dokumen_perusahaan = $(this).data('id_dokumen_perusahaan');
+
+      var id_jenis_dokumen_perusahaan = $(this).data('id_jenis_dokumen_perusahaan');
+      dokumen_perusahaan_modal.textaction.html('Perbaharui Dokumen');
+      console.log(no_dokumen_perusahaan);
+      dokumen_perusahaan_modal.form.trigger('reset');
+      dokumen_perusahaan_modal.self.modal('show');
+      dokumen_perusahaan_modal.no_dokumen_perusahaan.val(no_dokumen_perusahaan);
+      dokumen_perusahaan_modal.case.val('change');
+      dokumen_perusahaan_modal.id_dokumen_perusahaan.val(id_dokumen_perusahaan);
+      dokumen_perusahaan_modal.id_perusahaan.val(id_perusahaan);
+      dokumen_perusahaan_modal.id_jenis_dokumen_perusahaan.val(id_jenis_dokumen_perusahaan);
+    });
+
+    dokumen_perusahaan_datatable.on('click', '.add', function() {
+      event.preventDefault();
+      var id = $(this).data('id');
+      var id_jenis_dokumen_perusahaan = $(this).data('id_jenis_dokumen_perusahaan');
+      dokumen_perusahaan_modal.textaction.html('Tambahkan Dokumen');
+      console.log(id_jenis_dokumen_perusahaan);
+      dokumen_perusahaan_modal.form.trigger('reset');
+      dokumen_perusahaan_modal.self.modal('show');
+      dokumen_perusahaan_modal.id_perusahaan.val(id_perusahaan);
+      dokumen_perusahaan_modal.id_jenis_dokumen_perusahaan.val(id_jenis_dokumen_perusahaan);
+      dokumen_perusahaan_modal.id_dokumen_perusahaan.val('');
+      dokumen_perusahaan_modal.case.val('add');
     });
   });
 </script>

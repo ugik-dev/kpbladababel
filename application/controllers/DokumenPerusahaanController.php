@@ -33,9 +33,12 @@ class DokumenPerusahaanController extends CI_Controller
       } else {
         $data['dokumen_perusahaan'] = FileIO::genericUpload('dokumen_perusahaan', 'pdf', NULL, $data);
       }
-      // $data['dokumen_perusahaan'] = 'adw';
-      $data['id_dokumen_perusahaan'] = $this->DokumenPerusahaanModel->add($data);
-      $data = $this->DokumenPerusahaanModel->getAll(array('id_perusahaan' => $data['id_perusahaan'], 'id_jenis_dokumen_perusahaan' => $data['id_jenis_dokumen_perusahaan'], 'is_get' => '1'));
+      if ($data['case'] == 'add') {
+        $this->DokumenPerusahaanModel->add($data);
+      } else if ($data['case'] == 'change') {
+        $this->DokumenPerusahaanModel->edit($data);
+      }
+      $data = $this->DokumenPerusahaanModel->getAll(array('id_perusahaan' => $data['id_perusahaan']));
       echo json_encode(array("data" => $data));
     } catch (Exception $e) {
       ExceptionHandler::handle($e);
