@@ -21,6 +21,7 @@
                                     <th style="width: 24%; text-align:center!important">Nama Dokumen</th>
                                     <th style="width: 24%; text-align:center!important">Persyaratan</th>
                                     <th style="width: 16%; text-align:center!important">Status</th>
+                                    <th style="width: 16%; text-align:center!important">Type </th>
                                     <th style="width: 5%; text-align:center!important">Action</th>
                                 </tr>
                             </thead>
@@ -54,7 +55,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="status">Jenis Perusahaan</label>
+                        <label for="allow_type">Type </label>
+                        <select class="form-control mr-sm-2" name="allow_type" id="allow_type" required="required"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Active </label>
                         <select class="form-control mr-sm-2" name="ACT" id="status" required="required"></select>
                     </div>
                     <button class="btn btn-success my-1 mr-sm-2" type="submit" id="add_btn" data-loading-text="Loading..."><strong>Tambah Data</strong></button>
@@ -96,6 +102,8 @@
             'id_jenis_dokumen_perusahaan': $('#jenis_dokumen_perusahaan_modal').find('#id_jenis_dokumen_perusahaan'),
             'nama_jenis_dokumen_perusahaan': $('#jenis_dokumen_perusahaan_modal').find('#nama_jenis_dokumen_perusahaan'),
             'status': $('#jenis_dokumen_perusahaan_modal').find('#status'),
+            'allow_type': $('#jenis_dokumen_perusahaan_modal').find('#allow_type'),
+
             'password': $('#jenis_dokumen_perusahaan_modal').find('#password'),
             'id_jenis_perusahaan': $('#jenis_dokumen_perusahaan_modal').find('#id_jenis_perusahaan'),
             'opd': $('#jenis_dokumen_perusahaan_modal').find('#opd'),
@@ -174,21 +182,24 @@
             });
 
             DokumenPerusahaanModal.status.empty();
-            // DokumenPerusahaanModal.status.append($('<option>', {
-            //     value: "",
-            //     text: "-- Pilih Jenis Perusahaan --"
-            // }));
-            // Object.values(data).forEach((d) => {
             DokumenPerusahaanModal.status.append($('<option>', {
                 value: 'Y',
                 text: 'Active',
             }));
-
             DokumenPerusahaanModal.status.append($('<option>', {
                 value: 'N',
                 text: 'Non Active',
             }));
-            // });
+
+            DokumenPerusahaanModal.allow_type.empty();
+            DokumenPerusahaanModal.allow_type.append($('<option>', {
+                value: 'pdf',
+                text: '.pdf',
+            }));
+            DokumenPerusahaanModal.allow_type.append($('<option>', {
+                value: 'img',
+                text: '.jpg .jpeg .png ',
+            }));
         }
 
         toolbar.id_jenis_perusahaan.on('change', (e) => {
@@ -243,7 +254,7 @@
           </div>
         </div>
       `;
-                renderData.push([jenis_dokumen_perusahaan['id_jenis_dokumen_perusahaan'], jenis_dokumen_perusahaan['nama_jenis_dokumen_perusahaan'], jenis_dokumen_perusahaan['nama_jenis_perusahaan'], jenis_dokumen_perusahaan['ACT'] == 'Y' ? 'Active' : 'Non Active', button]);
+                renderData.push([jenis_dokumen_perusahaan['id_jenis_dokumen_perusahaan'], jenis_dokumen_perusahaan['nama_jenis_dokumen_perusahaan'], jenis_dokumen_perusahaan['nama_jenis_perusahaan'], jenis_dokumen_perusahaan['ACT'] == 'Y' ? 'Active' : 'Non Active', jenis_dokumen_perusahaan['allow_type'] == 'img' ? 'jpg jpeg png' : 'pdf', button]);
             });
             FDataTable.clear().rows.add(renderData).draw('full-hold');
         }
@@ -259,8 +270,6 @@
             DokumenPerusahaanModal.self.modal('show');
             DokumenPerusahaanModal.addBtn.show();
             DokumenPerusahaanModal.saveEditBtn.hide();
-            DokumenPerusahaanModal.password.prop('placeholder', 'Password');
-            DokumenPerusahaanModal.password.prop('required', true);
         });
 
         FDataTable.on('click', '.edit', function() {
@@ -274,10 +283,8 @@
             var currentData = dataDokumenPerusahaan[$(this).data('id')];
             DokumenPerusahaanModal.id_jenis_dokumen_perusahaan.val(currentData['id_jenis_dokumen_perusahaan']);
             DokumenPerusahaanModal.id_jenis_perusahaan.val(currentData['id_jenis_perusahaan']);
-
+            DokumenPerusahaanModal.allow_type.val(currentData['allow_type']);
             DokumenPerusahaanModal.nama_jenis_dokumen_perusahaan.val(currentData['nama_jenis_dokumen_perusahaan']);
-            DokumenPerusahaanModal.nama.val(currentData['nama']);
-            DokumenPerusahaanModal.opd.val(currentData['id_opd']);
         });
 
         DokumenPerusahaanModal.form.submit(function(event) {

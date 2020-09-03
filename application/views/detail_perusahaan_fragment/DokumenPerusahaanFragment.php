@@ -41,6 +41,7 @@
           <input type="hidden" id="id_jenis_dokumen_perusahaan" name="id_jenis_dokumen_perusahaan">
           <input type="hidden" id="id_dokumen_perusahaan" name="id_dokumen_perusahaan">
           <input type="hidden" id="case" name="case">
+          <input type="hidden" id="allow_type" name="allow_type">
 
           <!-- <div class="form-group">
             <label for="id_jenis_dokumen_perusahaan">Jenis Dokumen Perusahaan</label>
@@ -97,6 +98,7 @@
       'id_dokumen_perusahaan': $('#dokumen_perusahaan_modal').find('#id_dokumen_perusahaan'),
       'case': $('#dokumen_perusahaan_modal').find('#case'),
       'textaction': $('#dokumen_perusahaan_modal').find('#textaction'),
+      'allow_type': $('#dokumen_perusahaan_modal').find('#allow_type'),
 
       'no_dokumen_perusahaan': $('#dokumen_perusahaan_modal').find('#no_dokumen_perusahaan'),
       'dokumen_perusahaan': new FileUploader($('#dokumen_perusahaan_modal').find('#dokumen_perusahaan'), "", "dokumen_perusahaan", ".png , .pdf , .jpg , .jpeg", false, true),
@@ -149,10 +151,10 @@
         <a class="delete dropdown-item" data-id='${dokumen['id_dokumen_perusahaan']}'><i class='fa fa-trash'></i> Hapus Dokumen Perusahaan</a>
       `;
         var addDokButton = `
-        <a class="add dropdown-item" data-id='${dokumen['id_dokumen_perusahaan']}' data-id_jenis_dokumen_perusahaan='${dokumen['id_jenis_dokumen_perusahaan']}' ><i class='fa fa-trash'></i> Tambah Dokumen Perusahaan</a>
+        <a class="add dropdown-item" data-allow_type='${dokumen['allow_type']}' data-id='${dokumen['id_dokumen_perusahaan']}' data-id_jenis_dokumen_perusahaan='${dokumen['id_jenis_dokumen_perusahaan']}' ><i class='fa fa-trash'></i> Tambah Dokumen Perusahaan</a>
       `;
         var changeDokButton = `
-        <a class="change dropdown-item" data-id='${dokumen['id_dokumen_perusahaan']}' data-id_jenis_dokumen_perusahaan='${dokumen['id_jenis_dokumen_perusahaan']}' data-no_dokumen_perusahaan='${dokumen['no_dokumen_perusahaan']}' data-id_dokumen_perusahaan='${dokumen['id_dokumen_perusahaan']}'><i class='fa fa-trash'></i> Perbaharui Dokumen Perusahaan</a>
+        <a class="change dropdown-item" data-allow_type='${dokumen['allow_type']}' data-id='${dokumen['id_dokumen_perusahaan']}' data-id_jenis_dokumen_perusahaan='${dokumen['id_jenis_dokumen_perusahaan']}' data-no_dokumen_perusahaan='${dokumen['no_dokumen_perusahaan']}' data-id_dokumen_perusahaan='${dokumen['id_dokumen_perusahaan']}'><i class='fa fa-trash'></i> Perbaharui Dokumen Perusahaan</a>
       `;
         if (dokumen['dokumen_perusahaan'] == null) {
           actBtn = addDokButton;
@@ -168,7 +170,7 @@
         </div>
       `;
         if (!dataInfo['edit_perusahaan']) {
-          renderData.push([dokumen['nama_jenis_dokumen_perusahaan'], dokumen['no_dokumen_perusahaan'], downloadButton("<?= base_url('uploads/dokumen_perusahaan/') ?>", dokumen['dokumen_perusahaan'], false), button]);
+          renderData.push([dokumen['nama_jenis_dokumen_perusahaan'] + ' (' + (dokumen['allow_type'] == 'img' ? 'jpg jpeg png' : 'pdf') + ')', dokumen['no_dokumen_perusahaan'], downloadButton("<?= base_url('uploads/dokumen_perusahaan/') ?>", dokumen['dokumen_perusahaan'], false), button]);
         } else {
           renderData.push([dokumen['nama_jenis_dokumen_perusahaan'], dokumen['no_dokumen_perusahaan'], downloadButton("<?= base_url('uploads/dokumen_perusahaan/') ?>", dokumen['dokumen_perusahaan'], false), '-']);
         }
@@ -245,7 +247,7 @@
       var id = $(this).data('id');
       var no_dokumen_perusahaan = $(this).data('no_dokumen_perusahaan');
       var id_dokumen_perusahaan = $(this).data('id_dokumen_perusahaan');
-
+      var allow_type = $(this).data('allow_type');
       var id_jenis_dokumen_perusahaan = $(this).data('id_jenis_dokumen_perusahaan');
       dokumen_perusahaan_modal.textaction.html('Perbaharui Dokumen');
       console.log(no_dokumen_perusahaan);
@@ -253,6 +255,7 @@
       dokumen_perusahaan_modal.self.modal('show');
       dokumen_perusahaan_modal.no_dokumen_perusahaan.val(no_dokumen_perusahaan);
       dokumen_perusahaan_modal.case.val('change');
+      dokumen_perusahaan_modal.allow_type.val(allow_type);
       dokumen_perusahaan_modal.id_dokumen_perusahaan.val(id_dokumen_perusahaan);
       dokumen_perusahaan_modal.id_perusahaan.val(id_perusahaan);
       dokumen_perusahaan_modal.id_jenis_dokumen_perusahaan.val(id_jenis_dokumen_perusahaan);
@@ -261,11 +264,13 @@
     dokumen_perusahaan_datatable.on('click', '.add', function() {
       event.preventDefault();
       var id = $(this).data('id');
+      var allow_type = $(this).data('allow_type');
       var id_jenis_dokumen_perusahaan = $(this).data('id_jenis_dokumen_perusahaan');
       dokumen_perusahaan_modal.textaction.html('Tambahkan Dokumen');
       console.log(id_jenis_dokumen_perusahaan);
       dokumen_perusahaan_modal.form.trigger('reset');
       dokumen_perusahaan_modal.self.modal('show');
+      dokumen_perusahaan_modal.allow_type.val(allow_type);
       dokumen_perusahaan_modal.id_perusahaan.val(id_perusahaan);
       dokumen_perusahaan_modal.id_jenis_dokumen_perusahaan.val(id_jenis_dokumen_perusahaan);
       dokumen_perusahaan_modal.id_dokumen_perusahaan.val('');

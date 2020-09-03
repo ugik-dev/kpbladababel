@@ -23,7 +23,7 @@ class ParameterModel extends CI_Model
   public function addJenisDokumenPerusahaan($data)
   {
 
-    $this->db->insert('jenis_dokumen_perusahaan', DataStructure::slice($data, ['nama_jenis_dokumen_perusahaan', 'id_jenis_perusahaan', 'ACT'], true));
+    $this->db->insert('jenis_dokumen_perusahaan', DataStructure::slice($data, ['nama_jenis_dokumen_perusahaan', 'id_jenis_perusahaan', 'ACT', 'allow_type'], true));
     ExceptionHandler::handleDBError($this->db->error(), "Tambah Jenis Dokumen gagal", "jenis_dokumen");
 
     return $this->db->insert_id();
@@ -32,7 +32,7 @@ class ParameterModel extends CI_Model
   public function editJenisDokumenPerusahaan($data)
   {
     $this->db->where('id_jenis_dokumen_perusahaan', $data['id_jenis_dokumen_perusahaan']);
-    $this->db->update('jenis_dokumen_perusahaan', DataStructure::slice($data, ['nama_jenis_dokumen_perusahaan', 'id_jenis_perusahaan', 'ACT'], TRUE));
+    $this->db->update('jenis_dokumen_perusahaan', DataStructure::slice($data, ['nama_jenis_dokumen_perusahaan', 'id_jenis_perusahaan', 'ACT', 'allow_type'], TRUE));
     ExceptionHandler::handleDBError($this->db->error(), "Edit Pengiriman gagal", "pengiriman");
 
     return $data['id_jenis_dokumen_perusahaan'];
