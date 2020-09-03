@@ -72,15 +72,16 @@
 </section>
 
 
-<section id="news" class="gray-section p-w-xl">
-  <div class="row">
-    <div class="col-lg-12 text-center">
-      <div class="navy-line"></div>
-      <h1>News</h1>
+<section id="news" class="gray-section p-w-x">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        <h1>News</h1>
 
-    </div>
-    <div class="col-lg-12 m-b-xl" id="news-list"></div>
-    <!-- <div class="row">
+      </div>
+      <div class="col-lg-12 m-b-xl" id="news-list"></div>
+      <!-- <div class="row">
           <div class="col-lg-6 text-center m-b-xl">
             <p>Webinar</p>
           </div>
@@ -91,8 +92,9 @@
           </div>
           
       </div> -->
-    <div class="col-lg-12 text-center m-b-xl">
-      <a href="<?= site_url('news') ?>" class="btn btn-primary">More News</a>
+      <div class="col-lg-12 text-center m-b-xl">
+        <a href="<?= site_url('news') ?>" class="btn btn-primary">More News</a>
+      </div>
     </div>
   </div>
 </section>
@@ -254,7 +256,7 @@
   </div>
 </section>
 
-<section id="products" class="gray-section p-w-xl">
+<section id="products" class="container">
   <div class="row">
     <div class="col-lg-12 text-center">
       <div class="navy-line"></div>
@@ -337,7 +339,7 @@
     </div>
     <div class="row">
       <div class="col-lg-12 text-center m-t-lg m-b-lg">
-        <p><strong>&copy; 2019 Kantor Pemasaran Lada Provinsi Kepulauan Babel</strong><br /> All rights reserved</p>
+        <p><strong>&copy; 2020 Kantor Pemasaran Lada Provinsi Kepulauan Babel</strong><br /> All rights reserved</p>
       </div>
     </div>
   </div>
@@ -357,8 +359,8 @@
 		<li><a class="nav-link page-scroll" href="#products">Products</a></li>
 		<li><a class="nav-link page-scroll" href="#news">News</a></li>
 		<li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
-    <li><a class='dropmenu' href="http://mpms.kpbladababel.com/trading"><i class='fa fa-shopping-cart'></i> MPMS</a></li>
-	  <li><a class='dropmenu' href="http://pss.kpbladababel.com/trading"><i class='fa fa-archive'></i> PSS</a></li>
+    <li><a class='nav-link page-scroll' href="http://mpms.kpbladababel.com/trading"><i class='fa fa-shopping-cart'></i> MPMS</a></li>
+	  <li><a class='nav-link page-scroll' href="http://pss.kpbladababel.com"><i class='fa fa-archive'></i> PSS</a></li>
     <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i> SIM-KPBLB</a></li>
 	`)
     var dataProduct = {}
@@ -527,23 +529,27 @@
           p = panjang.substring(0, index_p);
           news_list.append(`
         <div class="col-sm-12">
-          <div class="ibox product-box" style="cursor:pointer" onclick="location.href='<?= site_url('newsx?id_news='); ?>${news['berita_id']}'">
-            <div class="ibox-title text-center">
+          <div class="ibox product-box">
+          <div class="card">
+            <div class="card-header" style="cursor:pointer" onclick="location.href='<?= site_url('newsx?id_news='); ?>${news['berita_id']}'">
               <h5>${news['berita_judul']}</h5>
             </div>
-            <div class="col-sm-12">
-            <div class="row">
-              <div class="col-sm-3 ibox-content">
-              <div class="product-item" style="background-image:url('<?= base_url('assets/img/news/') ?>${news['berita_image']}')"></div>
-            
-              </div>
-              <div class="col-sm-9 ibox-content">
-                <p>${p}</p>
-              </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3 ibox-content">
+                  <img src="<?= base_url('assets/img/news/') ?>${news['berita_image']}" class="img-fluid img-thumbnail" alt="...">
+                </div>
+                <div class="col-sm-9 ibox-content">
+                  <p class="card-text">
+                    ${p}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          </div>
+          </div>
+        
       `);
           i++;
         }

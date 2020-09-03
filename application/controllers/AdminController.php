@@ -26,7 +26,8 @@ class AdminController extends CI_Controller
 
   public function kelola_user()
   {
-    $this->SecurityModel->rolesOnlyGuard('admin');
+    $this->SecurityModel->rolesOnlyGuard(array('admin', 'kpb'));
+
     $pageData = array(
       'title' => 'Kelola User',
       'content' => 'admin/KelolaUserPage',
