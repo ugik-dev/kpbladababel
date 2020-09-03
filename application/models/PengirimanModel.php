@@ -77,15 +77,15 @@ class PengirimanModel extends CI_Model
 
   public function add($data)
   {
-    $this->db->select('count(*) as num');
-    $this->db->from("dokumen_perusahaan");
+    $this->db->select('verificated');
+    $this->db->from("perusahaan");
     $this->db->where('id_perusahaan', $data['id_perusahaan']);
     $res = $this->db->get();
     $res = $res->result_array();
     // echo $res[0];
     // throw new UserException($res[0], USER_NOT_FOUND_CODE);
-    if ($res[0]['num'] < '8') {
-      throw new UserException("Dokumen Perusahaan tidak lengkap.", USER_NOT_FOUND_CODE);
+    if ($res[0]['verificated'] != 'Y') {
+      throw new UserException("Maaf akun anda belum terverifikasi.", USER_NOT_FOUND_CODE);
     };
 
     $data['id_tahap_proposal'] = 0;

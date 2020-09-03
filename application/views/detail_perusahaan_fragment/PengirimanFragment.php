@@ -97,9 +97,8 @@
         var button = `
         <a class="btn btn-success btn-sm" href="<?= site_url('PengirimanController/detail') ?>?id_pengiriman=${pengiriman['id_pengiriman']}"><i class='fa fa-angle-double-right'></i></a>
       `;
-        var duplikat = `
-      <a class="duplikat btn-success btn-sm" data-id='${pengiriman['id_pengiriman']}'><i class='fa fa-copy'></i></a>
-        `;
+        var duplikat = " ";
+        if (!dataInfo['edit_perusahaan']) duplikat = ` <a class="duplikat btn-success btn-sm" data-id='${pengiriman['id_pengiriman']}'><i class='fa fa-copy'></i></a>`
         renderData.push([pengiriman['id_pengiriman'], pengiriman['nama_pengiriman'] ? pengiriman['nama_pengiriman'] : 'Tidak Ada', pengiriman['item'], statusPermohonan(pengiriman['status_proposal']), button, duplikat]);
       });
       pengiriman_datatable.clear().rows.add(renderData).draw('full-hold');

@@ -168,9 +168,9 @@
         </div>
       `;
         if (!dataInfo['edit_perusahaan']) {
-          renderData.push([dokumen['nama_jenis_dokumen_perusahaan'], dokumen['no_dokumen_perusahaan'], downloadButton("<?= base_url('uploads/dokumen_perusahaan/') ?>", dokumen['dokumen_perusahaan'], true), button]);
+          renderData.push([dokumen['nama_jenis_dokumen_perusahaan'], dokumen['no_dokumen_perusahaan'], downloadButton("<?= base_url('uploads/dokumen_perusahaan/') ?>", dokumen['dokumen_perusahaan'], false), button]);
         } else {
-          renderData.push([dokumen['nama_jenis_dokumen_perusahaan'], dokumen['no_dokumen_perusahaan'], downloadButton("<?= base_url('uploads/dokumen_perusahaan/') ?>", dokumen['dokumen_perusahaan'], true), '-']);
+          renderData.push([dokumen['nama_jenis_dokumen_perusahaan'], dokumen['no_dokumen_perusahaan'], downloadButton("<?= base_url('uploads/dokumen_perusahaan/') ?>", dokumen['dokumen_perusahaan'], false), '-']);
         }
       });
       dokumen_perusahaan_datatable.clear().rows.add(renderData).draw('full-hold');
