@@ -186,63 +186,63 @@
         <div class="team-member">
           <h4><span class="navy">Disperindag</span> Kep. Babel</h4>
           <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus. </p>
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="http://perindag.babelprov.go.id/"><i class="fa fa-link"></i> Website</a></li>
-          </ul>
+          <li class="list-inline">
+          <li class="list-inline-item"><a href="http://perindag.babelprov.go.id/"><i class="fa fa-link"></i> Website</a></li>
+          </li>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="team-member wow zoomIn">
           <h4><span class="navy">Balai Pengujian </span>Mutu</h4>
           <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
-          </ul>
+          <li class="list-inline">
+          <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
+          </li>
         </div>
       </div>
       <div class="col-sm-4 wow fadeInRight">
         <div class="team-member">
           <h4><span class="navy">Balai</span> Karantina</h4>
           <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
-          </ul>
+          <li class="list-inline">
+          <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
+          </li>
         </div>
       </div>
       <div class="col-sm-3 wow fadeInLeft">
         <div class="team-member">
           <h4><span class="navy">BP</span>3L</h4>
           <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus. </p>
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
-          </ul>
+          <li class="list-inline">
+          <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
+          </li>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="team-member wow zoomIn">
           <h4><span class="navy">KS</span>OP</h4>
           <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
-          </ul>
+          <li class="list-inline">
+          <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
+          </li>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="team-member">
           <h4><span class="navy">Bea</span> Cukai</h4>
           <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
-          </ul>
+          <li class="list-inline">
+          <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
+          </li>
         </div>
       </div>
       <div class="col-sm-3 wow fadeInRight">
         <div class="team-member">
           <h4><span class="navy">Bursa</span> Komoditi</h4>
           <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
-          </ul>
+          <li class="list-inline">
+          <li class="list-inline-item"><a href="#"><i class="fa fa-link"></i> Website</a></li>
+          </li>
         </div>
       </div>
     </div>
@@ -325,14 +325,14 @@
         <p class="m-t-sm">
           Or follow us on social platform
         </p>
-        <ul class="list-inline social-icon">
-          <li class="list-inline-item"><a href="https://www.twitter.com/kpblada"><i class="fab fa-twitter"></i></a>
-          </li>
-          <li class="list-inline-item"><a href="https://www.facebook.com/kpbladababel"><i class="fab fa-facebook"></i></a>
-          </li>
-          <li class="list-inline-item"><a href="https://www.instagram.com/kpb.ladababel"><i class="fab fa-instagram"></i></a>
-          </li>
-        </ul>
+        <li class="list-inline social-icon">
+        <li class="list-inline-item"><a href="https://www.twitter.com/kpblada"><i class="fab fa-twitter"></i></a>
+        </li>
+        <li class="list-inline-item"><a href="https://www.facebook.com/kpbladababel"><i class="fab fa-facebook"></i></a>
+        </li>
+        <li class="list-inline-item"><a href="https://www.instagram.com/kpb.ladababel"><i class="fab fa-instagram"></i></a>
+        </li>
+        </li>
       </div>
     </div>
     <div class="row">
@@ -349,17 +349,17 @@
     var product_list = $('#product-list');
     var news_list = $('#news-list');
     var current_date = $('#current_date');
+    //	<li><a class="nav-link page-scroll" href="#partners">Partners</a></li>
 
     current_date.html(new Date().toLocaleDateString());
     $('#navbar-item').html(`
-		<li><a class="nav-link page-scroll" href="#page-top">Home</a></li>
 		<li><a class="nav-link page-scroll" href="#features">What We Do</a></li>
-		<li><a class="nav-link page-scroll" href="#partners">Partners</a></li>
 		<li><a class="nav-link page-scroll" href="#products">Products</a></li>
 		<li><a class="nav-link page-scroll" href="#news">News</a></li>
 		<li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
-    <li><a class='nav-link page-scroll' href="http://mpms.kpbladababel.com/trading"><i class='fa fa-shopping-cart'></i> MPMS</a></li>
-		<li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i> SIM-KPBLB</a></li>
+    <li><a class='dropmenu' href="http://mpms.kpbladababel.com/trading"><i class='fa fa-shopping-cart'></i> MPMS</a></li>
+	  <li><a class='dropmenu' href="http://pss.kpbladababel.com/trading"><i class='fa fa-archive'></i> PSS</a></li>
+    <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i> SIM-KPBLB</a></li>
 	`)
     var dataProduct = {}
     var dataNews = {}

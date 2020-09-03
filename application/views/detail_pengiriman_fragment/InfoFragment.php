@@ -170,94 +170,94 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="netto">Netto (Kg)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="netto" name="netto">
+                <input required="required" type="number" min="0" step="1" placeholder="0" class="form-control" id="netto" name="netto">
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="gross">Gross (Kg)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="gross" name="gross">
+                <input required="required" type="number" min="0" step="1" placeholder="0" class="form-control" id="gross" name="gross">
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="id_jenis_mutu">Target Mutu</label>
-                <select class="form-control mr-sm-2" name="id_jenis_mutu" id="id_jenis_mutu"></select>
+                <select required="required" class="form-control mr-sm-2" name="id_jenis_mutu" id="id_jenis_mutu"></select>
                 <div><a href="<?= base_url('assets/Rincian_Standar_Mutu.xlsx?v=0.0.1') ?>" target="_blank"> <small>Rincian Standar Mutu</small></a></div>
               </div>
             </div>
             <div class="col-sm-12">
               <div class="form-group">
                 <label for="nama_importir">Nama Importir</label>
-                <input type="text" class="form-control" placeholder="Nama Importir" id="nama_importir" name="nama_importir">
+                <input required="required" type="text" class="form-control" placeholder="Nama Importir" id="nama_importir" name="nama_importir">
               </div>
             </div>
             <div class="col-sm-12">
               <div class="form-group">
                 <label for="nomor_kontrak">Nomor Kontrak</label>
-                <input type="text" class="form-control" placeholder="Nomor Kontrak" id="nomor_kontrak" name="nomor_kontrak">
+                <input required="required" type="text" class="form-control" placeholder="Nomor Kontrak" id="nomor_kontrak" name="nomor_kontrak">
               </div>
             </div>
             <div class="col-sm-12">
               <div class="form-group">
                 <label for="keterangan_marking">Keterangan Marking</label>
-                <input type="text" class="form-control" placeholder="Keterangan Marking" id="keterangan_marking" name="keterangan_marking">
+                <input required="required" type="text" class="form-control" placeholder="Keterangan Marking" id="keterangan_marking" name="keterangan_marking">
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="city">City</label>
-                <input type="text" class="form-control" placeholder="City" id="city" name="city">
+                <input required="required" type="text" class="form-control" placeholder="City" id="city" name="city">
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="province">Province</label>
-                <input type="text" class="form-control" placeholder="Province" id="province" name="province">
+                <input required="required" type="text" class="form-control" placeholder="Province" id="province" name="province">
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="id_negara">Negara</label>
-                <select class="form-control mr-sm-2" name="id_negara" id="id_negara"></select>
+                <select required="required" class="form-control mr-sm-2" name="id_negara" id="id_negara"></select>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="id_port_of_origin">Port Of Origin</label>
-                <select class="form-control mr-sm-2" name="id_port_of_origin" id="id_port_of_origin"></select>
+                <select required="required" class="form-control mr-sm-2" name="id_port_of_origin" id="id_port_of_origin"></select>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="port_of_destination">Port of Destination</label>
-                <input type="text" class="form-control" placeholder="Port of Destination" id="port_of_destination" name="port_of_destination">
+                <input required="required" type="text" class="form-control" placeholder="Port of Destination" id="port_of_destination" name="port_of_destination">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="id_jenis_pengemasan">Jenis Pengemasan</label>
-                <select class="form-control mr-sm-2" name="id_jenis_pengemasan" id="id_jenis_pengemasan"></select>
+                <select required="required" class="form-control mr-sm-2" name="id_jenis_pengemasan" id="id_jenis_pengemasan"></select>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="tanggal_pengiriman">Tanggal Pengiriman</label>
-                <input type="text" class="form-control" placeholder="Tanggal Pengiriman" id="tanggal_pengiriman" name="tanggal_pengiriman">
+                <input required="required" type="text" class="form-control" placeholder="Tanggal Pengiriman" id="tanggal_pengiriman" name="tanggal_pengiriman">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="shipping_mark">Shipping Mark</label>
                 <!-- <input type="text" class="form-control" placeholder="Shipping Mark" id="shipping_mark" name="shipping_mark"> -->
-                <textarea rows="4" type="text" placeholder="Shipping Mark" class="form-control" id="shipping_mark" name="shipping_mark"></textarea>
+                <textarea required="required" rows="4" type="text" placeholder="Shipping Mark" class="form-control" id="shipping_mark" name="shipping_mark"></textarea>
 
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="keterangan_penggunaan_produk">Keterangan Penggunaan Produk</label>
-                <textarea rows="4" type="text" placeholder="Keterangan Penggunaan Produk" class="form-control" id="keterangan_penggunaan_produk" name="keterangan_penggunaan_produk"></textarea>
+                <textarea required="required" rows="4" type="text" placeholder="Keterangan Penggunaan Produk" class="form-control" id="keterangan_penggunaan_produk" name="keterangan_penggunaan_produk"></textarea>
 
                 <!-- <input type="text" class="form-control" placeholder="Keterangan Penggunaan Produk" id="keterangan_penggunaan_produk" name="keterangan_penggunaan_produk"> -->
               </div>

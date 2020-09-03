@@ -37,15 +37,15 @@
       <div class="modal-body" id="modal-body">
         <form opd="form" id="dokumen_perusahaan_form" onsubmit="return false;" type="multipart" autocomplete="off">
           <!-- hidden  -->
-          <input type="" id="id_perusahaan" name="id_perusahaan">
-          <input type="" id="id_jenis_dokumen_perusahaan" name="id_jenis_dokumen_perusahaan">
-          <input type="" id="id_dokumen_perusahaan" name="id_dokumen_perusahaan">
-          <input type="" id="case" name="case">
+          <input type="hidden" id="id_perusahaan" name="id_perusahaan">
+          <input type="hidden" id="id_jenis_dokumen_perusahaan" name="id_jenis_dokumen_perusahaan">
+          <input type="hidden" id="id_dokumen_perusahaan" name="id_dokumen_perusahaan">
+          <input type="hidden" id="case" name="case">
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="id_jenis_dokumen_perusahaan">Jenis Dokumen Perusahaan</label>
-            <!-- <select class="form-control mr-sm-2" name="id_jenis_dokumen_perusahaan" id="id_jenis_dokumen_perusahaan" required="required"></select> -->
-          </div>
+         ?   <select class="form-control mr-sm-2" name="id_jenis_dokumen_perusahaan" id="id_jenis_dokumen_perusahaan" required="required"></select>
+          </div> -->
           <div class="form-group">
             <label for="no_dokumen_perusahaan">Nomor Dokumen Perusahaan</label>
             <input type="text" placeholder="Nomor Dokumen Perusahaan" class="form-control" id="no_dokumen_perusahaan" name="no_dokumen_perusahaan" required="required">
