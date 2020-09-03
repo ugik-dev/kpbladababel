@@ -44,8 +44,8 @@ class ParameterModel extends CI_Model
     $this->db->select('pi.* , jp.nama_jenis_perusahaan');
     $this->db->from('jenis_dokumen_perusahaan as pi');
     $this->db->join("jenis_perusahaan as jp", 'jp.id_jenis_perusahaan = pi.id_jenis_perusahaan', 'LEFT');
-    if (!empty($filter['id_jenis_perusahaan'])) $this->db->where('id_jenis_perusahaan', $filter['id_jenis_perusahaan']);
-    if (!empty($filter['id_jenis_dokumen_perusahaan']))  $this->db->where('id_jenis_dokumen_perusahaan', $filter['id_jenis_dokumen_perusahaan']);
+    if (!empty($filter['id_jenis_perusahaan'])) $this->db->where('pi.id_jenis_perusahaan', $filter['id_jenis_perusahaan']);
+    if (!empty($filter['id_jenis_dokumen_perusahaan']))  $this->db->where('pi.id_jenis_dokumen_perusahaan', $filter['id_jenis_dokumen_perusahaan']);
 
     $res = $this->db->get();
     return DataStructure::keyValue($res->result_array(), 'id_jenis_dokumen_perusahaan');

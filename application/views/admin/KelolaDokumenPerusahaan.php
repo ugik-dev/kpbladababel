@@ -204,7 +204,7 @@
             swal.showLoading();
             return $.ajax({
                 url: `<?php echo site_url('ParameterController/getAllJenisDokumenPerusahaan/') ?>`,
-                'type': 'POST',
+                'type': 'GET',
                 data: toolbar.form.serialize(),
                 success: function(data) {
                     swal.close();
