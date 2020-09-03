@@ -12,7 +12,15 @@ class DokumenPerusahaanModel extends CI_Model
     if (!empty($this->session->userdata()['id_perusahaan'])) $this->db->where("dp.id_perusahaan", $this->session->userdata()['id_perusahaan']);
     if (!empty($filter['id_perusahaan'])) $this->db->where('dp.id_perusahaan', $filter['id_perusahaan']);
     if (!empty($filter['id_jenis_dokumen_perusahaan'])) $this->db->where('dp.id_jenis_dokumen_perusahaan', $filter['id_jenis_dokumen_perusahaan']);
+    if (!empty($filter['clue'])) {
+      $this->db->where("dp.nama_jenis_dokumen_perusahaan Like '%" . $filter['clue'] . "%'");
 
+      $res = $this->db->get();
+      $res = $res->result_array();
+      if (!empty($res[0]['dokumen_perusahaan'])) return $res[0];
+
+      return null;
+    }
 
     // $this->db->select("dp.*, jdp.nama_jenis_dokumen_perusahaan");
     // $this->db->from("dokumen_perusahaan as dp");

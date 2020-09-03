@@ -313,12 +313,12 @@ class FormatDokumenController extends CI_Controller
     $pengiriman = $this->PengirimanModel->get($input['id_pengiriman']);
     $pengirimanItem = $this->PengirimanItemModel->getAll(['id_pengiriman' => $input['id_pengiriman']]);
     $perusahaan = $this->PerusahaanModel->get($pengiriman['id_perusahaan']);
-    $siup = array_values($this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'id_jenis_dokumen_perusahaan' => 2]));
-    $no_siup = !empty($siup) ? $siup[0]['no_dokumen_perusahaan'] : NULL;
-    $nib = array_values($this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'id_jenis_dokumen_perusahaan' => 7]));
-    $no_nib = !empty($nib) ? $nib[0]['no_dokumen_perusahaan'] : NULL;
-    $logo = array_values($this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'id_jenis_dokumen_perusahaan' => 8]));
-    $logo_img = !empty($logo) ? $logo[0]['dokumen_perusahaan'] : NULL;
+    $siup = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'siup']);
+    $no_siup = !empty($siup) ? $siup['no_dokumen_perusahaan'] : NULL;
+    $nib = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'nib']);
+    $no_nib = !empty($nib) ? $nib['no_dokumen_perusahaan'] : NULL;
+    $logo = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'logo']);
+    $logo_img = !empty($logo) ? $logo['dokumen_perusahaan'] : NULL;
     $filename = 'Surat_Permohonan_IDX_' . $input['id_pengiriman'];
 
     // var_dump($pengirimanItem);
