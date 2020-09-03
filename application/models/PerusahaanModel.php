@@ -26,6 +26,15 @@ class PerusahaanModel extends CI_Model
     $res = $this->db->get();
     return DataStructure::keyValue($res->result_array(), 'id_pengiriman');
   }
+  public function reqeust_verifikasi($data)
+  {
+
+    $this->db->set('verificated', 'R');
+    $this->db->where('id_perusahaan', $data['id_perusahaan']);
+    $this->db->update('perusahaan');
+    ExceptionHandler::handleDBError($this->db->error(), "Update Request Verifikasi", "perusahaan");
+  }
+
 
   public function getPengiriman($id = NULL)
   {
@@ -75,6 +84,9 @@ class PerusahaanModel extends CI_Model
       return $res[0]['id_perusahaan'];
     }
     if (!empty($filter['id_perusahaan'])) $this->db->where("eks.id_perusahaan", $filter['id_perusahaan']);
+    if (!empty($filter['id_jenis_perusahaan'])) $this->db->where("eks.id_jenis_perusahaan", $filter['id_jenis_perusahaan']);
+    if (!empty($filter['verificated'])) $this->db->where("eks.verificated", $filter['verificated']);
+
     $res = $this->db->get();
     return DataStructure::keyValue($res->result_array(), 'id_perusahaan');
   }

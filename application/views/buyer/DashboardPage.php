@@ -116,7 +116,6 @@
   <div class="row">
     <div class="col-lg-4">
       <button class="btn btn-primary my-1 mr-sm-2" id="request_verifikasi" style="display:none"><i class='fa fa-check'></i> Request Verifikasi</button>
-
       <button class="btn btn-success my-1 mr-sm-2" id="edit_info_btn" style="display:none"><i class='fa fa-edit'></i> Edit Informasi</button>
     </div>
   </div>

@@ -66,6 +66,17 @@ class PerusahaanController extends CI_Controller
     }
   }
 
+  public function reqeust_verifikasi()
+  {
+    try {
+      $data = $this->input->post();
+      $this->PerusahaanModel->reqeust_verifikasi($data);
+      echo json_encode(array("data" => $data));
+    } catch (Exception $e) {
+      ExceptionHandler::handle($e);
+    }
+  }
+
   public function getAllPengiriman()
   {
     try {

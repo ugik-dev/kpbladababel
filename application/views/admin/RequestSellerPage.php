@@ -3,7 +3,7 @@
         <div class="ibox-content">
             <form class="form-inline" id="toolbar_form" onsubmit="return false;">
                 <input type="hidden" id="is_not_self" name="is_not_self" value="1">
-                <select class="form-control mr-sm-2" name="region" id="region"></select>
+                <select class="form-control mr-sm-2" name="id_jenis_perusahaan" id="id_jenis_perusahaan"></select>
                 <select class="form-control mr-sm-2" name="verificated" id="stat_verifikasi"></select>
             </form>
         </div>
@@ -20,7 +20,7 @@
                                     <th style="width: 7%; text-align:center!important">ID</th>
                                     <th style="width: 24%; text-align:center!important">Nama Perusahaan</th>
                                     <th style="width: 24%; text-align:center!important">Alamat</th>
-                                    <th style="width: 16%; text-align:center!important">Region</th>
+                                    <th style="width: 16%; text-align:center!important">Jenis Usaha</th>
                                     <th style="width: 16%; text-align:center!important">Status</th>
                                     <th style="width: 5%; text-align:center!important">Detail</th>
                                 </tr>
@@ -36,11 +36,11 @@
 
 <script>
     $(document).ready(function() {
-        $('#request_buyer').addClass('active');
+        $('#request_seller').addClass('active');
 
         var toolbar = {
             'form': $('#toolbar_form'),
-            'region': $('#toolbar_form').find('#region'),
+            'id_jenis_perusahaan': $('#toolbar_form').find('#id_jenis_perusahaan'),
             'stat_verifikasi': $('#toolbar_form').find('#stat_verifikasi'),
             'id_opd': $('#toolbar_form').find('#id_opd'),
         }
@@ -63,7 +63,7 @@
             'username': $('#user_modal').find('#username'),
             'nama': $('#user_modal').find('#nama'),
             'password': $('#user_modal').find('#password'),
-            'region': $('#user_modal').find('#region'),
+            'id_jenis_perusahaan': $('#user_modal').find('#id_jenis_perusahaan'),
             'opd': $('#user_modal').find('#opd'),
         }
 
@@ -88,28 +88,42 @@
             confirmButtonText: "Ya, Hapus!",
         };
 
-        $.when(getAllUser()).then((e) => {
+        $.when(getAllUser(), getAllJenisPerusahaan()).then((e) => {
 
         }).fail((e) => {
             console.log(e)
         });
 
-        renderRoleSelectionFilter();
+        function getAllJenisPerusahaan() {
+            return $.ajax({
+                url: `<?php echo site_url('ParameterController/getAllJenisPerusahaan/') ?>`,
+                'type': 'POST',
+                data: {},
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    if (json['error']) {
+                        return;
+                    }
+                    dataJenisPerusahaan = json['data'];
+                    renderRoleSelectionFilter(dataJenisPerusahaan);
+                },
+                error: function(e) {}
+            });
+        }
 
-        function renderRoleSelectionFilter() {
-            toolbar.region.empty();
-            toolbar.region.append($('<option>', {
+
+        function renderRoleSelectionFilter(data) {
+            toolbar.id_jenis_perusahaan.empty();
+            toolbar.id_jenis_perusahaan.append($('<option>', {
                 value: "",
-                text: "-- Semua Region --"
+                text: "-- Semua Jenis Usaha --"
             }));
-            toolbar.region.append($('<option>', {
-                value: 'D',
-                text: 'Domestic :: Dalam Negeri',
-            }));
-            toolbar.region.append($('<option>', {
-                value: 'F',
-                text: 'Foreig :: Luar Negeri',
-            }));
+            Object.values(data).forEach((d) => {
+                toolbar.id_jenis_perusahaan.append($('<option>', {
+                    value: d['id_jenis_perusahaan'],
+                    text: d['id_jenis_perusahaan'] + ' :: ' + d['nama_jenis_perusahaan'],
+                }));
+            });
 
             toolbar.stat_verifikasi.append($('<option>', {
                 value: "",
@@ -131,8 +145,8 @@
 
 
 
-        toolbar.region.on('change', (e) => {
-            UserModal.region.attr('readonly', !empty(toolbar.region.val()));
+        toolbar.id_jenis_perusahaan.on('change', (e) => {
+            UserModal.id_jenis_perusahaan.attr('readonly', !empty(toolbar.id_jenis_perusahaan.val()));
             getAllUser();
         });
 
@@ -175,14 +189,14 @@
                 var button = `
                 <a type="button" class="btn btn-success my-1 mr-sm-3" href="<?php echo base_url() . 'index.php/PerusahaanController/detail?id_perusahaan='; ?>${user['id_perusahaan']}"><i class="fal fa-eye"></i>  </a>
       `;
-                renderData.push([user['id_perusahaan'], user['nama_perusahaan'], user['lok_perusahaan_full']+', '+user['lok_perusahaan_kec']+', '+user['lok_perusahaan_kabkot'], user['nama_jenis_perusahaan'], statusVerifikasi(user['verificated']), button]);
+                renderData.push([user['id_perusahaan'], user['nama_perusahaan'], user['lok_perusahaan_full'] + ', ' + user['lok_perusahaan_kec'] + ', ' + user['lok_perusahaan_kabkot'], user['nama_jenis_perusahaan'], statusVerifikasi(user['verificated']), button]);
             });
             FDataTable.clear().rows.add(renderData).draw('full-hold');
         }
 
         function resetUserModal() {
             UserModal.form.trigger('reset');
-            UserModal.region.val(toolbar.region.val());
+            UserModal.id_jenis_perusahaan.val(toolbar.id_jenis_perusahaan.val());
             UserModal.opd.val(toolbar.id_opd.val() != -1 ? toolbar.id_opd.val() : "");
         }
 

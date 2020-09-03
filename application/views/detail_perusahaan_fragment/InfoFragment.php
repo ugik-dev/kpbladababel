@@ -179,6 +179,8 @@
   </div>
   <div class="row">
     <div class="col-lg-4">
+      <button class="btn btn-primary my-1 mr-sm-2" id="request_verifikasi" style="display:none"><i class='fa fa-check'></i> Request Verifikasi</button>
+
       <button class="btn btn-success my-1 mr-sm-2" id="edit_info_btn" style="display:none"><i class='fa fa-edit'></i> Edit Informasi</button>
     </div>
   </div>
@@ -336,11 +338,11 @@
       'email': $('#info_container').find('#email'),
       'layer_dokumen_pdf': $('#info_container').find('#layer_dokumen_pdf'),
       'verificated': $('#info_container').find('#verificated'),
-
+      'request_verifikasi': $('#request_verifikasi'),
       'edit_info_btn': $('#edit_info_btn')
     }
     info.edit_info_btn.prop('disabled', true);
-
+    info.request_verifikasi.prop('disabled', true);
     <?php if ($this->session->userdata()['nama_role'] == 'admin' || $this->session->userdata()['nama_role'] == 'kpb') { ?>
       btn_verifikasi = $('#btn_verifikasi');
       btn_dis_verifikasi = $('#btn_dis_verifikasi');
@@ -411,7 +413,7 @@
       });
 
     <?php }
-    5 ?>
+    ?>
 
     var informasiModal = {
       self: $('#informasi_modal'),
@@ -442,6 +444,7 @@
     $.when(getAllJenisPerusahaan(), getAllBank()).then((e) => {
       renderInfo();
       info.edit_info_btn.prop('disabled', false);
+      info.request_verifikasi.prop('disabled', false);
     }).fail((e) => {
       console.log(e)
     });
@@ -544,18 +547,47 @@
       info.no_telepon.html(dataInfo['no_telepon'] ? dataInfo['no_telepon'] : 'Tidak Ada');
       info.email.html(dataInfo['email'] ? dataInfo['email'] : 'Tidak Ada');
       info.edit_info_btn.toggle(!dataInfo['edit_perusahaan']);
+      if (dataInfo['verificated'] == 'N') info.request_verifikasi.toggle(!dataInfo['edit_perusahaan']);
+
       btnx = downloadButtonV2("<?= site_url('FormatDokumenController/pdf_profile_perusahaan/') ?>", "?id_perusahaan=" + dataInfo['id_perusahaan'], "PDF Informasi Perusahaan")
       info.layer_dokumen_pdf.html(btnx);
       info.verificated.html(statusVerifikasi(dataInfo['verificated']));
     }
 
+    info.request_verifikasi.on('click', function() {
+      event.preventDefault();
+      swal(saveConfirmation("Konfirmasi Request", "Jika verifikasi diterima dan anda mengubah data profile perusahaan, anda harus melakukan verifikasi kembali. Yakin akan request verifikasi sekarang ? ", "Ya Request Sekarang!")).then((result) => {
+        if (!result.value) {
+          return;
+        }
+        $.ajax({
+          url: "<?= site_url('PerusahaanController/reqeust_verifikasi') ?>",
+          'type': 'POST',
+          data: {
+            'id_perusahaan': id_perusahaan,
+          },
+          success: function(data) {
+            var json = JSON.parse(data);
+            if (json['error']) {
+              swal("Verifikasi Gagal", json['message'], "error");
+              return;
+            }
+            info.verificated.html(statusVerifikasi('R'));
+            swal("Request Berhasil diajukan", "", "success");
+          },
+          error: function(e) {}
+        });
+      });
+    });
+
+
     function statusVerifikasi(status) {
       if (status == 'R')
-        return `   <i class='fa fa-hourglass-start text-primary'>Request Verifikasi </i>`;
+        return ` <i class='fa fa-hourglass-start text-primary'> Request Verifikasi </i>`;
       else if (status == 'Y')
-        return `   <i class='fa fa-check text-success'> Telah Diverifikasi</i>`;
+        return ` <i class='fa fa-check text-success'> Telah Diverifikasi</i>`;
       else
-        return `   <i class='fa fa-edit text-warning'> Belum Diverifikasi</i>`;
+        return `  <i class='fa fa-edit text-warning'> Belum Diverifikasi</i>`;
     }
 
     info.edit_info_btn.on('click', function() {
@@ -569,7 +601,6 @@
       informasiModal.an_bank.val(dataInfo['an_bank']);
       informasiModal.no_rek_bank.val(dataInfo['no_rek_bank']);
       if (dataInfo['id_bank'] != "") informasiModal.id_bank.val(dataBank[dataInfo['id_bank']]['nama_bank'] + ' -- ' + dataInfo['id_bank']);
-
       informasiModal.lok_perusahaan_kec.val(dataInfo['lok_perusahaan_kec']);
       informasiModal.lok_perusahaan_kabkot.val(dataInfo['lok_perusahaan_kabkot']);
       informasiModal.lok_unit_pengelolaan_full.val(dataInfo['lok_unit_pengelolaan_full']);
