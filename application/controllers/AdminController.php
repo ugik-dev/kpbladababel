@@ -41,7 +41,7 @@ class AdminController extends CI_Controller
   {
     $this->SecurityModel->rolesOnlyGuard(array('admin', 'kpb'));
     $pageData = array(
-      'title' => 'Kelola User',
+      'title' => 'Request Buyer',
       'content' => 'admin/RequestBuyerPage',
       'breadcrumb' => array(
         'Home' => base_url(),
@@ -55,7 +55,7 @@ class AdminController extends CI_Controller
     $this->SecurityModel->rolesOnlyGuard(array('admin', 'kpb'));
 
     $pageData = array(
-      'title' => 'Kelola User',
+      'title' => 'Request Buyer',
       'content' => 'admin/DetailBuyerPage',
       'breadcrumb' => array(
         'Home' => base_url(),
@@ -69,7 +69,7 @@ class AdminController extends CI_Controller
   {
     $this->SecurityModel->rolesOnlyGuard(array('admin', 'kpb'));
     $pageData = array(
-      'title' => 'Kelola User',
+      'title' => 'Request Seller',
       'content' => 'admin/RequestSellerPage',
       'breadcrumb' => array(
         'Home' => base_url(),
@@ -83,7 +83,7 @@ class AdminController extends CI_Controller
     $this->SecurityModel->rolesOnlyGuard(array('admin', 'kpb'));
 
     $pageData = array(
-      'title' => 'Kelola User',
+      'title' => 'Request Seller',
       'content' => 'admin/DetailBuyerPage',
       'breadcrumb' => array(
         'Home' => base_url(),
@@ -121,6 +121,18 @@ class AdminController extends CI_Controller
     $this->load->view('Page', $pageData);
   }
 
+  public function kelola_jenis_dokumen_perusahaan()
+  {
+    $this->SecurityModel->roleOnlyGuard('admin');
+    $pageData = array(
+      'title' => 'Kelola Dokumen Perusahaan',
+      'content' => 'admin/KelolaDokumenPerusahaan',
+      'breadcrumb' => array(
+        'Home' => base_url(),
+      ),
+    );
+    $this->load->view('Page', $pageData);
+  }
   public function kelola_email()
   {
     $this->SecurityModel->roleOnlyGuard('admin');
@@ -197,6 +209,19 @@ class AdminController extends CI_Controller
       $data = $this->input->post();
       $this->PerusahaanModel->acc_seller($data);
       $this->email_send($data);
+      echo json_encode(array("data" => $data));
+    } catch (Exception $e) {
+      ExceptionHandler::handle($e);
+    }
+  }
+
+
+  public function getAllDBConfig()
+  {
+    try {
+      $this->SecurityModel->rolesOnlyGuard(array('admin', 'kpb'));
+      $data = $this->input->post();
+      $data = $this->PengirimanModel->getEmailConfig($data);
       echo json_encode(array("data" => $data));
     } catch (Exception $e) {
       ExceptionHandler::handle($e);

@@ -22,12 +22,21 @@
         <li id="kelola_harga_mwp">
           <a href="<?= site_url('AdminController/kelola_harga_mwp') ?>"><i class="fa fa-chart-line"></i> <span class="nav-label">Harga MWP</span></a>
         </li>
-        <li id="kelola_standar_mutu">
-          <a href="<?= site_url('AdminController/kelola_standar_mutu') ?>"><i class="fa fa-balance-scale"></i> <span class="nav-label">Standar Mutu</span></a>
+        <li id="setting_parm">
+          <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">Setting</span> <span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level" aria-expanded="true">
+            <li id="kelola_standar_mutu">
+              <a href="<?= site_url('AdminController/kelola_standar_mutu') ?>"><i class="fa fa-balance-scale"></i> <span class="nav-label"> Mutu</span></a>
+            </li>
+            <li id="kelola_jenis_dokumen_perusahaan">
+              <a href="<?= site_url('AdminController/kelola_jenis_dokumen_perusahaan') ?>"><i class="fa fa-archive"></i> <span class="nav-label"> Dokumen</span></a>
+            </li>
+            <li id="kelola_email">
+              <a href="<?= site_url('AdminController/kelola_email') ?>"><i class="fa fa-link"></i> <span class="nav-label">Kelolah Email</span></a>
+            </li>
+          </ul>
         </li>
-        <li id="kelola_email">
-          <a href="<?= site_url('AdminController/kelola_email') ?>"><i class="fa fa-link"></i> <span class="nav-label">Kelolah Email</span></a>
-        </li>
+
         <li id="logout">
           <a href="#" class="logout"><i class="fa fa-sign-out"></i> <span class="nav-label">Logout</span></a>
         </li>

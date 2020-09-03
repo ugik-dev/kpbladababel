@@ -262,6 +262,7 @@ class PengirimanModel extends CI_Model
     // return $res;
     return DataStructure::keyValue($res->result_array(), 'type');
   }
+
   public function getServerSTMP()
   {
 
