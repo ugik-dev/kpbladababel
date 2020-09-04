@@ -359,9 +359,9 @@
 		<li><a class="nav-link page-scroll" href="#products">Products</a></li>
 		<li><a class="nav-link page-scroll" href="#news">News</a></li>
 		<li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
-    <li><a class='nav-link page-scroll' href="http://mpms.kpbladababel.com/trading"><i class='fa fa-shopping-cart'></i> MPMS</a></li>
-	  <li><a class='nav-link page-scroll' href="http://pss.kpbladababel.com"><i class='fa fa-archive'></i> PSS</a></li>
-    <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i> SIM-KPBLB</a></li>
+    <li><a class='nav-link page-scroll' href="http://mpms.kpbladababel.com/trading"><i class='fa fa-shopping-cart'></i> TRADING BURSA LADA</a></li>
+	  <li><a class='nav-link page-scroll' href="http://pss.kpbladababel.com"><i class='fa fa-archive'></i> SHIPPING & REPORT</a></li>
+    <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i> IG MWP & LAB</a></li>
 	`)
     var dataProduct = {}
     var dataNews = {}
