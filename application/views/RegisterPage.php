@@ -37,11 +37,11 @@
           <hr>
           <hr>
           <div class="form-group">
-            <label for="jenis_akun">Tujuan</label>
+            <label for="jenis_akun">Participant</label>
             <select class="form-control mr-sm-3" id="jenis_akun" name="jenis_akun" required="required">
               <option value=""></option>
-              <option value="B"> Buyer</option>
-              <option value="S"> Seller</option>
+              <option value="B"> as Buyer</option>
+              <option value="S"> as Seller</option>
             </select>
           </div>
           <div class="form-group">
@@ -130,7 +130,7 @@
           <a class="btn btn-default block full-width m-b" href="<?= site_url('login') ?>">Login</a>
         </form>
         <p class="m-t">
-          <small>Sistem Integrasi Layanan Pengiriman Lada Putih Bangka Belitung</small>
+          <small>Sistem Informasi Kantor Pemasaran Berasama </small>
         </p>
       </div>
     </div>
