@@ -74,11 +74,8 @@ class UserController extends CI_Controller
 	{
 		try {
 			// $this->SecurityModel->guestOnlyGuard(TRUE);
-			// Validation::ajaxValidateForm($this->SecurityModel->loginValidation());
 			$data['activator'] = $activate;
 			$data['id'] = $id;
-
-
 			$data = $this->UserModel->activatorUser($data);
 			$this->email_send($data, 'activate');
 			redirect('login');

@@ -34,17 +34,27 @@ class UserModel extends CI_Model
 		$res = $this->db->get();
 		$res = $res->result_array();
 		if (empty($res)) {
-			throw new UserException('Activation failed', USER_NOT_FOUND_CODE);
+			throw new UserException('Activation failed or has active please check your email', USER_NOT_FOUND_CODE);
 		} else {
-			$this->cekUserByUsername($res[0]['username']);
-			$res[0]['id_role'] = '12';
-			$res[0]['password'] = $res[0]['password_hash'];
-			$res[0]['id_user'] = $this->addUser($res[0]);
-			$this->addBuyer($res[0]);
-			$this->db->where('id', $res[0]['id']);
-			$this->db->delete('user_temp');
-
-			return $res[0];
+			if ($res[0]['jenis_akun'] == 'B') {
+				$this->cekUserByUsername($res[0]['username']);
+				$res[0]['id_role'] = '12';
+				$res[0]['password'] = $res[0]['password_hash'];
+				$res[0]['id_user'] = $this->addUser($res[0]);
+				$this->addBuyer($res[0]);
+				$this->db->where('id', $res[0]['id']);
+				$this->db->delete('user_temp');
+				return $res[0];
+			} else if ($res[0]['jenis_akun'] == 'S') {
+				$this->cekUserByUsername($res[0]['username']);
+				$res[0]['id_role'] = '2';
+				$res[0]['password'] = $res[0]['password_hash'];
+				$res[0]['id_user'] = $this->addUser($res[0]);
+				//	$this->addPerusahaan($res[0]);
+				$this->db->where('id', $res[0]['id']);
+				$this->db->delete('user_temp');
+				return $res[0];
+			}
 		};
 	}
 
@@ -97,6 +107,9 @@ class UserModel extends CI_Model
 		if ($data['id_role'] == 2) {
 			ini_set('date.timezone', 'Asia/Jakarta');
 			$date = date("Y-m-d h:i:s");
+			if (!empty($data['nama_perusahaan'])) $this->db->set('nama_perusahaan', $data['nama_perusahaan']);
+			if (!empty($data['alamat'])) $this->db->set('lok_perusahaan_full', $data['alamat']);
+
 			$this->db->insert('perusahaan', ['id_user' => $id_user, 'date_modified' => $date]);
 			ExceptionHandler::handleDBError($this->db->error(), "Tambah User", "Perusahaan");
 		}
@@ -122,6 +135,19 @@ class UserModel extends CI_Model
 			$this->db->insert('perusahaan', ['id_user' => $id_user, 'date_modified' => $date]);
 			ExceptionHandler::handleDBError($this->db->error(), "Tambah User", "Perusahaan");
 		}
+	}
+
+	public function addPerusahaan($data)
+	{
+		ini_set('date.timezone', 'Asia/Jakarta');
+		$data['date_modified'] = date("Y-m-d h:i:s");
+
+		$this->db->insert('perusahaan', DataStructure::slice($data, [
+			'id_user', 'nama_perusahaan', 'alamat', 'region', 'email', 'date_modified'
+		], TRUE));
+		ExceptionHandler::handleDBError($this->db->error(), "Tambah User", "User");
+
+		$id_user = $this->db->insert_id();
 
 		return $id_user;
 	}
@@ -135,7 +161,7 @@ class UserModel extends CI_Model
 		$data['activator'] =  substr(str_shuffle($permitted_activtor), 0, 20);
 		// echo $act;
 		$this->db->insert('user_temp', DataStructure::slice($data, [
-			'username', 'nama', 'password', 'password_hash', 'activator', 'email', 'nama_perusahaan', 'region', 'alamat'
+			'username', 'nama', 'password', 'password_hash', 'activator', 'email', 'nama_perusahaan', 'region', 'alamat', 'jenis_akun'
 		], TRUE));
 		ExceptionHandler::handleDBError($this->db->error(), "Tambah User", "User");
 

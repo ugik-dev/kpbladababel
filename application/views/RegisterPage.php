@@ -37,6 +37,14 @@
           <hr>
           <hr>
           <div class="form-group">
+            <label for="jenis_akun">Tujuan</label>
+            <select class="form-control mr-sm-3" id="jenis_akun" name="jenis_akun" required="required">
+              <option value=""></option>
+              <option value="B"> Buyer</option>
+              <option value="S"> Seller</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="nama">Personal Name</label>
             <input type="text" placeholder="Personal Name" class="form-control" id="nama" name="nama" required="required">
           </div>
@@ -44,7 +52,7 @@
             <label for="nama_perusahaan">Companny Name</label>
             <input type="text" placeholder="Companny Name" class="form-control" id="nama_perusahaan" name="nama_perusahaan" required="required">
           </div>
-          <div class="form-group">
+          <div class="form-group" id="divregion">
             <label for="regional">Region</label>
             <select class="form-control mr-sm-3" id="region" name="region" required="required">
               <option value=""></option>
@@ -133,7 +141,7 @@
       BUMD Kepulauan Bangka Belitung
     </div>
     <div class="col-md-6 text-right">
-      <small>© 2019</small>
+      <small>© 2020</small>
     </div>
   </div>
 </div>
@@ -148,12 +156,25 @@
   $(document).ready(function() {
 
     var registerForm = $('#registerForm');
+    var divregion = $('#divregion');
+    var region = $('#region');
     var submitBtn = registerForm.find('#registerBtn');
     // ktp = $('#ktp');
     // ktp = new FileUploader($('#ktp'), "", "ktp", ".png , .jpg , .jpeg", false, true);
     // npwp = $('#npwp');
     // npwp = new FileUploader($('#npwp'), "", "npwp", ".png , .jpg , .jpeg", false, true);
-
+    // divregion.attr('hidden', true);
+    var btn1 = $('#jenis_akun');
+    btn1.on('change', (ev) => {
+      if (btn1.val() == 'S') {
+        divregion.attr('hidden', true);
+        region.attr('required', false);
+      }
+      if (btn1.val() == 'B') {
+        divregion.attr('hidden', false);
+        region.attr('required', true);
+      }
+    });
 
     registerForm.on('submit', (ev) => {
       ev.preventDefault();
