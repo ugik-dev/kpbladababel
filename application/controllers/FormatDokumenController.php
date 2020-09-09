@@ -321,11 +321,14 @@ class FormatDokumenController extends CI_Controller
     $logo_img = !empty($logo) ? $logo['dokumen_perusahaan'] : NULL;
     $filename = 'Surat_Permohonan_IDX_' . $input['id_pengiriman'];
 
-    // var_dump($logo_img);
-    // var_dump($no_nib);
-    // var_dump($siup);
+    var_dump($logo_img);
+    var_dump($no_nib);
+    var_dump($siup);
+    var_dump($pengiriman);
+    var_dump($pengirimanItem);
+    var_dump($perusahaan);
 
-    // return 0;
+    return 0;
     // var_dump($pengirimanItem);
     // $pengiriman = 'nama pengirim';
     // $pengirimanItem = 'nama pengirim';
