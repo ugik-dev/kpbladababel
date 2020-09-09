@@ -321,11 +321,11 @@ class FormatDokumenController extends CI_Controller
     $logo_img = !empty($logo) ? $logo['dokumen_perusahaan'] : NULL;
     $filename = 'Surat_Permohonan_IDX_' . $input['id_pengiriman'];
 
-    var_dump($logo_img);
-    var_dump($no_nib);
-    var_dump($siup);
+    // var_dump($logo_img);
+    // var_dump($no_nib);
+    // var_dump($siup);
 
-    return 0;
+    // return 0;
     // var_dump($pengirimanItem);
     // $pengiriman = 'nama pengirim';
     // $pengirimanItem = 'nama pengirim';
@@ -355,19 +355,19 @@ class FormatDokumenController extends CI_Controller
     if (!empty($logo_img)) {
       // $fancyTableStyle = array('borderSize' => 1, 'borderColor' => '000000', 'height' => 200, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
 
-      $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
-      $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
-      $spanTableStyleName = 'Colspan Rowspan';
-      $phpWord->addTableStyle($spanTableStyleName, $fancyTableStyle);
-      $table = $section->addTable($spanTableStyleName, array('spaceAfter' => 0));
-      $table->addRow();
-      $table->addCell(2000, $cellVCentered)->addImage(base_url('uploads/dokumen_perusahaan/') . $logo_img, array('height' => 75, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,  'spaceAfter' => 0));;
-      $myCell1 = $table->addCell(7400, $cellVCentered);
-      $myCell1->addText($perusahaan['nama_perusahaan'], array('name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => true), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 10));
-      $myCell1->addText($perusahaan['lok_perusahaan_full'] . ', ' . $perusahaan['lok_perusahaan_kec'] . ' - ' . $perusahaan['lok_perusahaan_kabkot'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
-      $myCell1->addText('Provinsi Kepulauan Bangka Belitung', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
-      $myCell1->addText('Email : ' . $perusahaan['email'] . ' Telp : ' . $perusahaan['no_telepon'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
-      $section->addLine(array('weight' => 1.25, 'width' => 465, 'height' => 0, 'color' => '38c172'), array('spaceAfter' => 0));
+      // $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      // $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      // $spanTableStyleName = 'Colspan Rowspan';
+      // $phpWord->addTableStyle($spanTableStyleName, $fancyTableStyle);
+      // $table = $section->addTable($spanTableStyleName, array('spaceAfter' => 0));
+      // $table->addRow();
+      // $table->addCell(2000, $cellVCentered)->addImage(base_url('uploads/dokumen_perusahaan/') . $logo_img, array('height' => 75, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,  'spaceAfter' => 0));;
+      // $myCell1 = $table->addCell(7400, $cellVCentered);
+      // $myCell1->addText($perusahaan['nama_perusahaan'], array('name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => true), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 10));
+      // $myCell1->addText($perusahaan['lok_perusahaan_full'] . ', ' . $perusahaan['lok_perusahaan_kec'] . ' - ' . $perusahaan['lok_perusahaan_kabkot'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+      // $myCell1->addText('Provinsi Kepulauan Bangka Belitung', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+      // $myCell1->addText('Email : ' . $perusahaan['email'] . ' Telp : ' . $perusahaan['no_telepon'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+      // $section->addLine(array('weight' => 1.25, 'width' => 465, 'height' => 0, 'color' => '38c172'), array('spaceAfter' => 0));
     } else {
       $section->addText('KOP SURAT', "paragraph3", $paragraphStyleName);
       $textrun = $section->addTextRun();
