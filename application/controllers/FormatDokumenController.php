@@ -529,6 +529,16 @@ class FormatDokumenController extends CI_Controller
       // $nama_importir = substr($nama_importir, 0, -9);
       // $jenis_pengemasan = substr($jenis_pengemasan, 0, -2);
       // $jumlah_karung = substr($jumlah_karung, 0, -2);
+      echo $negara_tujuan;
+      echo $keterangan_marking;
+      echo $nomor_kontrak;
+      echo $berat;
+      echo $nama_jenis_mutu;
+      echo $nama_importir;
+      echo $jenis_pengemasan;
+      echo $jumlah_karung;
+
+      return 0;
 
       // $table->addRow();
       // $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
