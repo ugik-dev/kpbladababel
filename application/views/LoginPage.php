@@ -9,6 +9,9 @@
       </span>
       <h4 class="font-bold">Guide: </h4>
       <div>1. <a href="<?= base_url('assets/Manual_Book_KPB_Lada_Babel_v.0.2.pdf') ?>" target="_blank">SIM KPB Lada Babel : in</a></div>
+      <div>2. <a href="<?= base_url('assets/Skema_Mekanisme_Sistem_Bursa.pdf') ?>" target="_blank">Mekanisme Sistem Bursa : in</a></div>
+      <div>3. <a href="<?= base_url('assets/Mekanisme_Penjualan_KPB_Lada_Babel.pdf') ?>" target="_blank">Mekanisme Penjual atau Seller KPB Lada Babel : in</a></div>
+      <div>4. <a href="<?= base_url('assets/Mekanisme_Pembeli_atau_Buyer_KPB_Lada_Babel.pdf') ?>" target="_blank">Mekanisme Pembeli atau Buyer KPB Lada Babel : in</a></div>
 
     </div>
     <div class="col-md-6">
