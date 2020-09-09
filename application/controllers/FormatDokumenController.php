@@ -594,48 +594,48 @@ class FormatDokumenController extends CI_Controller
       ));
 
 
-      $textrun = $section->addTextRun();
-      $section->addText("Lampiran surat permohonan No. \t\t\t\t\t\t\tPanngkalpinang, {$tanggal}", "paragraph2");
+      // $textrun = $section->addTextRun();
+      // $section->addText("Lampiran surat permohonan No. \t\t\t\t\t\t\tPanngkalpinang, {$tanggal}", "paragraph2");
 
 
-      $textrun = $section->addTextRun();
-      if (file_exists('./assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png')) {
-        // $pdf->Image(base_url('assets/qrcode/'.$data['id_record'].'.png'), 170, 160, -300);
-        $section->addImage(base_url('assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png'), array(
-          'height'           => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(2.4)),
-          'positioning'      => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
-          'posHorizontal' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
-          'posVertical' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
-          'marginLeft'       => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(10)),
-          'marginTop'        => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(14)),
-        ));
-      }
-      $section->addText('SHIPPING MARK', "paragraph3", $paragraphStyleName);
-      $textrun = $section->addTextRun();
-      $i = 1;
-      foreach ($pengirimanItem as $pi) {
-        $textrun = $section->addTextRun();
-        $textrun->addText("({$i})", 'paragraph');
-        $textrun->addTextBreak();
-        $resultshipping_mark = str_replace(array("\n"), "<w:br/>", $pi['shipping_mark']);
-        // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
-        $textrun->addText("$resultshipping_mark", 'paragraph');
-        $i++;
-      }
-      $textrun = $section->addTextRun();
+      // $textrun = $section->addTextRun();
+      // if (file_exists('./assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png')) {
+      //   // $pdf->Image(base_url('assets/qrcode/'.$data['id_record'].'.png'), 170, 160, -300);
+      //   $section->addImage(base_url('assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png'), array(
+      //     'height'           => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(2.4)),
+      //     'positioning'      => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+      //     'posHorizontal' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+      //     'posVertical' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+      //     'marginLeft'       => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(10)),
+      //     'marginTop'        => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(14)),
+      //   ));
+      // }
+      // $section->addText('SHIPPING MARK', "paragraph3", $paragraphStyleName);
+      // $textrun = $section->addTextRun();
+      // $i = 1;
+      // foreach ($pengirimanItem as $pi) {
+      //   $textrun = $section->addTextRun();
+      //   $textrun->addText("({$i})", 'paragraph');
+      //   $textrun->addTextBreak();
+      //   $resultshipping_mark = str_replace(array("\n"), "<w:br/>", $pi['shipping_mark']);
+      //   // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
+      //   $textrun->addText("$resultshipping_mark", 'paragraph');
+      //   $i++;
+      // }
+      // $textrun = $section->addTextRun();
 
-      $section->addText('KETERANGAN PENGGUNAAN PRODUK', "paragraph3", $paragraphStyleName);
-      $textrun = $section->addTextRun();
-      $i = 1;
-      foreach ($pengirimanItem as $pi) {
-        $textrun = $section->addTextRun();
-        $textrun->addText("({$i})", 'paragraph');
-        $textrun->addTextBreak();
-        $resulket_produk = str_replace(array("\n"), "<w:br/>", $pi['keterangan_penggunaan_produk']);
-        // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
-        $textrun->addText("$resulket_produk", 'paragraph');
-        $i++;
-      }
+      // $section->addText('KETERANGAN PENGGUNAAN PRODUK', "paragraph3", $paragraphStyleName);
+      // $textrun = $section->addTextRun();
+      // $i = 1;
+      // foreach ($pengirimanItem as $pi) {
+      //   $textrun = $section->addTextRun();
+      //   $textrun->addText("({$i})", 'paragraph');
+      //   $textrun->addTextBreak();
+      //   $resulket_produk = str_replace(array("\n"), "<w:br/>", $pi['keterangan_penggunaan_produk']);
+      //   // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
+      //   $textrun->addText("$resulket_produk", 'paragraph');
+      //   $i++;
+      // }
 
 
       $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
