@@ -498,100 +498,100 @@ class FormatDokumenController extends CI_Controller
       $keterangan_marking = '';
       $nomor_kontrak = '';
       $i = 1;
-      foreach ($pengirimanItem as $pi) {
+      // foreach ($pengirimanItem as $pi) {
 
-        $negara_tujuan .= "{$i}) {$pi['city']} - {$pi['nama_negara']}, <w:br/>";
-        $berat .= "{$i}) {$pi['netto']} KG + ";
-        $berat_gross .= "{$i}) {$pi['gross']} KG + ";
-        $nama_jenis_mutu .= "{$i}) {$pi['nama_jenis_mutu']}, ";
-        $berat_total += $pi['netto'];
-        $berat_total_gross += $pi['gross'];
-        $jenis_pengemasan .= "{$i}) {$pi['nama_jenis_pengemasan']}, ";
-        $jumlah_karung .= "{$i}) {$pi['jumlah_pengemasan']} {$pi['nama_jenis_pengemasan']}, ";
+      //   $negara_tujuan .= "{$i}) {$pi['city']} - {$pi['nama_negara']}, <w:br/>";
+      //   $berat .= "{$i}) {$pi['netto']} KG + ";
+      //   $berat_gross .= "{$i}) {$pi['gross']} KG + ";
+      //   $nama_jenis_mutu .= "{$i}) {$pi['nama_jenis_mutu']}, ";
+      //   $berat_total += $pi['netto'];
+      //   $berat_total_gross += $pi['gross'];
+      //   $jenis_pengemasan .= "{$i}) {$pi['nama_jenis_pengemasan']}, ";
+      //   $jumlah_karung .= "{$i}) {$pi['jumlah_pengemasan']} {$pi['nama_jenis_pengemasan']}, ";
 
-        $nama_importir .= "{$i}) {$pi['nama_importir']}, <w:br/>";
-        if (!empty($pi['keterangan_marking'])) {
-          $keterangan_marking .= "{$i}) {$pi['keterangan_marking']}, <w:br/>";
-        } else {
-          $keterangan_marking .= "- , ";
-        }
+      //   $nama_importir .= "{$i}) {$pi['nama_importir']}, <w:br/>";
+      //   if (!empty($pi['keterangan_marking'])) {
+      //     $keterangan_marking .= "{$i}) {$pi['keterangan_marking']}, <w:br/>";
+      //   } else {
+      //     $keterangan_marking .= "- , ";
+      //   }
 
-        $nomor_kontrak .= "{$i}) {$pi['nomor_kontrak']}, ";
-        $i++;
-      }
-      $negara_tujuan = substr($negara_tujuan, 0, -9);
-      $keterangan_marking = substr($keterangan_marking, 0, -9);
-      $nomor_kontrak = substr($nomor_kontrak, 0, -2);
-      $berat = substr($berat, 0, -3);
-      $berat_gross = substr($berat_gross, 0, -3);
-      $nama_jenis_mutu = substr($nama_jenis_mutu, 0, -2);
-      $shipping_mark = substr($shipping_mark, 0, -9);
-      $nama_importir = substr($nama_importir, 0, -9);
-      $jenis_pengemasan = substr($jenis_pengemasan, 0, -2);
-      $jumlah_karung = substr($jumlah_karung, 0, -2);
+      //   $nomor_kontrak .= "{$i}) {$pi['nomor_kontrak']}, ";
+      //   $i++;
+      // }
+      // $negara_tujuan = substr($negara_tujuan, 0, -9);
+      // $keterangan_marking = substr($keterangan_marking, 0, -9);
+      // $nomor_kontrak = substr($nomor_kontrak, 0, -2);
+      // $berat = substr($berat, 0, -3);
+      // $berat_gross = substr($berat_gross, 0, -3);
+      // $nama_jenis_mutu = substr($nama_jenis_mutu, 0, -2);
+      // $shipping_mark = substr($shipping_mark, 0, -9);
+      // $nama_importir = substr($nama_importir, 0, -9);
+      // $jenis_pengemasan = substr($jenis_pengemasan, 0, -2);
+      // $jumlah_karung = substr($jumlah_karung, 0, -2);
 
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Nomor Kontrak', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($nomor_kontrak, 'paragraph', $noSpace);
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($keterangan_marking, 'paragraph', $noSpace);
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Rencana Mutu', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($nama_jenis_mutu, 'paragraph', $noSpace);
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Netto', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($berat, 'paragraph', $noSpace);
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Gross', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($berat_gross, 'paragraph', $noSpace);
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Jenis Pengemasan', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($jenis_pengemasan, 'paragraph', $noSpace);
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Jumlah Karung', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($jumlah_karung, 'paragraph', $noSpace);
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Shipping Mark', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Keterangan Penggunaan Produk', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
-      $textrun = $section->addTextRun();
-      $textrun->addText("Demikian permohonan kami, atas bantuan dan kerjasamanya kami ucapkan terima kasih.", 'paragraph');
-      $textrun->addTextBreak();
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Nomor Kontrak', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($nomor_kontrak, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($keterangan_marking, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Rencana Mutu', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($nama_jenis_mutu, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Netto', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($berat, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Gross', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($berat_gross, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Jenis Pengemasan', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($jenis_pengemasan, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Jumlah Karung', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($jumlah_karung, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Shipping Mark', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Keterangan Penggunaan Produk', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
+      // $textrun = $section->addTextRun();
+      // $textrun->addText("Demikian permohonan kami, atas bantuan dan kerjasamanya kami ucapkan terima kasih.", 'paragraph');
+      // $textrun->addTextBreak();
 
-      $textrun = $section->addTextRun();
-      $textrun->addText("Hormat Kami,", 'paragraph');
-      $textrun->addTextBreak();
-      $textrun->addText($perusahaan['nama_perusahaan'], 'paragraph');
-      $textrun->addTextBreak(4);
-      $textrun->addText($perusahaan['nama_pimpinan'], 'paragraph');
-      $textrun->addTextBreak();
+      // $textrun = $section->addTextRun();
+      // $textrun->addText("Hormat Kami,", 'paragraph');
+      // $textrun->addTextBreak();
+      // $textrun->addText($perusahaan['nama_perusahaan'], 'paragraph');
+      // $textrun->addTextBreak(4);
+      // $textrun->addText($perusahaan['nama_pimpinan'], 'paragraph');
+      // $textrun->addTextBreak();
 
 
 
-      $section = $phpWord->addSection(array(
-        'marginLeft' => 1200, 'marginRight' => 600,
-        'marginTop' => 600, 'marginBottom' => 600
-      ));
+      // $section = $phpWord->addSection(array(
+      //   'marginLeft' => 1200, 'marginRight' => 600,
+      //   'marginTop' => 600, 'marginBottom' => 600
+      // ));
 
 
       // $textrun = $section->addTextRun();
