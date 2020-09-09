@@ -544,11 +544,11 @@ class FormatDokumenController extends CI_Controller
     $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
-    $table->addRow();
+    // $table->addRow();
+    // $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
+    // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    // $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+    // $table->addRow();
     // $table->addCell(4000, $cellVCentered)->addText('Nomor Kontrak', 'paragraph', $noSpace);
     // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     // $table->addCell(5000, $cellVCentered)->addText($nomor_kontrak, 'paragraph', $noSpace);
