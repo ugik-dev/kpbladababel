@@ -498,37 +498,37 @@ class FormatDokumenController extends CI_Controller
     $keterangan_marking = '';
     $nomor_kontrak = '';
     $i = 1;
-    // foreach ($pengirimanItem as $pi) {
+    foreach ($pengirimanItem as $pi) {
 
-    //   $negara_tujuan .= "{$i}) {$pi['city']} - {$pi['nama_negara']}, <w:br/>";
-    //   $berat .= "{$i}) {$pi['netto']} KG + ";
-    //   $berat_gross .= "{$i}) {$pi['gross']} KG + ";
-    //   $nama_jenis_mutu .= "{$i}) {$pi['nama_jenis_mutu']}, ";
-    //   $berat_total += $pi['netto'];
-    //   $berat_total_gross += $pi['gross'];
-    //   $jenis_pengemasan .= "{$i}) {$pi['nama_jenis_pengemasan']}, ";
-    //   $jumlah_karung .= "{$i}) {$pi['jumlah_pengemasan']} {$pi['nama_jenis_pengemasan']}, ";
+      $negara_tujuan .= "{$i}) {$pi['city']} - {$pi['nama_negara']}, <w:br/>";
+      $berat .= "{$i}) {$pi['netto']} KG + ";
+      $berat_gross .= "{$i}) {$pi['gross']} KG + ";
+      $nama_jenis_mutu .= "{$i}) {$pi['nama_jenis_mutu']}, ";
+      $berat_total += $pi['netto'];
+      $berat_total_gross += $pi['gross'];
+      $jenis_pengemasan .= "{$i}) {$pi['nama_jenis_pengemasan']}, ";
+      $jumlah_karung .= "{$i}) {$pi['jumlah_pengemasan']} {$pi['nama_jenis_pengemasan']}, ";
 
-    //   $nama_importir .= "{$i}) {$pi['nama_importir']}, <w:br/>";
-    //   if (!empty($pi['keterangan_marking'])) {
-    //     $keterangan_marking .= "{$i}) {$pi['keterangan_marking']}, <w:br/>";
-    //   } else {
-    //     $keterangan_marking .= "- , ";
-    //   }
+      $nama_importir .= "{$i}) {$pi['nama_importir']}, <w:br/>";
+      if (!empty($pi['keterangan_marking'])) {
+        $keterangan_marking .= "{$i}) {$pi['keterangan_marking']}, <w:br/>";
+      } else {
+        $keterangan_marking .= "- , ";
+      }
 
-    //   $nomor_kontrak .= "{$i}) {$pi['nomor_kontrak']}, ";
-    //   $i++;
-    // }
-    // $negara_tujuan = substr($negara_tujuan, 0, -9);
-    // $keterangan_marking = substr($keterangan_marking, 0, -9);
-    // $nomor_kontrak = substr($nomor_kontrak, 0, -2);
-    // $berat = substr($berat, 0, -3);
-    // $berat_gross = substr($berat_gross, 0, -3);
-    // $nama_jenis_mutu = substr($nama_jenis_mutu, 0, -2);
-    // $shipping_mark = substr($shipping_mark, 0, -9);
-    // $nama_importir = substr($nama_importir, 0, -9);
-    // $jenis_pengemasan = substr($jenis_pengemasan, 0, -2);
-    // $jumlah_karung = substr($jumlah_karung, 0, -2);
+      $nomor_kontrak .= "{$i}) {$pi['nomor_kontrak']}, ";
+      $i++;
+    }
+    $negara_tujuan = substr($negara_tujuan, 0, -9);
+    $keterangan_marking = substr($keterangan_marking, 0, -9);
+    $nomor_kontrak = substr($nomor_kontrak, 0, -2);
+    $berat = substr($berat, 0, -3);
+    $berat_gross = substr($berat_gross, 0, -3);
+    $nama_jenis_mutu = substr($nama_jenis_mutu, 0, -2);
+    $shipping_mark = substr($shipping_mark, 0, -9);
+    $nama_importir = substr($nama_importir, 0, -9);
+    $jenis_pengemasan = substr($jenis_pengemasan, 0, -2);
+    $jumlah_karung = substr($jumlah_karung, 0, -2);
     echo $negara_tujuan;
     echo $keterangan_marking;
     echo $nomor_kontrak;
