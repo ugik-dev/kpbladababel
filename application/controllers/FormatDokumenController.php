@@ -538,7 +538,7 @@ class FormatDokumenController extends CI_Controller
     // echo $jenis_pengemasan;
     // echo $jumlah_karung;
 
-    // return 0;
+    return json_encode($nama_importir);
 
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
