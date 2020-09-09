@@ -76,8 +76,9 @@ class BuyerModel extends CI_Model
         if (!empty($data['id_bank'])) {
             $data['id_bank'] = explode(' -- ', $data['id_bank'])[1];
         }
+
         $data['verificated'] = 'N';
-        $this->db->set(DataStructure::slice($data, ['nama_perusahaan', 'alamat', 'no_telp', 'no_fax', 'email', 'id_bank', 'an_bank', 'no_rek_bank', 'verificated']));
+        $this->db->set(DataStructure::slice($data, ['nama_perusahaan', 'alamat', 'no_telp', 'no_fax', 'email', 'id_bank', 'an_bank', 'no_rek_bank', 'verificated', 'f_bank']));
         $this->db->where('id', $data['id']);
         $this->db->update('buyer');
         $this->updateModifedDate($data['id']);

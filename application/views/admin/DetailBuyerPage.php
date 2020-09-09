@@ -296,7 +296,11 @@
         function renderInfo() {
             info.an_bank.html(dataInfo['an_bank'] ? dataInfo['an_bank'] : '-');
             info.no_rek_bank.html(dataInfo['no_rek_bank'] ? dataInfo['no_rek_bank'] : '-');
-            if (dataInfo['id_bank'] != "") info.id_bank.html(dataInfo['nama_bank']);
+            if (dataInfo['region'] == 'D') {
+                if (dataInfo['id_bank'] != "") info.id_bank.html(dataInfo['nama_bank']);
+            } else if (dataInfo['region'] == 'F') {
+                info.id_bank.html(dataInfo['f_bank'] ? dataInfo['f_bank'] : '-');
+            }
             info.kbi_id.html(dataInfo['kbi_id']);
             info.nama_buyer.html(dataInfo['nama']);
             info.verificated.html(statusVerifikasi(dataInfo['verificated']));

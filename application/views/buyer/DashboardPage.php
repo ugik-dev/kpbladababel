@@ -365,7 +365,7 @@
       info.no_telp.html(dataInfo['no_telp'] ? dataInfo['no_telp'] : 'Tidak Ada');
       info.email.html(dataInfo['email'] ? dataInfo['email'] : 'Tidak Ada');
       info.edit_info_btn.toggle(!dataInfo['edit_buyer']);
-      info.request_verifikasi.toggle(!dataInfo['edit_buyer']);
+      if (dataInfo['verificated'] == 'N') info.request_verifikasi.toggle(!dataInfo['edit_buyer']);
       btnx = downloadButtonV2("<?= site_url('FormatDokumenController/pdf_profile_buyer/') ?>", "?id=" + dataInfo['id'], "PDF Informasi Buyer")
       info.layer_dokumen_pdf.html(btnx);
     }
@@ -389,6 +389,7 @@
               return;
             }
             info.verificated.html(statusVerifikasi('R'));
+            info.request_verifikasi.toggle('hide');
             swal("Request Berhasil diajukan", "", "success");
           },
           error: function(e) {}

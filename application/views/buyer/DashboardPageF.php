@@ -152,7 +152,7 @@
               <div class="form-group">
                 <label for="id_bankx">Bank Name (Bank Id)</label>
                 <!-- <select class="form-control mr-sm-3" id="id_bankx" name="id_bank" required="required"></select> -->
-                  <input type="text" class="form-control" id="id_bankx" name="bank_name" placeholder="Tidak ada" required="required">
+                  <input type="text" class="form-control" id="id_bankx" name="f_bank" placeholder="Tidak ada" required="required">
               </div>
             </div>
             <div class="col-sm-3">
@@ -251,7 +251,8 @@
     var dataJenisBuyer = {};
     var dataBank = {};
     var dataInfo = {};
-    $.when(getAllBank(), getProfile()).then((e) => {
+    //getAllBank(),
+    $.when( getProfile()).then((e) => {
       renderInfo();
       info.edit_info_btn.prop('disabled', false);
       info.request_verifikasi.prop('disabled', false);
@@ -311,39 +312,39 @@
       });
     }
 
-    function getAllBank() {
-      return $.ajax({
-        url: `<?php echo site_url('BankController/getAll/') ?>`,
-        'type': 'GET',
-        data: {},
-        success: function(data) {
-          var json = JSON.parse(data);
-          if (json['error']) {
-            return;
-          }
-          dataBank = json['data'];
-          renderBank(dataBank);
-        },
-        error: function(e) {}
-      });
-    }
+    // function getAllBank() {
+    //   return $.ajax({
+    //     url: `<?php echo site_url('BankController/getAll/') ?>`,
+    //     'type': 'GET',
+    //     data: {},
+    //     success: function(data) {
+    //       var json = JSON.parse(data);
+    //       if (json['error']) {
+    //         return;
+    //       }
+    //       dataBank = json['data'];
+    //       renderBank(dataBank);
+    //     },
+    //     error: function(e) {}
+    //   });
+    // }
 
-    function renderBank(data) {
-      if (data == null || typeof data != "object") return;
-      informasiModal.id_bank.typeahead({
-        source: Object.values(data).map((e) => {
-          return `${e['nama_bank']} -- ${e['id_bank']}`;
-        }),
-        afterSelect: function(data) {
-          informasiModal.id_bank.val(data);
-        }
-      });
-      informasiModal.id_bank.on('blur', function(e) {
-        if (empty(informasiModal.id_bank.val())) {
-          informasiModal.id_bank.val('');
-        }
-      });
-    }
+    // function renderBank(data) {
+    //   if (data == null || typeof data != "object") return;
+    //   informasiModal.id_bank.typeahead({
+    //     source: Object.values(data).map((e) => {
+    //       return `${e['nama_bank']} -- ${e['id_bank']}`;
+    //     }),
+    //     afterSelect: function(data) {
+    //       informasiModal.id_bank.val(data);
+    //     }
+    //   });
+    //   informasiModal.id_bank.on('blur', function(e) {
+    //     if (empty(informasiModal.id_bank.val())) {
+    //       informasiModal.id_bank.val('');
+    //     }
+    //   });
+    // }
 
 
 
@@ -352,7 +353,8 @@
 
       info.an_bank.html(dataInfo['an_bank'] ? dataInfo['an_bank'] : '-');
       info.no_rek_bank.html(dataInfo['no_rek_bank'] ? dataInfo['no_rek_bank'] : '-');
-      if (dataInfo['id_bank'] != "") info.id_bank.html(dataInfo['nama_bank']);
+      // info.id_bank.html(dataInfo['f_bank']);
+      info.id_bank.html(dataInfo['f_bank'] ? dataInfo['f_bank'] : '-');
       info.kbi_id.html(dataInfo['kbi_id']);
       info.nama_buyer.html(dataInfo['nama']);
 
@@ -364,7 +366,8 @@
       info.no_telp.html(dataInfo['no_telp'] ? dataInfo['no_telp'] : 'Tidak Ada');
       info.email.html(dataInfo['email'] ? dataInfo['email'] : 'Tidak Ada');
       info.edit_info_btn.toggle(!dataInfo['edit_buyer']);
-      info.request_verifikasi.toggle(!dataInfo['edit_buyer']);
+      if(dataInfo['verificated'] == 'N') info.request_verifikasi.toggle(!dataInfo['edit_buyer']);
+      
       btnx = downloadButtonV2("<?= site_url('FormatDokumenController/pdf_profile_buyer/') ?>", "?id=" + dataInfo['id'], "PDF Informasi Buyer")
       info.layer_dokumen_pdf.html(btnx);
     }
@@ -388,6 +391,7 @@
               return;
             }
             info.verificated.html(statusVerifikasi('R'));
+            info.request_verifikasi.toggle('hide');
             swal("Request success", "", "success");
           },
           error: function(e) {}
@@ -406,7 +410,7 @@
 
       informasiModal.an_bank.val(dataInfo['an_bank']);
       informasiModal.no_rek_bank.val(dataInfo['no_rek_bank']);
-      if (dataInfo['id_bank'] != "") informasiModal.id_bank.val(dataBank[dataInfo['id_bank']]['nama_bank'] + ' -- ' + dataInfo['id_bank']);
+      informasiModal.id_bank.val(dataInfo['f_bank']);
 
       informasiModal.no_telp.val(dataInfo['no_telp']);
       informasiModal.no_fax.val(dataInfo['no_fax']);
