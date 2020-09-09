@@ -355,14 +355,32 @@
 
     current_date.html(new Date().toLocaleDateString());
     $('#navbar-item').html(`
-		<li><a class="nav-link page-scroll" href="#features">What We Do</a></li>
+    <li><a class="nav-link page-scroll" href="#features">What We Do</a></li>
 		<li><a class="nav-link page-scroll" href="#products">Products</a></li>
 		<li><a class="nav-link page-scroll" href="#news">News</a></li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class='fa fa-shopping-cart'></i> Trading
+        </a>
+        <div class="dropdown-menu bg-primary" >
+        <a class='nav-link page-scroll' style="width: 200px" href="http://mpms.kpbladababel.com/trading">TRADING BURSA LADA</a>
+        <a class='nav-link page-scroll' style="width: 200px" href="http://pss.kpbladababel.com">SHIPPING & REPORT</a> 
+        </div>
+    </li>
 		<li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
-    <li><a class='nav-link page-scroll' href="http://mpms.kpbladababel.com/trading"><i class='fa fa-shopping-cart'></i> TRADING BURSA LADA</a></li>
-	  <li><a class='nav-link page-scroll' href="http://pss.kpbladababel.com"><i class='fa fa-archive'></i> SHIPPING & REPORT</a></li>
-    <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i> IG MWP & LAB</a></li>
+    <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i>Login | Registration</a></li>
+                   
+               
 	`)
+
+    // <li><a class="nav-link page-scroll" href="#features">What We Do</a></li>
+    // 	<li><a class="nav-link page-scroll" href="#products">Products</a></li>
+    // 	<li><a class="nav-link page-scroll" href="#news">News</a></li>
+    // 	<li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
+    //   <li><a class='nav-link page-scroll' href="http://mpms.kpbladababel.com/trading"><i class='fa fa-shopping-cart'></i> TRADING BURSA LADA</a></li>
+    //   <li><a class='nav-link page-scroll' href="http://pss.kpbladababel.com"><i class='fa fa-archive'></i> SHIPPING & REPORT</a></li>
+    //   <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i> IG MWP & LAB</a></li>
+
     var dataProduct = {}
     var dataNews = {}
 

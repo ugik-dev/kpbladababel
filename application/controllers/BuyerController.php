@@ -16,13 +16,15 @@ class BuyerController extends CI_Controller
     {
         // var_dump($this->session->userdata());
         $this->SecurityModel->roleOnlyGuard('buyer');
-        // if ($this->session->userdata()['region'] == 'D') {
-        $pageBuyer = 'buyer/DashboardPage';
-        // } else {
-        // $pageBuyer = 'buyer/DashboardPageF';
-        // }
+        if ($this->session->userdata()['region'] == 'D') {
+            $text = 'Beranda';
+            $pageBuyer = 'buyer/DashboardPage';
+        } else {
+            $text = 'Dashboard';
+            $pageBuyer = 'buyer/DashboardPageF';
+        }
         $pageData = array(
-            'title' => 'Beranda',
+            'title' => $text,
             'content' => $pageBuyer,
             'breadcrumb' => array(
                 'Home' => base_url(),
@@ -49,15 +51,19 @@ class BuyerController extends CI_Controller
     public function dokumen_buyer()
     {
         $this->SecurityModel->userOnlyGuard();
-        // $input = $this->input->get();
-        // $data = $this->BuyerModel->get($input['id_buyer']);
-        // if ($this->session->userdata()['region'] == 'D') {
-        $pageBuyer = 'buyer/DokumentBuyerPage';
+        if ($this->session->userdata()['region'] == 'D') {
+            $text = 'Dokument';
+            $pageBuyer = 'buyer/DokumentBuyerPage';
+        } else {
+            $text = 'Document';
+            $pageBuyer = 'buyer/DokumentBuyerPageF';
+        }
+
         // } else {
         //     $pageBuyer = 'buyer/DokumentBuyerPageF';
         // }
         $pageData = array(
-            'title' => "Dokument",
+            'title' => $text,
             'content' => $pageBuyer,
             'breadcrumb' => array(
                 'Home' => base_url(),

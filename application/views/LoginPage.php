@@ -5,16 +5,16 @@
     <div class="col-md-6">
       <span class="text-center">
         <h3><img class="col-xs-8 col-lg-8 logo" src="<?php echo base_url('assets/img/logo-kpb.png'); ?>"></h3>
-        <h3 class="font-bold">SELAMAT DATANG DI SISTEM INFORMASI KANTOR PEMASARAN BERSAMA LADA BABEL</h3>
+        <h3 class="font-bold">WELCOME TO SYSTEM INFORMATION KANTOR PEMASARAN BERSAMA LADA BABEL</h3>
       </span>
-      <h4 class="font-bold">Panduan: </h4>
-      <div>1. <a href="<?= base_url('assets/Manual_Book_KPB_Lada_Babel_v.0.2.pdf') ?>" target="_blank">Buku Panduan KPB Lada Babel</a></div>
+      <h4 class="font-bold">Guide: </h4>
+      <div>1. <a href="<?= base_url('assets/Manual_Book_KPB_Lada_Babel_v.0.2.pdf') ?>" target="_blank">SIM KPB Lada Babel : in</a></div>
 
     </div>
     <div class="col-md-6">
       <div class="ibox-content">
         <form id="loginForm" class="m-t" role="form">
-          <h3>Masuk</h3>
+          <!-- <h3>Masuk</h3> -->
           <div class="form-group">
             <input type="text" class="form-control" name="username" placeholder="Username" required="required" autocomplete="username">
           </div>

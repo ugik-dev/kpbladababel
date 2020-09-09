@@ -50,6 +50,7 @@ class PerusahaanModel extends CI_Model
     ini_set('date.timezone', 'Asia/Jakarta');
     $date = date("Y-m-d h:i:s");
     $this->db->set('date_modified', $date);
+    $this->db->set('verificated', 'N');
     $this->db->where('id_perusahaan', $data);
     $this->db->update('perusahaan');
     ExceptionHandler::handleDBError($this->db->error(), "Update Data Perusahaan", "perusahaan");
@@ -140,6 +141,7 @@ class PerusahaanModel extends CI_Model
     if (!empty($data['id_bank'])) {
       $data['id_bank'] = explode(' -- ', $data['id_bank'])[1];
     }
+
     $this->db->set(DataStructure::slice($data, ['nama_perusahaan', 'id_jenis_perusahaan', 'nama_pimpinan', 'lok_perusahaan_full', 'lok_perusahaan_kec', 'lok_perusahaan_kabkot', 'lok_unit_pengelolaan_full', 'lok_unit_pengelolaan_kec', 'lok_unit_pengelolaan_kabkot', 'lok_gudang_penyimpanan_full', 'lok_gudang_penyimpanan_kec', 'lok_gudang_penyimpanan_kabkot', 'no_telepon', 'email', 'id_bank', 'an_bank', 'no_rek_bank']));
     $this->db->where('id_perusahaan', $data['id_perusahaan']);
     $this->db->update('perusahaan');

@@ -21,6 +21,9 @@
             </table>
           </div>
         </div>
+        <?php if ($this->session->userdata()['id_role'] == '12') { ?>
+          <h4>Note : <small> Setiap perubahan atau penambahan dokumen berpengaruh terhadap status verifikasi anda, jika terjadi perubahan harus dilakukan verifikasi kembali. </small> </h4>
+        <?php } ?>
       </div>
     </div>
   </div>

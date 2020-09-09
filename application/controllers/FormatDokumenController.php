@@ -498,6 +498,8 @@ class FormatDokumenController extends CI_Controller
     $keterangan_marking = '';
     $nomor_kontrak = '';
     $i = 1;
+    $j = 0;
+    $ar_nama_importir = [];
     foreach ($pengirimanItem as $pi) {
 
       $negara_tujuan .= "{$i}) {$pi['city']} - {$pi['nama_negara']}, <w:br/>";
@@ -508,8 +510,8 @@ class FormatDokumenController extends CI_Controller
       $berat_total_gross += $pi['gross'];
       $jenis_pengemasan .= "{$i}) {$pi['nama_jenis_pengemasan']}, ";
       $jumlah_karung .= "{$i}) {$pi['jumlah_pengemasan']} {$pi['nama_jenis_pengemasan']}, ";
-
-      $nama_importir .= "{$i}) {$pi['nama_importir']}, <w:br/>";
+      // $ar_nama_importir[$j] = $pi['nama_importir'];
+      $nama_importir .= "{$i}) " . htmlspecialchars($pi['nama_importir']) . ", <w:br/>";
       if (!empty($pi['keterangan_marking'])) {
         $keterangan_marking .= "{$i}) {$pi['keterangan_marking']}, <w:br/>";
       } else {
@@ -518,6 +520,7 @@ class FormatDokumenController extends CI_Controller
 
       $nomor_kontrak .= "{$i}) {$pi['nomor_kontrak']}, ";
       $i++;
+      $j++;
     }
     $negara_tujuan = substr($negara_tujuan, 0, -9);
     $keterangan_marking = substr($keterangan_marking, 0, -9);
@@ -529,16 +532,6 @@ class FormatDokumenController extends CI_Controller
     $nama_importir = substr($nama_importir, 0, -9);
     $jenis_pengemasan = substr($jenis_pengemasan, 0, -2);
     $jumlah_karung = substr($jumlah_karung, 0, -2);
-    // echo $negara_tujuan;
-    // echo $keterangan_marking;
-    // echo $nomor_kontrak;
-    // echo $berat;
-    // echo $nama_jenis_mutu;
-    // echo $nama_importir;
-    // echo $jenis_pengemasan;
-    // echo $jumlah_karung;
-
-    // return json_encode($nama_importir);
 
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
@@ -547,17 +540,11 @@ class FormatDokumenController extends CI_Controller
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText('NAMA IMPORTIR', 'paragraph', $noSpace);
-
-    // $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+    $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Nomor Kontrak', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText($nomor_kontrak, 'paragraph', $noSpace);
-    // $table->addRow();
-    // $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
-    // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    // $table->addCell(5000, $cellVCentered)->addText($keterangan_marking, 'paragraph', $noSpace);
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Rencana Mutu', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
@@ -598,18 +585,12 @@ class FormatDokumenController extends CI_Controller
     $textrun->addText($perusahaan['nama_pimpinan'], 'paragraph');
     $textrun->addTextBreak();
 
-
-
     $section = $phpWord->addSection(array(
       'marginLeft' => 1200, 'marginRight' => 600,
       'marginTop' => 600, 'marginBottom' => 600
     ));
-
-
     $textrun = $section->addTextRun();
     $section->addText("Lampiran surat permohonan No. \t\t\t\t\t\t\tPanngkalpinang, {$tanggal}", "paragraph2");
-
-
     $textrun = $section->addTextRun();
     if (file_exists('./assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png')) {
       // $pdf->Image(base_url('assets/qrcode/'.$data['id_record'].'.png'), 170, 160, -300);
@@ -629,7 +610,7 @@ class FormatDokumenController extends CI_Controller
       $textrun = $section->addTextRun();
       $textrun->addText("({$i})", 'paragraph');
       $textrun->addTextBreak();
-      $resultshipping_mark = str_replace(array("\n"), "<w:br/>", $pi['shipping_mark']);
+      $resultshipping_mark = str_replace(array("\n"), "<w:br/>", htmlspecialchars($pi['shipping_mark']));
       // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
       $textrun->addText("$resultshipping_mark", 'paragraph');
       $i++;
@@ -643,7 +624,7 @@ class FormatDokumenController extends CI_Controller
       $textrun = $section->addTextRun();
       $textrun->addText("({$i})", 'paragraph');
       $textrun->addTextBreak();
-      $resulket_produk = str_replace(array("\n"), "<w:br/>", $pi['keterangan_penggunaan_produk']);
+      $resulket_produk = str_replace(array("\n"), "<w:br/>", htmlspecialchars($pi['keterangan_penggunaan_produk']));
       // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
       $textrun->addText("$resulket_produk", 'paragraph');
       $i++;

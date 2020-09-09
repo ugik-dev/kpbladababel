@@ -20,6 +20,9 @@
               <tbody></tbody>
             </table>
           </div>
+          <?php if ($this->session->userdata()['id_role'] == '2') { ?>
+            <h4>Note : <small> Setiap perubahan atau penambahan dokumen berpengaruh terhadap status verifikasi anda, jika terjadi perubahan harus dilakukan verifikasi kembali. </small> </h4>
+          <?php } ?>
         </div>
       </div>
     </div>
@@ -151,10 +154,10 @@
         <a class="delete dropdown-item" data-id='${dokumen['id_dokumen_perusahaan']}'><i class='fa fa-trash'></i> Hapus Dokumen Perusahaan</a>
       `;
         var addDokButton = `
-        <a class="add dropdown-item" data-allow_type='${dokumen['allow_type']}' data-id='${dokumen['id_dokumen_perusahaan']}' data-id_jenis_dokumen_perusahaan='${dokumen['id_jenis_dokumen_perusahaan']}' ><i class='fa fa-trash'></i> Tambah Dokumen Perusahaan</a>
+        <a class="add dropdown-item" data-allow_type='${dokumen['allow_type']}' data-id='${dokumen['id_dokumen_perusahaan']}' data-id_jenis_dokumen_perusahaan='${dokumen['id_jenis_dokumen_perusahaan']}' ><i class='fa fa-plus'></i> Tambah Dokumen Perusahaan</a>
       `;
         var changeDokButton = `
-        <a class="change dropdown-item" data-allow_type='${dokumen['allow_type']}' data-id='${dokumen['id_dokumen_perusahaan']}' data-id_jenis_dokumen_perusahaan='${dokumen['id_jenis_dokumen_perusahaan']}' data-no_dokumen_perusahaan='${dokumen['no_dokumen_perusahaan']}' data-id_dokumen_perusahaan='${dokumen['id_dokumen_perusahaan']}'><i class='fa fa-trash'></i> Perbaharui Dokumen Perusahaan</a>
+        <a class="change dropdown-item" data-allow_type='${dokumen['allow_type']}' data-id='${dokumen['id_dokumen_perusahaan']}' data-id_jenis_dokumen_perusahaan='${dokumen['id_jenis_dokumen_perusahaan']}' data-no_dokumen_perusahaan='${dokumen['no_dokumen_perusahaan']}' data-id_dokumen_perusahaan='${dokumen['id_dokumen_perusahaan']}'><i class='fa fa-pencil'></i> Perbaharui Dokumen Perusahaan</a>
       `;
         if (dokumen['dokumen_perusahaan'] == null) {
           actBtn = addDokButton;

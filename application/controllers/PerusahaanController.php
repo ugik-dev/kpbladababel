@@ -166,8 +166,8 @@ class PerusahaanController extends CI_Controller
       $this->SecurityModel->userOnlyGuard(TRUE);
       $data = $this->input->post();
       $id = $this->PerusahaanModel->update($data);
-      $data = $this->PerusahaanModel->get($id);
       $this->PerusahaanModel->updateModifedDate($id);
+      $data = $this->PerusahaanModel->get($id);
       echo json_encode(array("data" => $data));
     } catch (Exception $e) {
       ExceptionHandler::handle($e);

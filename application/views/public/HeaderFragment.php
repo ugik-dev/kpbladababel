@@ -50,7 +50,7 @@
 </head>
 
 <body id="page-top" class="landing-page no-skin-config">
-    <div class="navbar-wrapper">
+    <!-- <div class="navbar-wrapper">
         <nav class="navbar navbar-default navbar-fixed-top navbar-expand-md" role="navigation">
             <div class="container">
                 <a class="navbar-brand" href="<?= base_url('') ?>#page-top">Kantor Pemasaran Bersama Lada Babel</a>
@@ -64,6 +64,24 @@
 
                     </ul>
                 </div>
+            </div>
+        </nav>
+    </div> -->
+    <div class="navbar-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-expand-md" role="navigation">
+            <div class="col-sm-1 text-center">
+            </div>
+            <a class="navbar-brand" href="<?= base_url('') ?>#page-top">Kantor Pemasaran Bersama Lada Babel</a>
+            <div class="navbar-header page-scroll">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbar">
+                <ul class="nav navbar-nav navbar-right" id="navbar-item">
+                </ul>
+            </div>
+            <div class="col-sm-1">
             </div>
         </nav>
     </div>

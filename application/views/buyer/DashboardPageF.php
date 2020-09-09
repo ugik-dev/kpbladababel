@@ -3,7 +3,7 @@
     <div class="col-lg-6">
       <div class="ibox">
         <div class="ibox-content">
-          <h5>Nama Buyer</h5>
+          <h5>Buyer Name</h5>
           <p class="no-margins"><span id="nama_buyer">-</span></p>
         </div>
       </div>
@@ -11,7 +11,7 @@
     <div class="col-lg-4">
       <div class="ibox">
         <div class="ibox-content">
-          <h5>Nama Perusahaan</h5>
+          <h5>Companny Name</h5>
           <p class="no-margins"><span id="nama_perusahaan">-</span></p>
         </div>
       </div>
@@ -20,7 +20,7 @@
     <div class="col-lg-2">
       <div class="ibox">
         <div class="ibox-content">
-          <h5 id="region">Regional</h5>
+          <h5 id="region">Region</h5>
           <!-- <p class="no-margins"><span id="region">-</span></p> -->
           <p class="no-margins"><span id="verificated">-</span></p>
         </div>
@@ -41,7 +41,7 @@
         <div class="col-lg-6">
           <div class="ibox">
             <div class="ibox-content">
-              <h5>Bank</h5>
+              <h5>Bank Name (Bank Id)</h5>
               <p class="no-margins"><span id="id_bank">-</span></p>
             </div>
           </div>
@@ -49,7 +49,7 @@
         <div class="col-lg-3">
           <div class="ibox">
             <div class="ibox-content">
-              <h5>Nama Pemilik Rekening</h5>
+              <h5>Account Name Bank</h5>
               <p class="no-margins"><span id="an_bank">-</span></p>
             </div>
           </div>
@@ -57,7 +57,7 @@
         <div class="col-lg-3">
           <div class="ibox">
             <div class="ibox-content">
-              <h5>No Rekening</h5>
+              <h5>Account Number Bank</h5>
               <p class="no-margins"><span id="no_rek_bank">-</span></p>
             </div>
           </div>
@@ -75,7 +75,7 @@
     <div class="col-lg-3">
       <div class="ibox">
         <div class="ibox-content">
-          <h5>Nomor Telepon</h5>
+          <h5>Phone Number</h5>
           <p class="no-margins"><span id="no_telp">-</span></p>
         </div>
       </div>
@@ -83,7 +83,7 @@
     <div class="col-lg-3">
       <div class="ibox">
         <div class="ibox-content">
-          <h5>Nomor Fax</h5>
+          <h5>Fax Number</h5>
           <p class="no-margins"><span id="no_fax">-</span></p>
         </div>
       </div>
@@ -99,7 +99,7 @@
     <div class="col-lg-6">
       <div class="ibox">
         <div class="ibox-content">
-          <h5>Alamat</h5>
+          <h5>Address</h5>
           <p class="no-margins"><span id="alamat">-</span></p>
         </div>
       </div>
@@ -115,13 +115,13 @@
   </div>
   <div class="row">
     <div class="col-lg-4">
-      <button class="btn btn-primary my-1 mr-sm-2" id="request_verifikasi" style="display:none"><i class='fa fa-check'></i> Request Verifikasi</button>
-      <button class="btn btn-success my-1 mr-sm-2" id="edit_info_btn" style="display:none"><i class='fa fa-edit'></i> Edit Informasi</button>
+      <button class="btn btn-primary my-1 mr-sm-2" id="request_verifikasi" style="display:none"><i class='fa fa-check'></i> Request Verification</button>
+      <button class="btn btn-success my-1 mr-sm-2" id="edit_info_btn" style="display:none"><i class='fa fa-edit'></i> Edit Information</button>
     </div>
   </div>
   <?php if ($this->session->userdata()['id_role'] == '12') { ?>
-    <h4>Note : <small> Setiap perubahan atau penambahan informasi berpengaruh terhadap status verifikasi anda, jika terjadi perubahan harus dilakukan verifikasi kembali. </small> </h4>
-  <?php } ?>
+            <h4>Note : <small> Every change or addition of information will affect your verification status, if there is a change, you must verify again. </small> </h4>
+          <?php } ?>
 </div>
 
 <div class="modal inmodal" id="informasi_modal" tabindex="-1" role="dialog" aria-hidden="true" autocomplete="off">
@@ -129,7 +129,7 @@
     <div class="modal-content animated fadeIn">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Informasi Buyer</h4>
+        <h4 class="modal-title">Information Buyer</h4>
         <span class="info"></span>
       </div>
       <div class="modal-body" id="modal-body">
@@ -138,8 +138,8 @@
           <div class="row">
             <div class="col-sm-9">
               <div class="form-group">
-                <label for="nama_perusahaanx">Nama Perusahaan</label>
-                <input type="text" class="form-control" id="nama_perusahaanx" name="nama_perusahaan" placeholder="Tidak ada">
+                <label for="nama_perusahaanx">Companny Name</label>
+                <input type="text" class="form-control" id="nama_perusahaanx" name="nama_perusahaan" placeholder="Companny Name">
               </div>
             </div>
             <!-- <div class="col-sm-3">
@@ -150,53 +150,52 @@
             </div> -->
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="id_bankx">Bank</label>
+                <label for="id_bankx">Bank Name (Bank Id)</label>
                 <!-- <select class="form-control mr-sm-3" id="id_bankx" name="id_bank" required="required"></select> -->
-                <label for="id_bankx">Nama Bank</label>
-                <input type="text" class="form-control" id="id_bankx" name="id_bank" placeholder="Tidak ada" required="required">
+                  <input type="text" class="form-control" id="id_bankx" name="bank_name" placeholder="Tidak ada" required="required">
               </div>
             </div>
             <div class="col-sm-3">
               <div class="form-group">
-                <label for="an_bank">Nama Pemilik Bank</label>
+                <label for="an_bank">Account Name Bank</label>
                 <input type="text" class="form-control" id="an_bankx" name="an_bank" placeholder="Tidak ada" required="required">
               </div>
             </div>
             <div class="col-sm-3">
               <div class="form-group">
-                <label for="no_rek_bankx">No Rekening Bank</label>
+                <label for="no_rek_bankx">Account Number Bank</label>
                 <input type="text" class="form-control" id="no_rek_bankx" name="no_rek_bank" placeholder="Tidak ada" required="required">
               </div>
             </div>
 
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="no_telpx">No Telepon</label>
-                <input type="tel" class="form-control" id="no_telpx" name="no_telp" placeholder="Tidak ada">
+                <label for="no_telpx">Phone Number</label>
+                <input type="tel" class="form-control" id="no_telpx" name="no_telp" placeholder="Phone Number">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="no_faxx">No Fax</label>
-                <input type="tel" class="form-control" id="no_faxx" name="no_fax" placeholder="Tidak ada">
+                <label for="no_faxx">Fax Number</label>
+                <input type="tel" class="form-control" id="no_faxx" name="no_fax" placeholder="Fax Number">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="emailx">Email</label>
-                <input type="email" class="form-control" id="emailx" name="email" placeholder="Tidak ada">
+                <input type="email" class="form-control" id="emailx" name="email" placeholder="Email">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="alamatx">Alamat</label>
-                <textarea rows="4" type="text" placeholder="Alamat" class="form-control" id="alamatx" name="alamat"></textarea>
+                <label for="alamatx">Addess</label>
+                <textarea rows="4" type="text" placeholder="Address" class="form-control" id="alamatx" name="alamat"></textarea>
 
                 <!-- <input type="text" class="form-control" id="alamatx" name="alamat" placeholder="Tidak ada"> -->
               </div>
             </div>
           </div>
-          <button class="btn btn-success my-1 mr-sm-2" type="submit" id="save" data-loading-text="Loading..."><strong>Simpan</strong></button>
+          <button class="btn btn-success my-1 mr-sm-2" type="submit" id="save" data-loading-text="Loading..."><strong>Save</strong></button>
         </form>
       </div>
       <div class="modal-footer">
@@ -372,7 +371,7 @@
 
     info.request_verifikasi.on('click', function() {
       event.preventDefault();
-      swal(saveConfirmation("Konfirmasi Request", "Yakin akan data ini sudah benar dan lengkap?", "Ya!")).then((result) => {
+      swal(saveConfirmation("Confirmation Verification Request", "Are you sure that this data is correct and complete?", "Yes!")).then((result) => {
         if (!result.value) {
           return;
         }
@@ -385,11 +384,11 @@
           success: function(data) {
             var json = JSON.parse(data);
             if (json['error']) {
-              swal("Verifikasi Gagal", json['message'], "error");
+              swal("Request Fail!!", json['message'], "error");
               return;
             }
             info.verificated.html(statusVerifikasi('R'));
-            swal("Request Berhasil diajukan", "", "success");
+            swal("Request success", "", "success");
           },
           error: function(e) {}
         });
@@ -416,11 +415,11 @@
 
     function statusVerifikasi(status) {
       if (status == 'R')
-        return `<i class='fa fa-hourglass-start text-primary'>Request Verifikasi </i>`;
+        return `<i class='fa fa-hourglass-start text-primary'>Request Verification </i>`;
       else if (status == 'Y')
-        return `<i class='fa fa-check text-success'> Telah Diverifikasi</i>`;
+        return `<i class='fa fa-check text-success'> Verified</i>`;
       else
-        return `<i class='fa fa-edit text-warning'> Belum Diverifikasi</i>`;
+        return `<i class='fa fa-edit text-warning'> Not Verified</i>`;
     }
 
     informasiModal.form.on('submit', (ev) => {
@@ -436,12 +435,12 @@
           buttonIdle(informasiModal.save_btn);
           json = JSON.parse(data);
           if (json['error']) {
-            swal("Ganti Program Renja gagal", json['message'], "error");
+            swal("Fail", json['message'], "error");
             return;
           }
           dataInfo = json['data'];
           renderInfo();
-          swal("Berhasil disimpan", 'Input Informasi Berhasil', "success");
+          swal("Save success", '', "success");
           informasiModal.self.modal('hide');
         },
         error: () => {

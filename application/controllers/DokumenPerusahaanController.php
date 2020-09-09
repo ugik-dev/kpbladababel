@@ -7,7 +7,7 @@ class DokumenPerusahaanController extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model(array("DokumenPerusahaanModel"));
+    $this->load->model(array("DokumenPerusahaanModel", "PerusahaanModel"));
     $this->load->helper(array('DataStructure', 'Validation'));
     $this->db->db_debug = FALSE;
   }
@@ -38,7 +38,9 @@ class DokumenPerusahaanController extends CI_Controller
       } else if ($data['case'] == 'change') {
         $this->DokumenPerusahaanModel->edit($data);
       }
+      $this->PerusahaanModel->updateModifedDate($data['id_perusahaan']);
       $data = $this->DokumenPerusahaanModel->getAll(array('id_perusahaan' => $data['id_perusahaan']));
+
       echo json_encode(array("data" => $data));
     } catch (Exception $e) {
       ExceptionHandler::handle($e);

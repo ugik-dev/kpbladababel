@@ -574,6 +574,8 @@
             }
             info.verificated.html(statusVerifikasi('R'));
             swal("Request Berhasil diajukan", "", "success");
+            if (dataInfo['verificated'] == 'N') info.request_verifikasi.toggle('hide');
+
           },
           error: function(e) {}
         });
@@ -614,29 +616,35 @@
     });
 
     informasiModal.form.on('submit', (ev) => {
-      ev.preventDefault();
-      buttonLoading(informasiModal.save_btn);
-      $.ajax({
-        url: "<?= site_url('PerusahaanController/update') ?>",
-        type: "POST",
-        data: new FormData(informasiModal.form[0]),
-        contentType: false,
-        processData: false,
-        success: (data) => {
-          buttonIdle(informasiModal.save_btn);
-          json = JSON.parse(data);
-          if (json['error']) {
-            swal("Ganti Program Renja gagal", json['message'], "error");
-            return;
-          }
-          dataInfo = json['data'];
-          renderInfo();
-          swal("Berhasil disimpan", 'Input Informasi Berhasil', "success");
-          informasiModal.self.modal('hide');
-        },
-        error: () => {
-          buttonIdle(informasiModal.save_btn);
-        },
+
+      swal(saveConfirmation("Konfirmasi Perubahan Data", "Jika anda mengubah data profile perusahaan, anda harus melakukan verifikasi kembali. Yakin akan mengubah data? ", "Ya!")).then((result) => {
+        if (!result.value) {
+          return;
+        }
+        ev.preventDefault();
+        buttonLoading(informasiModal.save_btn);
+        $.ajax({
+          url: "<?= site_url('PerusahaanController/update') ?>",
+          type: "POST",
+          data: new FormData(informasiModal.form[0]),
+          contentType: false,
+          processData: false,
+          success: (data) => {
+            buttonIdle(informasiModal.save_btn);
+            json = JSON.parse(data);
+            if (json['error']) {
+              swal("Update gagal", json['message'], "error");
+              return;
+            }
+            dataInfo = json['data'];
+            renderInfo();
+            swal("Berhasil disimpan", 'Input Informasi Berhasil', "success");
+            informasiModal.self.modal('hide');
+          },
+          error: () => {
+            buttonIdle(informasiModal.save_btn);
+          },
+        });
       });
     });
   });
