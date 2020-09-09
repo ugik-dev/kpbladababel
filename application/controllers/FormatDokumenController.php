@@ -304,345 +304,348 @@ class FormatDokumenController extends CI_Controller
 
   public function format_permohonan_pergub()
   {
-    // try{
-    $this->SecurityModel->userOnlyGuard(TRUE);
+    try {
+      $this->SecurityModel->userOnlyGuard(TRUE);
 
-    $input = $this->input->get();
-    if (empty($input['id_pengiriman'])) throw new UserException("Parameter 'id_pengiriman' tidak ada", 0);
+      $input = $this->input->get();
+      if (empty($input['id_pengiriman'])) throw new UserException("Parameter 'id_pengiriman' tidak ada", 0);
 
-    $pengiriman = $this->PengirimanModel->get($input['id_pengiriman']);
-    $pengirimanItem = $this->PengirimanItemModel->getAll(['id_pengiriman' => $input['id_pengiriman']]);
-    $perusahaan = $this->PerusahaanModel->get($pengiriman['id_perusahaan']);
-    $siup = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'siup']);
-    $no_siup = !empty($siup) ? $siup['no_dokumen_perusahaan'] : NULL;
-    $nib = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'nib']);
-    $no_nib = !empty($nib) ? $nib['no_dokumen_perusahaan'] : NULL;
-    $logo = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'logo']);
-    $logo_img = !empty($logo) ? $logo['dokumen_perusahaan'] : NULL;
-    $filename = 'Surat_Permohonan_IDX_' . $input['id_pengiriman'];
+      $pengiriman = $this->PengirimanModel->get($input['id_pengiriman']);
+      $pengirimanItem = $this->PengirimanItemModel->getAll(['id_pengiriman' => $input['id_pengiriman']]);
+      $perusahaan = $this->PerusahaanModel->get($pengiriman['id_perusahaan']);
+      $siup = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'siup']);
+      $no_siup = !empty($siup) ? $siup['no_dokumen_perusahaan'] : NULL;
+      $nib = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'nib']);
+      $no_nib = !empty($nib) ? $nib['no_dokumen_perusahaan'] : NULL;
+      $logo = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'logo']);
+      $logo_img = !empty($logo) ? $logo['dokumen_perusahaan'] : NULL;
+      $filename = 'Surat_Permohonan_IDX_' . $input['id_pengiriman'];
 
-    echo json_encode($logo_img);
-    echo json_encode($no_nib);
-    echo json_encode($siup);
-    echo json_encode($pengiriman);
-    echo json_encode($pengirimanItem);
-    echo json_encode($perusahaan);
+      // echo json_encode($logo_img);
+      // echo json_encode($no_nib);
+      // echo json_encode($siup);
+      // echo json_encode($pengiriman);
+      // echo json_encode($pengirimanItem);
+      // echo json_encode($perusahaan);
 
-    return 0;
-    // var_dump($pengirimanItem);
-    // $pengiriman = 'nama pengirim';
-    // $pengirimanItem = 'nama pengirim';
-    // $perusahaan = 'nama pengirim';
-    // $siup = 'nama pengirim';
-    // $no_siup = 'nama pengirim';
+      // return 0;
+      // var_dump($pengirimanItem);
+      // $pengiriman = 'nama pengirim';
+      // $pengirimanItem = 'nama pengirim';
+      // $perusahaan = 'nama pengirim';
+      // $siup = 'nama pengirim';
+      // $no_siup = 'nama pengirim';
 
 
-    $phpWord = new PhpOffice\PhpWord\PhpWord();
-    $phpWord->addFontStyle('h3', array('name' => 'Times New Roman', 'size' => 10, 'color' => '000000', 'bold' => true));
-    $phpWord->addFontStyle('paragraph', array('name' => 'Times New Roman', 'size' => 10, 'color' => '000000', 'spaceAfter' => 0));
-    // $PHPWord->addParagraphStyle('p3Style', array('align'=>'center', 'spaceAfter'=>100));
-    $phpWord->addFontStyle('paragraph_bold', array('name' => 'Times New Roman', 'size' => 10, 'color' => '000000', 'bold' => true));
-    $phpWord->addFontStyle('paragraph2', array('name' => 'Times New Roman', 'size' => 9, 'color' => '000000', 'underline' => 'single'));
-    $phpWord->addFontStyle('paragraph3', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => true, 'underline' => 'single'));
-    $phpWord->addFontStyle('paragraph4', array('name' => 'Times New Roman', 'size' => 13, 'color' => '000000', 'bold' => true, 'underline' => 'single'));
-    $noSpace = array('spaceAfter' => 0);
+      $phpWord = new PhpOffice\PhpWord\PhpWord();
+      $phpWord->addFontStyle('h3', array('name' => 'Times New Roman', 'size' => 10, 'color' => '000000', 'bold' => true));
+      $phpWord->addFontStyle('paragraph', array('name' => 'Times New Roman', 'size' => 10, 'color' => '000000', 'spaceAfter' => 0));
+      // $PHPWord->addParagraphStyle('p3Style', array('align'=>'center', 'spaceAfter'=>100));
+      $phpWord->addFontStyle('paragraph_bold', array('name' => 'Times New Roman', 'size' => 10, 'color' => '000000', 'bold' => true));
+      $phpWord->addFontStyle('paragraph2', array('name' => 'Times New Roman', 'size' => 9, 'color' => '000000', 'underline' => 'single'));
+      $phpWord->addFontStyle('paragraph3', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => true, 'underline' => 'single'));
+      $phpWord->addFontStyle('paragraph4', array('name' => 'Times New Roman', 'size' => 13, 'color' => '000000', 'bold' => true, 'underline' => 'single'));
+      $noSpace = array('spaceAfter' => 0);
 
-    $paragraphStyleName = 'pStyle';
-    $phpWord->addParagraphStyle($paragraphStyleName, array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 100));
-    $phpWord->addParagraphStyle('pS2', array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::BOTH, 'spaceAfter' => 50));
+      $paragraphStyleName = 'pStyle';
+      $phpWord->addParagraphStyle($paragraphStyleName, array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 100));
+      $phpWord->addParagraphStyle('pS2', array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::BOTH, 'spaceAfter' => 50));
 
-    $section = $phpWord->addSection(array(
-      'marginLeft' => 1200, 'marginRight' => 600,
-      'marginTop' => 600, 'marginBottom' => 600
-    ));
-    if (!empty($logo_img)) {
-      // $fancyTableStyle = array('borderSize' => 1, 'borderColor' => '000000', 'height' => 200, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
-
-      // $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
-      // $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
-      // $spanTableStyleName = 'Colspan Rowspan';
-      // $phpWord->addTableStyle($spanTableStyleName, $fancyTableStyle);
-      // $table = $section->addTable($spanTableStyleName, array('spaceAfter' => 0));
-      // $table->addRow();
-      // $table->addCell(2000, $cellVCentered)->addImage(base_url('uploads/dokumen_perusahaan/') . $logo_img, array('height' => 75, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,  'spaceAfter' => 0));;
-      // $myCell1 = $table->addCell(7400, $cellVCentered);
-      // $myCell1->addText($perusahaan['nama_perusahaan'], array('name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => true), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 10));
-      // $myCell1->addText($perusahaan['lok_perusahaan_full'] . ', ' . $perusahaan['lok_perusahaan_kec'] . ' - ' . $perusahaan['lok_perusahaan_kabkot'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
-      // $myCell1->addText('Provinsi Kepulauan Bangka Belitung', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
-      // $myCell1->addText('Email : ' . $perusahaan['email'] . ' Telp : ' . $perusahaan['no_telepon'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
-      // $section->addLine(array('weight' => 1.25, 'width' => 465, 'height' => 0, 'color' => '38c172'), array('spaceAfter' => 0));
-    } else {
-      $section->addText('KOP SURAT', "paragraph3", $paragraphStyleName);
-      $textrun = $section->addTextRun();
-      $textrun->addTextBreak();
-    }
-    if (file_exists('./assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png')) {
-      // $pdf->Image(base_url('assets/qrcode/'.$data['id_record'].'.png'), 170, 160, -300);
-      $section->addImage(base_url('assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png'), array(
-        'height'           => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(2.4)),
-        'positioning'      => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
-        'posHorizontal' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
-        'posVertical' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
-        'marginLeft'       => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(9)),
-        'marginTop'        => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(15)),
+      $section = $phpWord->addSection(array(
+        'marginLeft' => 1200, 'marginRight' => 600,
+        'marginTop' => 600, 'marginBottom' => 600
       ));
-    }
+      if (!empty($logo_img)) {
+        // $fancyTableStyle = array('borderSize' => 1, 'borderColor' => '000000', 'height' => 200, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
 
-
-    // $textrun->addTextBreak();
-    // $textrun->addTextBreak();
-    $tanggal = CustomFunctions::tanggal_indonesia(date("Y-m-d"));
-    $section->addText("\t\t\t\t\t\t\t\t\tPanngkalpinang, {$tanggal}", "paragraph", array('spaceBefore' => 0));
-
-    $section = $phpWord->addSection(['breakType' => 'continuous', 'colsNum' => 2]);
-    $textrun = $section->addTextRun();
-    $year = explode("-", $pengiriman['created_at'])[0];
-    $textrun->addText("Nomor\t  : \t(no surat perusahaan)", 'paragraph');
-    $textrun->addTextBreak();
-    $textrun->addText("Lampiran : \t1 lembar", 'paragraph');
-    $textrun->addTextBreak();
-    $textrun->addTextBreak();
-    $textrun->addTextBreak();
-    $textrun->addText("Perihal\t  : \tPengajuan Penggunaan IG dan", 'paragraph');
-    $textrun->addText("\t\tUji Lab Lada ", 'paragraph');
-
-    $textrun->addTextBreak();
-
-    $textrun->addText("Yth.", 'paragraph');
-    $textrun->addTextBreak();
-    $textrun->addText("          1.\t KPB Lada Prov. Kep. Bangka Belitung.", 'paragraph');
-    $textrun->addTextBreak();
-    $textrun->addText("          2.\t BP3L Prov. Kep. Bangka Belitung.", 'paragraph');
-    $textrun->addTextBreak();
-    $textrun->addText("          3.\t Lab BPSMB Prov. Kep. Bangka Belitung.", 'paragraph');
-    $textrun->addTextBreak();
-    $textrun->addText("di -", 'paragraph');
-    $textrun->addTextBreak();
-    $textrun->addText("\tTempat", 'paragraph');
-
-    $section = $phpWord->addSection(['breakType' => 'continuous', 'colsNum' => 1]);
-
-
-    $section->addText("Dengan hormat,", 'paragraph', array('spaceAfter' => 0));
-    $section->addText("Sesuai dengan Peraturan Gubernur nomor 63 tahun 2019 dalam menyelenggarakan pemasaran lada putih penugasan BUMD PT BBBS sebagai dan Peraturan Gubernur nomor 19 tahun 2020 tentang tata kelolah perdagangan lada putih Muntok White Papper maka bersama ini kami mengajukan penggunaan IG dan Uji Laboratorium serta kami lampirkan rencana ekspor/Perdagangan lada antar Pulau dengan data sebagai berikut :", 'paragraph', 'pS2');
-    $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
-    $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
-    $spanTableStyleName = 'Colspan Rowspan';
-    $phpWord->addTableStyle($spanTableStyleName, $fancyTableStyle);
-    $table = $section->addTable($spanTableStyleName);
-
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Nama Perusahaan', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($perusahaan['nama_perusahaan'], 'paragraph', $noSpace);
-
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Alamat Perusahaan', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($perusahaan['lok_perusahaan_full'] . ' ,' . $perusahaan['lok_perusahaan_kec'] . ' - ' . $perusahaan['lok_perusahaan_kabkot'], 'paragraph', $noSpace);
-
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Alamat Gudang', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($perusahaan['lok_gudang_penyimpanan_full'] . ' ,' . $perusahaan['lok_gudang_penyimpanan_kec'] . ' - ' . $perusahaan['lok_gudang_penyimpanan_kabkot'], 'paragraph', $noSpace);
-
-
-    // $table->addRow();
-    // $table->addCell(4000, $cellVCentered)->addText('Nomor SIUP Perusahaan', 'paragraph', $noSpace);
-    // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    // $table->addCell(5000, $cellVCentered)->addText($no_siup, 'paragraph', $noSpace);
-
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Nomor Induk Berusaha (NIB)', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($no_nib, 'paragraph', $noSpace);
-
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Nama Komoditi', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($pengiriman['nama_komoditi'], 'paragraph', $noSpace);
-
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Jumlah Berat', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($pengiriman['jumlah_berat'] . ' Metric Ton', 'paragraph', $noSpace);
-
-
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Jumlah Partai', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($pengiriman['jumlah_partai'], 'paragraph', $noSpace);
-
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Nama Pengiriman', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($pengiriman['nama_pengiriman'], 'paragraph', $noSpace);
-
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Rencana Pengapalan', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($pengiriman['rencana_pengapalan'], 'paragraph', $noSpace);
-
-    $negara_tujuan = '';
-    $berat = '';
-    $berat_gross = '';
-    $berat_total = 0;
-    $berat_total_gross = 0;
-    $jenis_pengemasan = '';
-    $jumlah_karung = '';
-    $shipping_mark = '';
-    $ket_penggunaan = '';
-    $nama_jenis_pengemasan = '';
-    $nama_jenis_mutu = '';
-    $nama_importir = '';
-    $keterangan_marking = '';
-    $nomor_kontrak = '';
-    $i = 1;
-    foreach ($pengirimanItem as $pi) {
-
-      $negara_tujuan .= "{$i}) {$pi['city']} - {$pi['nama_negara']}, <w:br/>";
-      $berat .= "{$i}) {$pi['netto']} KG + ";
-      $berat_gross .= "{$i}) {$pi['gross']} KG + ";
-      $nama_jenis_mutu .= "{$i}) {$pi['nama_jenis_mutu']}, ";
-      $berat_total += $pi['netto'];
-      $berat_total_gross += $pi['gross'];
-      $jenis_pengemasan .= "{$i}) {$pi['nama_jenis_pengemasan']}, ";
-      $jumlah_karung .= "{$i}) {$pi['jumlah_pengemasan']} {$pi['nama_jenis_pengemasan']}, ";
-
-      $nama_importir .= "{$i}) {$pi['nama_importir']}, <w:br/>";
-      if (!empty($pi['keterangan_marking'])) {
-        $keterangan_marking .= "{$i}) {$pi['keterangan_marking']}, <w:br/>";
+        // $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+        // $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+        // $spanTableStyleName = 'Colspan Rowspan';
+        // $phpWord->addTableStyle($spanTableStyleName, $fancyTableStyle);
+        // $table = $section->addTable($spanTableStyleName, array('spaceAfter' => 0));
+        // $table->addRow();
+        // $table->addCell(2000, $cellVCentered)->addImage(base_url('uploads/dokumen_perusahaan/') . $logo_img, array('height' => 75, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,  'spaceAfter' => 0));;
+        // $myCell1 = $table->addCell(7400, $cellVCentered);
+        // $myCell1->addText($perusahaan['nama_perusahaan'], array('name' => 'Times New Roman', 'size' => 12, 'color' => '000000', 'bold' => true), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 10));
+        // $myCell1->addText($perusahaan['lok_perusahaan_full'] . ', ' . $perusahaan['lok_perusahaan_kec'] . ' - ' . $perusahaan['lok_perusahaan_kabkot'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+        // $myCell1->addText('Provinsi Kepulauan Bangka Belitung', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+        // $myCell1->addText('Email : ' . $perusahaan['email'] . ' Telp : ' . $perusahaan['no_telepon'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+        // $section->addLine(array('weight' => 1.25, 'width' => 465, 'height' => 0, 'color' => '38c172'), array('spaceAfter' => 0));
       } else {
-        $keterangan_marking .= "- , ";
+        $section->addText('KOP SURAT', "paragraph3", $paragraphStyleName);
+        $textrun = $section->addTextRun();
+        $textrun->addTextBreak();
+      }
+      if (file_exists('./assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png')) {
+        // $pdf->Image(base_url('assets/qrcode/'.$data['id_record'].'.png'), 170, 160, -300);
+        $section->addImage(base_url('assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png'), array(
+          'height'           => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(2.4)),
+          'positioning'      => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+          'posHorizontal' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+          'posVertical' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+          'marginLeft'       => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(9)),
+          'marginTop'        => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(15)),
+        ));
       }
 
-      $nomor_kontrak .= "{$i}) {$pi['nomor_kontrak']}, ";
-      $i++;
-    }
-    $negara_tujuan = substr($negara_tujuan, 0, -9);
-    $keterangan_marking = substr($keterangan_marking, 0, -9);
-    $nomor_kontrak = substr($nomor_kontrak, 0, -2);
-    $berat = substr($berat, 0, -3);
-    $berat_gross = substr($berat_gross, 0, -3);
-    $nama_jenis_mutu = substr($nama_jenis_mutu, 0, -2);
-    $shipping_mark = substr($shipping_mark, 0, -9);
-    $nama_importir = substr($nama_importir, 0, -9);
-    $jenis_pengemasan = substr($jenis_pengemasan, 0, -2);
-    $jumlah_karung = substr($jumlah_karung, 0, -2);
 
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Nomor Kontrak', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($nomor_kontrak, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($keterangan_marking, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Rencana Mutu', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($nama_jenis_mutu, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Netto', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($berat, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Gross', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($berat_gross, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Jenis Pengemasan', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($jenis_pengemasan, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Jumlah Karung', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($jumlah_karung, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Shipping Mark', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Keterangan Penggunaan Produk', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
-    $textrun = $section->addTextRun();
-    $textrun->addText("Demikian permohonan kami, atas bantuan dan kerjasamanya kami ucapkan terima kasih.", 'paragraph');
-    $textrun->addTextBreak();
+      // $textrun->addTextBreak();
+      // $textrun->addTextBreak();
+      $tanggal = CustomFunctions::tanggal_indonesia(date("Y-m-d"));
+      $section->addText("\t\t\t\t\t\t\t\t\tPanngkalpinang, {$tanggal}", "paragraph", array('spaceBefore' => 0));
 
-    $textrun = $section->addTextRun();
-    $textrun->addText("Hormat Kami,", 'paragraph');
-    $textrun->addTextBreak();
-    $textrun->addText($perusahaan['nama_perusahaan'], 'paragraph');
-    $textrun->addTextBreak(4);
-    $textrun->addText($perusahaan['nama_pimpinan'], 'paragraph');
-    $textrun->addTextBreak();
+      $section = $phpWord->addSection(['breakType' => 'continuous', 'colsNum' => 2]);
+      $textrun = $section->addTextRun();
+      $year = explode("-", $pengiriman['created_at'])[0];
+      $textrun->addText("Nomor\t  : \t(no surat perusahaan)", 'paragraph');
+      $textrun->addTextBreak();
+      $textrun->addText("Lampiran : \t1 lembar", 'paragraph');
+      $textrun->addTextBreak();
+      $textrun->addTextBreak();
+      $textrun->addTextBreak();
+      $textrun->addText("Perihal\t  : \tPengajuan Penggunaan IG dan", 'paragraph');
+      $textrun->addText("\t\tUji Lab Lada ", 'paragraph');
+
+      $textrun->addTextBreak();
+
+      $textrun->addText("Yth.", 'paragraph');
+      $textrun->addTextBreak();
+      $textrun->addText("          1.\t KPB Lada Prov. Kep. Bangka Belitung.", 'paragraph');
+      $textrun->addTextBreak();
+      $textrun->addText("          2.\t BP3L Prov. Kep. Bangka Belitung.", 'paragraph');
+      $textrun->addTextBreak();
+      $textrun->addText("          3.\t Lab BPSMB Prov. Kep. Bangka Belitung.", 'paragraph');
+      $textrun->addTextBreak();
+      $textrun->addText("di -", 'paragraph');
+      $textrun->addTextBreak();
+      $textrun->addText("\tTempat", 'paragraph');
+
+      $section = $phpWord->addSection(['breakType' => 'continuous', 'colsNum' => 1]);
 
 
+      $section->addText("Dengan hormat,", 'paragraph', array('spaceAfter' => 0));
+      $section->addText("Sesuai dengan Peraturan Gubernur nomor 63 tahun 2019 dalam menyelenggarakan pemasaran lada putih penugasan BUMD PT BBBS sebagai dan Peraturan Gubernur nomor 19 tahun 2020 tentang tata kelolah perdagangan lada putih Muntok White Papper maka bersama ini kami mengajukan penggunaan IG dan Uji Laboratorium serta kami lampirkan rencana ekspor/Perdagangan lada antar Pulau dengan data sebagai berikut :", 'paragraph', 'pS2');
+      $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      $spanTableStyleName = 'Colspan Rowspan';
+      $phpWord->addTableStyle($spanTableStyleName, $fancyTableStyle);
+      $table = $section->addTable($spanTableStyleName);
 
-    $section = $phpWord->addSection(array(
-      'marginLeft' => 1200, 'marginRight' => 600,
-      'marginTop' => 600, 'marginBottom' => 600
-    ));
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nama Perusahaan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($perusahaan['nama_perusahaan'], 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Alamat Perusahaan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($perusahaan['lok_perusahaan_full'] . ' ,' . $perusahaan['lok_perusahaan_kec'] . ' - ' . $perusahaan['lok_perusahaan_kabkot'], 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Alamat Gudang', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($perusahaan['lok_gudang_penyimpanan_full'] . ' ,' . $perusahaan['lok_gudang_penyimpanan_kec'] . ' - ' . $perusahaan['lok_gudang_penyimpanan_kabkot'], 'paragraph', $noSpace);
 
 
-    $textrun = $section->addTextRun();
-    $section->addText("Lampiran surat permohonan No. \t\t\t\t\t\t\tPanngkalpinang, {$tanggal}", "paragraph2");
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Nomor SIUP Perusahaan', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($no_siup, 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nomor Induk Berusaha (NIB)', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($no_nib, 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nama Komoditi', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pengiriman['nama_komoditi'], 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Jumlah Berat', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pengiriman['jumlah_berat'] . ' Metric Ton', 'paragraph', $noSpace);
 
 
-    $textrun = $section->addTextRun();
-    if (file_exists('./assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png')) {
-      // $pdf->Image(base_url('assets/qrcode/'.$data['id_record'].'.png'), 170, 160, -300);
-      $section->addImage(base_url('assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png'), array(
-        'height'           => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(2.4)),
-        'positioning'      => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
-        'posHorizontal' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
-        'posVertical' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
-        'marginLeft'       => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(10)),
-        'marginTop'        => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(14)),
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Jumlah Partai', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pengiriman['jumlah_partai'], 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nama Pengiriman', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pengiriman['nama_pengiriman'], 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Rencana Pengapalan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pengiriman['rencana_pengapalan'], 'paragraph', $noSpace);
+
+      $negara_tujuan = '';
+      $berat = '';
+      $berat_gross = '';
+      $berat_total = 0;
+      $berat_total_gross = 0;
+      $jenis_pengemasan = '';
+      $jumlah_karung = '';
+      $shipping_mark = '';
+      $ket_penggunaan = '';
+      $nama_jenis_pengemasan = '';
+      $nama_jenis_mutu = '';
+      $nama_importir = '';
+      $keterangan_marking = '';
+      $nomor_kontrak = '';
+      $i = 1;
+      foreach ($pengirimanItem as $pi) {
+
+        $negara_tujuan .= "{$i}) {$pi['city']} - {$pi['nama_negara']}, <w:br/>";
+        $berat .= "{$i}) {$pi['netto']} KG + ";
+        $berat_gross .= "{$i}) {$pi['gross']} KG + ";
+        $nama_jenis_mutu .= "{$i}) {$pi['nama_jenis_mutu']}, ";
+        $berat_total += $pi['netto'];
+        $berat_total_gross += $pi['gross'];
+        $jenis_pengemasan .= "{$i}) {$pi['nama_jenis_pengemasan']}, ";
+        $jumlah_karung .= "{$i}) {$pi['jumlah_pengemasan']} {$pi['nama_jenis_pengemasan']}, ";
+
+        $nama_importir .= "{$i}) {$pi['nama_importir']}, <w:br/>";
+        if (!empty($pi['keterangan_marking'])) {
+          $keterangan_marking .= "{$i}) {$pi['keterangan_marking']}, <w:br/>";
+        } else {
+          $keterangan_marking .= "- , ";
+        }
+
+        $nomor_kontrak .= "{$i}) {$pi['nomor_kontrak']}, ";
+        $i++;
+      }
+      $negara_tujuan = substr($negara_tujuan, 0, -9);
+      $keterangan_marking = substr($keterangan_marking, 0, -9);
+      $nomor_kontrak = substr($nomor_kontrak, 0, -2);
+      $berat = substr($berat, 0, -3);
+      $berat_gross = substr($berat_gross, 0, -3);
+      $nama_jenis_mutu = substr($nama_jenis_mutu, 0, -2);
+      $shipping_mark = substr($shipping_mark, 0, -9);
+      $nama_importir = substr($nama_importir, 0, -9);
+      $jenis_pengemasan = substr($jenis_pengemasan, 0, -2);
+      $jumlah_karung = substr($jumlah_karung, 0, -2);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nomor Kontrak', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($nomor_kontrak, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($keterangan_marking, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Rencana Mutu', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($nama_jenis_mutu, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Netto', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($berat, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Gross', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($berat_gross, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Jenis Pengemasan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($jenis_pengemasan, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Jumlah Karung', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($jumlah_karung, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Shipping Mark', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Keterangan Penggunaan Produk', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText("TERLAMPIR", 'paragraph', $noSpace);
+      $textrun = $section->addTextRun();
+      $textrun->addText("Demikian permohonan kami, atas bantuan dan kerjasamanya kami ucapkan terima kasih.", 'paragraph');
+      $textrun->addTextBreak();
+
+      $textrun = $section->addTextRun();
+      $textrun->addText("Hormat Kami,", 'paragraph');
+      $textrun->addTextBreak();
+      $textrun->addText($perusahaan['nama_perusahaan'], 'paragraph');
+      $textrun->addTextBreak(4);
+      $textrun->addText($perusahaan['nama_pimpinan'], 'paragraph');
+      $textrun->addTextBreak();
+
+
+
+      $section = $phpWord->addSection(array(
+        'marginLeft' => 1200, 'marginRight' => 600,
+        'marginTop' => 600, 'marginBottom' => 600
       ));
-    }
-    $section->addText('SHIPPING MARK', "paragraph3", $paragraphStyleName);
-    $textrun = $section->addTextRun();
-    $i = 1;
-    foreach ($pengirimanItem as $pi) {
+
+
       $textrun = $section->addTextRun();
-      $textrun->addText("({$i})", 'paragraph');
-      $textrun->addTextBreak();
-      $resultshipping_mark = str_replace(array("\n"), "<w:br/>", $pi['shipping_mark']);
-      // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
-      $textrun->addText("$resultshipping_mark", 'paragraph');
-      $i++;
-    }
-    $textrun = $section->addTextRun();
+      $section->addText("Lampiran surat permohonan No. \t\t\t\t\t\t\tPanngkalpinang, {$tanggal}", "paragraph2");
 
-    $section->addText('KETERANGAN PENGGUNAAN PRODUK', "paragraph3", $paragraphStyleName);
-    $textrun = $section->addTextRun();
-    $i = 1;
-    foreach ($pengirimanItem as $pi) {
+
       $textrun = $section->addTextRun();
-      $textrun->addText("({$i})", 'paragraph');
-      $textrun->addTextBreak();
-      $resulket_produk = str_replace(array("\n"), "<w:br/>", $pi['keterangan_penggunaan_produk']);
-      // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
-      $textrun->addText("$resulket_produk", 'paragraph');
-      $i++;
+      if (file_exists('./assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png')) {
+        // $pdf->Image(base_url('assets/qrcode/'.$data['id_record'].'.png'), 170, 160, -300);
+        $section->addImage(base_url('assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png'), array(
+          'height'           => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(2.4)),
+          'positioning'      => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+          'posHorizontal' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+          'posVertical' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+          'marginLeft'       => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(10)),
+          'marginTop'        => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(14)),
+        ));
+      }
+      $section->addText('SHIPPING MARK', "paragraph3", $paragraphStyleName);
+      $textrun = $section->addTextRun();
+      $i = 1;
+      foreach ($pengirimanItem as $pi) {
+        $textrun = $section->addTextRun();
+        $textrun->addText("({$i})", 'paragraph');
+        $textrun->addTextBreak();
+        $resultshipping_mark = str_replace(array("\n"), "<w:br/>", $pi['shipping_mark']);
+        // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
+        $textrun->addText("$resultshipping_mark", 'paragraph');
+        $i++;
+      }
+      $textrun = $section->addTextRun();
+
+      $section->addText('KETERANGAN PENGGUNAAN PRODUK', "paragraph3", $paragraphStyleName);
+      $textrun = $section->addTextRun();
+      $i = 1;
+      foreach ($pengirimanItem as $pi) {
+        $textrun = $section->addTextRun();
+        $textrun->addText("({$i})", 'paragraph');
+        $textrun->addTextBreak();
+        $resulket_produk = str_replace(array("\n"), "<w:br/>", $pi['keterangan_penggunaan_produk']);
+        // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
+        $textrun->addText("$resulket_produk", 'paragraph');
+        $i++;
+      }
+
+
+      $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+      // FileIO::headerDownloadDocx('Form Pengajuan Mutu - ' . $pengiriman['nama_pengiriman']);
+      FileIO::headerDownloadDocx($filename);
+
+      $objWriter->save("php://output");
+    } catch (Exception $e) {
+      ExceptionHandler::handle($e);
     }
-
-
-    $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-    // FileIO::headerDownloadDocx('Form Pengajuan Mutu - ' . $pengiriman['nama_pengiriman']);
-    FileIO::headerDownloadDocx($filename);
-
-    $objWriter->save("php://output");
   }
 
   public function format_permohonan_to_kpb()
