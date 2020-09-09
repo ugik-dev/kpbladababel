@@ -3,7 +3,7 @@
     Pemprov Babel
   </div>
   <div>
-    <strong>Copyright</strong> BUMD Kepulauan Bangka Belitung &copy; 2019
+    <strong>Copyright</strong> BUMD Kepulauan Bangka Belitung &copy; 2020
   </div>
 </div>
 <div id='installer' style="display:none">

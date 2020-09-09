@@ -39,7 +39,7 @@
       BUMD Kepulauan Bangka Belitung
     </div>
     <div class="col-md-6 text-right">
-      <small>© 2019</small>
+      <small>© 2020</small>
     </div>
   </div>
 </div>
