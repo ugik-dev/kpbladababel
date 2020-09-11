@@ -6483,6 +6483,15 @@ ins {
   background-color: #c6ffc6;
   text-decoration: none;
 }
+
+.lang_bot {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  width: 8em;
+  margin-top: -2.5em;
+}
+
 del {
   background-color: #ffc6c6;
 }

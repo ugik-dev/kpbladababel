@@ -36,8 +36,10 @@ class UserModel extends CI_Model
 		if (empty($res)) {
 			throw new UserException('Activation failed or has active please check your email', USER_NOT_FOUND_CODE);
 		} else {
+			$this->cekUserByEmailBuyer($res[0]);
+			$this->cekUserByEmailSeller($res[0]);
+			$this->cekUserByUsername($res[0]['username']);
 			if ($res[0]['jenis_akun'] == 'B') {
-				$this->cekUserByUsername($res[0]['username']);
 				$res[0]['id_role'] = '12';
 				$res[0]['password'] = $res[0]['password_hash'];
 				$res[0]['id_user'] = $this->addUser($res[0]);
@@ -46,7 +48,6 @@ class UserModel extends CI_Model
 				$this->db->delete('user_temp');
 				return $res[0];
 			} else if ($res[0]['jenis_akun'] == 'S') {
-				$this->cekUserByUsername($res[0]['username']);
 				$res[0]['id_role'] = '2';
 				$res[0]['password'] = $res[0]['password_hash'];
 				$res[0]['id_user'] = $this->addUser($res[0]);
@@ -72,6 +73,31 @@ class UserModel extends CI_Model
 		$row = $this->getAllUser(['username' => $username, 'is_login' => TRUE]);
 		if (!empty($row)) {
 			throw new UserException("User yang kamu daftarkan sudah ada", USER_NOT_FOUND_CODE);
+		}
+	}
+
+	public function cekUserByEmailBuyer($data)
+	{
+		$this->db->select("email");
+		$this->db->from('buyer as u');
+		$this->db->where('u.email', $data['email']);
+		$res = $this->db->get();
+		$row = $res->result_array();
+		if (!empty($row)) {
+			throw new UserException("Email yang kamu daftarkan sudah ada", USER_NOT_FOUND_CODE);
+		}
+	}
+
+	public function cekUserByEmailSeller($data)
+	{
+
+		$this->db->select("email");
+		$this->db->from('perusahaan as u');
+		$this->db->where('u.email', $data['email']);
+		$res = $this->db->get();
+		$row = $res->result_array();
+		if (!empty($row)) {
+			throw new UserException("Email yang kamu daftarkan sudah ada", USER_NOT_FOUND_CODE);
 		}
 	}
 
@@ -155,6 +181,8 @@ class UserModel extends CI_Model
 	public function registerUser($data)
 	{
 		$this->cekUserByUsername($data['username']);
+		$this->cekUserByEmailBuyer($data);
+		$this->cekUserByEmailSeller($data);
 		$data['password_hash'] = $data['password'];
 		$data['password'] = md5($data['password']);
 		$permitted_activtor = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

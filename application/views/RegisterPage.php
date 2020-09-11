@@ -2,8 +2,17 @@
 if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 }
 ?>
+
+
 <div class="col-md-12">
-  <div class="row">
+
+  <div style="float: right; padding : 3px" class="alert alert-light">
+    <a id='lang_in'> Indonesia</a> | <a id='lang_en'>English </a>
+  </div>
+
+
+  <div>
+    <!-- <div class="row"> -->
     <div class="registerColumns animated fadeInDown">
       <div class="row">
         <div class="col-md-12">
@@ -203,109 +212,99 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
           <small>© 2020</small>
         </div>
       </div>
+      <!-- </div> -->
     </div>
-    <div>
-      <span class="text-right">
 
-        <button style="width : 100px" class="text-right" id='lang_in'>Indonesia</button><br>
-        <button style="width : 100px" class="text-right" id='lang_en'>English</button>
-        <!-- <h3 class="font-bold" style="margin-bottom:16px">in</h3>
-    <h3 class="font-bold" style="margin-bottom:16px">en</h3> -->
-      </span>
-    </div>
   </div>
 
-</div>
+  <style>
+    .logo {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  </style>
+  <script>
 
-<style>
-  .logo {
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
-</style>
-<script>
+  </script>
+  <script>
+    $(document).ready(function() {
 
-</script>
-<script>
-  $(document).ready(function() {
-
-    var registerForm = $('#registerForm');
-    var divregion = $('#divregion');
-    var region = $('#region');
-    var submitBtn = registerForm.find('#registerBtn');
-    // ktp = $('#ktp');
-    // ktp = new FileUploader($('#ktp'), "", "ktp", ".png , .jpg , .jpeg", false, true);
-    // npwp = $('#npwp');
-    // npwp = new FileUploader($('#npwp'), "", "npwp", ".png , .jpg , .jpeg", false, true);
-    // divregion.attr('hidden', true);
-    var btn1 = $('#jenis_akun');
-    btn1.on('change', (ev) => {
-      if (btn1.val() == 'S') {
-        divregion.attr('hidden', true);
-        region.attr('required', false);
-      }
-      if (btn1.val() == 'B') {
-        divregion.attr('hidden', false);
-        region.attr('required', true);
-      }
-    });
-
-    registerForm.on('submit', (ev) => {
-      ev.preventDefault();
-      buttonLoading(submitBtn);
-      $.ajax({
-        url: "<?= site_url() . 'register-process' ?>",
-        type: "POST",
-        data: registerForm.serialize(),
-        success: (data) => {
-          buttonIdle(submitBtn);
-          json = JSON.parse(data);
-          if (json['error']) {
-            swal("Login Gagal", json['message'], "error");
-            return;
-          } else {
-            swal("Success Registration", 'check your email to activation', "success");
-          }
-          // $(location).attr('href', '<?= site_url() ?>' + json['user']['nama_controller']);
-        },
-        error: () => {
-          buttonIdle(submitBtn);
+      var registerForm = $('#registerForm');
+      var divregion = $('#divregion');
+      var region = $('#region');
+      var submitBtn = registerForm.find('#registerBtn');
+      // ktp = $('#ktp');
+      // ktp = new FileUploader($('#ktp'), "", "ktp", ".png , .jpg , .jpeg", false, true);
+      // npwp = $('#npwp');
+      // npwp = new FileUploader($('#npwp'), "", "npwp", ".png , .jpg , .jpeg", false, true);
+      // divregion.attr('hidden', true);
+      var btn1 = $('#jenis_akun');
+      btn1.on('change', (ev) => {
+        if (btn1.val() == 'S') {
+          divregion.attr('hidden', true);
+          region.attr('required', false);
+        }
+        if (btn1.val() == 'B') {
+          divregion.attr('hidden', false);
+          region.attr('required', true);
         }
       });
-    });
 
-    var lang_in = $('#lang_in');
-    var lang_en = $('#lang_en');
-    lang_in.on('click', (ev) => {
-      document.cookie = "lang_set=in";
-      location.reload();
-    });
-    lang_en.on('click', (ev) => {
-      document.cookie = "lang_set=en";
-      location.reload();
+      registerForm.on('submit', (ev) => {
+        ev.preventDefault();
+        buttonLoading(submitBtn);
+        $.ajax({
+          url: "<?= site_url() . 'register-process' ?>",
+          type: "POST",
+          data: registerForm.serialize(),
+          success: (data) => {
+            buttonIdle(submitBtn);
+            json = JSON.parse(data);
+            if (json['error']) {
+              swal("Login Gagal", json['message'], "error");
+              return;
+            } else {
+              swal("Success Registration", 'check your email to activation', "success");
+            }
+            // $(location).attr('href', '<?= site_url() ?>' + json['user']['nama_controller']);
+          },
+          error: () => {
+            buttonIdle(submitBtn);
+          }
+        });
+      });
 
-    });
+      var lang_in = $('#lang_in');
+      var lang_en = $('#lang_en');
+      lang_in.on('click', (ev) => {
+        document.cookie = "lang_set=in";
+        location.reload();
+      });
+      lang_en.on('click', (ev) => {
+        document.cookie = "lang_set=en";
+        location.reload();
+      });
 
-    function getCookie(cname) {
-      var name = cname + "=";
-      var ca = document.cookie.split(';');
-      for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-          c = c.substring(1);
+      function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
         }
-        if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-        }
+        return "";
       }
-      return "";
-    }
 
-  });
-</script>
-<style>
-  body {
-    background-color: #f3f3f4 !important;
-  }
-</style>
-<?php $this->load->view('Fragment/FooterFragment'); ?>
+    });
+  </script>
+  <style>
+    body {
+      background-color: #f3f3f4 !important;
+    }
+  </style>
+  <?php $this->load->view('Fragment/FooterFragment'); ?>

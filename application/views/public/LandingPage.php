@@ -47,8 +47,14 @@
   <div class="row">
     <div class="col-lg-12 text-center">
       <div class="navy-line"></div>
-      <h1>Muntok White Pepper Pricing X</h1>
-      <p>Today, <span id="current_date"></span></p>
+      <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+        echo "<h1>Muntok White Pepper Pricing</h1>
+        <p>Today, <span id='current_date'></span></p>";
+      } else {
+        echo "<h1>Harga Muntok White Pepper</h1>
+        <p>Hari ini, <span id='current_date'></span></p>";
+      } ?>
+
     </div>
     <div class="col-lg-12">
       <div class="ibox">
@@ -57,9 +63,17 @@
             <table id="HargaMWPTable" class="table table-bordered stripe" style="padding:0px">
               <thead>
                 <tr>
-                  <th style="width: 40%;">Quality</th>
-                  <th style="width: 30%;">Farmer</th>
-                  <th style="width: 30%;">Free on Board</th>
+                  <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+                    echo "  <th style='width: 40%;'>Quality</th>
+                    <th style='width: 30%;'>Farmer</th>
+                    <th style='width: 30%;'>Free on Board</th>";
+                  } else {
+                    echo "  <th style='width: 40%;'>Kualitas</th>
+                    <th style='width: 30%;'>Petani</th>
+                    <th style='width: 30%;'>Free on Board</th>";
+                  } ?>
+
+
                 </tr>
               </thead>
               <tbody></tbody>
@@ -77,8 +91,11 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <div class="navy-line"></div>
-        <h1>News</h1>
-
+        <h1> <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+                echo "News";
+              } else {
+                echo "Berita";
+              } ?></h1>
       </div>
       <div class="col-lg-12 m-b-xl" id="news-list"></div>
       <!-- <div class="row">
@@ -93,7 +110,12 @@
           
       </div> -->
       <div class="col-lg-12 text-center m-b-xl">
-        <a href="<?= site_url('news') ?>" class="btn btn-primary">More News</a>
+        <a href="<?= site_url('news') ?>" class="btn btn-primary">
+          <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+            echo "More News";
+          } else {
+            echo "Berita Lain";
+          } ?></a>
       </div>
     </div>
   </div>
@@ -138,19 +160,28 @@
     <div class="row">
       <div class="col-lg-12 text-center">
         <div class="navy-line"></div>
-        <h1>What We Do</h1>
+        <h1><?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+              echo "What We Do";
+            } else {
+              echo "Tentang Kami";
+            } ?></h1>
         <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-5 col-lg-offset-1 features-text">
-        <small>Kantor Pemasaran Bersama Lada Babel</small>
-        <h2>Help Manage Goverment Export Documents</h2>
+        <!-- <small>Kantor Pemasaran Bersama Lada Babel</small> -->
+        <h2>
+          <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+            echo "Help Manage Goverment Export Documents";
+          } else {
+            echo "Membantu Pemerintahan dalam Dokumentasi Ekport";
+          } ?></h2>
         <i class="fa fa-cabinet-filing big-icon float-right"></i>
         <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
       </div>
       <div class="col-lg-5 features-text">
-        <small>Kantor Pemasaran Bersama Lada Babel</small>
+        <!-- <small>Kantor Pemasaran Bersama Lada Babel</small> -->
         <h2>Export Consultant </h2>
         <i class="fa fa-university big-icon float-right"></i>
         <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
@@ -158,13 +189,13 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-lg-5 col-lg-offset-1 features-text">
-        <small>Kantor Pemasaran Bersama Lada Babel</small>
+        <!-- <small>Kantor Pemasaran Bersama Lada Babel</small> -->
         <h2>Pepper Marketing </h2>
         <i class="fa fa-users big-icon float-right"></i>
         <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
       </div>
       <div class="col-lg-5 features-text">
-        <small>Kantor Pemasaran Bersama Lada Babel</small>
+        <!-- <small>Kantor Pemasaran Bersama Lada Babel</small> -->
         <h2>Pepper Packing </h2>
         <i class="fa fa-boxes big-icon float-right"></i>
         <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with.</p>
@@ -179,7 +210,12 @@
     <div class="row m-b-lg">
       <div class="col-lg-12 text-center">
         <div class="navy-line"></div>
-        <h1>Our Partners</h1>
+        <h1> <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+                echo "Our Partners";
+              } else {
+                echo "Patner Kami";
+              } ?>
+        </h1>
         <p>We, with our partner, intend to make your export bussiness go smoothly</p>
       </div>
     </div>
@@ -260,12 +296,27 @@
   <div class="row">
     <div class="col-lg-12 text-center">
       <div class="navy-line"></div>
-      <h1>Featured Products</h1>
-      <p>Some of the products from our customers</p>
-    </div>
-    <div class="row" id="product-list"></div>
-    <div class="col-lg-12 text-center m-b-xl">
-      <a href="<?= site_url('products') ?>" class="btn btn-primary">More Products</a>
+      <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+        echo "<h1>Products</h1>
+            <p>Some of the products from our customers</p>
+          </div>
+          <div class='row' id='product-list'></div>
+          <div class='col-lg-12 text-center m-b-xl'>
+   ";
+      } else {
+        echo "<h1>Produk</h1>
+        <p>Beberapa Produk dari customer kami</p>
+      </div>
+      <div class='row' id='product-list'></div>
+      <div class='col-lg-12 text-center m-b-xl'>
+  ";
+      } ?>
+      <a href='<?= site_url('products') ?>' class='btn btn-primary'>
+        <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+          echo "More Products";
+        } else {
+          echo "Produk Lain";
+        } ?></a>
     </div>
   </div>
 </section>
@@ -307,7 +358,11 @@
     <div class="row m-b-lg">
       <div class="col-lg-12 text-center">
         <div class="navy-line"></div>
-        <h1>Contact Us</h1>
+        <h1> <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+                echo "Contact Us";
+              } else {
+                echo "Kontak Kami";
+              } ?></h1>
         <!-- <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.</p> -->
       </div>
     </div>
@@ -347,31 +402,60 @@
 
 <script>
   $(document).ready(function() {
-
+    var lang = <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+                  echo "'en'";
+                } else {
+                  echo "'in'";
+                } ?>;
     var product_list = $('#product-list');
     var news_list = $('#news-list');
     var current_date = $('#current_date');
     //	<li><a class="nav-link page-scroll" href="#partners">Partners</a></li>
 
     current_date.html(new Date().toLocaleDateString());
-    $('#navbar-item').html(`
-    <li><a class="nav-link page-scroll" href="#features">What We Do</a></li>
-		<li><a class="nav-link page-scroll" href="#products">Products</a></li>
-		<li><a class="nav-link page-scroll" href="#news">News</a></li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class='fa fa-shopping-cart'></i> Trading
-        </a>
-        <div class="dropdown-menu bg-primary" >
-        <a class='nav-link page-scroll' style="width: 200px" href="http://mpms.kpbladababel.com/trading">TRADING BURSA LADA</a>
-        <a class='nav-link page-scroll' style="width: 200px" href="http://pss.kpbladababel.com">SHIPPING & REPORT</a> 
-        </div>
-    </li>
-		<li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
-    <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i>Login | Registration</a></li>
-                   
-               
-	`)
+    if (lang == 'en') {
+      $('#navbar-item').html(`
+        <li><a class="nav-link page-scroll" href="#features">What We Do</a></li>
+        <li><a class="nav-link page-scroll" href="#products">Products</a></li>
+        <li><a class="nav-link page-scroll" href="#news">News</a></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class='fa fa-shopping-cart'></i> Trading
+            </a>
+            <div class="dropdown-menu bg-primary" >
+            <a class='nav-link page-scroll' style="width: 200px" href="http://mpms.kpbladababel.com/trading">TRADING BURSA LADA</a>
+            <a class='nav-link page-scroll' style="width: 200px" href="http://pss.kpbladababel.com">SHIPPING & REPORT</a> 
+            </div>
+        </li>
+        <li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
+        
+        <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i>Login | Registration</a></li>
+        <li><a class="nav-link page-scroll" href="#in" id='lang_in' >in</a></li>
+        <li><a class="nav-link page-scroll active" href="#en" id='lang_en' >en</a></li>               
+                  
+      `)
+    } else {
+      $('#navbar-item').html(`
+        <li><a class="nav-link page-scroll" href="#features">Tentang Kami</a></li>
+        <li><a class="nav-link page-scroll" href="#products">Produk</a></li>
+        <li><a class="nav-link page-scroll" href="#news">Berita</a></li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class='fa fa-shopping-cart'></i> TRADING
+            </a>
+            <div class="dropdown-menu bg-primary" >
+            <a class='nav-link page-scroll' style="width: 200px" href="http://mpms.kpbladababel.com/trading">PASAR BURSA LADA</a>
+            <a class='nav-link page-scroll' style="width: 200px" href="http://pss.kpbladababel.com">SHIPPING & LAPORAN</a> 
+            </div>
+        </li>
+        <li><a class="nav-link page-scroll" href="#contact">Kontak</a></li>
+        
+        <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i>Masuk | Daftar</a></li>
+        <li><a class="nav-link page-scroll active" href="#in" id='lang_in' >in</a></li>
+        <li><a class="nav-link page-scroll" href="#en" id='lang_en' >en</a></li>               
+                  
+      `)
+    };
 
     // <li><a class="nav-link page-scroll" href="#features">What We Do</a></li>
     // 	<li><a class="nav-link page-scroll" href="#products">Products</a></li>
@@ -607,7 +691,6 @@
         console.log("Product::UNKNOWN DATA");
         return;
       }
-
       product_list.empty();
       Object.values(data).forEach((product) => {
         product_list.append(`
@@ -630,6 +713,17 @@
       `);
       });
     }
+    var lang_in = $('#lang_in');
+    var lang_en = $('#lang_en');
+    lang_in.on('click', (ev) => {
+      document.cookie = "lang_set=in";
+      location.reload();
+    });
+    lang_en.on('click', (ev) => {
+      document.cookie = "lang_set=en";
+      location.reload();
+    });
+
   });
 </script>
 

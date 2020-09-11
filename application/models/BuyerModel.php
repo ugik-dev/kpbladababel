@@ -70,9 +70,35 @@ class BuyerModel extends CI_Model
         return $row[$id];
     }
 
-    public function update($data)
+    public function cekUserByEmailBuyer($data)
+    {
+        $this->db->select("count(email) as count");
+        $this->db->from('buyer as u');
+        $this->db->where('u.email', $data['email']);
+        $res = $this->db->get();
+        $row = $res->result_array();
+        if ($row[0]['count'] > 0) {
+            throw new UserException("Email yang kamu daftarkan sudah ada", USER_NOT_FOUND_CODE);
+        }
+    }
+
+    public function cekUserByEmailSeller($data)
     {
 
+        $this->db->select("count(email) as count");
+        $this->db->from('perusahaan as u');
+        $this->db->where('u.email', $data['email']);
+        $res = $this->db->get();
+        $row = $res->result_array();
+        if ($row[0]['count'] > 0) {
+            throw new UserException("Email yang kamu daftarkan sudah ada", USER_NOT_FOUND_CODE);
+        }
+    }
+
+    public function update($data)
+    {
+        $this->cekUserByEmailBuyer($data);
+        $this->cekUserByEmailSeller($data);
         if (!empty($data['id_bank'])) {
             $data['id_bank'] = explode(' -- ', $data['id_bank'])[1];
         }
