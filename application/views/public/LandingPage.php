@@ -549,13 +549,13 @@
 
       var renderData = [];
 
-      renderData.push(["MWP1", "Rp" + dataHargaMWP['harga_mwp1_petani'], "Rp" + dataHargaMWP['harga_mwp1_fob']]);
-      renderData.push(["MWP2", "Rp" + dataHargaMWP['harga_mwp2_petani'], "Rp" + dataHargaMWP['harga_mwp2_fob']]);
-      renderData.push(["ASTA", "Rp" + dataHargaMWP['harga_asta_petani'], "Rp" + dataHargaMWP['harga_asta_fob']]);
-      renderData.push(["ESA", "Rp" + dataHargaMWP['harga_esa_petani'], "Rp" + dataHargaMWP['harga_esa_fob']]);
-      renderData.push(["IPC", "Rp" + dataHargaMWP['harga_ipc_petani'], "Rp" + dataHargaMWP['harga_ipc_fob']]);
-      renderData.push(["SNI1", "Rp" + dataHargaMWP['harga_sni1_petani'], "Rp" + dataHargaMWP['harga_sni1_fob']]);
-      renderData.push(["ISO", "Rp" + dataHargaMWP['harga_iso_petani'], "Rp" + dataHargaMWP['harga_iso_fob']]);
+      renderData.push(["MWP1", "Rp " + dataHargaMWP['harga_mwp1_petani'] + ' || USD ' + dataHargaMWP['d_harga_mwp1_petani'], "Rp " + dataHargaMWP['harga_mwp1_fob'] + ' || USD ' + dataHargaMWP['d_harga_mwp1_fob']]);
+      renderData.push(["MWP2", "Rp " + dataHargaMWP['harga_mwp2_petani'] + ' || USD ' + dataHargaMWP['d_harga_mwp2_petani'], "Rp" + dataHargaMWP['harga_mwp2_fob'] + ' || USD ' + dataHargaMWP['d_harga_mwp2_fob']]);
+      renderData.push(["ASTA", "Rp " + dataHargaMWP['harga_asta_petani'] + ' || USD ' + dataHargaMWP['d_harga_asta_petani'], "Rp" + dataHargaMWP['harga_asta_fob'] + ' || USD ' + dataHargaMWP['d_harga_asta_fob']]);
+      renderData.push(["ESA", "Rp " + dataHargaMWP['harga_esa_petani'] + ' || USD ' + dataHargaMWP['d_harga_esa_petani'], "Rp" + dataHargaMWP['harga_esa_fob'] + ' || USD ' + dataHargaMWP['d_harga_esa_fob']]);
+      renderData.push(["IPC", "Rp " + dataHargaMWP['harga_ipc_petani'] + ' || USD ' + dataHargaMWP['d_harga_ipc_petani'], "Rp" + dataHargaMWP['harga_ipc_fob'] + ' || USD ' + dataHargaMWP['d_harga_ipc_fob']]);
+      renderData.push(["SNI1", "Rp " + dataHargaMWP['harga_sni1_petani'] + ' || USD ' + dataHargaMWP['d_harga_sni1_petani'], "Rp" + dataHargaMWP['harga_sni1_fob'] + ' || USD ' + dataHargaMWP['d_harga_sni1_fob']]);
+      renderData.push(["ISO", "Rp " + dataHargaMWP['harga_iso_petani'] + ' || USD ' + dataHargaMWP['d_harga_iso_petani'], "Rp" + dataHargaMWP['harga_iso_fob'] + ' || USD ' + dataHargaMWP['d_harga_iso_fob']]);
       HargaMWPTable.clear().rows.add(renderData).draw('full-hold');
     }
 

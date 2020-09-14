@@ -38,7 +38,7 @@
 </div>
 
 <div class="modal inmodal" id="harga_mwp_modal" tabindex="-1" opd="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content animated fadeIn">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -55,90 +55,179 @@
                 <input type="text" class="form-control" placeholder="Tanggal Berlaku" id="tanggal_berlaku" name="tanggal_berlaku" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_mwp1_petani">MWP1 Petani (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mwp1_petani" name="harga_mwp1_petani" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_mwp1_fob">MWP1 FOB (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mwp1_fob" name="harga_mwp1_fob" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_mwp1_petani">MWP1 Petani (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_mwp1_petani" name="d_harga_mwp1_petani" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_mwp1_fob">MWP1 FOB (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_mwp1_fob" name="d_harga_mwp1_fob" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_mwp2_petani">MWP2 Petani (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mwp2_petani" name="harga_mwp2_petani" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_mwp2_fob">MWP2 FOB (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mwp2_fob" name="harga_mwp2_fob" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_mwp2_petani">MWP2 Petani (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_mwp2_petani" name="d_harga_mwp2_petani" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_mwp2_fob">MWP2 FOB (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_mwp2_fob" name="d_harga_mwp2_fob" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_asta_petani">ASTA Petani (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_asta_petani" name="harga_asta_petani" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_asta_fob">ASTA FOB (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_asta_fob" name="harga_asta_fob" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_asta_petani">ASTA Petani (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_asta_petani" name="d_harga_asta_petani" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_asta_fob">ASTA FOB (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_asta_fob" name="d_harga_asta_fob" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_esa_petani">ESA Petani (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_esa_petani" name="harga_esa_petani" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_esa_fob">ESA FOB (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_esa_fob" name="harga_esa_fob" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_esa_petani">ESA Petani (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_esa_petani" name="d_harga_esa_petani" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_esa_fob">ESA FOB (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_esa_fob" name="d_harga_esa_fob" required="required">
+              </div>
+            </div>
+
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_ipc_petani">IPC Petani (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_ipc_petani" name="harga_ipc_petani" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_ipc_fob">IPC FOB (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_ipc_fob" name="harga_ipc_fob" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_ipc_petani">IPC Petani (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_ipc_petani" name="d_harga_ipc_petani" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_ipc_fob">IPC FOB (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_ipc_fob" name="d_harga_ipc_fob" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_sni1_petani">SNI1 Petani (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_sni1_petani" name="harga_sni1_petani" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_sni1_fob">SNI1 FOB (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_sni1_fob" name="harga_sni1_fob" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_sni1_petani">SNI1 Petani (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_sni1_petani" name="d_harga_sni1_petani" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_sni1_fob">SNI1 FOB (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_sni1_fob" name="d_harga_sni1_fob" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_iso_petani">ISO Petani (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_iso_petani" name="harga_iso_petani" required="required">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_iso_fob">ISO FOB (Rp)</label>
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_iso_fob" name="harga_iso_fob" required="required">
               </div>
             </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_iso_petani">ISO Petani (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_iso_petani" name="d_harga_iso_petani" required="required">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="d_harga_iso_fob">ISO FOB (USD)</label>
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_iso_fob" name="d_harga_iso_fob" required="required">
+              </div>
+            </div>
+
           </div>
 
           <button class="btn btn-success my-1 mr-sm-2" type="submit" id="add_btn" data-loading-text="Loading..."><strong>Tambah Harga</strong></button>
@@ -195,6 +284,21 @@
       'harga_sni1_fob': $('#harga_mwp_modal').find('#harga_sni1_fob'),
       'harga_iso_petani': $('#harga_mwp_modal').find('#harga_iso_petani'),
       'harga_iso_fob': $('#harga_mwp_modal').find('#harga_iso_fob'),
+
+      'd_harga_mwp1_petani': $('#harga_mwp_modal').find('#d_harga_mwp1_petani'),
+      'd_harga_mwp1_fob': $('#harga_mwp_modal').find('#d_harga_mwp1_fob'),
+      'd_harga_mwp2_petani': $('#harga_mwp_modal').find('#d_harga_mwp2_petani'),
+      'd_harga_mwp2_fob': $('#harga_mwp_modal').find('#d_harga_mwp2_fob'),
+      'd_harga_asta_petani': $('#harga_mwp_modal').find('#d_harga_asta_petani'),
+      'd_harga_asta_fob': $('#harga_mwp_modal').find('#hd_arga_asta_fob'),
+      'd_harga_esa_petani': $('#harga_mwp_modal').find('#d_harga_esa_petani'),
+      'd_harga_esa_fob': $('#harga_mwp_modal').find('#d_harga_esa_fob'),
+      'd_harga_ipc_petani': $('#harga_mwp_modal').find('#d_harga_ipc_petani'),
+      'd_harga_ipc_fob': $('#harga_mwp_modal').find('#d_harga_ipc_fob'),
+      'd_harga_sni1_petani': $('#harga_mwp_modal').find('#d_harga_sni1_petani'),
+      'd_harga_sni1_fob': $('#harga_mwp_modal').find('#d_harga_sni1_fob'),
+      'd_harga_iso_petani': $('#harga_mwp_modal').find('#d_harga_iso_petani'),
+      'd_harga_iso_fob': $('#harga_mwp_modal').find('#d_harga_iso_fob'),
     }
 
     harga_mwp_modal.tanggal_berlaku.datepicker({
@@ -258,17 +362,41 @@
           </div>
         </div>
       `;
-        renderData.push([harga_mwp['tanggal_berlaku'], renderHargaPetani(harga_mwp['harga_mwp1_petani']) + renderHargaFOB(harga_mwp['harga_mwp1_fob']), renderHargaPetani(harga_mwp['harga_mwp2_petani']) + renderHargaFOB(harga_mwp['harga_mwp2_fob']), renderHargaPetani(harga_mwp['harga_asta_petani']) + renderHargaFOB(harga_mwp['harga_asta_fob']), renderHargaPetani(harga_mwp['harga_esa_petani']) + renderHargaFOB(harga_mwp['harga_esa_fob']), renderHargaPetani(harga_mwp['harga_ipc_petani']) + renderHargaFOB(harga_mwp['harga_ipc_fob']), renderHargaPetani(harga_mwp['harga_sni1_petani']) + renderHargaFOB(harga_mwp['harga_sni1_fob']), renderHargaPetani(harga_mwp['harga_iso_petani']) + renderHargaFOB(harga_mwp['harga_iso_fob']), button]);
+        renderData.push([harga_mwp['tanggal_berlaku'],
+          renderHargaPetani(harga_mwp['harga_mwp1_petani']) + renderHargaFOB(harga_mwp['harga_mwp1_fob']) +
+          renderHargaPetaniD(harga_mwp['d_harga_mwp1_petani']) + renderHargaFOBD(harga_mwp['d_harga_mwp1_fob']),
+          renderHargaPetani(harga_mwp['harga_mwp2_petani']) + renderHargaFOB(harga_mwp['harga_mwp2_fob']) +
+          renderHargaPetaniD(harga_mwp['d_harga_mwp2_petani']) + renderHargaFOBD(harga_mwp['d_harga_mwp2_fob']),
+          renderHargaPetani(harga_mwp['harga_asta_petani']) + renderHargaFOB(harga_mwp['harga_asta_fob']) +
+          renderHargaPetaniD(harga_mwp['d_harga_asta_petani']) + renderHargaFOBD(harga_mwp['d_harga_asta_fob']),
+          renderHargaPetani(harga_mwp['harga_esa_petani']) + renderHargaFOB(harga_mwp['harga_esa_fob']) +
+          renderHargaPetaniD(harga_mwp['d_harga_esa_petani']) + renderHargaFOBD(harga_mwp['d_harga_esa_fob']),
+          renderHargaPetani(harga_mwp['harga_ipc_petani']) + renderHargaFOB(harga_mwp['harga_ipc_fob']) +
+          renderHargaPetaniD(harga_mwp['d_harga_ipc_petani']) + renderHargaFOBD(harga_mwp['d_harga_ipc_fob']),
+          renderHargaPetani(harga_mwp['harga_sni1_petani']) + renderHargaFOB(harga_mwp['harga_sni1_fob']) +
+          renderHargaPetaniD(harga_mwp['d_harga_sni1_petani']) + renderHargaFOBD(harga_mwp['d_harga_sni1_fob']),
+          renderHargaPetani(harga_mwp['harga_iso_petani']) + renderHargaFOB(harga_mwp['harga_iso_fob']) +
+          renderHargaPetaniD(harga_mwp['d_harga_iso_petani']) + renderHargaFOBD(harga_mwp['d_harga_iso_fob']),
+          button
+        ]);
       });
       HargaMWPTable.clear().rows.add(renderData).draw('full-hold');
     }
 
     function renderHargaPetani(harga) {
-      return `<div class="bg-primary">${harga}</div>`;
+      return `<div class="bg-primary">Rp. ${harga}</div>`;
     }
 
     function renderHargaFOB(harga) {
-      return `<div class="bg-success">${harga}</div>`;
+      return `<div class="bg-success">Rp. ${harga}</div>`;
+    }
+
+    function renderHargaPetaniD(harga) {
+      return `<div class="bg-primary">USD ${harga}</div>`;
+    }
+
+    function renderHargaFOBD(harga) {
+      return `<div class="bg-success">USD ${harga}</div>`;
     }
 
     toolbar.newBtn.on('click', (e) => {
@@ -301,6 +429,21 @@
       harga_mwp_modal.harga_sni1_fob.val(currentData['harga_sni1_fob']);
       harga_mwp_modal.harga_iso_petani.val(currentData['harga_iso_petani']);
       harga_mwp_modal.harga_iso_fob.val(currentData['harga_iso_fob']);
+
+      d_harga_mwp_modal.harga_mwp1_petani.val(currentData['d_harga_mwp1_petani']);
+      d_harga_mwp_modal.harga_mwp1_fob.val(currentData['d_harga_mwp1_fob']);
+      d_harga_mwp_modal.harga_mwp2_petani.val(currentData['d_harga_mwp2_petani']);
+      d_harga_mwp_modal.harga_mwp2_fob.val(currentData['d_harga_mwp2_fob']);
+      d_harga_mwp_modal.harga_asta_petani.val(currentData['d_harga_asta_petani']);
+      d_harga_mwp_modal.harga_asta_fob.val(currentData['d_harga_asta_fob']);
+      d_harga_mwp_modal.harga_esa_petani.val(currentData['d_harga_esa_petani']);
+      d_harga_mwp_modal.harga_esa_fob.val(currentData['d_harga_esa_fob']);
+      d_harga_mwp_modal.harga_ipc_petani.val(currentData['d_harga_ipc_petani']);
+      d_harga_mwp_modal.harga_ipc_fob.val(currentData['d_harga_ipc_fob']);
+      d_harga_mwp_modal.harga_sni1_petani.val(currentData['d_harga_sni1_petani']);
+      d_harga_mwp_modal.harga_sni1_fob.val(currentData['d_harga_sni1_fob']);
+      d_harga_mwp_modal.harga_iso_petani.val(currentData['d_harga_iso_petani']);
+      d_harga_mwp_modal.harga_iso_fob.val(currentData['d_harga_iso_fob']);
     });
 
     harga_mwp_modal.form.submit(function(event) {
