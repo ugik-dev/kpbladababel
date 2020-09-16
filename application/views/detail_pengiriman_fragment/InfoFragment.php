@@ -19,6 +19,14 @@
     <div class="col-lg-3">
       <div class="ibox">
         <div class="ibox-content">
+          <h5>Nomor Surat</h5>
+          <p class="no-margins"><span id="no_surat">-</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="ibox">
+        <div class="ibox-content">
           <h5>Nama Komoditi</h5>
           <p class="no-margins"><span id="nama_komoditi">-</span></p>
         </div>
@@ -124,6 +132,10 @@
             <input type="text" placeholder="Nama Pengiriman" class="form-control" id="nama_pengirimanx" name="nama_pengiriman" required="required">
           </div>
           <div class="form-group">
+            <label for="no_suratx">Nomor Surat</label>
+            <input type="text" placeholder="Nomor Surat" class="form-control" id="no_suratx" name="no_surat" required="required">
+          </div>
+          <div class="form-group">
             <label for="nama_komoditix">Nama Komoditi</label>
             <input type="text" placeholder="Nama Komoditi" class="form-control" id="nama_komoditix" name="nama_komoditi" required="required">
           </div>
@@ -167,16 +179,35 @@
           <input type="hidden" id="id_pengiriman" name="id_pengiriman">
           <input type="hidden" id="id_pengiriman_item" name="id_pengiriman_item">
           <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <div class="form-group">
                 <label for="netto">Netto (Kg)</label>
                 <input required="required" type="number" min="0" step="1" placeholder="0" class="form-control" id="netto" name="netto">
               </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <div class="form-group">
                 <label for="gross">Gross (Kg)</label>
                 <input required="required" type="number" min="0" step="1" placeholder="0" class="form-control" id="gross" name="gross">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="netto_karung">Netto Karung (Kg)</label>
+                <input required="required" type="number" min="0" step="1" placeholder="0" class="form-control" id="netto_karung" name="netto_karung">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="gross_karung">Gross Karung (Kg)</label>
+                <input required="required" type="number" min="0" step="1" placeholder="0" class="form-control" id="gross_karung" name="gross_karung">
+              </div>
+            </div>
+
+            <div class="col-sm-8">
+              <div class="form-group">
+                <label for="nama_importir">Nama Importir</label>
+                <input required="required" type="text" class="form-control" placeholder="Nama Importir" id="nama_importir" name="nama_importir">
               </div>
             </div>
             <div class="col-sm-4">
@@ -184,12 +215,6 @@
                 <label for="id_jenis_mutu">Target Mutu</label>
                 <select required="required" class="form-control mr-sm-2" name="id_jenis_mutu" id="id_jenis_mutu"></select>
                 <div><a href="<?= base_url('assets/Rincian_Standar_Mutu.xlsx?v=0.0.1') ?>" target="_blank"> <small>Rincian Standar Mutu</small></a></div>
-              </div>
-            </div>
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label for="nama_importir">Nama Importir</label>
-                <input required="required" type="text" class="form-control" placeholder="Nama Importir" id="nama_importir" name="nama_importir">
               </div>
             </div>
             <div class="col-sm-12">
@@ -340,6 +365,7 @@
       'self': $('#info_container'),
       'nama_perusahaan': $('#info_container').find('#nama_perusahaan'),
       'nama_pengiriman': $('#info_container').find('#nama_pengiriman'),
+      'no_surat': $('#info_container').find('#no_surat'),
       'nama_komoditi': $('#info_container').find('#nama_komoditi'),
       // 'nomor_kontrak' : $('#info_container').find('#nomor_kontrak'),
       'rencana_pengapalan': $('#info_container').find('#rencana_pengapalan'),
@@ -363,6 +389,7 @@
       form: $('#informasi_form'),
       'id_pengiriman': $('#informasi_form').find('#id_pengiriman'),
       'nama_pengiriman': $('#informasi_form').find('#nama_pengirimanx'),
+      'no_surat': $('#informasi_form').find('#no_suratx'),
       'nama_komoditi': $('#informasi_form').find('#nama_komoditix'),
       // 'nomor_kontrak' : $('#informasi_form').find('#nomor_kontrakx'),
       'rencana_pengapalan': $('#informasi_form').find('#rencana_pengapalanx'),
@@ -404,6 +431,8 @@
       'id_pengiriman_item': $('#pengiriman_item_form').find('#id_pengiriman_item'),
       'netto': $('#pengiriman_item_form').find('#netto'),
       'gross': $('#pengiriman_item_form').find('#gross'),
+      'netto_karung': $('#pengiriman_item_form').find('#netto_karung'),
+      'gross_karung': $('#pengiriman_item_form').find('#gross_karung'),
       'id_jenis_mutu': $('#pengiriman_item_form').find('#id_jenis_mutu'),
       'nama_importir': $('#pengiriman_item_form').find('#nama_importir'),
       'city': $('#pengiriman_item_form').find('#city'),
@@ -573,6 +602,7 @@
     function renderInfo() {
       info.nama_perusahaan.html(`<a href="<?= site_url('PerusahaanController/detail') ?>?id_perusahaan=${dataInfo['id_perusahaan']}">${dataInfo['nama_perusahaan']}</a>`);
       info.nama_pengiriman.html(dataInfo['nama_pengiriman'] ? dataInfo['nama_pengiriman'] : 'Tidak Ada');
+      info.nama_pengiriman.html(dataInfo['no_surat'] ? dataInfo['no_surat'] : 'Tidak Ada');
       info.nama_komoditi.html(dataInfo['nama_komoditi'] ? dataInfo['nama_komoditi'] : '-');
       // info.nomor_kontrak.html(dataInfo['nomor_kontrak'] ? dataInfo['nomor_kontrak'] : '-');
       info.rencana_pengapalan.html(dataInfo['rencana_pengapalan'] ? dataInfo['rencana_pengapalan'] : '-');
@@ -595,6 +625,7 @@
       informasiModal.self.modal('show');
       informasiModal.id_pengiriman.val(dataInfo['id_pengiriman']);
       informasiModal.nama_pengiriman.val(dataInfo['nama_pengiriman']);
+      informasiModal.no_surat.val(dataInfo['no_surat']);
       informasiModal.nama_komoditi.val(dataInfo['nama_komoditi']);
       // informasiModal.nomor_kontrak.val(dataInfo['nomor_kontrak']);
       informasiModal.rencana_pengapalan.val(dataInfo['rencana_pengapalan']);
@@ -846,6 +877,8 @@
       pengiriman_item_modal.id_pengiriman_item.val(currentData['id_pengiriman_item']);
       pengiriman_item_modal.netto.val(currentData['netto']);
       pengiriman_item_modal.gross.val(currentData['gross']);
+      pengiriman_item_modal.netto_karung.val(currentData['netto_karung']);
+      pengiriman_item_modal.gross_karung.val(currentData['gross_karung']);
       pengiriman_item_modal.id_jenis_mutu.val(currentData['id_jenis_mutu']);
       pengiriman_item_modal.nama_importir.val(currentData['nama_importir']);
       pengiriman_item_modal.city.val(currentData['city']);

@@ -105,7 +105,7 @@ class PengirimanModel extends CI_Model
       $this->db->set('date_proposal', $date);
       $this->db->set('id_tahap_proposal', 1);
     }
-    $this->db->update('pengiriman', DataStructure::slice($data, ['rencana_pengapalan', 'jumlah_berat', 'jumlah_partai', 'nama_pengiriman', 'nama_komoditi', 'status_proposal'], TRUE));
+    $this->db->update('pengiriman', DataStructure::slice($data, ['rencana_pengapalan', 'jumlah_berat', 'jumlah_partai', 'nama_pengiriman', 'nama_komoditi', 'status_proposal', 'no_surat'], TRUE));
     ExceptionHandler::handleDBError($this->db->error(), "Edit Pengiriman gagal", "pengiriman");
 
     return $data['id_pengiriman'];

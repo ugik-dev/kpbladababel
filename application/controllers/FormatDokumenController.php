@@ -397,7 +397,7 @@ class FormatDokumenController extends CI_Controller
     $section = $phpWord->addSection(['breakType' => 'continuous', 'colsNum' => 2]);
     $textrun = $section->addTextRun();
     $year = explode("-", $pengiriman['created_at'])[0];
-    $textrun->addText("Nomor\t  : \t(no surat perusahaan)", 'paragraph');
+    $textrun->addText("Nomor\t  : \t" . $pengiriman['no_surat'], 'paragraph');
     $textrun->addTextBreak();
     $textrun->addText("Lampiran : \t1 lembar", 'paragraph');
     $textrun->addTextBreak();
@@ -488,6 +488,10 @@ class FormatDokumenController extends CI_Controller
     $berat_gross = '';
     $berat_total = 0;
     $berat_total_gross = 0;
+    $berat_karung = '';
+    $berat_gross_karung = '';
+    $berat_total_karung = 0;
+    $berat_total_gross_karung = 0;
     $jenis_pengemasan = '';
     $jumlah_karung = '';
     $shipping_mark = '';
@@ -505,6 +509,8 @@ class FormatDokumenController extends CI_Controller
       $negara_tujuan .= "{$i}) {$pi['city']} - {$pi['nama_negara']}, <w:br/>";
       $berat .= "{$i}) {$pi['netto']} KG + ";
       $berat_gross .= "{$i}) {$pi['gross']} KG + ";
+      $berat_karung .= "{$i}) {$pi['netto_karung']} KG + ";
+      $berat_gross_karung .= "{$i}) {$pi['gross_karung']} KG + ";
       $nama_jenis_mutu .= "{$i}) {$pi['nama_jenis_mutu']}, ";
       $berat_total += $pi['netto'];
       $berat_total_gross += $pi['gross'];
@@ -527,6 +533,8 @@ class FormatDokumenController extends CI_Controller
     $nomor_kontrak = substr($nomor_kontrak, 0, -2);
     $berat = substr($berat, 0, -3);
     $berat_gross = substr($berat_gross, 0, -3);
+    $berat_karung = substr($berat_karung, 0, -3);
+    $berat_gross_karung = substr($berat_gross_karung, 0, -3);
     $nama_jenis_mutu = substr($nama_jenis_mutu, 0, -2);
     $shipping_mark = substr($shipping_mark, 0, -9);
     $nama_importir = substr($nama_importir, 0, -9);
@@ -542,6 +550,11 @@ class FormatDokumenController extends CI_Controller
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
     $table->addRow();
+    $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
+    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    $table->addCell(5000, $cellVCentered)->addText($keterangan_marking, 'paragraph', $noSpace);
+
+    $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Nomor Kontrak', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText($nomor_kontrak, 'paragraph', $noSpace);
@@ -549,14 +562,14 @@ class FormatDokumenController extends CI_Controller
     $table->addCell(4000, $cellVCentered)->addText('Rencana Mutu', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText($nama_jenis_mutu, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Netto', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($berat, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Gross', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($berat_gross, 'paragraph', $noSpace);
+    // $table->addRow();
+    // $table->addCell(4000, $cellVCentered)->addText('Netto Karung', 'paragraph', $noSpace);
+    // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    // $table->addCell(5000, $cellVCentered)->addText($berat_karung, 'paragraph', $noSpace);
+    // $table->addRow();
+    // $table->addCell(4000, $cellVCentered)->addText('Gross Karung', 'paragraph', $noSpace);
+    // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    // $table->addCell(5000, $cellVCentered)->addText($berat_gross_karung, 'paragraph', $noSpace);
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Jenis Pengemasan', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
@@ -565,6 +578,14 @@ class FormatDokumenController extends CI_Controller
     $table->addCell(4000, $cellVCentered)->addText('Jumlah Karung', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText($jumlah_karung, 'paragraph', $noSpace);
+    $table->addRow();
+    $table->addCell(4000, $cellVCentered)->addText('Netto', 'paragraph', $noSpace);
+    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    $table->addCell(5000, $cellVCentered)->addText($berat, 'paragraph', $noSpace);
+    $table->addRow();
+    $table->addCell(4000, $cellVCentered)->addText('Gross', 'paragraph', $noSpace);
+    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    $table->addCell(5000, $cellVCentered)->addText($berat_gross, 'paragraph', $noSpace);
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Shipping Mark', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
@@ -611,8 +632,16 @@ class FormatDokumenController extends CI_Controller
       $textrun->addText("({$i})", 'paragraph');
       $textrun->addTextBreak();
       $resultshipping_mark = str_replace(array("\n"), "<w:br/>", htmlspecialchars($pi['shipping_mark']));
+      $ketresultshipping_mark = "<w:br/> Gross \t\t: " . $pi['gross_karung'];
+      $ketresultshipping_mark .= "<w:br/> Net \t\t: " . $pi['netto_karung'];
+      $ketresultshipping_mark .= "<w:br/> Destin \t\t: " . $pi['province'] . ' - ' . $pi['nama_negara'];
+      $ketresultshipping_mark .= "<w:br/> Gross \t\t: " . $pi['gross'];
+      $ketresultshipping_mark .= "<w:br/> Net \t\t: " . $pi['netto'];
+      $ketresultshipping_mark .= "<w:br/> Packing \t: " . $pi['jumlah_pengemasan'] . ' ' . $pi['nama_jenis_pengemasan'];
+
       // $shipping_mark = "{$resultshipping_mark}, <w:br/>";
-      $textrun->addText("$resultshipping_mark", 'paragraph');
+      $textrun->addText("$resultshipping_mark", 'paragraph', $paragraphStyleName);
+      $textrun->addText("$ketresultshipping_mark", 'paragraph');
       $i++;
     }
     $textrun = $section->addTextRun();
