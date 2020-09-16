@@ -194,13 +194,13 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="netto_karung">Netto Karung (Kg)</label>
-                <input required="required" type="number" min="0" step="1" placeholder="0" class="form-control" id="netto_karung" name="netto_karung">
+                <input required="required" type="number" min="0" step="0.01" placeholder="0" class="form-control" id="netto_karung" name="netto_karung">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="gross_karung">Gross Karung (Kg)</label>
-                <input required="required" type="number" min="0" step="1" placeholder="0" class="form-control" id="gross_karung" name="gross_karung">
+                <input required="required" type="number" min="0" step="0.01" placeholder="0" class="form-control" id="gross_karung" name="gross_karung">
               </div>
             </div>
 
