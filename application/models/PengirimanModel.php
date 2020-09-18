@@ -48,7 +48,9 @@ class PengirimanModel extends CI_Model
     if (!empty($filter['tahun'])) $this->db->where('YEAR(eks.created_at)', $filter['tahun']);
     if (!empty($filter['status_proposal'])) $this->db->where('eks.status_proposal', $filter['status_proposal']);
     if (!empty($filter['sampel'])) $this->db->where('eks.id_tahap_proposal', '4');
-
+    if (!empty($filter['exstatus_proposal'])) $this->db->where("eks.status_proposal <> '".  $filter['exstatus_proposal']."'");
+ 
+    
     if (!empty($filter['status_kpb_rek'])) $this->db->where('eks.status_kpb_rek', $filter['status_kpb_rek']);
     if (!empty($filter['status_kpb_rek_not'])) $this->db->where('eks.status_kpb_rek !=', $filter['status_kpb_rek_not']);
 

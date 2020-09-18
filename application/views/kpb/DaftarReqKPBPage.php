@@ -14,6 +14,8 @@
           <option value='DITERIMA'>Diterima</option>
           <option value='DITOLAK'>Ditolak</option>
         </select>
+
+        <a class="btn btn-success btn-sm" href="<?= site_url()?>ExcelController/laporan"><i class="fa fa-download"></i> Laporan Excel</a>
       </form>
     </div>
   </div>
