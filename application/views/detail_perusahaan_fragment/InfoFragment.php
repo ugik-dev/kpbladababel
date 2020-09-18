@@ -299,7 +299,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="emailx">Email</label>
-                <input type="email" class="form-control" id="emailx" name="email" placeholder="Tidak ada">
+                <input type="email" class="form-control" id="emailx" name="email" placeholder="Tidak ada" required='required'>
               </div>
             </div>
           </div>
