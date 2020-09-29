@@ -629,9 +629,14 @@ class PengirimanController extends CI_Controller
       $dataOld = $this->PengirimanModel->get($data['id_pengiriman']);
       if (!empty($dataOld['bpsmb_mutu_edit'])) throw new UserException($dataOld['bpsmb_mutu_edit'], 0);
       $data['dokumen_hasil_mutu'] = FileIO::genericUpload('dokumen_hasil_mutu', 'pdf', $dataOld, $data);
-      // if(!empty($dataOld['bp3l_sertifikat_ig_edit'])) throw new UserException($dataOld['bp3l_sertifikat_ig_edit'], 0);
-      // $data['dokumen_bp3l_sertifikat_ig'] = FileIO::genericUpload('dokumen_bp3l_sertifikat_ig', 'pdf', $dataOld, $data);
+     // // if(!empty($dataOld['bp3l_sertifikat_ig_edit'])) throw new UserException($dataOld['bp3l_sertifikat_ig_edit'], 0);
+      // // $data['dokumen_bp3l_sertifikat_ig'] = FileIO::genericUpload('dokumen_bp3l_sertifikat_ig', 'pdf', $dataOld, $data);
       $data['id_pengiriman'] = $this->PengirimanModel->bpsmb_mutu($data);
+      for($i=1;$i<=$data['jumlah_item'];$i++){
+        $tmp['id_pengiriman_item'] = $data['id_pengiriman_'.$i];
+        $tmp['hasil_mutu'] = $data['hasil_item_'.$i];
+        $this->PengirimanItemModel->edit_hasil($tmp);
+      }
       $data = $this->PengirimanModel->get($data['id_pengiriman']);
       $this->email_send($data);
       echo json_encode(array("data" => $data));

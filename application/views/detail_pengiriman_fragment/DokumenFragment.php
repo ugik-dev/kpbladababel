@@ -118,7 +118,8 @@
         <form opd="form" id="bpsmb_mutu_form" onsubmit="return false;" type="multipart" autocomplete="off">
           <input type="hidden" id="id_pengiriman" name="id_pengiriman">
           <input type="hidden" id="jenis_usaha" name="jenis_usaha">
-
+          <input type="hidden" id="jumlah_item" name="jumlah_item">
+          
           <div class="form-group">
             <label for="status_bpsmb_mutu">Status Approval</label>
             <select class="form-control mr-sm-2" name="status_bpsmb_mutu" id="status_bpsmb_mutu" required="required">
@@ -135,6 +136,16 @@
             <label for="dokumen_bp3l_sertifikat_ig">Dokumen Sertifikat IG</label>
             <p class="no-margins"><span id="dokumen_bp3l_sertifikat_ig">-</span></p>
           </div> -->
+          <table id="FDataItem" class="table table-bordered table-hover" style="padding:0px">
+            <thead>
+              <tr>
+                <th style="width: 70%; text-align:center!important">Item</th>
+                <th style="width: 30%; text-align:center!important">Hasil</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+
           <div class="form-group" id="tgl_sampel_form">
             <label for="tgl_sampel">Tanggal Pengambilan Sampel</label>
             <input type="date" id="tgl_sampel" class="form-control" name="tgl_sampel" required="required">
@@ -233,12 +244,22 @@
 
     var id_pengiriman = `<?= $contentData['id_pengiriman'] ?>`;
     var role = `<?= $this->session->userdata()['nama_role'] ?>`
+
+    var dataJenisMutu = [];
+    getJenisMutu();
     var dokumen_table = $('#dokumen_table').DataTable({
       'dom': 't',
       deferRender: true,
       'ordering': false,
     });
 
+    var FDataItem = $('#FDataItem').DataTable({
+            'dom': 't',
+            deferRender: true,
+            'ordering': false,      
+    });
+
+ 
     var kpb_rek_modal = {
       self: $('#kpb_rek_modal'),
       form: $('#kpb_rek_form'),
@@ -272,6 +293,7 @@
       form: $('#bpsmb_mutu_form'),
       'id_pengiriman': $('#bpsmb_mutu_form').find('#id_pengiriman'),
       'jenis_usaha': $('#bpsmb_mutu_form').find('#jenis_usaha'),
+      'jumlah_item': $('#bpsmb_mutu_form').find('#jumlah_item'),
 
       'tgl_sampel': $('#bpsmb_mutu_form').find('#tgl_sampel'),
       'tgl_sampel_form': $('#bpsmb_mutu_form').find('#tgl_sampel_form'),
@@ -450,6 +472,56 @@
       kpb_rek_modal.status_kpb_rek.trigger('change');
     });
 
+    function getJenisMutu() {
+      return $.ajax({
+        url: `<?php echo site_url('JenisMutuController/getAll/') ?>`,
+        'type': 'GET',
+        data: {},
+        success: function(data) {
+          var json = JSON.parse(data);
+          if (json['error']) {
+            return;
+          }
+          dataJenisMutu = json['data'];
+          // renderAllJenisMutu(dataJenisMutu);
+        },
+        error: function(e) {}
+      });
+    }
+
+
+    function renderFDataItem(data) {
+
+    dataItemTB = [];
+    var x = 1;
+    Object.values(data).forEach((d) => {
+
+    var item = `  <b>Nomor Kontrak:</b> ${d['nomor_kontrak']}<br>
+                  <b>Netto:</b> ${d['netto']} Kg |   <b>Permohonan Mutu:</b> ${d['nama_jenis_mutu']}<br>
+                  <b> ${d['nama_importir']} </b> | 
+                  <b>Tujuan:</b> ${d['city']}, ${d['province']}, ${d['nama_negara']}<br>
+      `;
+
+    var selector_item = `
+            <select class="form-control" name="hasil_item_${x}" id="hasil_item_${x}" required="required">
+            <option value>Pilih Hasil Uji Lab</option>
+          
+       `;
+    Object.values(dataJenisMutu).forEach((dM) => {
+      selector_item = selector_item + ` <option value="${dM['id_jenis_mutu']}">${dM['nama_jenis_mutu']}</option>      
+          `;
+        });
+    
+      selector_item = selector_item + ` </select> `;
+    
+      var id_item = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">`;
+     dataItemTB.push([item, selector_item + id_item ]);
+     x++;
+    });
+      FDataItem.rows.add(dataItemTB).draw('full-hold');
+    return x-1;      
+    }
+
 
     dokumen_table.on('click', '.bp3l_rek', function() {
 
@@ -481,9 +553,10 @@
         // bpsmb_mutu_modal.dokumen_hasil_mutu.resetState();
         bpsmb_mutu_modal.catatan_bpsmb_mutu_form.toggle(true);
         bpsmb_mutu_modal.catatan_bpsmb_mutu.val(dataInfo['catatan_bpsmb_mutu']);
-
+        bpsmb_mutu_modal.jumlah_item.val(renderFDataItem(dataItem));
+    
       } else {
-
+        $('#FDataItem').prop('hidden', 'hidden');
         bpsmb_mutu_modal.status_bpsmb_mutu.trigger('change');
       }
     });

@@ -45,6 +45,16 @@ class PengirimanItemModel extends CI_Model
     return $data['id_pengiriman_item'];
   }
 
+  public function edit_hasil($data)
+  {
+    $this->db->where('id_pengiriman_item', $data['id_pengiriman_item']);
+    $this->db->update('pengiriman_item', DataStructure::slice($data, ['hasil_mutu'], TRUE));
+    ExceptionHandler::handleDBError($this->db->error(), "Edit Pengiriman gagal", "pengiriman");
+
+    return $data['id_pengiriman_item'];
+  }
+
+
   public function delete($data)
   {
     $this->db->where('id_pengiriman_item', $data['id_pengiriman_item']);

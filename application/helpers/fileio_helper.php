@@ -14,7 +14,7 @@ class FileIO
     $CI->upload->initialize(array(
       'upload_path' => realpath(APPPATH . '../uploads/' . $folder),
       'allowed_types' => $allowedType != NULL ? $allowedType : 'jpg|jpeg|png|gif|doc|docx|pdf',
-      'max_size' => '1000',
+      'max_size' => '2500',
       'encrypt_name' => TRUE,
     ));
     if (!$CI->upload->do_upload($field)) {

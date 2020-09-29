@@ -46,10 +46,10 @@ class ExcelController extends CI_Controller {
     $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('A')->setWidth(5);
     $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('B')->setWidth(20);
     $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('C')->setWidth(12);
-    $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('D')->setWidth(20);
+    $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('D')->setWidth(37);
     $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('E')->setWidth(9);
     $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('F')->setWidth(30);
-    $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('G')->setWidth(22);
+    $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('G')->setWidth(30);
     $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('H')->setWidth(15);
     $spreadsheet->setActiveSheetIndex(0)->getColumnDimension('I')->setWidth(15);
     // Add some data
