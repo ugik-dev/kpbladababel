@@ -150,7 +150,7 @@
                 renderData.push(['Identitas Direksi Perusahaan', dataDokumenBuyer['no_idp'], downloadButton("<?= base_url('uploads/idp/') ?>", dataDokumenBuyer['idp'], false), button_edit('idp')]);
                 renderData.push(['Laporan Keuangan', dataDokumenBuyer['no_lu'], downloadButton("<?= base_url('uploads/lu/') ?>", dataDokumenBuyer['lu'], false), button_edit('lu')]);
             } else {
-                renderData.push(['PASPOR', dataDokumenBuyer['no_paspor'], downloadButtonEn("<?= base_url('uploads/paspor/') ?>", dataDokumenBuyer['paspor'], false), button_edit('paspor')]);
+                renderData.push(['PASSPORT', dataDokumenBuyer['no_paspor'], downloadButtonEn("<?= base_url('uploads/paspor/') ?>", dataDokumenBuyer['paspor'], false), button_edit('paspor')]);
                 renderData.push(['Foreign Bank Reference', dataDokumenBuyer['no_srbln'], downloadButtonEn("<?= base_url('uploads/srbln/') ?>", dataDokumenBuyer['srbln'], false), button_edit('srbln')]);
                 renderData.push(['Document of Domicile of State of Origin Company', dataDokumenBuyer['no_skdpna'], downloadButtonEn("<?= base_url('uploads/skdpna/') ?>", dataDokumenBuyer['skdpna'], false), button_edit('skdpna')]);
                 renderData.push(['Business Licence Dokuments', dataDokumenBuyer['no_skiu'], downloadButtonEn("<?= base_url('uploads/skiu/') ?>", dataDokumenBuyer['skiu'], false), button_edit('skiu')]);
