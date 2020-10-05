@@ -151,12 +151,12 @@
                 renderData.push(['Laporan Keuangan', dataDokumenBuyer['no_lu'], downloadButton("<?= base_url('uploads/lu/') ?>", dataDokumenBuyer['lu'], false), button_edit('lu')]);
             } else {
                 renderData.push(['PASPOR', dataDokumenBuyer['no_paspor'], downloadButtonEn("<?= base_url('uploads/paspor/') ?>", dataDokumenBuyer['paspor'], false), button_edit('paspor')]);
-                renderData.push(['Referensi Bank Luar Negeri', dataDokumenBuyer['no_srbln'], downloadButtonEn("<?= base_url('uploads/srbln/') ?>", dataDokumenBuyer['srbln'], false), button_edit('srbln')]);
-                renderData.push(['SK Domisili Perusahaan Negara Asal', dataDokumenBuyer['no_skdpna'], downloadButtonEn("<?= base_url('uploads/skdpna/') ?>", dataDokumenBuyer['skdpna'], false), button_edit('skdpna')]);
-                renderData.push(['SK Izin Usaha', dataDokumenBuyer['no_skiu'], downloadButtonEn("<?= base_url('uploads/skiu/') ?>", dataDokumenBuyer['skiu'], false), button_edit('skiu')]);
-                renderData.push(['Surat Pernyataan sebagai Perusahaan Pengguna Lada Putih', dataDokumenBuyer['no_sp'], downloadButtonEn("<?= base_url('uploads/sp/') ?>", dataDokumenBuyer['sp'], false), button_edit('sp')]);
-                renderData.push(['Laporan Keuangan', dataDokumenBuyer['no_lu'], downloadButtonEn("<?= base_url('uploads/lu/') ?>", dataDokumenBuyer['lu'], false), button_edit('lu')]);
-                renderData.push(['Akta Pendiri Perusahaan', dataDokumenBuyer['no_app'], downloadButtonEn("<?= base_url('uploads/app/') ?>", dataDokumenBuyer['app'], false), button_edit('app')]);
+                renderData.push(['Foreign Bank Reference', dataDokumenBuyer['no_srbln'], downloadButtonEn("<?= base_url('uploads/srbln/') ?>", dataDokumenBuyer['srbln'], false), button_edit('srbln')]);
+                renderData.push(['Document of Domicile of State of Origin Company', dataDokumenBuyer['no_skdpna'], downloadButtonEn("<?= base_url('uploads/skdpna/') ?>", dataDokumenBuyer['skdpna'], false), button_edit('skdpna')]);
+                renderData.push(['Business Licence Dokuments', dataDokumenBuyer['no_skiu'], downloadButtonEn("<?= base_url('uploads/skiu/') ?>", dataDokumenBuyer['skiu'], false), button_edit('skiu')]);
+                renderData.push(['Statement Letter as White Pepper User Company', dataDokumenBuyer['no_sp'], downloadButtonEn("<?= base_url('uploads/sp/') ?>", dataDokumenBuyer['sp'], false), button_edit('sp')]);
+                renderData.push(['Financial Statements', dataDokumenBuyer['no_lu'], downloadButtonEn("<?= base_url('uploads/lu/') ?>", dataDokumenBuyer['lu'], false), button_edit('lu')]);
+                renderData.push(['Deed of Founder of the Company', dataDokumenBuyer['no_app'], downloadButtonEn("<?= base_url('uploads/app/') ?>", dataDokumenBuyer['app'], false), button_edit('app')]);
             }
             dokumen_buyer_datatable.clear().rows.add(renderData).draw('full-hold');
         }
