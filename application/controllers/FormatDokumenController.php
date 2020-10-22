@@ -925,6 +925,355 @@ class FormatDokumenController extends CI_Controller
 
     $objWriter->save("php://output");
   }
+ 
+
+  function tgl_indo(){
+    $tanggal = date('Y-m-d');
+    $bulan = array (
+      1 =>   'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember'
+    );
+    $pecahkan = explode('-', $tanggal);
+    
+    return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+  }
+
+  function getRomawi()
+  {
+    $bln = date('n');
+    $year = date('Y');
+    // $romawi = getRomawi($bulan);
+    switch ($bln) {
+      case 1:
+        return "I/" . $year;
+        break;
+      case 2:
+        return "II/" . $year;
+        break;
+      case 3:
+        return "III/" . $year;
+        break;
+      case 4:
+        return "IV/" . $year;
+        break;
+      case 5:
+        return "V/" . $year;
+        break;
+      case 6:
+        return "VI/" . $year;
+        break;
+      case 7:
+        return "VII/" . $year;
+        break;
+      case 8:
+        return "VIII/" . $year;
+        break;
+      case 9:
+        return "IX/" . $year;
+        break;
+      case 10:
+        return "X/" . $year;
+        break;
+      case 11:
+        return "XI/" . $year;
+        break;
+      case 12:
+        return "XII/" . $year;
+        break;
+    }
+  }
+
+  public function format_sk_transaksi()
+  {
+    // try {
+    $this->SecurityModel->userOnlyGuard(TRUE);
+
+    $input = $this->input->get();
+    if (empty($input['id_pengiriman'])) throw new UserException("Parameter 'id_pengiriman' tidak ada", 0);
+
+    $pengiriman = $this->PengirimanModel->get($input['id_pengiriman']);
+    $pengirimanItem = $this->PengirimanItemModel->getAll(['id_pengiriman' => $input['id_pengiriman']]);
+    $perusahaan = $this->PerusahaanModel->get($pengiriman['id_perusahaan']);
+    $siup = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'terdaftar']);
+    $npult = !empty($siup) ? $siup['no_dokumen_perusahaan'] : NULL;
+    $nib = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'nib']);
+    $no_nib = !empty($nib) ? $nib['no_dokumen_perusahaan'] : NULL;
+    $logo = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'logo']);
+    $logo_img = !empty($logo) ? $logo['dokumen_perusahaan'] : NULL;
+    $filename = 'SKT_'.$perusahaan['nama_perusahaan'].'_' . $input['id_pengiriman'];
+
+
+
+    $phpWord = new PhpOffice\PhpWord\PhpWord();
+    $phpWord->addFontStyle('h3', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => true));
+    $phpWord->addFontStyle('paragraph', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'spaceAfter' => 0));
+    // $PHPWord->addParagraphStyle('p3Style', array('align'=>'center', 'spaceAfter'=>100));
+    $phpWord->addFontStyle('paragraph_bold', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => true));
+    $phpWord->addFontStyle('paragraph2', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'underline' => 'single'));
+    $phpWord->addFontStyle('paragraph3', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => true, 'underline' => 'single'));
+    $phpWord->addFontStyle('paragraph4', array('name' => 'Times New Roman', 'size' => 13, 'color' => '000000', 'bold' => true, 'underline' => 'single'));
+    $noSpace = array('spaceAfter' => 0);
+
+    $paragraphStyleName = 'pStyle';
+    $phpWord->addParagraphStyle($paragraphStyleName, array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 100));
+    $phpWord->addParagraphStyle('pS2', array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::BOTH, 'spaceAfter' => 50));
+
+    foreach ($pengirimanItem as $pi) {
+
+      $section = $phpWord->addSection(array(
+        'marginLeft' => 1200, 'marginRight' => 600,
+        'marginTop' => 600, 'marginBottom' => 600
+      ));
+
+      $fancyTableStyle = array('borderSize' => 1, 'borderColor' => '000000', 'height' => 200, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+
+      $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      $spanTableStyleName = 'Colspan Rowspan';
+      $phpWord->addTableStyle($spanTableStyleName, $fancyTableStyle);
+      $table = $section->addTable($spanTableStyleName, array('spaceAfter' => 0));
+      $table->addRow();
+      $table->addCell(1500, $cellVCentered)->addImage(base_url('assets/img/logo-kpb.png'), array('height' => 75, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,  'spaceAfter' => 0));;
+      $myCell1 = $table->addCell(8800, $cellVCentered);
+      $myCell1->addText('KANTOR PEMASARAN BERSAMA (KPB)-LADA', array('name' => 'Times New Roman', 'size' => 13, 'color' => '000000', 'bold' => true), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 10));
+      $myCell1->addText('PROVINSI KEPULAUAN BANGKA BELITUNG', array('name' => 'Times New Roman', 'size' => 13, 'color' => '000000', 'bold' => true), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 10));
+
+      // $myCell1->addText($perusahaan['lok_perusahaan_full'] . ', ' . $perusahaan['lok_perusahaan_kec'] . ' - ' . $perusahaan['lok_perusahaan_kabkot'], array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+      $myCell1->addText('Alamat : Jl. Pulau Bangka Kompleks Perkantoran Pemprov Babel, Ruko City Hall Blok I-10', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+      $myCell1->addText('Kota Pangkalpinang, Provinsi Kepulauan Bangka Belitung', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+      $myCell1->addText('Telp. 0717 9112195, Email : kpb.ladababel@gmail.com', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+
+      $section->addLine(array('weight' => 1.25, 'width' => 500, 'height' => 0, 'color' => '38c172'), array('spaceAfter' => 0));
+
+      //   if (file_exists('./assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png')) {
+      //   // $pdf->Image(base_url('assets/qrcode/'.$data['id_record'].'.png'), 170, 160, -300);
+      //   $section->addImage(base_url('assets/qrcode/' . $pengiriman['id_pengiriman'] . '.png'), array(
+      //     'height'           => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(2.4)),
+      //     'positioning'      => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+      //     'posHorizontal' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+      //     'posVertical' => \PhpOffice\PhpWord\Style\Image::POSITION_ABSOLUTE,
+      //     'marginLeft'       => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(9)),
+      //     'marginTop'        => round(\PhpOffice\PhpWord\Shared\Converter::cmToPixel(15)),
+      //   ));
+      // }
+
+
+      // $textrun->addTextBreak();
+      // $textrun->addTextBreak();
+
+      $tanggal = CustomFunctions::tanggal_indonesia(date("Y-m-d"));
+      // $section->addText("\t\t\t\t\t\t\t\t\tPanngkalpinang, {$tanggal}", "paragraph", array('spaceBefore' => 0));
+      $section->addText('SURAT KETERANGAN TRANSAKSI PERDAGANGAN LADA', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false, 'underline' => 'single'), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+      $section->addText("Nomor : \t/SKT-MWP/BABEL/" . $this->getRomawi(), array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => false), array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 0));
+
+      // $section = $phpWord->addSection(['breakType' => 'continuous', 'colsNum' => 2]);
+      $textrun = $section->addTextRun();
+      $year = explode("-", $pengiriman['created_at'])[0];
+      $section->addText("Berdasarkan Peraturan Gubernur nomor 19 tahun 2020 tentang Tata Kelolah Perdagangan Lada Putih Muntok White Papper, KPB Lada menyatakan keterangan transaksi perdagangan lada :", 'paragraph', 'pS2');
+      $fancyTableStyle = array('lineStyle' => 'no border', 'borderColor' => 'no border', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      $spanTableStyleName = 'Colspan Rowspan';
+      $phpWord->addTableStyle($spanTableStyleName, $fancyTableStyle);
+      $table = $section->addTable($spanTableStyleName);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nama Perusahaan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($perusahaan['nama_perusahaan'], 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Alamat Perusahaan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($perusahaan['lok_perusahaan_full'] . ' ,' . $perusahaan['lok_perusahaan_kec'] . ' - ' . $perusahaan['lok_perusahaan_kabkot'], 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nomor Pelaku Usaha Lada Terdaftar', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($npult, 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nomor Induk Berusaha (NIB)', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($no_nib, 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nama Komoditi', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pengiriman['nama_komoditi'], 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Kualitas', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pi['nama_jenis_mutu'], 'paragraph', $noSpace);
+
+
+
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Jumlah Berat', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($pengiriman['jumlah_berat'] . ' Metric Ton', 'paragraph', $noSpace);
+
+
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Jumlah Partai', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($pengiriman['jumlah_partai'], 'paragraph', $noSpace);
+
+      $negara_tujuan = '';
+      $berat = '';
+      $berat_gross = '';
+      $berat_total = 0;
+      $berat_total_gross = 0;
+      $berat_karung = '';
+      $berat_gross_karung = '';
+      $berat_total_karung = 0;
+      $berat_total_gross_karung = 0;
+      $jenis_pengemasan = '';
+      $jumlah_karung = '';
+      $shipping_mark = '';
+      $ket_penggunaan = '';
+      $nama_jenis_pengemasan = '';
+      $nama_jenis_mutu = '';
+      $nama_importir = '';
+      $keterangan_marking = '';
+      $nomor_kontrak = '';
+      $i = 1;
+      $j = 0;
+      $ar_nama_importir = [];
+      // foreach ($pengirimanItem as $pi) {
+
+      $negara_tujuan = " {$pi['city']} - {$pi['nama_negara']}";
+      $berat = "{$pi['netto']} KG  ";
+      $berat_gross = "{$pi['gross']} KG  ";
+      $berat_karung = "{$pi['netto_karung']} KG  ";
+      $berat_gross_karung = "{$pi['gross_karung']} ";
+      $nama_jenis_mutu = "{$pi['nama_jenis_mutu']} ";
+      $berat_total += $pi['netto'];
+      $berat_total_gross += $pi['gross'];
+      $jenis_pengemasan .= "{$pi['nama_jenis_pengemasan']}";
+      $jumlah_karung .= "{$pi['jumlah_pengemasan']} {$pi['nama_jenis_pengemasan']} ";
+      // $ar_nama_importir[$j] = $pi['nama_importir'];
+      $nama_importir = "" . htmlspecialchars($pi['nama_importir']);
+      if (!empty($pi['keterangan_marking'])) {
+        $keterangan_marking .= "{$pi['keterangan_marking']}";
+      } else {
+        $keterangan_marking .= "- ";
+      }
+
+      $nomor_kontrak .= "{$pi['nomor_kontrak']} ";
+      $i++;
+      // $js++;
+      // }
+      // $negara_tujuan = substr($negara_tujuan, 0, -9);
+      // $keterangan_marking = substr($keterangan_marking, 0, -9);
+      // $nomor_kontrak = substr($nomor_kontrak, 0, -2);
+      // $berat = substr($berat, 0, -3);
+      // $berat_gross = substr($berat_gross, 0, -3);
+      // $berat_karung = substr($berat_karung, 0, -3);
+      // $berat_gross_karung = substr($berat_gross_karung, 0, -3);
+      // $nama_jenis_mutu = substr($nama_jenis_mutu, 0, -2);
+      // $shipping_mark = substr($shipping_mark, 0, -9);
+      // $nama_importir = substr($nama_importir, 0, -9);
+      // $jenis_pengemasan = substr($jenis_pengemasan, 0, -2);
+      // $jumlah_karung = substr($jumlah_karung, 0, -2);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($keterangan_marking, 'paragraph', $noSpace);
+
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Nomor Kontrak', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($nomor_kontrak, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Rencana Mutu', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($nama_jenis_mutu, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Netto Karung', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($berat_karung, 'paragraph', $noSpace);
+      // $table->addRow();
+      // $table->addCell(4000, $cellVCentered)->addText('Gross Karung', 'paragraph', $noSpace);
+      // $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      // $table->addCell(5000, $cellVCentered)->addText($berat_gross_karung, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Jenis Pengemasan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($jenis_pengemasan, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Jumlah Karung', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($jumlah_karung, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Netto', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($berat, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Gross', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($berat_gross, 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Keterangan Penggunaan Produk', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pi['keterangan_penggunaan_produk'], 'paragraph', $noSpace);
+      
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('No Sertifikat IG MWP', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText("", 'paragraph', $noSpace);
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('No Sertifikat Uji Mutu (Sertificate of Confirmity)', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText("", 'paragraph', $noSpace);
+      $textrun = $section->addTextRun();
+      $textrun->addTextBreak();
+      $textrun->addText("Surat keterangan ini diberikan untuk menjelaskan perdagangan Lada Putih telah dilakukan sesuai peraturan dalam upaya menciptakan perdagangan lada yang baik.", 'paragraph');
+      $textrun->addTextBreak();
+
+      $textrun = $section->addTextRun();
+      $textrun->addText("Pangkalpinang, ".$this->tgl_indo(), 'paragraph');
+      
+      $textrun->addTextBreak();
+      $textrun->addText("KANTOR PEMASARAN BERSAMA,", array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'spaceAfter' => 0, 'bold' => true));
+      
+      $textrun->addTextBreak();
+      $textrun->addText('Direktur', 'paragraph');
+      $textrun->addTextBreak(5);
+      $textrun->addText('Prof. Saparudin Ph.D', 'paragraph');
+      $textrun->addTextBreak();
+
+    }
+
+    $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+    // FileIO::headerDownloadDocx('Form Pengajuan Mutu - ' . $pengiriman['nama_pengiriman']);
+    FileIO::headerDownloadDocx($filename);
+
+    $objWriter->save("php://output");
+    // } catch (Exception $e) {
+    //   ExceptionHandler::handle($e);
+    // }
+  }
+
   public function format_permohonan_to_bp3l()
   {
     // try{

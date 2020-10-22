@@ -383,9 +383,9 @@
       }
       // var kpb_pdf_pengiriman = downloadButtonV2("<?= site_url('FormatDokumenController/pdf_pengiriman/') ?>", "?id_pengiriman=" + dataInfo['id_pengiriman'], "Ringkasan Pengiriman");
 
-      var kpb_rek_permohonan = '-';
+      // var kpb_rek_permohonan = '-';
       var kpb_rek_balasan = '-';
-      // var kpb_rek_permohonan = downloadButtonV2("<?= site_url('FormatDokumenController/format_permohonan_to_bp3l/') ?>", "?id_pengiriman=" + dataInfo['id_pengiriman'], "Permohonan");
+      var kpb_rek_permohonan = downloadButtonV2("<?= site_url('FormatDokumenController/format_sk_transaksi/') ?>", "?id_pengiriman=" + dataInfo['id_pengiriman'], "Draft SKT");
       // var kpb_rek_balasan = downloadButtonV2("<?= base_url('uploads/dokumen_kpb_rek/') ?>", dataInfo['dokumen_kpb_rek'], "Rekomendasi");
       var kpb_rek_catatan = dataInfo['catatan_kpb_rek'] ? dataInfo['catatan_kpb_rek'] : 'Tidak Ada';
       if (dataInfo['id_tahap_proposal'] == '1' || dataInfo['id_tahap_proposal'] == '6') {
