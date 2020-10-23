@@ -6,10 +6,12 @@ class PengirimanItemModel extends CI_Model
 
   public function getAll($filter = [])
   {
-    $this->db->select('jm.*, n.nama_negara, poo.nama_port_of_origin, jp.nama_jenis_pengemasan, pi.*');
+    $this->db->select('jm.*, n.nama_negara, poo.nama_port_of_origin, jp.nama_jenis_pengemasan, pi.* , jm2.nama_jenis_mutu as nama_hasil_mutu');
     $this->db->select('CEILING(pi.netto / jp.kapasitas) as jumlah_pengemasan', FALSE);
     $this->db->from("pengiriman_item as pi");
     $this->db->join("jenis_mutu as jm", 'jm.id_jenis_mutu = pi.id_jenis_mutu', 'LEFT');
+    $this->db->join("jenis_mutu as jm2", 'jm2.id_jenis_mutu = pi.hasil_mutu', 'LEFT');
+  
     $this->db->join("negara as n", 'n.id_negara = pi.id_negara', 'LEFT');
     $this->db->join("port_of_origin as poo", 'poo.id_port_of_origin = pi.id_port_of_origin', 'LEFT');
     $this->db->join("jenis_pengemasan as jp", 'jp.id_jenis_pengemasan = pi.id_jenis_pengemasan', 'LEFT');

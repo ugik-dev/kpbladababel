@@ -1114,7 +1114,7 @@ class FormatDokumenController extends CI_Controller
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('Kualitas', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($pi['nama_jenis_mutu'], 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pi['nama_hasil_mutu'], 'paragraph', $noSpace);
 
 
 
