@@ -592,6 +592,14 @@ class PengirimanController extends CI_Controller
       $data['dokumen_bp3l_rek'] = FileIO::genericUpload('dokumen_bp3l_rek', 'pdf', $dataOld, $data);
       if (!empty($dataOld['bp3l_sertifikat_ig_edit'])) throw new UserException($dataOld['bp3l_sertifikat_ig_edit'], 0);
       $data['dokumen_bp3l_sertifikat_ig'] = FileIO::genericUpload('dokumen_bp3l_sertifikat_ig', 'pdf', $dataOld, $data);
+      
+      for($i=1;$i<=$data['jumlah_item'];$i++){
+        $tmp['id_pengiriman_item'] = $data['id_pengiriman_'.$i];
+        $tmp['no_sertifikat_ig'] = $data['no_sertifikat_ig_'.$i];
+    // var_dump($tmp);
+        $this->PengirimanItemModel->edit_hasil_ig($tmp);
+      }
+
       $data['id_pengiriman'] = $this->PengirimanModel->bp3l_rek($data);
       $data = $this->PengirimanModel->get($data['id_pengiriman']);
       $this->email_send($data);
@@ -607,7 +615,7 @@ class PengirimanController extends CI_Controller
       $this->SecurityModel->userOnlyGuard(TRUE);
       $data = $this->input->post();
       $dataOld = $this->PengirimanModel->get($data['id_pengiriman']);
-      if (!empty($dataOld['kpb_rek_edit'])) throw new UserException($dataOld['kpb_rek_edit'], 0);
+      // if (!empty($dataOld['kpb_rek_edit'])) throw new UserException($dataOld['kpb_rek_edit'], 0);
       $data['dokumen_kpb_rek'] = FileIO::genericUpload('dokumen_kpb_rek', 'pdf', $dataOld, $data);
       // if(!empty($dataOld['kpb_sertifikat_ig_edit'])) throw new UserException($dataOld['kpb_sertifikat_ig_edit'], 0);
       // $data['dokumen_kpb_sertifikat_ig'] = FileIO::genericUpload('dokumen_kpb_sertifikat_ig', 'pdf', $dataOld, $data);
@@ -635,6 +643,8 @@ class PengirimanController extends CI_Controller
       for($i=1;$i<=$data['jumlah_item'];$i++){
         $tmp['id_pengiriman_item'] = $data['id_pengiriman_'.$i];
         $tmp['hasil_mutu'] = $data['hasil_item_'.$i];
+        $tmp['no_hasil_mutu'] = $data['no_hasil_mutu_'.$i];
+    
         $this->PengirimanItemModel->edit_hasil($tmp);
       }
       $data = $this->PengirimanModel->get($data['id_pengiriman']);

@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class PengirimanModel extends CI_Model
 {
-  //  IF(@nama_role != 'kpb', 'Bukan KPB', IF(eks.kpb_rek != 'DIPROSES', 'Syarat Rek BP3L Belum Terpenuhi', NULL)) as bp3l_rek_edit,     
 
   public function getAll($filter = [])
   {
@@ -30,8 +29,6 @@ class PengirimanModel extends CI_Model
         IF(eks.status_bpsmb_mutu = 'DIPROSES2',  NULL, 'Syarat Rek Mutu BPSMB Belum Terpenuhi')
       )
     ) as bpsmb_mutu_edit,
-
-      
       IF(@nama_role != 'disperindag', 'Bukan Disperindag', IF(eks.status_disperindag_izin != 'DIPROSES', 'Syarat Izin Disperindag Belum Terpenuhi', NULL)) as disperindag_izin_edit
     ", FALSE);
     $this->db->from("pengiriman as eks");
@@ -123,7 +120,7 @@ class PengirimanModel extends CI_Model
       $this->db->set('status_proposal', 'DITERIMA');
       $this->db->set('date_kpb_acc', $date);
       $this->db->set('id_tahap_proposal', 99);
-      $this->db->update('pengiriman', DataStructure::slice($data, ['status_kpb_rek', 'status_bp3l_rek', 'catatan_kpb_rek'], TRUE));
+      $this->db->update('pengiriman', DataStructure::slice($data, ['status_kpb_rek', 'status_bp3l_rek', 'catatan_kpb_rek','dokumen_kpb_rek'], TRUE));
     } else if ($data['status_kpb_rek'] == 'DITOLAK') {
       $this->db->set('status_proposal', 'DITOLAK');
       $this->db->set('date_kpb', $date);

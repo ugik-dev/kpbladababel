@@ -1240,11 +1240,11 @@ class FormatDokumenController extends CI_Controller
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('No Sertifikat IG MWP', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText("", 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pi['no_sertifikat_ig'], 'paragraph', $noSpace);
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('No Sertifikat Uji Mutu (Sertificate of Confirmity)', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText("", 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText( $pi['no_hasil_mutu'] , 'paragraph', $noSpace);
       $textrun = $section->addTextRun();
       $textrun->addTextBreak();
       $textrun->addText("Surat keterangan ini diberikan untuk menjelaskan perdagangan Lada Putih telah dilakukan sesuai peraturan dalam upaya menciptakan perdagangan lada yang baik.", 'paragraph');

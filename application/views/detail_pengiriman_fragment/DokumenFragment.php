@@ -40,10 +40,10 @@
               <option value="DITOLAK">Ditolak</option>
             </select>
           </div>
-          <!-- <div class="form-group" id="dokumen_kpb_rek_form">
-            <label for="dokumen_kpb_rek">Dokumen Rekomendasi</label>
+          <div class="form-group" id="dokumen_kpb_rek_form">
+            <label for="dokumen_kpb_rek">Surat Keterangan Transaksi</label>
             <p class="no-margins"><span id="dokumen_kpb_rek">-</span></p>
-          </div> -->
+          </div>
           <!-- <div class="form-group" id="dokumen_kpb_sertifikat_ig_form">
             <label for="dokumen_kpb_sertifikat_ig">Dokumen Sertifikat IG</label>
             <p class="no-margins"><span id="dokumen_kpb_sertifikat_ig">-</span></p>
@@ -73,6 +73,7 @@
       <div class="modal-body" id="modal-body">
         <form opd="form" id="bp3l_rek_form" onsubmit="return false;" type="multipart" autocomplete="off">
           <input type="hidden" id="id_pengiriman" name="id_pengiriman">
+          <input type="hidden" id="jumlah_item" name="jumlah_item">
           <div class="form-group">
             <label for="status_bp3l_rek">Status Approval</label>
             <!-- <select class="form-control mr-sm-2" name="status_bp3l_rek" id="status_bp3l_rek" required="required"> -->
@@ -84,6 +85,15 @@
               <option value="DITOLAK">Ditolak</option>
             </select>
           </div>
+          <table id="FDataItemBP3L" class="table table-bordered table-hover" style="padding:0px">
+            <thead>
+              <tr>
+                <th style="width: 70%; text-align:center!important">Item</th>
+                <th style="width: 30%; text-align:center!important">No Sertifikat IG</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
           <div class="form-group" id="dokumen_bp3l_rek_form">
             <label for="dokumen_bp3l_rek">Dokumen Rekomendasi</label>
             <p class="no-margins"><span id="dokumen_bp3l_rek">-</span></p>
@@ -119,7 +129,7 @@
           <input type="hidden" id="id_pengiriman" name="id_pengiriman">
           <input type="hidden" id="jenis_usaha" name="jenis_usaha">
           <input type="hidden" id="jumlah_item" name="jumlah_item">
-          
+
           <div class="form-group">
             <label for="status_bpsmb_mutu">Status Approval</label>
             <select class="form-control mr-sm-2" name="status_bpsmb_mutu" id="status_bpsmb_mutu" required="required">
@@ -254,20 +264,27 @@
     });
 
     var FDataItem = $('#FDataItem').DataTable({
-            'dom': 't',
-            deferRender: true,
-            'ordering': false,      
+      'dom': 't',
+      deferRender: true,
+      'ordering': false,
     });
 
- 
+    var FDataItemBP3L = $('#FDataItemBP3L').DataTable({
+      'dom': 't',
+      deferRender: true,
+      'ordering': false,
+    });
+
+    
+
     var kpb_rek_modal = {
       self: $('#kpb_rek_modal'),
       form: $('#kpb_rek_form'),
       'id_pengiriman': $('#kpb_rek_form').find('#id_pengiriman'),
       'status_kpb_rek': $('#kpb_rek_form').find('#status_kpb_rek'),
-      // 'dokumen_kpb_rek': new FileUploader($('#kpb_rek_form').find('#dokumen_kpb_rek'), "", "dokumen_kpb_rek", ".pdf", false, true),
+      'dokumen_kpb_rek': new FileUploader($('#kpb_rek_form').find('#dokumen_kpb_rek'), "", "dokumen_kpb_rek", ".pdf", false, true),
 
-      // 'dokumen_kpb_rek_form': $('#kpb_rek_form').find('#dokumen_kpb_rek_form'),
+      'dokumen_kpb_rek_form': $('#kpb_rek_form').find('#dokumen_kpb_rek_form'),
       'catatan_kpb_rek': $('#kpb_rek_form').find('#catatan_kpb_rek'),
       'catatan_kpb_rek_form': $('#kpb_rek_form').find('#catatan_kpb_rek_form'),
       save_btn: $('#kpb_rek_form').find('#save_edit_btn'),
@@ -281,7 +298,7 @@
       'dokumen_bp3l_rek': new FileUploader($('#bp3l_rek_form').find('#dokumen_bp3l_rek'), "", "dokumen_bp3l_rek", ".pdf", false, true),
       'dokumen_bp3l_sertifikat_ig': new FileUploader($('#bp3l_rek_form').find('#dokumen_bp3l_sertifikat_ig'), "", "dokumen_bp3l_sertifikat_ig", ".pdf", false, true),
       'dokumen_bp3l_sertifikat_ig_form': $('#bp3l_rek_form').find('#dokumen_bp3l_sertifikat_ig_form'),
-
+      'jumlah_item': $('#bp3l_rek_form').find('#jumlah_item'),
       'dokumen_bp3l_rek_form': $('#bp3l_rek_form').find('#dokumen_bp3l_rek_form'),
       'catatan_bp3l_rek': $('#bp3l_rek_form').find('#catatan_bp3l_rek'),
       'catatan_bp3l_rek_form': $('#bp3l_rek_form').find('#catatan_bp3l_rek_form'),
@@ -384,9 +401,9 @@
       // var kpb_pdf_pengiriman = downloadButtonV2("<?= site_url('FormatDokumenController/pdf_pengiriman/') ?>", "?id_pengiriman=" + dataInfo['id_pengiriman'], "Ringkasan Pengiriman");
 
       // var kpb_rek_permohonan = '-';
-      var kpb_rek_balasan = '-';
+      var kpb_rek_balasan = '';
       var kpb_rek_permohonan = downloadButtonV2("<?= site_url('FormatDokumenController/format_sk_transaksi/') ?>", "?id_pengiriman=" + dataInfo['id_pengiriman'], "Draft SKT");
-      // var kpb_rek_balasan = downloadButtonV2("<?= base_url('uploads/dokumen_kpb_rek/') ?>", dataInfo['dokumen_kpb_rek'], "Rekomendasi");
+      var skt = dataInfo['dokumen_kpb_rek'] ? downloadButtonV2("<?= base_url('uploads/dokumen_kpb_rek/') ?>", dataInfo['dokumen_kpb_rek'], "SK Transaksi") : 'Belum Ada SKT';
       var kpb_rek_catatan = dataInfo['catatan_kpb_rek'] ? dataInfo['catatan_kpb_rek'] : 'Tidak Ada';
       if (dataInfo['id_tahap_proposal'] == '1' || dataInfo['id_tahap_proposal'] == '6') {
         var kpb_rek_btn = dataInfo['kpb_rek_edit'] ? '-' : `<button class="btn btn-success btn-sm kpb_rek"><i class='fa fa-angle-double-right'></i></button>`;
@@ -394,7 +411,7 @@
         var kpb_rek_btn = '-';
       }
 
-      if (role == 'kpb') renderData.push(['KPB', kpb_rek_status, kpb_rek_permohonan, kpb_rek_balasan, kpb_rek_catatan, kpb_rek_btn]);
+      if (role == 'kpb') renderData.push(['KPB', kpb_rek_status, kpb_rek_permohonan, kpb_rek_balasan + skt, kpb_rek_catatan, kpb_rek_btn]);
 
       var bp3l_rek_status = statusPermohonan2(dataInfo['status_bp3l_rek']) + (dataInfo['status_bp3l_rek'] == 'MENUNGGU' ? ': Rekomendasi KPB' : '');
       if (!empty(dataInfo['date_bp3l'])) date = dataInfo['date_bp3l'].split(':');
@@ -425,19 +442,16 @@
         } else {
           renderData.push(['BP3L', bp3l_rek_status, bp3l_rek_permohonan, bp3l_rek_balasan, bp3l_rek_catatan, bp3l_rek_btn]);
         }
-        // renderData.push(['BP3L', bp3l_rek_status, bp3l_rek_permohonan,bp3l_sertifikat_ig_balasan, bp3l_rek_catatan, bp3l_rek_btn]);    
       <?php } else { ?>
         renderData.push(['BP3L', bp3l_rek_status, bp3l_rek_permohonan, bp3l_rek_balasan + '<br><br>' + bp3l_sertifikat_ig_balasan, bp3l_rek_catatan, bp3l_rek_btn]);
       <?php }; ?>
       var bpsdm_sertifikat_ig_balasan = dataInfo['dokumen_bp3l_sertifikat_ig'] ? downloadButtonV2("<?= base_url('uploads/dokumen_bp3l_sertifikat_ig/') ?>", dataInfo['dokumen_bp3l_sertifikat_ig'], "Sertifikat IG") : 'Tidak Ada';
 
       var bpsmb_mutu_status = statusPermohonan(dataInfo['status_bpsmb_mutu']) + (dataInfo['status_bpsmb_mutu'] == 'MENUNGGU' ? ': Rekomendasi BP3L' : '');
-      // if(dataInfo['id_tahap_proposal'] == '4' )bpsmb_mutu_status = statusPermohonandataInfo['date_bpsmb_mutu'].split(':');
-
+  
       if (!empty(dataInfo['date_bpsmb_mutu'])) date = dataInfo['date_bpsmb_mutu'].split(':');
       var bpsmb_mutu_status = dataInfo['date_bpsmb_mutu'] ? bpsmb_mutu_status += '<br>' + date[0] + ':' + date[1] : bpsmb_mutu_status;
-      // var bpsmb_pdf_pengiriman = downloadButtonV2("<?= site_url('FormatDokumenController/pdf_pengiriman/') ?>", "?id_pengiriman=" + dataInfo['id_pengiriman'], "Ringkasan Pengiriman");
-
+  
       var bpsmb_mutu_permohonan = '-';
       var bpsmb_mutu_balasan = downloadButtonV2("<?= base_url('uploads/dokumen_hasil_mutu/') ?>", dataInfo['dokumen_hasil_mutu'], 'Hasil Uji Mutu');
       var bpsmb_mutu_catatan = dataInfo['catatan_bpsmb_mutu'] ? dataInfo['catatan_bpsmb_mutu'] : '';
@@ -445,21 +459,7 @@
         bpsmb_mutu_catatan = "Tanggal pengambilan sampel : " + data['tgl_sampel'] + " <br>" + bpsmb_mutu_catatan;
       }
       var bpsmb_mutu_btn = dataInfo['bpsmb_mutu_edit'] ? '-' : `<button class="btn btn-success btn-sm bpsmb_mutu"><i class='fa fa-angle-double-right'></i></button>`;
-
       renderData.push(['BPSMB', bpsmb_mutu_status, bpsmb_mutu_permohonan, bpsmb_mutu_balasan, bpsmb_mutu_catatan, bpsmb_mutu_btn]);
-
-      // var disperindag_izin_status = statusPermohonan(dataInfo['status_disperindag_izin']) + (dataInfo['status_disperindag_izin'] == 'MENUNGGU' ? ': <br>Mutu BPSMB': '');
-      // if(!empty(dataInfo['date_disperindag']))date = dataInfo['date_disperindag'].split(':');
-      // var disperindag_izin_status = dataInfo['date_disperindag'] ? disperindag_izin_status += '<br>'+date[0]+':'+date[1] : disperindag_izin_status;   
-
-      // disperindag_izin_permohonan = '-'
-      // // var disperindag_izin_permohonan = downloadButtonV2("<?= site_url('PengirimanController/permohonan_disperindag_izin/') ?>", "?id_pengiriman=" + dataInfo['id_pengiriman'], "Permohonan") ;
-      // var disperindag_izin_balasan = downloadButtonV2("<?= base_url('uploads/dokumen_disperindag_izin/') ?>", dataInfo['dokumen_disperindag_izin'], 'Izin Pengiriman');
-      // var disperindag_izin_catatan = dataInfo['catatan_disperindag_izin'] ? dataInfo['catatan_disperindag_izin'] : 'Tidak Ada';
-      // var disperindag_izin_btn = dataInfo['disperindag_izin_edit'] ? '-' : `<button class="btn btn-success btn-sm disperindag_izin"><i class='fa fa-angle-double-right'></i></button>`;
-      // if(dataInfo['id_jenis_perusahaan'] == '1'){
-      //   renderData.push(['Disperindag', disperindag_izin_status, disperindag_izin_permohonan, disperindag_izin_balasan , disperindag_izin_catatan, disperindag_izin_btn]);
-      // }
       dokumen_table.clear().rows.add(renderData).draw('full-hold');
     }
 
@@ -492,35 +492,59 @@
 
     function renderFDataItem(data) {
 
-    dataItemTB = [];
-    var x = 1;
-    Object.values(data).forEach((d) => {
+      dataItemTB = [];
+      var x = 1;
+      Object.values(data).forEach((d) => {
 
-    var item = `  <b>Nomor Kontrak:</b> ${d['nomor_kontrak']}<br>
+        var item = `  <b>Nomor Kontrak:</b> ${d['nomor_kontrak']}<br>
                   <b>Netto:</b> ${d['netto']} Kg |   <b>Permohonan Mutu:</b> ${d['nama_jenis_mutu']}<br>
                   <b> ${d['nama_importir']} </b> | 
                   <b>Tujuan:</b> ${d['city']}, ${d['province']}, ${d['nama_negara']}<br>
       `;
 
-    var selector_item = `
+        var selector_item = `
             <select class="form-control" name="hasil_item_${x}" id="hasil_item_${x}" required="required">
             <option value>Pilih Hasil Uji Lab</option>
           
        `;
-    Object.values(dataJenisMutu).forEach((dM) => {
-      selector_item = selector_item + ` <option value="${dM['id_jenis_mutu']}">${dM['nama_jenis_mutu']}</option>      
+        Object.values(dataJenisMutu).forEach((dM) => {
+          selector_item = selector_item + ` <option value="${dM['id_jenis_mutu']}">${dM['nama_jenis_mutu']}</option>      
           `;
         });
-    
-      selector_item = selector_item + ` </select> `;
-    
-      var id_item = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">`;
-     dataItemTB.push([item, selector_item + id_item ]);
-     x++;
-    });
+
+        selector_item = selector_item + ` </select> `;
+
+        var id_item = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">
+      <input type="text" class="form-control" value="" name="no_hasil_mutu_${x}" placeholder="No Sertifikat Hasil Mutu">`;
+        dataItemTB.push([item, id_item + selector_item]);
+        x++;
+      });
       FDataItem.rows.add(dataItemTB).draw('full-hold');
-    return x-1;      
+      return x - 1;
     }
+
+    function renderFDataItemBP3L(data) {
+
+      dataItemTBBP3L = [];
+      var x = 1;
+      Object.values(data).forEach((d) => {
+
+        var item = `  <b>Nomor Kontrak:</b> ${d['nomor_kontrak']}<br>
+              <b>Netto:</b> ${d['netto']} Kg |   <b>Permohonan Mutu:</b> ${d['nama_jenis_mutu']}<br>
+              <b> ${d['nama_importir']} </b> | 
+              <b>Tujuan:</b> ${d['city']}, ${d['province']}, ${d['nama_negara']}<br>
+  `;
+
+       
+        var id_item = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">
+  <input type="text" class="form-control" value="" name="no_sertifikat_ig_${x}" placeholder="No Sertifikat IG">`;
+  dataItemTBBP3L.push([item, id_item ]);
+        x++;
+      });
+      FDataItemBP3L.rows.add(dataItemTBBP3L).draw('full-hold');
+      return x - 1;
+    }
+
 
 
     dokumen_table.on('click', '.bp3l_rek', function() {
@@ -531,7 +555,12 @@
       bp3l_rek_modal.id_pengiriman.val(id_pengiriman);
       bp3l_rek_modal.dokumen_bp3l_rek.resetState();
       bp3l_rek_modal.status_bp3l_rek.trigger('change');
-
+      bp3l_rek_modal.jumlah_item.val(renderFDataItemBP3L(dataItem));
+      if (dataInfo['status_bp3l_rek'] != 'DIPROSES2') {
+  
+      $('#FDataItemBP3L').prop('hidden', 'hidden');
+        bpsmb_mutu_modal.status_bpsmb_mutu.trigger('change');
+    }
     });
 
     dokumen_table.on('click', '.bpsmb_mutu', function() {
@@ -549,12 +578,10 @@
         bpsmb_mutu_modal.tgl_sampel.prop('readonly', 'true');
         bpsmb_mutu_modal.status_bpsmb_mutu.attr('readonly', 'true');
         bpsmb_mutu_modal.status_bpsmb_mutu.val('DIPROSES2');
-        // bpsmb_mutu_modal.tgl_sampel.setRequired(status == 'DITERIMA');
-        // bpsmb_mutu_modal.dokumen_hasil_mutu.resetState();
         bpsmb_mutu_modal.catatan_bpsmb_mutu_form.toggle(true);
         bpsmb_mutu_modal.catatan_bpsmb_mutu.val(dataInfo['catatan_bpsmb_mutu']);
         bpsmb_mutu_modal.jumlah_item.val(renderFDataItem(dataItem));
-    
+
       } else {
         $('#FDataItem').prop('hidden', 'hidden');
         bpsmb_mutu_modal.status_bpsmb_mutu.trigger('change');
@@ -576,17 +603,14 @@
         kpb_rek_modal.status_kpb_rek.val('DITERIMA')
         kpb_rek_modal.status_kpb_rek.attr('readonly', 'true');
         kpb_rek_modal.catatan_kpb_rek.val(dataInfo['catatan_kpb_rek']);
-        // kpb_rek_modal.dokumen_kpb_rek_form.toggle(false);
-        // kpb_rek_modal.dokumen_kpb_rek.setRequired(false);
+        kpb_rek_modal.dokumen_kpb_rek_form.toggle(true);
+        kpb_rek_modal.dokumen_kpb_rek.setRequired(true);
       } else {
+        kpb_rek_modal.dokumen_kpb_rek_form.toggle(false);
+        kpb_rek_modal.dokumen_kpb_rek.setRequired(false);
         var status = kpb_rek_modal.status_kpb_rek.val();
-        // kpb_rek_modal.dokumen_kpb_rek_form.toggle(status == 'DIPROSES2');
-        // kpb_rek_modal.dokumen_kpb_rek.setRequired(status == 'DIPROSES2');
-        // // kpb_rek_modal.dokumen_kpb_rek.resetState();
         kpb_rek_modal.catatan_kpb_rek_form.toggle(true);
         kpb_rek_modal.catatan_kpb_rek.attr('required', status == 'DITOLAK');
-        // kpb_rek_modal.dokumen_kpb_rek_form.toggle(true);
-        // kpb_rek_modal.dokumen_kpb_rek.setRequired(true);
       }
     });
 
@@ -622,8 +646,6 @@
       bpsmb_mutu_modal.dokumen_hasil_mutu_form.toggle(false);
       bpsmb_mutu_modal.dokumen_hasil_mutu.setRequired(false);
       bpsmb_mutu_modal.tgl_sampel_form.toggle(status == 'DIPROSES2');
-      // bpsmb_mutu_modal.tgl_sampel.setRequired(status == 'DITERIMA');
-      // bpsmb_mutu_modal.dokumen_hasil_mutu.resetState();
       bpsmb_mutu_modal.catatan_bpsmb_mutu_form.toggle(true);
       bpsmb_mutu_modal.catatan_bpsmb_mutu.attr('required', status == 'DITOLAK');
       bpsmb_mutu_modal.catatan_bpsmb_mutu.val(null);
