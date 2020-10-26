@@ -593,12 +593,12 @@ class PengirimanController extends CI_Controller
       if (!empty($dataOld['bp3l_sertifikat_ig_edit'])) throw new UserException($dataOld['bp3l_sertifikat_ig_edit'], 0);
       $data['dokumen_bp3l_sertifikat_ig'] = FileIO::genericUpload('dokumen_bp3l_sertifikat_ig', 'pdf', $dataOld, $data);
       
-      for($i=1;$i<=$data['jumlah_item'];$i++){
-        $tmp['id_pengiriman_item'] = $data['id_pengiriman_'.$i];
-        $tmp['no_sertifikat_ig'] = $data['no_sertifikat_ig_'.$i];
-    // var_dump($tmp);
-        $this->PengirimanItemModel->edit_hasil_ig($tmp);
-      }
+    //   for($i=1;$i<=$data['jumlah_item'];$i++){
+    //     $tmp['id_pengiriman_item'] = $data['id_pengiriman_'.$i];
+    //     $tmp['no_sertifikat_ig'] = $data['no_sertifikat_ig_'.$i];
+    // // var_dump($tmp);
+    //     $this->PengirimanItemModel->edit_hasil_ig($tmp);
+    //   }
 
       $data['id_pengiriman'] = $this->PengirimanModel->bp3l_rek($data);
       $data = $this->PengirimanModel->get($data['id_pengiriman']);
