@@ -29,6 +29,29 @@ class FileIO
     }
   }
 
+  public static function upload2($field, $folder, $type, $allowedType = NULL)
+  {
+    // throw new UserException($folder, UPLOAD_FAILED_CODE);
+    $CI = &get_instance();
+    $CI->load->library('upload');
+    $CI->upload->initialize(array(
+      'upload_path' => realpath(APPPATH . '../uploads/' . $folder),
+      'allowed_types' => $allowedType != NULL ? $allowedType : 'jpg|jpeg|png|gif|doc|docx|pdf',
+      'max_size' => '2500',
+      'encrypt_name' => TRUE,
+    ));
+    if (!$CI->upload->do_upload($field)) {
+      throw new UserException($CI->upload->display_errors(), UPLOAD_FAILED_CODE);
+    } else {
+      return [
+        'type' => $type,
+        'filename' => $CI->upload->data()['file_name'],
+        'url' => "uploads/{$folder}/{$CI->upload->data()['file_name']}",
+        'size' => round($CI->upload->data()['file_size'])
+      ];
+    }
+  }
+
   public static function delete($url)
   {
     $path = realpath(APPPATH . '../' . $url);
@@ -85,6 +108,17 @@ class FileIO
   {
     $filename = NULL;
     $filename = !empty($_FILES[$field]['name']) ? FileIO::upload($field, $field, NULL, $allowedType)['filename'] : (!empty($oldData[$field]) ? $oldData[$field] : NULL);
+    $filename = !empty($data["delete_{$field}"]) ? FileIO::delete("/uploads/{$field}/" . $data["delete_{$field}"]) : $filename;
+    return $filename;
+  }
+
+  public static function genericReUpload($field , $allowedType, $oldData = NULL, $data)
+  {
+    $field = 're_upload_dokumen';
+    // var_dump($data);
+    // throw new UserException($_FILES[$field]['name'], UPLOAD_FAILED_CODE);
+    $filename = NULL;
+    $filename = !empty($_FILES[$field]['name']) ? FileIO::upload2($field, $data['parm'], NULL, $allowedType)['filename'] : (!empty($oldData[$field]) ? $oldData[$field] : NULL);
     $filename = !empty($data["delete_{$field}"]) ? FileIO::delete("/uploads/{$field}/" . $data["delete_{$field}"]) : $filename;
     return $filename;
   }

@@ -85,6 +85,7 @@
             return;
           }
           dataItem = json['data'];
+          // console.log('panjang item'+dataItem.length)
         },
         error: function(e) {}
       });

@@ -546,6 +546,28 @@ class PengirimanController extends CI_Controller
     }
   }
 
+  public function re_upload()
+  {
+    try {
+      $this->SecurityModel->userOnlyGuard(TRUE);
+      $data = $this->input->post();
+      $dataOld = $this->PengirimanModel->get($data['id_pengiriman']);
+
+      // if (!empty($dataOld['bp3l_rek_edit'])) throw new UserException($dataOld['bp3l_rek_edit'], 0);
+      // $data['dokumen_bp3l_rek'] = FileIO::genericUpload('dokumen_bp3l_rek', 'pdf', "", $data);
+
+      // $data[$data['parm']] = $data['re_upload_dokumen'];
+      $data['filename'] = FileIO::genericReUpload($data['parm'], 'pdf', "", $data);
+      $data['id_pengiriman'] = $this->PengirimanModel->re_upload($data);
+      // $data = $this->PengirimanModel->get($data['id_pengiriman']);
+      echo json_encode(array("data" => $data));
+    } catch (Exception $e) {
+      ExceptionHandler::handle($e);
+    }
+  }
+
+
+
 
   public function dok_permohonan_upload_bpsmb()
   {
@@ -592,13 +614,13 @@ class PengirimanController extends CI_Controller
       $data['dokumen_bp3l_rek'] = FileIO::genericUpload('dokumen_bp3l_rek', 'pdf', $dataOld, $data);
       if (!empty($dataOld['bp3l_sertifikat_ig_edit'])) throw new UserException($dataOld['bp3l_sertifikat_ig_edit'], 0);
       $data['dokumen_bp3l_sertifikat_ig'] = FileIO::genericUpload('dokumen_bp3l_sertifikat_ig', 'pdf', $dataOld, $data);
-      
-    //   for($i=1;$i<=$data['jumlah_item'];$i++){
-    //     $tmp['id_pengiriman_item'] = $data['id_pengiriman_'.$i];
-    //     $tmp['no_sertifikat_ig'] = $data['no_sertifikat_ig_'.$i];
-    // // var_dump($tmp);
-    //     $this->PengirimanItemModel->edit_hasil_ig($tmp);
-    //   }
+
+      //   for($i=1;$i<=$data['jumlah_item'];$i++){
+      //     $tmp['id_pengiriman_item'] = $data['id_pengiriman_'.$i];
+      //     $tmp['no_sertifikat_ig'] = $data['no_sertifikat_ig_'.$i];
+      // // var_dump($tmp);
+      //     $this->PengirimanItemModel->edit_hasil_ig($tmp);
+      //   }
 
       $data['id_pengiriman'] = $this->PengirimanModel->bp3l_rek($data);
       $data = $this->PengirimanModel->get($data['id_pengiriman']);
@@ -637,18 +659,43 @@ class PengirimanController extends CI_Controller
       $dataOld = $this->PengirimanModel->get($data['id_pengiriman']);
       if (!empty($dataOld['bpsmb_mutu_edit'])) throw new UserException($dataOld['bpsmb_mutu_edit'], 0);
       $data['dokumen_hasil_mutu'] = FileIO::genericUpload('dokumen_hasil_mutu', 'pdf', $dataOld, $data);
-     // // if(!empty($dataOld['bp3l_sertifikat_ig_edit'])) throw new UserException($dataOld['bp3l_sertifikat_ig_edit'], 0);
+      // // if(!empty($dataOld['bp3l_sertifikat_ig_edit'])) throw new UserException($dataOld['bp3l_sertifikat_ig_edit'], 0);
       // // $data['dokumen_bp3l_sertifikat_ig'] = FileIO::genericUpload('dokumen_bp3l_sertifikat_ig', 'pdf', $dataOld, $data);
       $data['id_pengiriman'] = $this->PengirimanModel->bpsmb_mutu($data);
-      for($i=1;$i<=$data['jumlah_item'];$i++){
-        $tmp['id_pengiriman_item'] = $data['id_pengiriman_'.$i];
-        $tmp['hasil_mutu'] = $data['hasil_item_'.$i];
-        $tmp['no_hasil_mutu'] = $data['no_hasil_mutu_'.$i];
-    
+      for ($i = 1; $i <= $data['jumlah_item']; $i++) {
+        $tmp['id_pengiriman_item'] = $data['id_pengiriman_' . $i];
+        $tmp['hasil_mutu'] = $data['hasil_item_' . $i];
+        $tmp['no_hasil_mutu'] = $data['no_hasil_mutu_' . $i];
+
         $this->PengirimanItemModel->edit_hasil($tmp);
       }
       $data = $this->PengirimanModel->get($data['id_pengiriman']);
       $this->email_send($data);
+      echo json_encode(array("data" => $data));
+    } catch (Exception $e) {
+      ExceptionHandler::handle($e);
+    }
+  }
+
+  public function manifest_upload()
+  {
+    try {
+      $this->SecurityModel->userOnlyGuard(TRUE);
+      $data = $this->input->post();
+      $dataOld = $this->PengirimanModel->get($data['id_pengiriman']);
+      // if (!empty($dataOld['bpsmb_mutu_edit'])) throw new UserException($dataOld['bpsmb_mutu_edit'], 0);
+      $data['dokumen_manifest'] = FileIO::genericUpload('dokumen_manifest', 'pdf', $dataOld, $data);
+      // // if(!empty($dataOld['bp3l_sertifikat_ig_edit'])) throw new UserException($dataOld['bp3l_sertifikat_ig_edit'], 0);
+      // // $data['dokumen_bp3l_sertifikat_ig'] = FileIO::genericUpload('dokumen_bp3l_sertifikat_ig', 'pdf', $dataOld, $data);
+      $data['id_pengiriman'] = $this->PengirimanModel->upload_manifest($data);
+      for ($i = 1; $i <= $data['jumlah_item']; $i++) {
+        $tmp['id_pengiriman_item'] = $data['id_pengiriman_' . $i];
+        $tmp['no_manifest'] = $data['no_manifest_' . $i];
+
+        $this->PengirimanItemModel->edit_manifest($tmp);
+      }
+      $data = $this->PengirimanModel->get($data['id_pengiriman']);
+      // $this->email_send($data);
       echo json_encode(array("data" => $data));
     } catch (Exception $e) {
       ExceptionHandler::handle($e);

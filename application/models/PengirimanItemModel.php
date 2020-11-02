@@ -41,7 +41,7 @@ class PengirimanItemModel extends CI_Model
   public function edit($data)
   {
     $this->db->where('id_pengiriman_item', $data['id_pengiriman_item']);
-    $this->db->update('pengiriman_item', DataStructure::slice($data, ['netto', 'gross', 'netto_karung', 'gross_karung', 'id_jenis_mutu', 'nama_importir', 'city', 'province', 'id_negara', 'id_port_of_origin', 'port_of_destination', 'id_jenis_pengemasan', 'tanggal_pengiriman', 'shipping_mark', 'keterangan_marking', 'nomor_kontrak', 'keterangan_penggunaan_produk'], TRUE));
+    $this->db->update('pengiriman_item', DataStructure::slice($data, ['netto', 'gross', 'netto_karung', 'gross_karung', 'id_jenis_mutu', 'nama_importir', 'city', 'province', 'id_negara', 'id_port_of_origin', 'port_of_destination', 'id_jenis_pengemasan', 'tanggal_pengiriman', 'shipping_mark', 'keterangan_marking', 'nomor_kontrak', 'keterangan_penggunaan_produk','alamat_buyer', 'nama_buyer'], TRUE));
     ExceptionHandler::handleDBError($this->db->error(), "Edit Pengiriman gagal", "pengiriman");
 
     return $data['id_pengiriman_item'];
@@ -65,6 +65,16 @@ class PengirimanItemModel extends CI_Model
     return $data['id_pengiriman_item'];
   }
 
+  
+
+  public function edit_manifest($data)
+  {
+    $this->db->where('id_pengiriman_item', $data['id_pengiriman_item']);
+    $this->db->update('pengiriman_item', DataStructure::slice($data, ['no_manifest'], TRUE));
+    ExceptionHandler::handleDBError($this->db->error(), "Edit Pengiriman gagal", "pengiriman");
+
+    return $data['id_pengiriman_item'];
+  }
 
   public function delete($data)
   {

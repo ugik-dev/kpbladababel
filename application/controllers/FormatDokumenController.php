@@ -495,17 +495,22 @@ class FormatDokumenController extends CI_Controller
     $jenis_pengemasan = '';
     $jumlah_karung = '';
     $shipping_mark = '';
-    $ket_penggunaan = '';
-    $nama_jenis_pengemasan = '';
+    $pod = '';
+    $poo = '';
     $nama_jenis_mutu = '';
     $nama_importir = '';
+    $nama_buyer = '';
+    $alamat_buyer = '';
     $keterangan_marking = '';
     $nomor_kontrak = '';
     $i = 1;
     $j = 0;
     $ar_nama_importir = [];
     foreach ($pengirimanItem as $pi) {
-
+      $pod .= "{$i}) {$pi['port_of_destination']} , <w:br/>";;
+      $poo .= "{$i}) {$pi['nama_port_of_origin']} , <w:br/>";;
+      $nama_buyer .= "{$i}) {$pi['nama_buyer']} , <w:br/>";;
+      $alamat_buyer .= "{$i}) {$pi['alamat_buyer']} , <w:br/>";;
       $negara_tujuan .= "{$i}) {$pi['city']} - {$pi['nama_negara']}, <w:br/>";
       $berat .= "{$i}) {$pi['netto']} KG + ";
       $berat_gross .= "{$i}) {$pi['gross']} KG + ";
@@ -528,6 +533,10 @@ class FormatDokumenController extends CI_Controller
       $i++;
       $j++;
     }
+    $poo = substr($poo, 0, -9);
+    $pod = substr($pod, 0, -9);
+    $alamat_buyer = substr($alamat_buyer, 0, -9);
+    $nama_buyer = substr($nama_buyer, 0, -9);
     $negara_tujuan = substr($negara_tujuan, 0, -9);
     $keterangan_marking = substr($keterangan_marking, 0, -9);
     $nomor_kontrak = substr($nomor_kontrak, 0, -2);
@@ -545,6 +554,22 @@ class FormatDokumenController extends CI_Controller
     $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
+    $table->addRow();
+    $table->addCell(4000, $cellVCentered)->addText('Pelabuhan Tujuan', 'paragraph', $noSpace);
+    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    $table->addCell(5000, $cellVCentered)->addText($pod, 'paragraph', $noSpace);
+    $table->addRow();
+    $table->addCell(4000, $cellVCentered)->addText('Pelabuhan Muat', 'paragraph', $noSpace);
+    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    $table->addCell(5000, $cellVCentered)->addText($poo, 'paragraph', $noSpace);
+    $table->addRow();
+    $table->addCell(4000, $cellVCentered)->addText('Nama Buyer', 'paragraph', $noSpace);
+    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    $table->addCell(5000, $cellVCentered)->addText($nama_buyer, 'paragraph', $noSpace);
+    $table->addRow();
+    $table->addCell(4000, $cellVCentered)->addText('Alamat Buyer', 'paragraph', $noSpace);
+    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+    $table->addCell(5000, $cellVCentered)->addText($alamat_buyer, 'paragraph', $noSpace);
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
@@ -1116,6 +1141,16 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
       $table->addCell(5000, $cellVCentered)->addText($pi['nama_hasil_mutu'], 'paragraph', $noSpace);
 
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Pelabuhan Muatan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pi['nama_port_of_origin'], 'paragraph', $noSpace);
+
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Pelabuhan Tujuan', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pi['port_of_destination'], 'paragraph', $noSpace);
+
 
 
       // $table->addRow();
@@ -1191,10 +1226,33 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(4000, $cellVCentered)->addText('Negara Tujuan', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
       $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
+
+      if($pi['id_negara'] == 'ID'){
+        
+        //untuk antar pulau
+        $table->addRow();
+        $table->addCell(4000, $cellVCentered)->addText('Nama Buyer', 'paragraph', $noSpace);
+        $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+        $table->addCell(5000, $cellVCentered)->addText($pi['nama_buyer'], 'paragraph', $noSpace);
+
+        $table->addRow();
+        $table->addCell(4000, $cellVCentered)->addText('Alamat Buyer', 'paragraph', $noSpace);
+        $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+        $table->addCell(5000, $cellVCentered)->addText($pi['alamat_buyer'], 'paragraph', $noSpace);
+
+      } else{
+        
+
+      // untuk expor
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
       $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+      
+    }
+      
+      
+
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
@@ -1236,7 +1294,16 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(4000, $cellVCentered)->addText('Keterangan Penggunaan Produk', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
       $table->addCell(5000, $cellVCentered)->addText($pi['keterangan_penggunaan_produk'], 'paragraph', $noSpace);
-      
+       if($pi['id_negara'] == 'ID'){
+        
+        //untuk antar pulau
+        $table->addRow();
+        $table->addCell(4000, $cellVCentered)->addText('No Manifest Domestic', 'paragraph', $noSpace);
+        $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+        $table->addCell(5000, $cellVCentered)->addText($pi['no_manifest'], 'paragraph', $noSpace);
+
+        
+      } 
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('No Sertifikat IG MWP', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);

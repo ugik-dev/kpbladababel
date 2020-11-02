@@ -247,6 +247,26 @@
                 <select required="required" class="form-control mr-sm-2" name="id_negara" id="id_negara"></select>
               </div>
             </div>
+            <!--  -->
+            <div class="col-lg-12" id='ly_id_negara'>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="nama_buyer">Nama Buyer / Penerima</label>
+                    <input required="required" class="form-control mr-sm-2" placeholder="Nama Buyer / Penerima" name="nama_buyer" id="nama_buyer"></input>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="alamat_buyer">Alamat Buyer / Penerima</label>
+                    <!-- <input required="required" class="form-control mr-sm-2" name="alamat_buyer" id="alamat_buyer"></input> -->
+                    <textarea required="required" rows="4" type="text" placeholder="Alamat Buyer / Penerima" class="form-control" id="alamat_buyer" name="alamat_buyer"></textarea>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="id_port_of_origin">Port Of Origin</label>
@@ -438,6 +458,10 @@
       'city': $('#pengiriman_item_form').find('#city'),
       'province': $('#pengiriman_item_form').find('#province'),
       'id_negara': $('#pengiriman_item_form').find('#id_negara'),
+      'nama_buyer': $('#pengiriman_item_form').find('#nama_buyer'),
+      'alamat_buyer': $('#pengiriman_item_form').find('#alamat_buyer'),
+      'ly_id_negara': $('#pengiriman_item_form').find('#ly_id_negara'),
+
       'id_port_of_origin': $('#pengiriman_item_form').find('#id_port_of_origin'),
       'port_of_destination': $('#pengiriman_item_form').find('#port_of_destination'),
       'id_jenis_pengemasan': $('#pengiriman_item_form').find('#id_jenis_pengemasan'),
@@ -455,6 +479,22 @@
       todayBtn: "linked",
       autoclose: true,
       format: "yyyy-mm-dd"
+    });
+
+    pengiriman_item_modal.id_negara.on('change', function() {
+      if (pengiriman_item_modal.id_negara.val() == 'ID') {
+        pengiriman_item_modal.alamat_buyer.prop('disabled', false)
+        pengiriman_item_modal.nama_buyer.prop('disabled', false)
+        pengiriman_item_modal.alamat_buyer.prop('hidden', false)
+        pengiriman_item_modal.nama_buyer.prop('hidden', false)
+        pengiriman_item_modal.ly_id_negara.prop('hidden', false)
+      } else {
+        pengiriman_item_modal.ly_id_negara.prop('hidden', 'hidden')
+        pengiriman_item_modal.alamat_buyer.prop('hidden', 'hidden')
+        pengiriman_item_modal.nama_buyer.prop('hidden', 'hidden')
+        pengiriman_item_modal.alamat_buyer.prop('disabled', 'disabled')
+        pengiriman_item_modal.nama_buyer.prop('disabled', 'disabled')
+      }
     });
 
     var dataJenisMutu = {};
@@ -892,6 +932,23 @@
       pengiriman_item_modal.nomor_kontrak.val(currentData['nomor_kontrak']);
       pengiriman_item_modal.keterangan_marking.val(currentData['keterangan_marking']);
       pengiriman_item_modal.keterangan_penggunaan_produk.val(currentData['keterangan_penggunaan_produk']);
+
+      if (currentData['id_negara'] == 'ID') {
+        pengiriman_item_modal.alamat_buyer.prop('disabled', false)
+        pengiriman_item_modal.nama_buyer.prop('disabled', false)
+        pengiriman_item_modal.alamat_buyer.prop('hidden', false)
+        pengiriman_item_modal.nama_buyer.prop('hidden', false)
+        pengiriman_item_modal.ly_id_negara.prop('hidden', false)
+        pengiriman_item_modal.alamat_buyer.val(currentData['alamat_buyer'])
+        pengiriman_item_modal.nama_buyer.val(currentData['nama_buyer'])
+
+      } else {
+        pengiriman_item_modal.ly_id_negara.prop('hidden', 'hidden')
+        pengiriman_item_modal.alamat_buyer.prop('hidden', 'hidden')
+        pengiriman_item_modal.nama_buyer.prop('hidden', 'hidden')
+        pengiriman_item_modal.alamat_buyer.prop('disabled', 'disabled')
+        pengiriman_item_modal.nama_buyer.prop('disabled', 'disabled')
+      }
 
     });
 

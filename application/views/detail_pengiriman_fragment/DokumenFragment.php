@@ -174,6 +174,53 @@
   </div>
 </div>
 
+
+<div class="modal inmodal" id="manifest_modal" tabindex="-1" opd="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content animated fadeIn">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Upload Dokumen Manifest</h4>
+        <span class="info"></span>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <form opd="form" id="manifest_form" onsubmit="return false;" type="multipart" autocomplete="off">
+          <input type="hidden" id="id_pengiriman" name="id_pengiriman">
+          <input type="hidden" id="jumlah_item" name="jumlah_item">
+
+          <div class="form-group" id="dokumen_manifest_form">
+            <label for="dokumen_manifest">Dokumen Manifest</label>
+            <p class="no-margins"><span id="dokumen_manifest">-</span></p>
+          </div>
+          <!-- <div class="form-group" id="dokumen_bp3l_sertifikat_ig_form">
+            <label for="dokumen_bp3l_sertifikat_ig">Dokumen Sertifikat IG</label>
+            <p class="no-margins"><span id="dokumen_bp3l_sertifikat_ig">-</span></p>
+          </div> -->
+          <table id="FDataItemManifest" class="table table-bordered table-hover" style="padding:0px">
+            <thead>
+              <tr>
+                <th style="width: 70%; text-align:center!important">Item</th>
+                <th style="width: 30%; text-align:center!important">No Manifest Domestic</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+
+          <!-- <div class="form-group">
+            <label for="no_manifest">No Manifest Domestic</label>
+            <input type="text" id="tgl_sampel" class="form-control" id="no_manifest" name="no_manifest" required="required">
+          </div> -->
+      
+          <button class="btn btn-success my-1 mr-sm-2" type="submit" id="save_edit_btn" data-loading-text="Loading..."><strong>Simpan</strong></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- <div class="modal inmodal" id="bpsmb_mutu_modal" tabindex="-1" opd="dialog"  aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content animated fadeIn">
@@ -254,9 +301,12 @@
 
     var id_pengiriman = `<?= $contentData['id_pengiriman'] ?>`;
     var role = `<?= $this->session->userdata()['nama_role'] ?>`
+    var global_jumlah_item = 0;
+    var global_antar_pulau = 1; // 1 = false 2= true
 
     var dataJenisMutu = [];
     getJenisMutu();
+
     var dokumen_table = $('#dokumen_table').DataTable({
       'dom': 't',
       deferRender: true,
@@ -268,6 +318,11 @@
       deferRender: true,
       'ordering': false,
     });
+    var FDataItemManifest = $('#FDataItemManifest').DataTable({
+      'dom': 't',
+      deferRender: true,
+      'ordering': false,
+    });
 
     var FDataItemBP3L = $('#FDataItemBP3L').DataTable({
       'dom': 't',
@@ -275,8 +330,10 @@
       'ordering': false,
     });
 
+    renderFDataItem(dataItem);
+    renderFDataItemBP3L(dataItem);
     
-
+    
     var kpb_rek_modal = {
       self: $('#kpb_rek_modal'),
       form: $('#kpb_rek_form'),
@@ -288,6 +345,19 @@
       'catatan_kpb_rek': $('#kpb_rek_form').find('#catatan_kpb_rek'),
       'catatan_kpb_rek_form': $('#kpb_rek_form').find('#catatan_kpb_rek_form'),
       save_btn: $('#kpb_rek_form').find('#save_edit_btn'),
+    }
+
+    
+
+    var manifest_modal = {
+      self: $('#manifest_modal'),
+      form: $('#manifest_form'),
+      'id_pengiriman': $('#manifest_form').find('#id_pengiriman'),
+      'dokumen_manifest': new FileUploader($('#manifest_form').find('#dokumen_manifest'), "", "dokumen_manifest", ".pdf", false, true),
+      'dokumen_manifest_form': $('#manifest_form').find('#dokumen_manifest_form'),
+      'jumlah_item': $('#manifest_form').find('#jumlah_item'),
+      // 'dokumen_bp3l_rek_form': $('#bp3l_rek_form').find('#dokumen_bp3l_rek_form'),
+       save_btn: $('#manifest_form').find('#save_edit_btn'),
     }
 
     var bp3l_rek_modal = {
@@ -326,6 +396,8 @@
 
       save_btn: $('#bpsmb_mutu_form').find('#save_edit_btn'),
     }
+
+
 
     var disperindag_izin_modal = {
       self: $('#disperindag_izin_modal'),
@@ -370,24 +442,34 @@
         return;
       }
       var i = 0;
+      console.log(global_antar_pulau);
+      perusahaan_btn = "-"
+      dokumen_manifest = ""
+      if (global_antar_pulau == 2) {
+        if (role == 'perusahaan' || role == 'kpb') {
 
+        var perusahaan_btn = `<button class="btn btn-success btn-sm manifest"><i class='fa fa-angle-double-right'>Upload Manifest</i></button>`;
+        }
+
+        var dokumen_manifest = dataInfo['dokumen_manifest'] ? "<br><br>"+downloadButtonV2("<?= base_url('uploads/dokumen_manifest/') ?>", dataInfo['dokumen_manifest'], "Dokument Manifest Domestic") : "<br><br> Belum Ada Dokumen Manifest Domestic";
+  
+
+      }
       var renderData = [];
       // var kpb_rek_status = statusPermohonan(dataInfo['status_kpb_rek']) + (dataInfo['status_kpb_rek'] == 'MENUNGGU' ? ': Pengiriman Proposal': '');
 
       var perusahaan_status = statusPermohonan3(dataInfo['status_proposal'])
-      var dok_permohonan = dataInfo['dokumen_permohonan'] ? downloadButtonV2("<?= base_url('uploads/dokumen_permohonan/') ?>", dataInfo['dokumen_permohonan'], "Permohonan") : "Tidak Ada Dokumen BP3L";
+      var dok_permohonan = dataInfo['dokumen_permohonan'] ? downloadButtonV2("<?= base_url('uploads/dokumen_permohonan/') ?>", dataInfo['dokumen_permohonan'], "Permohonan") : "Tidak Ada";
+    
       // var dokbpsmb = dataInfo['dokumen_bpsmb_mutu'] ? downloadButtonV2("<?= base_url('uploads/dokumen_bpsmb_mutu/') ?>", dataInfo['dokumen_bpsmb_mutu'], "Permohonan BPSMB") : "Tidak Ada Dokumen";
-      // if(role == 'perusahaan' || role == 'kpb'){
-      var perusahaan_dokumen = dok_permohonan;
-      // }else if(role == 'bp3l'){
-      // var perusahaan_dokumen = dok_permohonan;  
-      // }else if(role == 'mutu'){
-      // var perusahaan_dokumen = dokbpsmb;  
-      // }
-      // var perusahaan_dokumen = 
+      if (role == 'perusahaan' || role == 'kpb') {
+
+      }
+      var perusahaan_dokumen = dok_permohonan + dokumen_manifest;
+
       if (!empty(dataInfo['date_proposal'])) date = dataInfo['date_proposal'].split(':');
       var perusahaan_status = dataInfo['date_proposal'] ? perusahaan_status += '<br>' + date[0] + ':' + date[1] : perusahaan_status;
-      renderData.push(['Perusahaan', perusahaan_status, '-', perusahaan_dokumen, '-', '-']);
+      renderData.push(['Perusahaan', perusahaan_status, '-', perusahaan_dokumen, '-', perusahaan_btn]);
 
 
       var kpb_rek_status = statusPermohonan2(dataInfo['status_kpb_rek']) + (dataInfo['status_kpb_rek'] == 'MENUNGGU' ? ': Pengiriman Proposal' : '');
@@ -448,10 +530,10 @@
       var bpsdm_sertifikat_ig_balasan = dataInfo['dokumen_bp3l_sertifikat_ig'] ? downloadButtonV2("<?= base_url('uploads/dokumen_bp3l_sertifikat_ig/') ?>", dataInfo['dokumen_bp3l_sertifikat_ig'], "Sertifikat IG") : 'Tidak Ada';
 
       var bpsmb_mutu_status = statusPermohonan(dataInfo['status_bpsmb_mutu']) + (dataInfo['status_bpsmb_mutu'] == 'MENUNGGU' ? ': Rekomendasi BP3L' : '');
-  
+
       if (!empty(dataInfo['date_bpsmb_mutu'])) date = dataInfo['date_bpsmb_mutu'].split(':');
       var bpsmb_mutu_status = dataInfo['date_bpsmb_mutu'] ? bpsmb_mutu_status += '<br>' + date[0] + ':' + date[1] : bpsmb_mutu_status;
-  
+
       var bpsmb_mutu_permohonan = '-';
       var bpsmb_mutu_balasan = downloadButtonV2("<?= base_url('uploads/dokumen_hasil_mutu/') ?>", dataInfo['dokumen_hasil_mutu'], 'Hasil Uji Mutu');
       var bpsmb_mutu_catatan = dataInfo['catatan_bpsmb_mutu'] ? dataInfo['catatan_bpsmb_mutu'] : '';
@@ -495,6 +577,8 @@
       dataItemTB = [];
       var x = 1;
       Object.values(data).forEach((d) => {
+        if (d['id_negara'] == 'ID') global_antar_pulau = 2;
+
 
         var item = `  <b>Nomor Kontrak:</b> ${d['nomor_kontrak']}<br>
                   <b>Netto:</b> ${d['netto']} Kg |   <b>Permohonan Mutu:</b> ${d['nama_jenis_mutu']}<br>
@@ -520,29 +604,37 @@
         x++;
       });
       FDataItem.rows.add(dataItemTB).draw('full-hold');
-      return x - 1;
+      global_jumlah_item = x - 1;
     }
 
     function renderFDataItemBP3L(data) {
 
       dataItemTBBP3L = [];
+      dataItemMN = [];
       var x = 1;
       Object.values(data).forEach((d) => {
-
+        if (d['id_negara'] == 'ID') global_antar_pulau = 2;
         var item = `  <b>Nomor Kontrak:</b> ${d['nomor_kontrak']}<br>
               <b>Netto:</b> ${d['netto']} Kg |   <b>Permohonan Mutu:</b> ${d['nama_jenis_mutu']}<br>
               <b> ${d['nama_importir']} </b> | 
               <b>Tujuan:</b> ${d['city']}, ${d['province']}, ${d['nama_negara']}<br>
   `;
 
-       
+
         var id_item = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">
-  <input type="text" class="form-control" value="" name="no_sertifikat_ig_${x}" placeholder="No Sertifikat IG">`;
-  dataItemTBBP3L.push([item, id_item ]);
+              <input type="text" class="form-control" value="" name="no_sertifikat_ig_${x}" placeholder="No Sertifikat IG">`;
+
+              var manifest = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">
+              <input type="text" class="form-control" value="" name="no_manifest_${x}" placeholder="No Manifest Domestic">`;
+        dataItemTBBP3L.push([item, id_item]);
+        dataItemMN.push([item, manifest]);
         x++;
       });
       FDataItemBP3L.rows.add(dataItemTBBP3L).draw('full-hold');
-      return x - 1;
+
+      FDataItemManifest.rows.add(dataItemMN).draw('full-hold');
+
+      global_jumlah_item = x - 1;
     }
 
 
@@ -555,12 +647,12 @@
       bp3l_rek_modal.id_pengiriman.val(id_pengiriman);
       bp3l_rek_modal.dokumen_bp3l_rek.resetState();
       bp3l_rek_modal.status_bp3l_rek.trigger('change');
-      bp3l_rek_modal.jumlah_item.val(renderFDataItemBP3L(dataItem));
+      bp3l_rek_modal.jumlah_item.val(global_jumlah_item);
       if (dataInfo['status_bp3l_rek'] != 'DIPROSES2') {
-  
-      $('#FDataItemBP3L').prop('hidden', 'hidden');
+
+        $('#FDataItemBP3L').prop('hidden', 'hidden');
         bpsmb_mutu_modal.status_bpsmb_mutu.trigger('change');
-    }
+      }
     });
 
     dokumen_table.on('click', '.bpsmb_mutu', function() {
@@ -580,7 +672,7 @@
         bpsmb_mutu_modal.status_bpsmb_mutu.val('DIPROSES2');
         bpsmb_mutu_modal.catatan_bpsmb_mutu_form.toggle(true);
         bpsmb_mutu_modal.catatan_bpsmb_mutu.val(dataInfo['catatan_bpsmb_mutu']);
-        bpsmb_mutu_modal.jumlah_item.val(renderFDataItem(dataItem));
+        bpsmb_mutu_modal.jumlah_item.val(global_jumlah_item);
 
       } else {
         $('#FDataItem').prop('hidden', 'hidden');
@@ -595,6 +687,15 @@
       disperindag_izin_modal.id_pengiriman.val(id_pengiriman);
       disperindag_izin_modal.dokumen_disperindag_izin.resetState();
       disperindag_izin_modal.status_disperindag_izin.trigger('change');
+    });
+
+    dokumen_table.on('click', '.manifest', function() {
+      manifest_modal.form.trigger('reset');
+      manifest_modal.self.modal('show');
+      manifest_modal.save_btn.show();
+      manifest_modal.id_pengiriman.val(id_pengiriman);
+      manifest_modal.jumlah_item.val(global_jumlah_item);
+      // manifest_modal.status_disperindag_izin.trigger('change');
     });
 
 
@@ -716,6 +817,38 @@
             dataInfo = json['data']
             renderDokumen(dataInfo);
             kpb_rek_modal.self.modal('hide');
+            swal("Simpan Berhasil", "", "success");
+          },
+          error: function(e) {}
+        });
+      });
+    });
+
+    
+    manifest_modal.form.submit(function(event) {
+      event.preventDefault();
+
+      swal(saveConfirmation("Kirim balasan", "Pastikan Format File PDF", "Ya, Kirim!")).then((result) => {
+        if (!result.value) {
+          return;
+        }
+        buttonLoading(manifest_modal.save_btn);
+        $.ajax({
+          url: "<?= site_url('PengirimanController/manifest_upload') ?>",
+          'type': 'POST',
+          data: new FormData(manifest_modal.form[0]),
+          contentType: false,
+          processData: false,
+          success: function(data) {
+            buttonIdle(manifest_modal.save_btn);
+            var json = JSON.parse(data);
+            if (json['error']) {
+              swal("Simpan Gagal", json['message'], "error");
+              return;
+            }
+            dataInfo = json['data']
+            renderDokumen(dataInfo);
+            manifest_modal.self.modal('hide');
             swal("Simpan Berhasil", "", "success");
           },
           error: function(e) {}

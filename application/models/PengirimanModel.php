@@ -46,7 +46,12 @@ class PengirimanModel extends CI_Model
     if (!empty($filter['status_proposal'])) $this->db->where('eks.status_proposal', $filter['status_proposal']);
     if (!empty($filter['sampel'])) $this->db->where('eks.id_tahap_proposal', '4');
     if (!empty($filter['exstatus_proposal'])) $this->db->where("eks.status_proposal <> '".  $filter['exstatus_proposal']."'");
+    if (!empty($filter['bulan_laporan'])){
+      if (empty($filter['tahun_laporan']))throw new UserException("Masukkan Tahun", USER_NOT_FOUND_CODE);
  
+      $fils = $filter['tahun_laporan'].'_'.$filter['bulan_laporan'];
+      $this->db->where('eks.date_kpb like "'.$fils.'%"');
+    }
     
     if (!empty($filter['status_kpb_rek'])) $this->db->where('eks.status_kpb_rek', $filter['status_kpb_rek']);
     if (!empty($filter['status_kpb_rek_not'])) $this->db->where('eks.status_kpb_rek !=', $filter['status_kpb_rek_not']);
@@ -225,6 +230,26 @@ class PengirimanModel extends CI_Model
   {
     $this->db->where('id_pengiriman', $data['id_pengiriman']);
     $this->db->update('pengiriman', DataStructure::slice($data, ['dokumen_permohonan'], TRUE));
+    ExceptionHandler::handleDBError($this->db->error(), "Upload Gagal!!", "pengiriman");
+    return $data['id_pengiriman'];
+  }
+
+  public function re_upload($data)
+  {
+    $data[$data['parm']] = 
+    $this->db->set($data['parm'], $data['filename']);
+    $this->db->where('id_pengiriman', $data['id_pengiriman']);
+    $this->db->update('pengiriman', DataStructure::slice($data, ['catatan_kpb_rek'], TRUE));
+    ExceptionHandler::handleDBError($this->db->error(), "Upload Gagal!!", "pengiriman");
+    return $data['id_pengiriman'];
+  }
+
+  public function upload_manifest($data)
+  {
+  
+    // $this->db->set($data['parm'], $data['filename']);
+    $this->db->where('id_pengiriman', $data['id_pengiriman']);
+    $this->db->update('pengiriman', DataStructure::slice($data, ['dokumen_manifest'], TRUE));
     ExceptionHandler::handleDBError($this->db->error(), "Upload Gagal!!", "pengiriman");
     return $data['id_pengiriman'];
   }
