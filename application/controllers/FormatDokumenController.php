@@ -505,9 +505,19 @@ class FormatDokumenController extends CI_Controller
     $nomor_kontrak = '';
     $i = 1;
     $j = 0;
+    $antar_pulau = false;
+    $xantar_pulau = false;
     $ar_nama_importir = [];
     foreach ($pengirimanItem as $pi) {
-      $pod .= "{$i}) {$pi['port_of_destination']} , <w:br/>";;
+      if($pi['id_negara'] == 'ID'){
+        $antar_pulau = true;
+        }
+  
+        if($pi['id_negara'] != 'ID'){
+          $xantar_pulau = true;
+        }
+  
+          $pod .= "{$i}) {$pi['port_of_destination']} , <w:br/>";;
       $poo .= "{$i}) {$pi['nama_port_of_origin']} , <w:br/>";;
       $nama_buyer .= "{$i}) {$pi['nama_buyer']} , <w:br/>";;
       $alamat_buyer .= "{$i}) {$pi['alamat_buyer']} , <w:br/>";;
@@ -570,10 +580,17 @@ class FormatDokumenController extends CI_Controller
     $table->addCell(4000, $cellVCentered)->addText('Alamat Buyer', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText($alamat_buyer, 'paragraph', $noSpace);
-    $table->addRow();
-    $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
-    $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-    $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+    if($antar_pulau == true){
+      // $antar_pulau = true;
+      }
+
+      if($xantar_pulau == true){
+        $table->addRow();
+        $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
+        $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+        $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+      }
+
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
