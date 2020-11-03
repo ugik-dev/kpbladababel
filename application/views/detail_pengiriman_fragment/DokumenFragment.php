@@ -210,7 +210,7 @@
             <label for="no_manifest">No Manifest Domestic</label>
             <input type="text" id="tgl_sampel" class="form-control" id="no_manifest" name="no_manifest" required="required">
           </div> -->
-      
+
           <button class="btn btn-success my-1 mr-sm-2" type="submit" id="save_edit_btn" data-loading-text="Loading..."><strong>Simpan</strong></button>
         </form>
       </div>
@@ -332,8 +332,8 @@
 
     renderFDataItem(dataItem);
     renderFDataItemBP3L(dataItem);
-    
-    
+
+
     var kpb_rek_modal = {
       self: $('#kpb_rek_modal'),
       form: $('#kpb_rek_form'),
@@ -347,7 +347,7 @@
       save_btn: $('#kpb_rek_form').find('#save_edit_btn'),
     }
 
-    
+
 
     var manifest_modal = {
       self: $('#manifest_modal'),
@@ -357,7 +357,7 @@
       'dokumen_manifest_form': $('#manifest_form').find('#dokumen_manifest_form'),
       'jumlah_item': $('#manifest_form').find('#jumlah_item'),
       // 'dokumen_bp3l_rek_form': $('#bp3l_rek_form').find('#dokumen_bp3l_rek_form'),
-       save_btn: $('#manifest_form').find('#save_edit_btn'),
+      save_btn: $('#manifest_form').find('#save_edit_btn'),
     }
 
     var bp3l_rek_modal = {
@@ -448,11 +448,11 @@
       if (global_antar_pulau == 2) {
         if (role == 'perusahaan' || role == 'kpb') {
 
-        var perusahaan_btn = `<button class="btn btn-success btn-sm manifest"><i class='fa fa-angle-double-right'>Upload Manifest</i></button>`;
+          var perusahaan_btn = `<button class="btn btn-success btn-sm manifest"><i class='fa fa-angle-double-right'>Upload Manifest</i></button>`;
         }
 
-        var dokumen_manifest = dataInfo['dokumen_manifest'] ? "<br><br>"+downloadButtonV2("<?= base_url('uploads/dokumen_manifest/') ?>", dataInfo['dokumen_manifest'], "Dokument Manifest Domestic") : "<br><br> Belum Ada Dokumen Manifest Domestic";
-  
+        var dokumen_manifest = dataInfo['dokumen_manifest'] ? "<br><br>" + downloadButtonV2("<?= base_url('uploads/dokumen_manifest/') ?>", dataInfo['dokumen_manifest'], "Dokument Manifest Domestic") : "<br><br> Belum Ada Dokumen Manifest Domestic";
+
 
       }
       var renderData = [];
@@ -460,7 +460,7 @@
 
       var perusahaan_status = statusPermohonan3(dataInfo['status_proposal'])
       var dok_permohonan = dataInfo['dokumen_permohonan'] ? downloadButtonV2("<?= base_url('uploads/dokumen_permohonan/') ?>", dataInfo['dokumen_permohonan'], "Permohonan") : "Tidak Ada";
-    
+
       // var dokbpsmb = dataInfo['dokumen_bpsmb_mutu'] ? downloadButtonV2("<?= base_url('uploads/dokumen_bpsmb_mutu/') ?>", dataInfo['dokumen_bpsmb_mutu'], "Permohonan BPSMB") : "Tidak Ada Dokumen";
       if (role == 'perusahaan' || role == 'kpb') {
 
@@ -579,28 +579,29 @@
       Object.values(data).forEach((d) => {
         if (d['id_negara'] == 'ID') global_antar_pulau = 2;
 
-
-        var item = `  <b>Nomor Kontrak:</b> ${d['nomor_kontrak']}<br>
+        if (dataInfo['id_tahap_proposal'] == '4') {
+          var item = `  <b>Nomor Kontrak:</b> ${d['nomor_kontrak']}<br>
                   <b>Netto:</b> ${d['netto']} Kg |   <b>Permohonan Mutu:</b> ${d['nama_jenis_mutu']}<br>
                   <b> ${d['nama_importir']} </b> | 
                   <b>Tujuan:</b> ${d['city']}, ${d['province']}, ${d['nama_negara']}<br>
       `;
 
-        var selector_item = `
+          var selector_item = `
             <select class="form-control" name="hasil_item_${x}" id="hasil_item_${x}" required="required">
             <option value>Pilih Hasil Uji Lab</option>
           
        `;
-        Object.values(dataJenisMutu).forEach((dM) => {
-          selector_item = selector_item + ` <option value="${dM['id_jenis_mutu']}">${dM['nama_jenis_mutu']}</option>      
+          Object.values(dataJenisMutu).forEach((dM) => {
+            selector_item = selector_item + ` <option value="${dM['id_jenis_mutu']}">${dM['nama_jenis_mutu']}</option>      
           `;
-        });
+          });
 
-        selector_item = selector_item + ` </select> `;
+          selector_item = selector_item + ` </select> `;
 
-        var id_item = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">
+          var id_item = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">
       <input type="text" class="form-control" value="" name="no_hasil_mutu_${x}" placeholder="No Sertifikat Hasil Mutu">`;
-        dataItemTB.push([item, id_item + selector_item]);
+          dataItemTB.push([item, id_item + selector_item]);
+        }
         x++;
       });
       FDataItem.rows.add(dataItemTB).draw('full-hold');
@@ -624,14 +625,16 @@
         var id_item = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">
               <input type="text" class="form-control" value="" name="no_sertifikat_ig_${x}" placeholder="No Sertifikat IG">`;
 
-              var manifest = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">
+        var manifest = `<input type="hidden" value="${d['id_pengiriman_item']}" name="id_pengiriman_${x}">
               <input type="text" class="form-control" value="" name="no_manifest_${x}" placeholder="No Manifest Domestic">`;
         dataItemTBBP3L.push([item, id_item]);
         dataItemMN.push([item, manifest]);
         x++;
       });
-      FDataItemBP3L.rows.add(dataItemTBBP3L).draw('full-hold');
 
+      if (dataInfo['id_tahap_proposal'] == '5') {
+      FDataItemBP3L.rows.add(dataItemTBBP3L).draw('full-hold');
+      }
       FDataItemManifest.rows.add(dataItemMN).draw('full-hold');
 
       global_jumlah_item = x - 1;
@@ -824,7 +827,7 @@
       });
     });
 
-    
+
     manifest_modal.form.submit(function(event) {
       event.preventDefault();
 
