@@ -330,8 +330,7 @@
       'ordering': false,
     });
 
-    renderFDataItem(dataItem);
-    renderFDataItemBP3L(dataItem);
+   
 
 
     var kpb_rek_modal = {
@@ -565,7 +564,8 @@
             return;
           }
           dataJenisMutu = json['data'];
-          // renderAllJenisMutu(dataJenisMutu);
+          renderFDataItem(dataItem);
+    renderFDataItemBP3L(dataItem);
         },
         error: function(e) {}
       });
@@ -573,7 +573,7 @@
 
 
     function renderFDataItem(data) {
-
+console.log(dataJenisMutu)
       dataItemTB = [];
       var x = 1;
       Object.values(data).forEach((d) => {

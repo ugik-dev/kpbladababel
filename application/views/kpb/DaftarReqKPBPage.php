@@ -82,8 +82,8 @@
       </div>
       <div class="modal-body" id="modal-body">
         <form opd="form" id="reupload_form" onsubmit="return false;" type="multipart" autocomplete="off">
-          <input type="" id="id_pengiriman" name="id_pengiriman">
-          <input type="" id="parm" name="parm">
+          <input type="hidden" id="id_pengiriman" name="id_pengiriman">
+          <input type="hidden" id="parm" name="parm">
 
           <div class="form-group" id="re_upload_dokumen_form">
             <label for="re_upload_dokumen">Surat Keterangan Transaksi</label>
