@@ -1341,9 +1341,9 @@ class FormatDokumenController extends CI_Controller
       $textrun->addText("KANTOR PEMASARAN BERSAMA,", array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'spaceAfter' => 0, 'bold' => true));
       
       $textrun->addTextBreak();
-      $textrun->addText('Direktur', 'paragraph');
+      $textrun->addText('General Manager', 'paragraph');
       $textrun->addTextBreak(5);
-      $textrun->addText('Prof. Saparudin Ph.D', 'paragraph');
+      $textrun->addText('Deki Susanto ST', 'paragraph');
       $textrun->addTextBreak();
 
     }

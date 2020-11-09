@@ -492,7 +492,13 @@
         var kpb_rek_btn = '-';
       }
 
-      if (role == 'kpb') renderData.push(['KPB', kpb_rek_status, kpb_rek_permohonan, kpb_rek_balasan + skt, kpb_rek_catatan, kpb_rek_btn]);
+      if (role == 'kpb'){
+
+      renderData.push(['KPB', kpb_rek_status, kpb_rek_permohonan, kpb_rek_balasan + skt, kpb_rek_catatan, kpb_rek_btn]);
+      }else{
+        renderData.push(['KPB', kpb_rek_status, '-', kpb_rek_balasan + skt, kpb_rek_catatan, '-']);
+     
+      } 
 
       var bp3l_rek_status = statusPermohonan2(dataInfo['status_bp3l_rek']) + (dataInfo['status_bp3l_rek'] == 'MENUNGGU' ? ': Rekomendasi KPB' : '');
       if (!empty(dataInfo['date_bp3l'])) date = dataInfo['date_bp3l'].split(':');
