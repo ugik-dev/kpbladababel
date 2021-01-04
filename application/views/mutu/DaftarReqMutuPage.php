@@ -4,6 +4,7 @@
       <form class="form-inline" id="toolbar_form" onsubmit="return false;">
         <input type="hidden" id="status_bpsmb_mutu_not" name="status_bpsmb_mutu_not" value="MENUNGGU">
         <select class="form-control mr-sm-2" name="tahun" id="tahun">
+            <option value='2021'>2021</option>
           <option value='2020'>2020</option>
           <option value='2019'>2019</option>
         </select>

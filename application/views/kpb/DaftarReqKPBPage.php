@@ -5,6 +5,7 @@
         <form class="form-inline col-sm-5" id="toolbar_form" onsubmit="return false;">
           <input type="hidden" id="status_kpb_rek_not" name="status_kpb_rek_not" value="MENUNGGU">
           <select class="form-control mr-sm-2" name="tahun" id="tahun">
+            <option value='2021'>2021</option>
             <option value='2020'>2020</option>
             <option value='2019'>2019</option>
           </select>
@@ -22,6 +23,7 @@
         <form class="form-inline col-6" id="excel_form" onsubmit="return false;">
           <select class="form-control mr-sm-2" name="tahun" id="tahun">
             <option value='' selected>-- Tahun --</option>
+            <option value='2021'>2021</option>
             <option value='2020'>2020</option>
             <option value='2019'>2019</option>
           </select>

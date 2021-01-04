@@ -212,8 +212,6 @@
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="id_bankx">Bank</label>
-                <!-- <select class="form-control mr-sm-3" id="id_bankx" name="id_bank" required="required"></select> -->
                 <label for="id_bankx">Nama Bank</label>
                 <input type="text" class="form-control" id="id_bankx" name="id_bank" placeholder="Tidak ada" required="required">
               </div>

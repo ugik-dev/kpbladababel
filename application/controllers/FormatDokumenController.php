@@ -44,75 +44,75 @@ class FormatDokumenController extends CI_Controller
     // // Setting spasi kebawah supaya tidak rapat
     // $pdf->Cell(50,7,'ID Perusahaan',0,0);
     // $pdf->Cell(50,7,': '.$data['id_perusahaan'],0,1);
-    $pdf->Cell(50, 7, 'Nama Perusahaan', 0, 0);
-    $pdf->Cell(50, 7, ': ' . ($data['nama_perusahaan'] ? $data['nama_perusahaan'] : '-'), 0, 1);
-    $pdf->Cell(50, 7, 'Nama Pimpinan', 0, 0);
-    $pdf->Cell(50, 7, ': ' . ($data['nama_pimpinan'] ? $data['nama_pimpinan'] : '-'), 0, 1);
-    $pdf->Cell(50, 7, 'Jenis Perusahaan', 0, 0);
-    $pdf->Cell(50, 7, ': ' . ($data['nama_jenis_perusahaan'] ? $data['nama_jenis_perusahaan'] : '-'), 0, 1);
-    $pdf->Cell(50, 7, 'No Telepon', 0, 0);
-    $pdf->Cell(50, 7, ': ' . ($data['no_telepon'] ? $data['no_telepon'] : '-'), 0, 1);
-    $pdf->Cell(50, 7, 'Email', 0, 0);
-    $pdf->Cell(50, 7, ': ' . ($data['email'] ? $data['email'] : '-'), 0, 1);
-    $pdf->Cell(50, 7, 'Lokasi Perusahaan', 0, 0);
-    $pdf->MultiCell(
-      100,
-      7,
-      ': ' . ($data['lok_perusahaan_full'] ? $data['lok_perusahaan_full'] : '-') .
-        ($data['lok_perusahaan_kec'] ? ', ' . $data['lok_perusahaan_kec'] : '-') .
-        ($data['lok_perusahaan_kabkot'] ? ', ' . $data['lok_perusahaan_kabkot'] : '-'),
-      0,
-      1
-    );
-    $pdf->Cell(50, 7, 'Lokasi Unit', 0, 0);
-    $pdf->MultiCell(
-      100,
-      7,
-      ': ' . ($data['lok_unit_pengelolaan_full'] ? $data['lok_unit_pengelolaan_full'] : '-') .
-        ($data['lok_unit_pengelolaan_kec'] ? ', ' . $data['lok_unit_pengelolaan_kec'] : '-') .
-        ($data['lok_unit_pengelolaan_kabkot'] ? ', ' . $data['lok_unit_pengelolaan_kabkot'] : '-'),
-      0,
-      1
-    );
-    $pdf->Cell(50, 7, 'Lokasi Gudang', 0, 0);
-    $pdf->MultiCell(
-      100,
-      7,
-      ': ' . ($data['lok_gudang_penyimpanan_full'] ? $data['lok_gudang_penyimpanan_full'] : '-') .
-        ($data['lok_gudang_penyimpanan_kec'] ? ', ' . $data['lok_gudang_penyimpanan_kec'] : '-') .
-        ($data['lok_gudang_penyimpanan_kabkot'] ? ', ' . $data['lok_gudang_penyimpanan_kabkot'] : '-'),
-      0,
-      1
-    );
-    $pdf->Cell(50, 7, 'Dokumen', 0, 0);
-    $tmp = ':';
+    // $pdf->Cell(50, 7, 'Nama Perusahaan', 0, 0);
+    // $pdf->Cell(50, 7, ': ' . ($data['nama_perusahaan'] ? $data['nama_perusahaan'] : '-'), 0, 1);
+    // $pdf->Cell(50, 7, 'Nama Pimpinan', 0, 0);
+    // $pdf->Cell(50, 7, ': ' . ($data['nama_pimpinan'] ? $data['nama_pimpinan'] : '-'), 0, 1);
+    // $pdf->Cell(50, 7, 'Jenis Perusahaan', 0, 0);
+    // $pdf->Cell(50, 7, ': ' . ($data['nama_jenis_perusahaan'] ? $data['nama_jenis_perusahaan'] : '-'), 0, 1);
+    // $pdf->Cell(50, 7, 'No Telepon', 0, 0);
+    // $pdf->Cell(50, 7, ': ' . ($data['no_telepon'] ? $data['no_telepon'] : '-'), 0, 1);
+    // $pdf->Cell(50, 7, 'Email', 0, 0);
+    // $pdf->Cell(50, 7, ': ' . ($data['email'] ? $data['email'] : '-'), 0, 1);
+    // $pdf->Cell(50, 7, 'Lokasi Perusahaan', 0, 0);
+    // $pdf->MultiCell(
+    //   100,
+    //   7,
+    //   ': ' . ($data['lok_perusahaan_full'] ? $data['lok_perusahaan_full'] : '-') .
+    //     ($data['lok_perusahaan_kec'] ? ', ' . $data['lok_perusahaan_kec'] : '-') .
+    //     ($data['lok_perusahaan_kabkot'] ? ', ' . $data['lok_perusahaan_kabkot'] : '-'),
+    //   0,
+    //   1
+    // );
+    // $pdf->Cell(50, 7, 'Lokasi Unit', 0, 0);
+    // $pdf->MultiCell(
+    //   100,
+    //   7,
+    //   ': ' . ($data['lok_unit_pengelolaan_full'] ? $data['lok_unit_pengelolaan_full'] : '-') .
+    //     ($data['lok_unit_pengelolaan_kec'] ? ', ' . $data['lok_unit_pengelolaan_kec'] : '-') .
+    //     ($data['lok_unit_pengelolaan_kabkot'] ? ', ' . $data['lok_unit_pengelolaan_kabkot'] : '-'),
+    //   0,
+    //   1
+    // );
+    // $pdf->Cell(50, 7, 'Lokasi Gudang', 0, 0);
+    // $pdf->MultiCell(
+    //   100,
+    //   7,
+    //   ': ' . ($data['lok_gudang_penyimpanan_full'] ? $data['lok_gudang_penyimpanan_full'] : '-') .
+    //     ($data['lok_gudang_penyimpanan_kec'] ? ', ' . $data['lok_gudang_penyimpanan_kec'] : '-') .
+    //     ($data['lok_gudang_penyimpanan_kabkot'] ? ', ' . $data['lok_gudang_penyimpanan_kabkot'] : '-'),
+    //   0,
+    //   1
+    // );
+    // $pdf->Cell(50, 7, 'Dokumen', 0, 0);
+    // $tmp = ':';
 
-    $itmp = ' ';
-    foreach ($dok as $key => $value) {
-      $tmp = $tmp . $itmp . $value['nama_jenis_dokumen_perusahaan'];
-      $itmp = ', ';
-    }
-    $pdf->Cell(50, 7, $tmp, 0, 1);
+    // $itmp = ' ';
+    // foreach ($dok as $key => $value) {
+    //   $tmp = $tmp . $itmp . $value['nama_jenis_dokumen_perusahaan'];
+    //   $itmp = ', ';
+    // }
+    // $pdf->Cell(50, 7, $tmp, 0, 1);
 
-    foreach ($dok as $key => $value) {
-      $pdf->Cell(50, 7, '  NO ' . $value['nama_jenis_dokumen_perusahaan'], 0, 0);
-      $pdf->Cell(50, 7, ': ' . ($value['no_dokumen_perusahaan'] ? $value['no_dokumen_perusahaan'] : '-'), 0, 1);
-    }
-    $pdf->Cell(50, 7, ' ', 0, 1);
-    $pdf->Cell(50, 7, 'Jumlah Pengiriman', 0, 0);
-    $i = 0;
-    foreach ($pengiriman as $key => $value) {
-      $i++;
-    }
-    $pdf->Cell(50, 7, ': ' . $i . 'x', 0, 1);
-    foreach ($pengiriman as $key => $value) {
-      $pdf->Cell(50, 7, 'Tanggal Pengusulan ', 0, 0);
-      $pdf->Cell(50, 7, ': ' . ($value['created_at'] ? $value['created_at'] : '-'), 0, 1);
-      $pdf->Cell(50, 7, '    Item ', 0, 0);
-      $pdf->MultiCell(130, 7, ': ' . ($value['item_v2'] ? $value['item_v2'] : '-'), 0, 1);
-    }
+    // foreach ($dok as $key => $value) {
+    //   $pdf->Cell(50, 7, '  NO ' . $value['nama_jenis_dokumen_perusahaan'], 0, 0);
+    //   $pdf->Cell(50, 7, ': ' . ($value['no_dokumen_perusahaan'] ? $value['no_dokumen_perusahaan'] : '-'), 0, 1);
+    // }
+    // $pdf->Cell(50, 7, ' ', 0, 1);
+    // $pdf->Cell(50, 7, 'Jumlah Pengiriman', 0, 0);
+    // $i = 0;
+    // foreach ($pengiriman as $key => $value) {
+    //   $i++;
+    // }
+    // $pdf->Cell(50, 7, ': ' . $i . 'x', 0, 1);
+    // foreach ($pengiriman as $key => $value) {
+    //   $pdf->Cell(50, 7, 'Tanggal Pengusulan ', 0, 0);
+    //   $pdf->Cell(50, 7, ': ' . ($value['created_at'] ? $value['created_at'] : '-'), 0, 1);
+    //   $pdf->Cell(50, 7, '    Item ', 0, 0);
+    //   $pdf->MultiCell(130, 7, ': ' . ($value['item_v2'] ? $value['item_v2'] : '-'), 0, 1);
+    // }
 
-    $pdf->SetFont('Arial', '', 10);
+    // $pdf->SetFont('Arial', '', 10);
 
     $filename = 'Informasi Perusahaan_' . ($data['nama_perusahaan'] ? $data['nama_perusahaan'] : 'NONAME') . '_ID' . $data['id_perusahaan'];
     $pdf->Output('', $filename, false);
@@ -1357,6 +1357,8 @@ class FormatDokumenController extends CI_Controller
     //   ExceptionHandler::handle($e);
     // }
   }
+
+  
 
   public function format_permohonan_to_bp3l()
   {
