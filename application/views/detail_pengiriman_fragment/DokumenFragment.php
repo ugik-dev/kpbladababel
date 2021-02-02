@@ -484,6 +484,7 @@
       // var kpb_rek_permohonan = '-';
       var kpb_rek_balasan = '';
       var kpb_rek_permohonan = downloadButtonV2("<?= site_url('FormatDokumenController/format_sk_transaksi/') ?>", "?id_pengiriman=" + dataInfo['id_pengiriman'], "Draft SKT");
+      var kpb_rek_permohonan2 = downloadButtonV2("<?= site_url('FormatDokumenController/format_sk_transaksi_2/') ?>", "?id_pengiriman=" + dataInfo['id_pengiriman'], "Draft SKT v2");
       var skt = dataInfo['dokumen_kpb_rek'] ? downloadButtonV2("<?= base_url('uploads/dokumen_kpb_rek/') ?>", dataInfo['dokumen_kpb_rek'], "SK Transaksi") : 'Belum Ada SKT';
       var kpb_rek_catatan = dataInfo['catatan_kpb_rek'] ? dataInfo['catatan_kpb_rek'] : 'Tidak Ada';
       if (dataInfo['id_tahap_proposal'] == '1' || dataInfo['id_tahap_proposal'] == '6') {
@@ -494,7 +495,7 @@
 
       if (role == 'kpb'){
 
-      renderData.push(['KPB', kpb_rek_status, kpb_rek_permohonan, kpb_rek_balasan + skt, kpb_rek_catatan, kpb_rek_btn]);
+      renderData.push(['KPB', kpb_rek_status, kpb_rek_permohonan +"<br><br>"+ kpb_rek_permohonan2, kpb_rek_balasan + skt, kpb_rek_catatan, kpb_rek_btn]);
       }else{
         renderData.push(['KPB', kpb_rek_status, '-', kpb_rek_balasan + skt, kpb_rek_catatan, '-']);
      
