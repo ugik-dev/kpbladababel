@@ -1874,80 +1874,80 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(null, $cellVCentered)->addText('2.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Bulk Density', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('g/l', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('665', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Min. 600', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('665', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.1', 'paragraph', $noSpace_center);
      
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('3.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Extraneius matter, (w/w) max', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('0,2', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('2,0', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('0,2', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.4', 'paragraph', $noSpace_center);
 
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('4.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Light barries, (w/w) max', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('0,2', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('2,0', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('0,2', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.3', 'paragraph', $noSpace_center);
       
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('5.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Mouldy barries, (w/w) max', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('0', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('3', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('0', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.6', 'paragraph', $noSpace_center);
 
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('6.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Darkcoloured barries, (w/w) max', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('0,9', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('2,0', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('0,9', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.5', 'paragraph', $noSpace_center);
 
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('7.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Moisture content, (w/w) max', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('13,6', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('15,0', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('13,6', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.2', 'paragraph', $noSpace_center);
 
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('8.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Salmonella', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('Detection/25g', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('-', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Negatif', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('-', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.7', 'paragraph', $noSpace_center);
 
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('9.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('E coli', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('MPN/g', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('-', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText(htmlspecialchars('< 3'), 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('-', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.8', 'paragraph', $noSpace_center);
 
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('10.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Piperine content, (w/w) max', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('4,9', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('As the test result', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('4,9', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.10.2', 'paragraph', $noSpace_center);
 
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('11.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Essential Oil content, (w/w) max', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('2,4', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('As the test result', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('2,4', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.10.3', 'paragraph', $noSpace_center);
       
       // Detail Report
