@@ -509,15 +509,15 @@ class FormatDokumenController extends CI_Controller
     $xantar_pulau = false;
     $ar_nama_importir = [];
     foreach ($pengirimanItem as $pi) {
-      if($pi['id_negara'] == 'ID'){
+      if ($pi['id_negara'] == 'ID') {
         $antar_pulau = true;
-        }
-  
-        if($pi['id_negara'] != 'ID'){
-          $xantar_pulau = true;
-        }
-  
-          $pod .= "{$i}) {$pi['port_of_destination']} , <w:br/>";;
+      }
+
+      if ($pi['id_negara'] != 'ID') {
+        $xantar_pulau = true;
+      }
+
+      $pod .= "{$i}) {$pi['port_of_destination']} , <w:br/>";;
       $poo .= "{$i}) {$pi['nama_port_of_origin']} , <w:br/>";;
       $nama_buyer .= "{$i}) {$pi['nama_buyer']} , <w:br/>";;
       $alamat_buyer .= "{$i}) {$pi['alamat_buyer']} , <w:br/>";;
@@ -580,16 +580,16 @@ class FormatDokumenController extends CI_Controller
     $table->addCell(4000, $cellVCentered)->addText('Alamat Buyer', 'paragraph', $noSpace);
     $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
     $table->addCell(5000, $cellVCentered)->addText($alamat_buyer, 'paragraph', $noSpace);
-    if($antar_pulau == true){
+    if ($antar_pulau == true) {
       // $antar_pulau = true;
-      }
+    }
 
-      if($xantar_pulau == true){
-        $table->addRow();
-        $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
-        $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-        $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
-      }
+    if ($xantar_pulau == true) {
+      $table->addRow();
+      $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
+      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+    }
 
     $table->addRow();
     $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
@@ -967,11 +967,12 @@ class FormatDokumenController extends CI_Controller
 
     $objWriter->save("php://output");
   }
- 
 
-  function tgl_indo(){
+
+  function tgl_indo()
+  {
     $tanggal = date('Y-m-d');
-    $bulan = array (
+    $bulan = array(
       1 =>   'Januari',
       'Februari',
       'Maret',
@@ -986,13 +987,14 @@ class FormatDokumenController extends CI_Controller
       'Desember'
     );
     $pecahkan = explode('-', $tanggal);
-    
-    return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+
+    return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
   }
 
-  function tgl_eng(){
+  function tgl_eng()
+  {
     $tanggal = date('Y-m-d');
-    $bulan = array (
+    $bulan = array(
       1 =>   'January',
       'February',
       'March',
@@ -1007,8 +1009,8 @@ class FormatDokumenController extends CI_Controller
       'December'
     );
     $pecahkan = explode('-', $tanggal);
-    
-    return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+
+    return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
   }
 
   function getRomawi()
@@ -1073,7 +1075,7 @@ class FormatDokumenController extends CI_Controller
     $no_nib = !empty($nib) ? $nib['no_dokumen_perusahaan'] : NULL;
     $logo = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'logo']);
     $logo_img = !empty($logo) ? $logo['dokumen_perusahaan'] : NULL;
-    $filename = 'SKT_'.$perusahaan['nama_perusahaan'].'_' . $input['id_pengiriman'];
+    $filename = 'SKT_' . $perusahaan['nama_perusahaan'] . '_' . $input['id_pengiriman'];
 
 
 
@@ -1265,8 +1267,8 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
       $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
 
-      if($pi['id_negara'] == 'ID'){
-        
+      if ($pi['id_negara'] == 'ID') {
+
         //untuk antar pulau
         $table->addRow();
         $table->addCell(4000, $cellVCentered)->addText('Nama Buyer', 'paragraph', $noSpace);
@@ -1277,19 +1279,17 @@ class FormatDokumenController extends CI_Controller
         $table->addCell(4000, $cellVCentered)->addText('Alamat Buyer', 'paragraph', $noSpace);
         $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
         $table->addCell(5000, $cellVCentered)->addText($pi['alamat_buyer'], 'paragraph', $noSpace);
+      } else {
 
-      } else{
-        
 
-      // untuk expor
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
-      
-    }
-      
-      
+        // untuk expor
+        $table->addRow();
+        $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
+        $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+        $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+      }
+
+
 
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
@@ -1332,16 +1332,14 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(4000, $cellVCentered)->addText('Keterangan Penggunaan Produk', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
       $table->addCell(5000, $cellVCentered)->addText($pi['keterangan_penggunaan_produk'], 'paragraph', $noSpace);
-       if($pi['id_negara'] == 'ID'){
-        
+      if ($pi['id_negara'] == 'ID') {
+
         //untuk antar pulau
         $table->addRow();
         $table->addCell(4000, $cellVCentered)->addText('No Manifest Domestic', 'paragraph', $noSpace);
         $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
         $table->addCell(5000, $cellVCentered)->addText($pi['no_manifest'], 'paragraph', $noSpace);
-
-        
-      } 
+      }
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('No Sertifikat IG MWP', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
@@ -1349,24 +1347,23 @@ class FormatDokumenController extends CI_Controller
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('No Sertifikat Uji Mutu (Sertificate of Confirmity)', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText( $pi['no_hasil_mutu'] , 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pi['no_hasil_mutu'], 'paragraph', $noSpace);
       $textrun = $section->addTextRun();
       $textrun->addTextBreak();
       $textrun->addText("Surat keterangan ini diberikan untuk menjelaskan perdagangan Lada Putih telah dilakukan sesuai peraturan dalam upaya menciptakan perdagangan lada yang baik.", 'paragraph');
       $textrun->addTextBreak();
 
       $textrun = $section->addTextRun();
-      $textrun->addText("Pangkalpinang, ".$this->tgl_indo(), 'paragraph');
-      
+      $textrun->addText("Pangkalpinang, " . $this->tgl_indo(), 'paragraph');
+
       $textrun->addTextBreak();
       $textrun->addText("KANTOR PEMASARAN BERSAMA,", array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'spaceAfter' => 0, 'bold' => true));
-      
+
       $textrun->addTextBreak();
       $textrun->addText('General Manager', 'paragraph');
       $textrun->addTextBreak(5);
       $textrun->addText('Deki Susanto ST', 'paragraph');
       $textrun->addTextBreak();
-
     }
 
     $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
@@ -1396,7 +1393,7 @@ class FormatDokumenController extends CI_Controller
     $no_nib = !empty($nib) ? $nib['no_dokumen_perusahaan'] : NULL;
     $logo = $this->DokumenPerusahaanModel->getAll(['id_perusahaan' => $pengiriman['id_perusahaan'], 'clue' => 'logo']);
     $logo_img = !empty($logo) ? $logo['dokumen_perusahaan'] : NULL;
-    $filename = 'SKT_'.$perusahaan['nama_perusahaan'].'_' . $input['id_pengiriman'];
+    $filename = 'SKT_' . $perusahaan['nama_perusahaan'] . '_' . $input['id_pengiriman'];
 
 
 
@@ -1410,7 +1407,7 @@ class FormatDokumenController extends CI_Controller
     $phpWord->addFontStyle('paragraph3', array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'bold' => true, 'underline' => 'single'));
     $phpWord->addFontStyle('paragraph4', array('name' => 'Times New Roman', 'size' => 13, 'color' => '000000', 'bold' => true, 'underline' => 'single'));
     $noSpace = array('spaceAfter' => 0);
-    $noSpace_center = array('spaceAfter' => 0 , 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER);
+    $noSpace_center = array('spaceAfter' => 0, 'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER);
 
     $paragraphStyleName = 'pStyle';
     $phpWord->addParagraphStyle($paragraphStyleName, array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 100));
@@ -1544,8 +1541,8 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
       $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
 
-      if($pi['id_negara'] == 'ID'){
-        
+      if ($pi['id_negara'] == 'ID') {
+
         //untuk antar pulau
         $table->addRow();
         $table->addCell(4000, $cellVCentered)->addText('Nama Buyer', 'paragraph', $noSpace);
@@ -1556,19 +1553,17 @@ class FormatDokumenController extends CI_Controller
         $table->addCell(4000, $cellVCentered)->addText('Alamat Buyer', 'paragraph', $noSpace);
         $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
         $table->addCell(5000, $cellVCentered)->addText($pi['alamat_buyer'], 'paragraph', $noSpace);
+      } else {
 
-      } else{
-        
 
-      // untuk expor
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
-      
-    }
-      
-      
+        // untuk expor
+        $table->addRow();
+        $table->addCell(4000, $cellVCentered)->addText('Nama Importir', 'paragraph', $noSpace);
+        $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+        $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+      }
+
+
 
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('Keterangan Marking', 'paragraph', $noSpace);
@@ -1595,16 +1590,14 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(4000, $cellVCentered)->addText('Keterangan Penggunaan Produk', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
       $table->addCell(5000, $cellVCentered)->addText($pi['keterangan_penggunaan_produk'], 'paragraph', $noSpace);
-       if($pi['id_negara'] == 'ID'){
-        
+      if ($pi['id_negara'] == 'ID') {
+
         //untuk antar pulau
         $table->addRow();
         $table->addCell(4000, $cellVCentered)->addText('No Manifest Domestic', 'paragraph', $noSpace);
         $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
         $table->addCell(5000, $cellVCentered)->addText($pi['no_manifest'], 'paragraph', $noSpace);
-
-        
-      } 
+      }
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('No Sertifikat IG MWP', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
@@ -1612,18 +1605,18 @@ class FormatDokumenController extends CI_Controller
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('No Sertifikat Uji Mutu (Sertificate of Confirmity)', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText( $pi['no_hasil_mutu'] , 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pi['no_hasil_mutu'], 'paragraph', $noSpace);
       $textrun = $section->addTextRun();
       $textrun->addTextBreak();
       $textrun->addText("Surat keterangan ini diberikan untuk menjelaskan perdagangan Lada Putih telah dilakukan sesuai peraturan dalam upaya menciptakan perdagangan lada yang baik.", 'paragraph');
       $textrun->addTextBreak();
 
       $textrun = $section->addTextRun();
-      $textrun->addText("Pangkalpinang, ".$this->tgl_indo(), 'paragraph');
-      
+      $textrun->addText("Pangkalpinang, " . $this->tgl_indo(), 'paragraph');
+
       $textrun->addTextBreak();
       $textrun->addText("KANTOR PEMASARAN BERSAMA,", array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'spaceAfter' => 0, 'bold' => true));
-      
+
       $textrun->addTextBreak();
       $textrun->addText('General Manager', 'paragraph');
       $textrun->addTextBreak(5);
@@ -1632,7 +1625,7 @@ class FormatDokumenController extends CI_Controller
 
       // Englis SKT
 
-      
+
       $section = $phpWord->addSection(array(
         'marginLeft' => 1200, 'marginRight' => 600,
         'marginTop' => 600, 'marginBottom' => 600
@@ -1759,8 +1752,8 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
       $table->addCell(5000, $cellVCentered)->addText($negara_tujuan, 'paragraph', $noSpace);
 
-      if($pi['id_negara'] == 'ID'){
-        
+      if ($pi['id_negara'] == 'ID') {
+
         //untuk antar pulau
         $table->addRow();
         $table->addCell(4000, $cellVCentered)->addText('Buyer Name', 'paragraph', $noSpace);
@@ -1771,18 +1764,16 @@ class FormatDokumenController extends CI_Controller
         $table->addCell(4000, $cellVCentered)->addText('Buyer Address', 'paragraph', $noSpace);
         $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
         $table->addCell(5000, $cellVCentered)->addText($pi['alamat_buyer'], 'paragraph', $noSpace);
+      } else {
 
-      } else{
-        
 
-      // untuk expor
-      $table->addRow();
-      $table->addCell(4000, $cellVCentered)->addText('Name Importer', 'paragraph', $noSpace);
-      $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
-      
-    }
-      
+        // untuk expor
+        $table->addRow();
+        $table->addCell(4000, $cellVCentered)->addText('Name Importer', 'paragraph', $noSpace);
+        $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
+        $table->addCell(5000, $cellVCentered)->addText($nama_importir, 'paragraph', $noSpace);
+      }
+
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('Marking Description', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
@@ -1808,16 +1799,14 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(4000, $cellVCentered)->addText('Product Usage Description', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
       $table->addCell(5000, $cellVCentered)->addText($pi['keterangan_penggunaan_produk'], 'paragraph', $noSpace);
-       if($pi['id_negara'] == 'ID'){
-        
+      if ($pi['id_negara'] == 'ID') {
+
         //untuk antar pulau
         $table->addRow();
         $table->addCell(4000, $cellVCentered)->addText('No Manifest Domestic', 'paragraph', $noSpace);
         $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
         $table->addCell(5000, $cellVCentered)->addText($pi['no_manifest'], 'paragraph', $noSpace);
-
-        
-      } 
+      }
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('No Certificate IG MWP', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
@@ -1825,43 +1814,160 @@ class FormatDokumenController extends CI_Controller
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('No Certificate of Confirmity', 'paragraph', $noSpace);
       $table->addCell(1, $cellVCentered)->addText(':', 'paragraph', $noSpace);
-      $table->addCell(5000, $cellVCentered)->addText( $pi['no_hasil_mutu'] , 'paragraph', $noSpace);
+      $table->addCell(5000, $cellVCentered)->addText($pi['no_hasil_mutu'], 'paragraph', $noSpace);
       $textrun = $section->addTextRun();
       $textrun->addTextBreak();
       $textrun->addText("This detail report was given to explain the trade of White Pepper has been carried out according to the regulations in an effort to create a good pepper trade.", 'paragraph');
       $textrun->addTextBreak();
 
       $textrun = $section->addTextRun();
-      $textrun->addText("Pangkalpinang, ".$this->tgl_eng(), 'paragraph');
-      
+      $textrun->addText("Pangkalpinang, " . $this->tgl_eng(), 'paragraph');
+
       $textrun->addTextBreak();
       $textrun->addText("KANTOR PEMASARAN BERSAMA,", array('name' => 'Times New Roman', 'size' => 11, 'color' => '000000', 'spaceAfter' => 0, 'bold' => true));
-      
+
       $textrun->addTextBreak();
       $textrun->addText('General Manager', 'paragraph');
       $textrun->addTextBreak(5);
       $textrun->addText('Deki Susanto ST', 'paragraph');
       $textrun->addTextBreak();
 
+     
+      // Test Result
       $section = $phpWord->addSection(array(
         'marginLeft' => 1200, 'marginRight' => 600,
-        'marginTop' => 600, 'marginBottom' => 600,'orientation' => 'landscape'
+        'marginTop' => 600, 'marginBottom' => 600
       ));
 
+      $section->addText("TEST RESULT :", 'paragraph_bold', 'pS2');
+      // $fancyTableStyle = array('cellMargin'=>80, 'borderStyle' => 'dotted', 'borderSize' => 6, 'borderColor' => '000000', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
+      $fancyTableStyle = array('cellMargin' => 100, 'borderStyle' => 'solid', 'borderSize' => 6);
+      $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(1));
+      $spanTableStyleName = 'Colspan Rowspan';
+      $phpWord->addTableStyle('requestorContactTbl', [
+        'borderSize' => 6,
+        'borderColor' => '00000',
+        'afterSpacing' => 2,
+        'Spacing' => 10,
+        'cellMargin' => 50
+      ]);
+      $table = $section->addTable('requestorContactTbl');
+      // array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 100)
+
+      $table->addRow();
+      $table->addCell(400, $cellVCentered)->addText('No.', 'paragraph_bold', $noSpace_center);
+      $table->addCell(3000, $cellVCentered)->addText('Caracteristic', 'paragraph_bold', $noSpace_center);
+      $table->addCell(2000, $cellVCentered)->addText('Unit', 'paragraph_bold', $noSpace_center);
+      $table->addCell(2000, $cellVCentered)->addText('Grade II Limit', 'paragraph_bold', $noSpace_center);
+      $table->addCell(3000, $cellVCentered)->addText('Mean Test Result', 'paragraph_bold', $noSpace_center);
+      $table->addCell(3000, $cellVCentered)->addText('Method of Test', 'paragraph_bold', $noSpace_center);
+
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('1.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Cleanliness', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('--', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Free from living and dead insects, also free from insects fragments.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Free from living and dead insects, also free from insects fragments.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.5.1', 'paragraph', $noSpace_center);
+     
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('2.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Bulk Density', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('g/l', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('665', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Min. 600', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.1', 'paragraph', $noSpace_center);
+     
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('3.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Extraneius matter, (w/w) max', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('0,2', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('2,0', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.4', 'paragraph', $noSpace_center);
+
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('4.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Light barries, (w/w) max', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('0,2', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('2,0', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.3', 'paragraph', $noSpace_center);
+      
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('5.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Mouldy barries, (w/w) max', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('0', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('3', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.6', 'paragraph', $noSpace_center);
+
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('6.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Darkcoloured barries, (w/w) max', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('0,9', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('2,0', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.5', 'paragraph', $noSpace_center);
+
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('7.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Moisture content, (w/w) max', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('13,6', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('15,0', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.2', 'paragraph', $noSpace_center);
+
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('8.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Salmonella', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('Detection/25g', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('-', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Negatif', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.7', 'paragraph', $noSpace_center);
+
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('9.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('E coli', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('MPN/g', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('-', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText(htmlspecialchars('< 3'), 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.8', 'paragraph', $noSpace_center);
+
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('10.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Piperine content, (w/w) max', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('4,9', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('As the test result', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.10.2', 'paragraph', $noSpace_center);
+
+      $table->addRow();
+      $table->addCell(null, $cellVCentered)->addText('11.', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('Essential Oil content, (w/w) max', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('2,4', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('As the test result', 'paragraph', $noSpace_center);
+      $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.10.3', 'paragraph', $noSpace_center);
       
       // Detail Report
+      $section = $phpWord->addSection(array(
+        'marginLeft' => 1200, 'marginRight' => 600,
+        'marginTop' => 600, 'marginBottom' => 600, 'orientation' => 'landscape'
+      ));
+
       $section->addText("DETAILS OF REPORT :", 'paragraph', 'pS2');
       // $fancyTableStyle = array('cellMargin'=>80, 'borderStyle' => 'dotted', 'borderSize' => 6, 'borderColor' => '000000', 'height' => 300, 'cellMargin' => 40, 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
-      $fancyTableStyle = array('cellMargin'=>80, 'borderStyle' => 'solid', 'borderSize' => 6);
+      $fancyTableStyle = array('cellMargin' => 0, 'borderStyle' => 'solid', 'borderSize' => 6, 'height' => 100);
       $cellVCentered = array('valign' => 'center', 'spaceAfter' => \PhpOffice\PhpWord\Shared\Converter::pointToTwip(0));
       $spanTableStyleName = 'Colspan Rowspan';
       $phpWord->addTableStyle('requestorContactTbl', [
-        'borderSize' => 6, 
-        'borderColor' => '00000', 
-        'afterSpacing' => 0, 
-        'Spacing'=> 0, 
-        'cellMargin'=> 0
-    ]);
+        'borderSize' => 6,
+        'borderColor' => '00000',
+        'afterSpacing' => 0,
+        'Spacing' => 0,
+        'cellMargin' => 0
+      ]);
       $table = $section->addTable('requestorContactTbl');
       // array('alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER, 'spaceAfter' => 100)
 
@@ -1896,35 +2002,35 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(4000, $cellVCentered)->addText('', 'paragraph_bold', $noSpace);
       $table->addCell(7800, array('gridSpan' => 6, 'align' => 'center'))->addText('Standar', 'paragraph_bold', $noSpace_center);
       $table->addCell(4000, $cellVCentered)->addText('Hasil Pemeriksaan', 'paragraph_bold', $noSpace_center);
-  
+
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('A. Cita Rasa', 'paragraph_bold', $noSpace);
       $table->addCell(7800, array('gridSpan' => 6, 'align' => 'center'))->addText('', 'paragraph', $noSpace);
       $table->addCell(4000, $cellVCentered)->addText(' ', 'paragraph', $noSpace);
-    
-      
+
+
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('   Bebas Kontainasi', 'paragraph', $noSpace);
       $table->addCell(7800, array('gridSpan' => 6, 'align' => 'center'))->addText('N/A', 'paragraph', $noSpace);
       $table->addCell(4000, $cellVCentered)->addText('N/A', 'paragraph', $noSpace);
-    
-      
+
+
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('   Bebas cacat cita rasa utama', 'paragraph', $noSpace);
       $table->addCell(7800, array('gridSpan' => 6, 'align' => 'center'))->addText('N/A', 'paragraph', $noSpace);
       $table->addCell(4000, $cellVCentered)->addText('N/A', 'paragraph', $noSpace);
-    
+
 
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('   Cita rasa aromatic', 'paragraph', $noSpace);
       $table->addCell(7800, array('gridSpan' => 6, 'align' => 'center'))->addText('N/A', 'paragraph', $noSpace);
       $table->addCell(4000, $cellVCentered)->addText('N/A', 'paragraph', $noSpace);
-    
+
       $table->addRow();
       $table->addCell(4000, $cellVCentered)->addText('   Tingkat kepedesan', 'paragraph', $noSpace);
       $table->addCell(7800, array('gridSpan' => 6, 'align' => 'center'))->addText('N/A', 'paragraph', $noSpace);
-      $table->addCell(4000 , $cellVCentered)->addText('N/A', 'paragraph', $noSpace);
-    
+      $table->addCell(4000, $cellVCentered)->addText('N/A', 'paragraph', $noSpace);
+
 
       $table->addRow();
       $table->addCell(5000, $cellVCentered)->addText('B. Kimiawi', 'paragraph_bold', $noSpace);
@@ -1936,9 +2042,9 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('IPC', 'paragraph_bold', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('ISO', 'paragraph_bold', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph_bold', $noSpace_center);
-    
 
-    $table->addRow();
+
+      $table->addRow();
       $table->addCell(5000, $cellVCentered)->addText('   Kerapatan (Bulk density), g/l min', 'paragraph', $noSpace);
       // $table->addCell(10000, array('gridSpan' => 6, 'align' => 'center'))->addText('', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
@@ -1948,9 +2054,9 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('600', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('450', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
-      
-    
+
+
+
       $table->addRow();
       $table->addCell(9000, $cellVCentered)->addText('   Kadar air (b/b), % maks', 'paragraph', $noSpace);
       // $table->addCell(10000, array('gridSpan' => 6, 'align' => 'center'))->addText('', 'paragraph', $noSpace_center);
@@ -1970,7 +2076,7 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('1', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
+
       $table->addRow();
       $table->addCell(6000, $cellVCentered)->addText('   Kadar benda asing (b/b), % maks', 'paragraph', $noSpace);
       $table->addCell(1300, $cellVCentered)->addText('1', 'paragraph', $noSpace_center);
@@ -1980,8 +2086,8 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('1', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('1,5', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
-      
+
+
       $table->addRow();
       $table->addCell(6000, $cellVCentered)->addText('   Kadar biji kehitaman (b/b), % maks', 'paragraph', $noSpace);
       $table->addCell(1300, $cellVCentered)->addText('1', 'paragraph', $noSpace_center);
@@ -1991,8 +2097,8 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('1', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('4', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
-      
+
+
       $table->addRow();
       $table->addCell(6000, $cellVCentered)->addText('   Kadar cemaran kapang (b/b), % maks', 'paragraph', $noSpace);
       $table->addCell(1300, $cellVCentered)->addText('1', 'paragraph', $noSpace_center);
@@ -2002,7 +2108,7 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('1', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
+
       $table->addRow();
       $table->addCell(6000, $cellVCentered)->addText('   Kadar abu (b/b), % maks', 'paragraph', $noSpace);
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
@@ -2012,8 +2118,8 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('3,5', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
-      
+
+
       $table->addRow();
       $table->addCell(6000, $cellVCentered)->addText('   Kadar abu larut asam (b/b), % maks', 'paragraph', $noSpace);
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
@@ -2023,8 +2129,8 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('0,3', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
-      
+
+
       $table->addRow();
       $table->addCell(6000, $cellVCentered)->addText('   Kadar piperin (b/b), % maks', 'paragraph', $noSpace);
       $table->addCell(1300, $cellVCentered)->addText('hasil', 'paragraph', $noSpace_center);
@@ -2034,7 +2140,7 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('4', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
+
       $table->addRow();
       $table->addCell(6000, $cellVCentered)->addText('   Kadar minyak atsiry (v/b), % maks', 'paragraph', $noSpace);
       $table->addCell(1300, $cellVCentered)->addText('hasil', 'paragraph', $noSpace_center);
@@ -2044,8 +2150,8 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('0,65', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
-      
+
+
       $table->addRow();
       $table->addCell(6000, $cellVCentered)->addText('   Salmonela sp, detection/25 gr', 'paragraph', $noSpace);
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
@@ -2056,7 +2162,7 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('negatif', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
 
-     
+
       $table->addRow();
       $table->addCell(6000, $cellVCentered)->addText('   E coli, MPN/gr', 'paragraph', $noSpace);
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
@@ -2066,8 +2172,8 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText(htmlspecialchars('< 3'), 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('Nil', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
-      
+
+
 
       $table->addRow();
       $table->addCell(7000, $cellVCentered)->addText('   Cemaran serangga, By count maks', 'paragraph', $noSpace);
@@ -2078,7 +2184,6 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(1300, $cellVCentered)->addText('Ipc', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText('*', 'paragraph', $noSpace_center);
       $table->addCell(1300, $cellVCentered)->addText(' ', 'paragraph', $noSpace_center);
-    
     }
 
     $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
@@ -2090,7 +2195,7 @@ class FormatDokumenController extends CI_Controller
     //   ExceptionHandler::handle($e);
     // }
   }
- 
+
 
   public function format_permohonan_to_bp3l()
   {
