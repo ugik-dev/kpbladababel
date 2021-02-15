@@ -29,7 +29,6 @@
                 <tr>
                   <th style="width: 14%; text-align:center!important">Nama Perusahaan</th>
                   <th style="width: 33%; text-align:center!important">Rangkuman Pengiriman</th>
-                
                   <th style="width: 11%; text-align:center!important">Permohonan</th>
                   <th style="width: 11%; text-align:center!important">Balasan</th>
                   <th style="width: 10%; text-align:center!important">Status BP3L</th>

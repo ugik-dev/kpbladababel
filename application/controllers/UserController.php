@@ -31,7 +31,7 @@ class UserController extends CI_Controller
 	{
 		$this->SecurityModel->guestOnlyGuard();
 		$pageData = array(
-			'title' => 'Masuk',
+			'title' => 'Daftar',
 		);
 
 		$this->load->view('RegisterPage', $pageData);

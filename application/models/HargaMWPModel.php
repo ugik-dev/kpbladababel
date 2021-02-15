@@ -10,6 +10,12 @@ class HargaMWPModel extends CI_Model
     $this->db->from("harga_mwp");
     $this->db->order_by("tanggal_berlaku", "DESC");
     if (!empty($filter['latest'])) $this->db->limit(1);
+    if (!empty($filter['latest3'])) {
+      $this->db->limit(1);
+      // $res = $this->db->get();
+      // return $res->result_array();
+    
+    }
     $res = $this->db->get();
     return DataStructure::keyValue($res->result_array(), 'id_harga_mwp');
   }
@@ -42,6 +48,23 @@ class HargaMWPModel extends CI_Model
     return reset($row);
   }
 
+  public function getLatest3()
+  {
+    $this->db->select("*");
+    $this->db->from("harga_mwp");
+    $this->db->order_by("tanggal_berlaku", "DESC");
+    $this->db->limit(5);
+    if (!empty($filter['latest'])) $this->db->limit(1);
+    if (!empty($filter['latest3'])) {
+      // $res = $this->db->get();
+      // return $res->result_array();
+    
+    }
+    $res = $this->db->get();
+    return $res->result_array();
+ }
+
+
   public function add($data)
   {
     $this->db->insert('harga_mwp', DataStructure::slice($data, [
@@ -58,7 +81,13 @@ class HargaMWPModel extends CI_Model
       'd_harga_sni1_petani',
       'd_harga_sni1_fob',
       'd_harga_iso_petani',
-      'd_harga_iso_fob'
+      'd_harga_iso_fob','harga_mq_petani','harga_mq_fob','d_harga_mq_petani','d_harga_mq_fob',
+      
+      'd_harga_sni2_petani',
+      'd_harga_sni2_fob',
+      
+      'harga_sni2_petani',
+      'harga_sni2_fob'
     ]));
     ExceptionHandler::handleDBError($this->db->error(), "Tambah Harga MWP gagal", "harga_mwp");
 
@@ -82,6 +111,8 @@ class HargaMWPModel extends CI_Model
       'harga_ipc_fob',
       'harga_sni1_petani',
       'harga_sni1_fob',
+      'harga_sni2_petani',
+      'harga_sni2_fob',
       'harga_iso_petani',
       'harga_iso_fob',
 
@@ -97,8 +128,11 @@ class HargaMWPModel extends CI_Model
       'd_harga_ipc_fob',
       'd_harga_sni1_petani',
       'd_harga_sni1_fob',
+      'd_harga_sni2_petani',
+      'd_harga_sni2_fob',
       'd_harga_iso_petani',
-      'd_harga_iso_fob'
+      'd_harga_iso_fob',
+      'harga_mq_petani','harga_mq_fob','d_harga_mq_petani','d_harga_mq_fob'
     ], TRUE));
     ExceptionHandler::handleDBError($this->db->error(), "Edit Harga MWP gagal", "harga_mwp");
 

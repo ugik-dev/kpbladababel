@@ -27,6 +27,15 @@ class HargaMWPController extends CI_Controller {
       ExceptionHandler::handle($e);
     }
   }
+
+  public function getLatest3(){
+    try{
+      $data = $this->HargaMWPModel->getLatest3();
+			echo json_encode(array("data" => $data));
+    } catch (Exception $e){
+      ExceptionHandler::handle($e);
+    }
+  }
   
   public function getStandarMutu(){
     try{

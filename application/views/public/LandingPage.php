@@ -56,7 +56,35 @@
       } ?>
 
     </div>
+    <!-- New -->
     <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-content">
+          <div class="table-responsive">
+            <table id="HargaMWPTable2" class="table table-bordered stripe" style="padding:0px">
+              <thead>
+                <tr>
+                  <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+                    echo "  <th style='width: 25%;'>Date</th>
+                    ";
+                  } else {
+                    echo "  <th style='width: 25%;'>Tanggal</th>
+               ";
+                  } ?>
+                  <th style='width: 25%;'>MQ</th>
+                  <th style='width: 25%;'>SNI 1</th>
+                  <th style='width: 25%;'>SNI 2</th>
+
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- OLD -->
+    <div class="col-lg-12" hidden>
       <div class="ibox">
         <div class="ibox-content">
           <div class="table-responsive">
@@ -483,6 +511,17 @@
       "dom": "t"
     });
 
+    var HargaMWPTable2 = $('#HargaMWPTable2').DataTable({
+      'columnDefs': [{
+        targets: [0, 1, 2,3],
+        className: 'text-center'
+      }],
+      deferRender: true,
+      "ordering": false,
+      "dom": "t"
+    });
+
+
     var StandarMutuTable = $('#StandarMutuTable').DataTable({
       'columnDefs': [{
         targets: [0, 1, 2],
@@ -500,7 +539,7 @@
       });
       swal.showLoading();
       return $.ajax({
-        url: `<?php echo site_url('HargaMWPController/getLatest/') ?>`,
+        url: `<?php echo site_url('HargaMWPController/getLatest3/') ?>`,
         'type': 'GET',
         data: {},
         success: function(data) {
@@ -510,7 +549,31 @@
             return;
           }
           dataHargaMWP = json['data'];
-          renderHargaMWP(dataHargaMWP);
+          // renderHargaMWP(dataHargaMWP);
+          renderHargaMWP2(dataHargaMWP);
+        },
+        error: function(e) {}
+      });
+    }
+
+    function getLatestHargaMWP2() {
+      swal({
+        title: 'Loading harga_mwp...',
+        allowOutsideClick: false
+      });
+      swal.showLoading();
+      return $.ajax({
+        url: `<?php echo site_url('HargaMWPController/getLatest3/') ?>`,
+        'type': 'GET',
+        data: {},
+        success: function(data) {
+          swal.close();
+          var json = JSON.parse(data);
+          if (json['error']) {
+            return;
+          }
+          dataHargaMWP2 = json['data'];
+          renderHargaMWP2(dataHargaMWP2);
         },
         error: function(e) {}
       });
@@ -558,6 +621,31 @@
       renderData.push(["ISO", "Rp " + dataHargaMWP['harga_iso_petani'] + ' || USD ' + dataHargaMWP['d_harga_iso_petani'], "Rp" + dataHargaMWP['harga_iso_fob'] + ' || USD ' + dataHargaMWP['d_harga_iso_fob']]);
       HargaMWPTable.clear().rows.add(renderData).draw('full-hold');
     }
+
+    function renderHargaMWP2(data) {
+      if (data == null || typeof data != "object") {
+        console.log("HargaMWP::UNKNOWN DATA");
+        return;
+      }
+      var i = 0;
+      // d = data
+      var renderData = [];
+    Object.values(data).forEach((d) => {
+        renderData.push([d['tanggal_berlaku'],
+       'Rp '+ d['harga_mq_petani'], 
+       'Rp '+d['harga_sni1_petani'], 
+       'Rp '+d['harga_sni2_petani']]) 
+      });
+      // renderData.push(["MWP1", "Rp " + dataHargaMWP['harga_mwp1_petani'] + ' || USD ' + dataHargaMWP['d_harga_mwp1_petani'], "Rp " + dataHargaMWP['harga_mwp1_fob'] + ' || USD ' + dataHargaMWP['d_harga_mwp1_fob']]);
+      // renderData.push(["MWP2", "Rp " + dataHargaMWP['harga_mwp2_petani'] + ' || USD ' + dataHargaMWP['d_harga_mwp2_petani'], "Rp" + dataHargaMWP['harga_mwp2_fob'] + ' || USD ' + dataHargaMWP['d_harga_mwp2_fob']]);
+      // renderData.push(["ASTA", "Rp " + dataHargaMWP['harga_asta_petani'] + ' || USD ' + dataHargaMWP['d_harga_asta_petani'], "Rp" + dataHargaMWP['harga_asta_fob'] + ' || USD ' + dataHargaMWP['d_harga_asta_fob']]);
+      // renderData.push(["ESA", "Rp " + dataHargaMWP['harga_esa_petani'] + ' || USD ' + dataHargaMWP['d_harga_esa_petani'], "Rp" + dataHargaMWP['harga_esa_fob'] + ' || USD ' + dataHargaMWP['d_harga_esa_fob']]);
+      // renderData.push(["IPC", "Rp " + dataHargaMWP['harga_ipc_petani'] + ' || USD ' + dataHargaMWP['d_harga_ipc_petani'], "Rp" + dataHargaMWP['harga_ipc_fob'] + ' || USD ' + dataHargaMWP['d_harga_ipc_fob']]);
+      // renderData.push(["SNI1", "Rp " + dataHargaMWP['harga_sni1_petani'] + ' || USD ' + dataHargaMWP['d_harga_sni1_petani'], "Rp" + dataHargaMWP['harga_sni1_fob'] + ' || USD ' + dataHargaMWP['d_harga_sni1_fob']]);
+      // renderData.push(["ISO", "Rp " + dataHargaMWP['harga_iso_petani'] + ' || USD ' + dataHargaMWP['d_harga_iso_petani'], "Rp" + dataHargaMWP['harga_iso_fob'] + ' || USD ' + dataHargaMWP['d_harga_iso_fob']]);
+      HargaMWPTable2.clear().rows.add(renderData).draw('full-hold');
+    }
+
 
     function renderStandarMutu(data) {
       if (data == null || typeof data != "object") {
