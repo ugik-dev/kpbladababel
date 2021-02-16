@@ -330,7 +330,7 @@
       'ordering': false,
     });
 
-   
+
 
 
     var kpb_rek_modal = {
@@ -440,6 +440,9 @@
         console.log("Dokumen::UNKNOWN DATA");
         return;
       }
+      renderFDataItem(dataItem);
+      renderFDataItemBP3L(dataItem);
+
       var i = 0;
       console.log(global_antar_pulau);
       perusahaan_btn = "-"
@@ -493,13 +496,13 @@
         var kpb_rek_btn = '-';
       }
 
-      if (role == 'kpb'){
+      if (role == 'kpb') {
 
-      renderData.push(['KPB', kpb_rek_status, kpb_rek_permohonan +"<br><br>"+ kpb_rek_permohonan2, kpb_rek_balasan + skt, kpb_rek_catatan, kpb_rek_btn]);
-      }else{
+        renderData.push(['KPB', kpb_rek_status, kpb_rek_permohonan + "<br><br>" + kpb_rek_permohonan2, kpb_rek_balasan + skt, kpb_rek_catatan, kpb_rek_btn]);
+      } else {
         renderData.push(['KPB', kpb_rek_status, '-', kpb_rek_balasan + skt, kpb_rek_catatan, '-']);
-     
-      } 
+
+      }
 
       var bp3l_rek_status = statusPermohonan2(dataInfo['status_bp3l_rek']) + (dataInfo['status_bp3l_rek'] == 'MENUNGGU' ? ': Rekomendasi KPB' : '');
       if (!empty(dataInfo['date_bp3l'])) date = dataInfo['date_bp3l'].split(':');
@@ -571,8 +574,6 @@
             return;
           }
           dataJenisMutu = json['data'];
-          renderFDataItem(dataItem);
-    renderFDataItemBP3L(dataItem);
         },
         error: function(e) {}
       });
@@ -580,7 +581,7 @@
 
 
     function renderFDataItem(data) {
-console.log(dataJenisMutu)
+      console.log('run')
       dataItemTB = [];
       var x = 1;
       Object.values(data).forEach((d) => {
@@ -640,7 +641,7 @@ console.log(dataJenisMutu)
       });
 
       if (dataInfo['id_tahap_proposal'] == '5') {
-      FDataItemBP3L.rows.add(dataItemTBBP3L).draw('full-hold');
+        FDataItemBP3L.rows.add(dataItemTBBP3L).draw('full-hold');
       }
       FDataItemManifest.rows.add(dataItemMN).draw('full-hold');
 
