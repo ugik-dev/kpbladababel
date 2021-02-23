@@ -433,7 +433,7 @@
         return `<i class='fa fa-check text-success'> Selesai</i>`;
       return `<i class='fa fa-times text-danger'> Ditolak</i>`;
     }
-    renderDokumen(dataInfo);
+   
 
     function renderDokumen(data) {
       if (data == null || typeof data != "object") {
@@ -574,6 +574,7 @@
             return;
           }
           dataJenisMutu = json['data'];
+          renderDokumen(dataInfo);
         },
         error: function(e) {}
       });
@@ -581,7 +582,8 @@
 
 
     function renderFDataItem(data) {
-      console.log('run')
+      console.log('runs')
+      console.log(dataJenisMutu)
       dataItemTB = [];
       var x = 1;
       Object.values(data).forEach((d) => {
