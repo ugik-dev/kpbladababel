@@ -1,419 +1,126 @@
-<?php
-/**
- * PHPMailer POP-Before-SMTP Authentication Class.
- * PHP Version 5.5.
- *
- * @see       https://github.com/PHPMailer/PHPMailer/ The PHPMailer GitHub project
- *
- * @author    Marcus Bointon (Synchro/coolbru) <phpmailer@synchromedia.co.uk>
- * @author    Jim Jagielski (jimjag) <jimjag@gmail.com>
- * @author    Andy Prevost (codeworxtech) <codeworxtech@users.sourceforge.net>
- * @author    Brent R. Matzelle (original founder)
- * @copyright 2012 - 2017 Marcus Bointon
- * @copyright 2010 - 2012 Jim Jagielski
- * @copyright 2004 - 2009 Andy Prevost
- * @license   http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
- * @note      This program is distributed in the hope that it will be useful - WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE.
- */
+<?php //00591
+// IONCUBE ENCODER 10.2 EVALUATION
+// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
+// IS NOT PRESENT IN PRODUCTION ENCODED FILES
 
-namespace PHPMailer\PHPMailer;
-
-/**
- * PHPMailer POP-Before-SMTP Authentication Class.
- * Specifically for PHPMailer to use for RFC1939 POP-before-SMTP authentication.
- * 1) This class does not support APOP authentication.
- * 2) Opening and closing lots of POP3 connections can be quite slow. If you need
- *   to send a batch of emails then just perform the authentication once at the start,
- *   and then loop through your mail sending script. Providing this process doesn't
- *   take longer than the verification period lasts on your POP3 server, you should be fine.
- * 3) This is really ancient technology; you should only need to use it to talk to very old systems.
- * 4) This POP3 class is deliberately lightweight and incomplete, and implements just
- *   enough to do authentication.
- *   If you want a more complete class there are other POP3 classes for PHP available.
- *
- * @author  Richard Davey (original author) <rich@corephp.co.uk>
- * @author  Marcus Bointon (Synchro/coolbru) <phpmailer@synchromedia.co.uk>
- * @author  Jim Jagielski (jimjag) <jimjag@gmail.com>
- * @author  Andy Prevost (codeworxtech) <codeworxtech@users.sourceforge.net>
- */
-class POP3
-{
-    /**
-     * The POP3 PHPMailer Version number.
-     *
-     * @var string
-     */
-    const VERSION = '6.0.1';
-
-    /**
-     * Default POP3 port number.
-     *
-     * @var int
-     */
-    const DEFAULT_PORT = 110;
-
-    /**
-     * Default timeout in seconds.
-     *
-     * @var int
-     */
-    const DEFAULT_TIMEOUT = 30;
-
-    /**
-     * Debug display level.
-     * Options: 0 = no, 1+ = yes.
-     *
-     * @var int
-     */
-    public $do_debug = 0;
-
-    /**
-     * POP3 mail server hostname.
-     *
-     * @var string
-     */
-    public $host;
-
-    /**
-     * POP3 port number.
-     *
-     * @var int
-     */
-    public $port;
-
-    /**
-     * POP3 Timeout Value in seconds.
-     *
-     * @var int
-     */
-    public $tval;
-
-    /**
-     * POP3 username.
-     *
-     * @var string
-     */
-    public $username;
-
-    /**
-     * POP3 password.
-     *
-     * @var string
-     */
-    public $password;
-
-    /**
-     * Resource handle for the POP3 connection socket.
-     *
-     * @var resource
-     */
-    protected $pop_conn;
-
-    /**
-     * Are we connected?
-     *
-     * @var bool
-     */
-    protected $connected = false;
-
-    /**
-     * Error container.
-     *
-     * @var array
-     */
-    protected $errors = [];
-
-    /**
-     * Line break constant.
-     */
-    const LE = "\r\n";
-
-    /**
-     * Simple static wrapper for all-in-one POP before SMTP.
-     *
-     * @param string   $host        The hostname to connect to
-     * @param int|bool $port        The port number to connect to
-     * @param int|bool $timeout     The timeout value
-     * @param string   $username
-     * @param string   $password
-     * @param int      $debug_level
-     *
-     * @return bool
-     */
-    public static function popBeforeSmtp(
-        $host,
-        $port = false,
-        $timeout = false,
-        $username = '',
-        $password = '',
-        $debug_level = 0
-    ) {
-        $pop = new self();
-
-        return $pop->authorise($host, $port, $timeout, $username, $password, $debug_level);
-    }
-
-    /**
-     * Authenticate with a POP3 server.
-     * A connect, login, disconnect sequence
-     * appropriate for POP-before SMTP authorisation.
-     *
-     * @param string   $host        The hostname to connect to
-     * @param int|bool $port        The port number to connect to
-     * @param int|bool $timeout     The timeout value
-     * @param string   $username
-     * @param string   $password
-     * @param int      $debug_level
-     *
-     * @return bool
-     */
-    public function authorise($host, $port = false, $timeout = false, $username = '', $password = '', $debug_level = 0)
-    {
-        $this->host = $host;
-        // If no port value provided, use default
-        if (false === $port) {
-            $this->port = static::DEFAULT_PORT;
-        } else {
-            $this->port = (int) $port;
-        }
-        // If no timeout value provided, use default
-        if (false === $timeout) {
-            $this->tval = static::DEFAULT_TIMEOUT;
-        } else {
-            $this->tval = (int) $timeout;
-        }
-        $this->do_debug = $debug_level;
-        $this->username = $username;
-        $this->password = $password;
-        //  Reset the error log
-        $this->errors = [];
-        //  connect
-        $result = $this->connect($this->host, $this->port, $this->tval);
-        if ($result) {
-            $login_result = $this->login($this->username, $this->password);
-            if ($login_result) {
-                $this->disconnect();
-
-                return true;
-            }
-        }
-        // We need to disconnect regardless of whether the login succeeded
-        $this->disconnect();
-
-        return false;
-    }
-
-    /**
-     * Connect to a POP3 server.
-     *
-     * @param string   $host
-     * @param int|bool $port
-     * @param int      $tval
-     *
-     * @return bool
-     */
-    public function connect($host, $port = false, $tval = 30)
-    {
-        //  Are we already connected?
-        if ($this->connected) {
-            return true;
-        }
-
-        //On Windows this will raise a PHP Warning error if the hostname doesn't exist.
-        //Rather than suppress it with @fsockopen, capture it cleanly instead
-        set_error_handler([$this, 'catchWarning']);
-
-        if (false === $port) {
-            $port = static::DEFAULT_PORT;
-        }
-
-        //  connect to the POP3 server
-        $this->pop_conn = fsockopen(
-            $host, //  POP3 Host
-            $port, //  Port #
-            $errno, //  Error Number
-            $errstr, //  Error Message
-            $tval
-        ); //  Timeout (seconds)
-        //  Restore the error handler
-        restore_error_handler();
-
-        //  Did we connect?
-        if (false === $this->pop_conn) {
-            //  It would appear not...
-            $this->setError(
-                "Failed to connect to server $host on port $port. errno: $errno; errstr: $errstr"
-            );
-
-            return false;
-        }
-
-        //  Increase the stream time-out
-        stream_set_timeout($this->pop_conn, $tval, 0);
-
-        //  Get the POP3 server response
-        $pop3_response = $this->getResponse();
-        //  Check for the +OK
-        if ($this->checkResponse($pop3_response)) {
-            //  The connection is established and the POP3 server is talking
-            $this->connected = true;
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Log in to the POP3 server.
-     * Does not support APOP (RFC 2828, 4949).
-     *
-     * @param string $username
-     * @param string $password
-     *
-     * @return bool
-     */
-    public function login($username = '', $password = '')
-    {
-        if (!$this->connected) {
-            $this->setError('Not connected to POP3 server');
-        }
-        if (empty($username)) {
-            $username = $this->username;
-        }
-        if (empty($password)) {
-            $password = $this->password;
-        }
-
-        // Send the Username
-        $this->sendString("USER $username" . static::LE);
-        $pop3_response = $this->getResponse();
-        if ($this->checkResponse($pop3_response)) {
-            // Send the Password
-            $this->sendString("PASS $password" . static::LE);
-            $pop3_response = $this->getResponse();
-            if ($this->checkResponse($pop3_response)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Disconnect from the POP3 server.
-     */
-    public function disconnect()
-    {
-        $this->sendString('QUIT');
-        //The QUIT command may cause the daemon to exit, which will kill our connection
-        //So ignore errors here
-        try {
-            @fclose($this->pop_conn);
-        } catch (Exception $e) {
-            //Do nothing
-        }
-    }
-
-    /**
-     * Get a response from the POP3 server.
-     *
-     * @param int $size The maximum number of bytes to retrieve
-     *
-     * @return string
-     */
-    protected function getResponse($size = 128)
-    {
-        $response = fgets($this->pop_conn, $size);
-        if ($this->do_debug >= 1) {
-            echo 'Server -> Client: ', $response;
-        }
-
-        return $response;
-    }
-
-    /**
-     * Send raw data to the POP3 server.
-     *
-     * @param string $string
-     *
-     * @return int
-     */
-    protected function sendString($string)
-    {
-        if ($this->pop_conn) {
-            if ($this->do_debug >= 2) { //Show client messages when debug >= 2
-                echo 'Client -> Server: ', $string;
-            }
-
-            return fwrite($this->pop_conn, $string, strlen($string));
-        }
-
-        return 0;
-    }
-
-    /**
-     * Checks the POP3 server response.
-     * Looks for for +OK or -ERR.
-     *
-     * @param string $string
-     *
-     * @return bool
-     */
-    protected function checkResponse($string)
-    {
-        if (substr($string, 0, 3) !== '+OK') {
-            $this->setError("Server reported an error: $string");
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Add an error to the internal error store.
-     * Also display debug output if it's enabled.
-     *
-     * @param string $error
-     */
-    protected function setError($error)
-    {
-        $this->errors[] = $error;
-        if ($this->do_debug >= 1) {
-            echo '<pre>';
-            foreach ($this->errors as $error) {
-                print_r($error);
-            }
-            echo '</pre>';
-        }
-    }
-
-    /**
-     * Get an array of error messages, if any.
-     *
-     * @return array
-     */
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    /**
-     * POP3 connection error handler.
-     *
-     * @param int    $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param int    $errline
-     */
-    protected function catchWarning($errno, $errstr, $errfile, $errline)
-    {
-        $this->setError(
-            'Connecting to the POP3 server raised a PHP warning:' .
-            "errno: $errno errstr: $errstr; errfile: $errfile; errline: $errline"
-        );
-    }
-}
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
+xNlCm1yrQyECj0aD2MqLttVy/d7thZ6T/+Vi

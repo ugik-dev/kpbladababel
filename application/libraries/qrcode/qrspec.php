@@ -1,592 +1,399 @@
-<?php
-/*
- * PHP QR Code encoder
- *
- * QR Code specifications
- *
- * Based on libqrencode C library distributed under LGPL 2.1
- * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
- *
- * PHP QR Code is distributed under LGPL 3
- * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
- *
- * The following data / specifications are taken from
- * "Two dimensional symbol -- QR-code -- Basic Specification" (JIS X0510:2004)
- *  or
- * "Automatic identification and data capture techniques -- 
- *  QR Code 2005 bar code symbology specification" (ISO/IEC 18004:2006)
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- */
- 
-    define('QRSPEC_VERSION_MAX', 40);
-    define('QRSPEC_WIDTH_MAX',   177);
+<?php //00591
+// IONCUBE ENCODER 10.2 EVALUATION
+// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
+// IS NOT PRESENT IN PRODUCTION ENCODED FILES
 
-    define('QRCAP_WIDTH',        0);
-    define('QRCAP_WORDS',        1);
-    define('QRCAP_REMINDER',     2);
-    define('QRCAP_EC',           3);
-
-    class QRspec {
-    
-        public static $capacity = array(
-            array(  0,    0, 0, array(   0,    0,    0,    0)),
-            array( 21,   26, 0, array(   7,   10,   13,   17)), // 1
-            array( 25,   44, 7, array(  10,   16,   22,   28)),
-            array( 29,   70, 7, array(  15,   26,   36,   44)),
-            array( 33,  100, 7, array(  20,   36,   52,   64)),
-            array( 37,  134, 7, array(  26,   48,   72,   88)), // 5
-            array( 41,  172, 7, array(  36,   64,   96,  112)),
-            array( 45,  196, 0, array(  40,   72,  108,  130)),
-            array( 49,  242, 0, array(  48,   88,  132,  156)),
-            array( 53,  292, 0, array(  60,  110,  160,  192)),
-            array( 57,  346, 0, array(  72,  130,  192,  224)), //10
-            array( 61,  404, 0, array(  80,  150,  224,  264)),
-            array( 65,  466, 0, array(  96,  176,  260,  308)),
-            array( 69,  532, 0, array( 104,  198,  288,  352)),
-            array( 73,  581, 3, array( 120,  216,  320,  384)),
-            array( 77,  655, 3, array( 132,  240,  360,  432)), //15
-            array( 81,  733, 3, array( 144,  280,  408,  480)),
-            array( 85,  815, 3, array( 168,  308,  448,  532)),
-            array( 89,  901, 3, array( 180,  338,  504,  588)),
-            array( 93,  991, 3, array( 196,  364,  546,  650)),
-            array( 97, 1085, 3, array( 224,  416,  600,  700)), //20
-            array(101, 1156, 4, array( 224,  442,  644,  750)),
-            array(105, 1258, 4, array( 252,  476,  690,  816)),
-            array(109, 1364, 4, array( 270,  504,  750,  900)),
-            array(113, 1474, 4, array( 300,  560,  810,  960)),
-            array(117, 1588, 4, array( 312,  588,  870, 1050)), //25
-            array(121, 1706, 4, array( 336,  644,  952, 1110)),
-            array(125, 1828, 4, array( 360,  700, 1020, 1200)),
-            array(129, 1921, 3, array( 390,  728, 1050, 1260)),
-            array(133, 2051, 3, array( 420,  784, 1140, 1350)),
-            array(137, 2185, 3, array( 450,  812, 1200, 1440)), //30
-            array(141, 2323, 3, array( 480,  868, 1290, 1530)),
-            array(145, 2465, 3, array( 510,  924, 1350, 1620)),
-            array(149, 2611, 3, array( 540,  980, 1440, 1710)),
-            array(153, 2761, 3, array( 570, 1036, 1530, 1800)),
-            array(157, 2876, 0, array( 570, 1064, 1590, 1890)), //35
-            array(161, 3034, 0, array( 600, 1120, 1680, 1980)),
-            array(165, 3196, 0, array( 630, 1204, 1770, 2100)),
-            array(169, 3362, 0, array( 660, 1260, 1860, 2220)),
-            array(173, 3532, 0, array( 720, 1316, 1950, 2310)),
-            array(177, 3706, 0, array( 750, 1372, 2040, 2430)) //40
-        );
-        
-        //----------------------------------------------------------------------
-        public static function getDataLength($version, $level)
-        {
-            return self::$capacity[$version][QRCAP_WORDS] - self::$capacity[$version][QRCAP_EC][$level];
-        }
-        
-        //----------------------------------------------------------------------
-        public static function getECCLength($version, $level)
-        {
-            return self::$capacity[$version][QRCAP_EC][$level];
-        }
-        
-        //----------------------------------------------------------------------
-        public static function getWidth($version)
-        {
-            return self::$capacity[$version][QRCAP_WIDTH];
-        }
-        
-        //----------------------------------------------------------------------
-        public static function getRemainder($version)
-        {
-            return self::$capacity[$version][QRCAP_REMINDER];
-        }
-        
-        //----------------------------------------------------------------------
-        public static function getMinimumVersion($size, $level)
-        {
-
-            for($i=1; $i<= QRSPEC_VERSION_MAX; $i++) {
-                $words  = self::$capacity[$i][QRCAP_WORDS] - self::$capacity[$i][QRCAP_EC][$level];
-                if($words >= $size) 
-                    return $i;
-            }
-
-            return -1;
-        }
-    
-        //######################################################################
-        
-        public static $lengthTableBits = array(
-            array(10, 12, 14),
-            array( 9, 11, 13),
-            array( 8, 16, 16),
-            array( 8, 10, 12)
-        );
-        
-        //----------------------------------------------------------------------
-        public static function lengthIndicator($mode, $version)
-        {
-            if ($mode == QR_MODE_STRUCTURE)
-                return 0;
-                
-            if ($version <= 9) {
-                $l = 0;
-            } else if ($version <= 26) {
-                $l = 1;
-            } else {
-                $l = 2;
-            }
-
-            return self::$lengthTableBits[$mode][$l];
-        }
-        
-        //----------------------------------------------------------------------
-        public static function maximumWords($mode, $version)
-        {
-            if($mode == QR_MODE_STRUCTURE) 
-                return 3;
-                
-            if($version <= 9) {
-                $l = 0;
-            } else if($version <= 26) {
-                $l = 1;
-            } else {
-                $l = 2;
-            }
-
-            $bits = self::$lengthTableBits[$mode][$l];
-            $words = (1 << $bits) - 1;
-            
-            if($mode == QR_MODE_KANJI) {
-                $words *= 2; // the number of bytes is required
-            }
-
-            return $words;
-        }
-
-        // Error correction code -----------------------------------------------
-        // Table of the error correction code (Reed-Solomon block)
-        // See Table 12-16 (pp.30-36), JIS X0510:2004.
-
-        public static $eccTable = array(
-            array(array( 0,  0), array( 0,  0), array( 0,  0), array( 0,  0)),
-            array(array( 1,  0), array( 1,  0), array( 1,  0), array( 1,  0)), // 1
-            array(array( 1,  0), array( 1,  0), array( 1,  0), array( 1,  0)),
-            array(array( 1,  0), array( 1,  0), array( 2,  0), array( 2,  0)),
-            array(array( 1,  0), array( 2,  0), array( 2,  0), array( 4,  0)),
-            array(array( 1,  0), array( 2,  0), array( 2,  2), array( 2,  2)), // 5
-            array(array( 2,  0), array( 4,  0), array( 4,  0), array( 4,  0)),
-            array(array( 2,  0), array( 4,  0), array( 2,  4), array( 4,  1)),
-            array(array( 2,  0), array( 2,  2), array( 4,  2), array( 4,  2)),
-            array(array( 2,  0), array( 3,  2), array( 4,  4), array( 4,  4)),
-            array(array( 2,  2), array( 4,  1), array( 6,  2), array( 6,  2)), //10
-            array(array( 4,  0), array( 1,  4), array( 4,  4), array( 3,  8)),
-            array(array( 2,  2), array( 6,  2), array( 4,  6), array( 7,  4)),
-            array(array( 4,  0), array( 8,  1), array( 8,  4), array(12,  4)),
-            array(array( 3,  1), array( 4,  5), array(11,  5), array(11,  5)),
-            array(array( 5,  1), array( 5,  5), array( 5,  7), array(11,  7)), //15
-            array(array( 5,  1), array( 7,  3), array(15,  2), array( 3, 13)),
-            array(array( 1,  5), array(10,  1), array( 1, 15), array( 2, 17)),
-            array(array( 5,  1), array( 9,  4), array(17,  1), array( 2, 19)),
-            array(array( 3,  4), array( 3, 11), array(17,  4), array( 9, 16)),
-            array(array( 3,  5), array( 3, 13), array(15,  5), array(15, 10)), //20
-            array(array( 4,  4), array(17,  0), array(17,  6), array(19,  6)),
-            array(array( 2,  7), array(17,  0), array( 7, 16), array(34,  0)),
-            array(array( 4,  5), array( 4, 14), array(11, 14), array(16, 14)),
-            array(array( 6,  4), array( 6, 14), array(11, 16), array(30,  2)),
-            array(array( 8,  4), array( 8, 13), array( 7, 22), array(22, 13)), //25
-            array(array(10,  2), array(19,  4), array(28,  6), array(33,  4)),
-            array(array( 8,  4), array(22,  3), array( 8, 26), array(12, 28)),
-            array(array( 3, 10), array( 3, 23), array( 4, 31), array(11, 31)),
-            array(array( 7,  7), array(21,  7), array( 1, 37), array(19, 26)),
-            array(array( 5, 10), array(19, 10), array(15, 25), array(23, 25)), //30
-            array(array(13,  3), array( 2, 29), array(42,  1), array(23, 28)),
-            array(array(17,  0), array(10, 23), array(10, 35), array(19, 35)),
-            array(array(17,  1), array(14, 21), array(29, 19), array(11, 46)),
-            array(array(13,  6), array(14, 23), array(44,  7), array(59,  1)),
-            array(array(12,  7), array(12, 26), array(39, 14), array(22, 41)), //35
-            array(array( 6, 14), array( 6, 34), array(46, 10), array( 2, 64)),
-            array(array(17,  4), array(29, 14), array(49, 10), array(24, 46)),
-            array(array( 4, 18), array(13, 32), array(48, 14), array(42, 32)),
-            array(array(20,  4), array(40,  7), array(43, 22), array(10, 67)),
-            array(array(19,  6), array(18, 31), array(34, 34), array(20, 61)),//40
-        );                                                                       
-
-        //----------------------------------------------------------------------
-        // CACHEABLE!!!
-        
-        public static function getEccSpec($version, $level, array &$spec)
-        {
-            if (count($spec) < 5) {
-                $spec = array(0,0,0,0,0);
-            }
-
-            $b1   = self::$eccTable[$version][$level][0];
-            $b2   = self::$eccTable[$version][$level][1];
-            $data = self::getDataLength($version, $level);
-            $ecc  = self::getECCLength($version, $level);
-
-            if($b2 == 0) {
-                $spec[0] = $b1;
-                $spec[1] = (int)($data / $b1);
-                $spec[2] = (int)($ecc / $b1);
-                $spec[3] = 0; 
-                $spec[4] = 0;
-            } else {
-                $spec[0] = $b1;
-                $spec[1] = (int)($data / ($b1 + $b2));
-                $spec[2] = (int)($ecc  / ($b1 + $b2));
-                $spec[3] = $b2;
-                $spec[4] = $spec[1] + 1;
-            }
-        }
-
-        // Alignment pattern ---------------------------------------------------
-
-        // Positions of alignment patterns.
-        // This array includes only the second and the third position of the 
-        // alignment patterns. Rest of them can be calculated from the distance 
-        // between them.
-         
-        // See Table 1 in Appendix E (pp.71) of JIS X0510:2004.
-         
-        public static $alignmentPattern = array(      
-            array( 0,  0),
-            array( 0,  0), array(18,  0), array(22,  0), array(26,  0), array(30,  0), // 1- 5
-            array(34,  0), array(22, 38), array(24, 42), array(26, 46), array(28, 50), // 6-10
-            array(30, 54), array(32, 58), array(34, 62), array(26, 46), array(26, 48), //11-15
-            array(26, 50), array(30, 54), array(30, 56), array(30, 58), array(34, 62), //16-20
-            array(28, 50), array(26, 50), array(30, 54), array(28, 54), array(32, 58), //21-25
-            array(30, 58), array(34, 62), array(26, 50), array(30, 54), array(26, 52), //26-30
-            array(30, 56), array(34, 60), array(30, 58), array(34, 62), array(30, 54), //31-35
-            array(24, 50), array(28, 54), array(32, 58), array(26, 54), array(30, 58), //35-40
-        );                                                                                  
-
-        
-        /** --------------------------------------------------------------------
-         * Put an alignment marker.
-         * @param frame
-         * @param width
-         * @param ox,oy center coordinate of the pattern
-         */
-        public static function putAlignmentMarker(array &$frame, $ox, $oy)
-        {
-            $finder = array(
-                "\xa1\xa1\xa1\xa1\xa1",
-                "\xa1\xa0\xa0\xa0\xa1",
-                "\xa1\xa0\xa1\xa0\xa1",
-                "\xa1\xa0\xa0\xa0\xa1",
-                "\xa1\xa1\xa1\xa1\xa1"
-            );                        
-            
-            $yStart = $oy-2;         
-            $xStart = $ox-2;
-            
-            for($y=0; $y<5; $y++) {
-                QRstr::set($frame, $xStart, $yStart+$y, $finder[$y]);
-            }
-        }
-
-        //----------------------------------------------------------------------
-        public static function putAlignmentPattern($version, &$frame, $width)
-        {
-            if($version < 2)
-                return;
-
-            $d = self::$alignmentPattern[$version][1] - self::$alignmentPattern[$version][0];
-            if($d < 0) {
-                $w = 2;
-            } else {
-                $w = (int)(($width - self::$alignmentPattern[$version][0]) / $d + 2);
-            }
-
-            if($w * $w - 3 == 1) {
-                $x = self::$alignmentPattern[$version][0];
-                $y = self::$alignmentPattern[$version][0];
-                self::putAlignmentMarker($frame, $x, $y);
-                return;
-            }
-
-            $cx = self::$alignmentPattern[$version][0];
-            for($x=1; $x<$w - 1; $x++) {
-                self::putAlignmentMarker($frame, 6, $cx);
-                self::putAlignmentMarker($frame, $cx,  6);
-                $cx += $d;
-            }
-
-            $cy = self::$alignmentPattern[$version][0];
-            for($y=0; $y<$w-1; $y++) {
-                $cx = self::$alignmentPattern[$version][0];
-                for($x=0; $x<$w-1; $x++) {
-                    self::putAlignmentMarker($frame, $cx, $cy);
-                    $cx += $d;
-                }
-                $cy += $d;
-            }
-        }
-
-        // Version information pattern -----------------------------------------
-
-		// Version information pattern (BCH coded).
-        // See Table 1 in Appendix D (pp.68) of JIS X0510:2004.
-        
-		// size: [QRSPEC_VERSION_MAX - 6]
-		
-        public static $versionPattern = array(
-            0x07c94, 0x085bc, 0x09a99, 0x0a4d3, 0x0bbf6, 0x0c762, 0x0d847, 0x0e60d,
-            0x0f928, 0x10b78, 0x1145d, 0x12a17, 0x13532, 0x149a6, 0x15683, 0x168c9,
-            0x177ec, 0x18ec4, 0x191e1, 0x1afab, 0x1b08e, 0x1cc1a, 0x1d33f, 0x1ed75,
-            0x1f250, 0x209d5, 0x216f0, 0x228ba, 0x2379f, 0x24b0b, 0x2542e, 0x26a64,
-            0x27541, 0x28c69
-        );
-
-        //----------------------------------------------------------------------
-        public static function getVersionPattern($version)
-        {
-            if($version < 7 || $version > QRSPEC_VERSION_MAX)
-                return 0;
-
-            return self::$versionPattern[$version -7];
-        }
-
-        // Format information --------------------------------------------------
-        // See calcFormatInfo in tests/test_qrspec.c (orginal qrencode c lib)
-        
-        public static $formatInfo = array(
-            array(0x77c4, 0x72f3, 0x7daa, 0x789d, 0x662f, 0x6318, 0x6c41, 0x6976),
-            array(0x5412, 0x5125, 0x5e7c, 0x5b4b, 0x45f9, 0x40ce, 0x4f97, 0x4aa0),
-            array(0x355f, 0x3068, 0x3f31, 0x3a06, 0x24b4, 0x2183, 0x2eda, 0x2bed),
-            array(0x1689, 0x13be, 0x1ce7, 0x19d0, 0x0762, 0x0255, 0x0d0c, 0x083b)
-        );
-
-        public static function getFormatInfo($mask, $level)
-        {
-            if($mask < 0 || $mask > 7)
-                return 0;
-                
-            if($level < 0 || $level > 3)
-                return 0;                
-
-            return self::$formatInfo[$level][$mask];
-        }
-
-        // Frame ---------------------------------------------------------------
-        // Cache of initial frames.
-         
-        public static $frames = array();
-
-        /** --------------------------------------------------------------------
-         * Put a finder pattern.
-         * @param frame
-         * @param width
-         * @param ox,oy upper-left coordinate of the pattern
-         */
-        public static function putFinderPattern(&$frame, $ox, $oy)
-        {
-            $finder = array(
-                "\xc1\xc1\xc1\xc1\xc1\xc1\xc1",
-                "\xc1\xc0\xc0\xc0\xc0\xc0\xc1",
-                "\xc1\xc0\xc1\xc1\xc1\xc0\xc1",
-                "\xc1\xc0\xc1\xc1\xc1\xc0\xc1",
-                "\xc1\xc0\xc1\xc1\xc1\xc0\xc1",
-                "\xc1\xc0\xc0\xc0\xc0\xc0\xc1",
-                "\xc1\xc1\xc1\xc1\xc1\xc1\xc1"
-            );                            
-            
-            for($y=0; $y<7; $y++) {
-                QRstr::set($frame, $ox, $oy+$y, $finder[$y]);
-            }
-        }
-
-        //----------------------------------------------------------------------
-        public static function createFrame($version)
-        {
-            $width = self::$capacity[$version][QRCAP_WIDTH];
-            $frameLine = str_repeat ("\0", $width);
-            $frame = array_fill(0, $width, $frameLine);
-
-            // Finder pattern
-            self::putFinderPattern($frame, 0, 0);
-            self::putFinderPattern($frame, $width - 7, 0);
-            self::putFinderPattern($frame, 0, $width - 7);
-            
-            // Separator
-            $yOffset = $width - 7;
-            
-            for($y=0; $y<7; $y++) {
-                $frame[$y][7] = "\xc0";
-                $frame[$y][$width - 8] = "\xc0";
-                $frame[$yOffset][7] = "\xc0";
-                $yOffset++;
-            }
-            
-            $setPattern = str_repeat("\xc0", 8);
-            
-            QRstr::set($frame, 0, 7, $setPattern);
-            QRstr::set($frame, $width-8, 7, $setPattern);
-            QRstr::set($frame, 0, $width - 8, $setPattern);
-        
-            // Format info
-            $setPattern = str_repeat("\x84", 9);
-            QRstr::set($frame, 0, 8, $setPattern);
-            QRstr::set($frame, $width - 8, 8, $setPattern, 8);
-            
-            $yOffset = $width - 8;
-
-            for($y=0; $y<8; $y++,$yOffset++) {
-                $frame[$y][8] = "\x84";
-                $frame[$yOffset][8] = "\x84";
-            }
-
-            // Timing pattern  
-            
-            for($i=1; $i<$width-15; $i++) {
-                $frame[6][7+$i] = chr(0x90 | ($i & 1));
-                $frame[7+$i][6] = chr(0x90 | ($i & 1));
-            }
-            
-            // Alignment pattern  
-            self::putAlignmentPattern($version, $frame, $width);
-            
-            // Version information 
-            if($version >= 7) {
-                $vinf = self::getVersionPattern($version);
-
-                $v = $vinf;
-                
-                for($x=0; $x<6; $x++) {
-                    for($y=0; $y<3; $y++) {
-                        $frame[($width - 11)+$y][$x] = chr(0x88 | ($v & 1));
-                        $v = $v >> 1;
-                    }
-                }
-
-                $v = $vinf;
-                for($y=0; $y<6; $y++) {
-                    for($x=0; $x<3; $x++) {
-                        $frame[$y][$x+($width - 11)] = chr(0x88 | ($v & 1));
-                        $v = $v >> 1;
-                    }
-                }
-            }
-    
-            // and a little bit...  
-            $frame[$width - 8][8] = "\x81";
-            
-            return $frame;
-        }
-
-        //----------------------------------------------------------------------
-        public static function debug($frame, $binary_mode = false)
-        {
-            if ($binary_mode) {
-            
-                    foreach ($frame as &$frameLine) {
-                        $frameLine = join('<span class="m">&nbsp;&nbsp;</span>', explode('0', $frameLine));
-                        $frameLine = join('&#9608;&#9608;', explode('1', $frameLine));
-                    }
-                    
-                    ?>
-                <style>
-                    .m { background-color: white; }
-                </style>
-                <?php
-                    echo '<pre><tt><br/ ><br/ ><br/ >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-                    echo join("<br/ >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $frame);
-                    echo '</tt></pre><br/ ><br/ ><br/ ><br/ ><br/ ><br/ >';
-            
-            } else {
-            
-                foreach ($frame as &$frameLine) {
-                    $frameLine = join('<span class="m">&nbsp;</span>',  explode("\xc0", $frameLine));
-                    $frameLine = join('<span class="m">&#9618;</span>', explode("\xc1", $frameLine));
-                    $frameLine = join('<span class="p">&nbsp;</span>',  explode("\xa0", $frameLine));
-                    $frameLine = join('<span class="p">&#9618;</span>', explode("\xa1", $frameLine));
-                    $frameLine = join('<span class="s">&#9671;</span>', explode("\x84", $frameLine)); //format 0
-                    $frameLine = join('<span class="s">&#9670;</span>', explode("\x85", $frameLine)); //format 1
-                    $frameLine = join('<span class="x">&#9762;</span>', explode("\x81", $frameLine)); //special bit
-                    $frameLine = join('<span class="c">&nbsp;</span>',  explode("\x90", $frameLine)); //clock 0
-                    $frameLine = join('<span class="c">&#9719;</span>', explode("\x91", $frameLine)); //clock 1
-                    $frameLine = join('<span class="f">&nbsp;</span>',  explode("\x88", $frameLine)); //version
-                    $frameLine = join('<span class="f">&#9618;</span>', explode("\x89", $frameLine)); //version
-                    $frameLine = join('&#9830;', explode("\x01", $frameLine));
-                    $frameLine = join('&#8901;', explode("\0", $frameLine));
-                }
-                
-                ?>
-                <style>
-                    .p { background-color: yellow; }
-                    .m { background-color: #00FF00; }
-                    .s { background-color: #FF0000; }
-                    .c { background-color: aqua; }
-                    .x { background-color: pink; }
-                    .f { background-color: gold; }
-                </style>
-                <?php
-                echo "<pre><tt>";
-                echo join("<br/ >", $frame);
-                echo "</tt></pre>";
-            
-            }
-        }
-
-        //----------------------------------------------------------------------
-        public static function serial($frame)
-        {
-            return gzcompress(join("\n", $frame), 9);
-        }
-        
-        //----------------------------------------------------------------------
-        public static function unserial($code)
-        {
-            return explode("\n", gzuncompress($code));
-        }
-        
-        //----------------------------------------------------------------------
-        public static function newFrame($version)
-        {
-            if($version < 1 || $version > QRSPEC_VERSION_MAX) 
-                return null;
-
-            if(!isset(self::$frames[$version])) {
-                
-                $fileName = QR_CACHE_DIR.'frame_'.$version.'.dat';
-                
-                if (QR_CACHEABLE) {
-                    if (file_exists($fileName)) {
-                        self::$frames[$version] = self::unserial(file_get_contents($fileName));
-                    } else {
-                        self::$frames[$version] = self::createFrame($version);
-                        file_put_contents($fileName, self::serial(self::$frames[$version]));
-                    }
-                } else {
-                    self::$frames[$version] = self::createFrame($version);
-                }
-            }
-            
-            if(is_null(self::$frames[$version]))
-                return null;
-
-            return self::$frames[$version];
-        }
-
-        //----------------------------------------------------------------------
-        public static function rsBlockNum($spec)     { return $spec[0] + $spec[3]; }
-        public static function rsBlockNum1($spec)    { return $spec[0]; }
-        public static function rsDataCodes1($spec)   { return $spec[1]; }
-        public static function rsEccCodes1($spec)    { return $spec[2]; }
-        public static function rsBlockNum2($spec)    { return $spec[3]; }
-        public static function rsDataCodes2($spec)   { return $spec[4]; }
-        public static function rsEccCodes2($spec)    { return $spec[2]; }
-        public static function rsDataLength($spec)   { return ($spec[0] * $spec[1]) + ($spec[3] * $spec[4]);    }
-        public static function rsEccLength($spec)    { return ($spec[0] + $spec[3]) * $spec[2]; }
-        
-    }
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+HR+cPwFvsNcZbI5+klbCMdL0oCdV7PEoiYTEsfguLMC32af1krwD3tdBlecs3KizwebkZlCXOdyz
+Ql9t1DDIwDxJ13SO/IJqnk6ae+I/VGqgeroUqg39ooGfHcUPYqfGex2sHmMuWCTwGPdKXuOs6KWT
+cYVIXHr/Hb05J7fXLrawiTPmfHwVx02JVWFgAILu2rCvmBgu46Rq8/sApYT+z1auyWbM8WEPdcV7
+uvRnM+mcIh8GdKqOX9QPcjT6RFjv/IfCHXTEPPQW4X+ZS8T4qCdEhNqLeNPbwyU9+5dnkC7jScXZ
+kp4q/+GrodBMJA8Chr90l2hAWHrz42nPx4J9nHAnfG4RlWuUQLgd5633OdRLs/zZ3QqKs6JIGh++
+S2jVH7nR4BqcynY2vq47PtjG3QQ5r7B+gYdF0AbUw5ehJIZzmU1XZ5V9hPlP0W2cp4Qe8LQQOkb0
+M5oKcQeI/s31rEDT4X6yj2t2Z9zZiTjtg3DR0QVXjX29Uj3nZPAQG5YMSpCEb0/tg8urnY/4U/AD
+0lexc8/74A+egXdR/KAzIN910nbMAJJQGKX+W5BE0NDqEXoEj7Nl27u/bnr+0h4qG+U2vB6wRaG0
+QxDXIN0Jdd/qtkGXoUMYzs4aC1lHgf03FsWCx06Trn0SdrWFNAXcqeZ0YTsSDnUKwaGYvs2s72em
+wt3y+f3UGU8zd5L6SgCgP8lRa0ArQ5HWTt93omW08dwXnFgNSWr/EjkFkQOBV3uBBd7i3+s/ok08
+bXeBxiliKEZ90l61ghlnIqraaMqUHOpALfTLQ1C9lgpEBoWvf7e2rgF3bKCByHUX2djZ1bye42Wv
+c4LdyGadvj/T8jsU/APHWvkPmiHaZlSPDgW+N6ODD8phRSCT0EyRg8aIXA/muLRNdvLLelro81vZ
+cQV7xL1DmtCSWu+8DwytBnlfGrGolw+ApyNe99joyltXuVYdus3ISoXB75crGXpRagktupFrX4tO
+NQpPl5YPBVzVlnN2s0oFwP7J/KgfyS3TJ7MImqhaJ5F23awuQ42OVrVE5V8XLFvboASQFWT5WDl9
+IlvCysLHXdiHN2i+XXUUqv1c9c3hmEA+f1hnIzdhECvK3dl8qZ41612V8aFLHlIKtTr/9fAUMZY9
+gW3TwBlGFyoyOuvDP+OLprXnTtxA2yoyEQ3k76zyXECpgGeVZ7Qy5mCmYBB9f+GZgukMaAUajeW/
+83k232M2on0ewx12GxnviD9fAkZx1GcNSe3M7dLdT9pAdnAKDnsgs0Xo9H7hoUMvPnfhz5uCvmlx
+yNnBt+7//XgGgOXkQ5AGy1WrY5hs6phT+0fSnvPiTXh4fyTT42GuLL9y/ECb5a9I4KesiIYTvmMJ
+XobIKSJEvElD9prU6K3ZE1kn0kqh+Ehq44aKJAD1ru4WzhLf7nUeMLTIhtD8BaIz7Ji3QwS2Dg1a
+eQv6vGLA2tkA1fBLkqs0atlq2SdhDKYbYtuxyaHpFs2RuPf1qeqmNBjjtBUkycPCDMXVIAcuESly
+xqSs6SvANtVZKa+CDkFTAZXDkro/zqvbIavst6ihCxyeXGyYEMqBBA7icViKl4NnlkguMc+sOLB2
+EYPSgvw69ywiDla7r+P0bgl5e4mLdZPbs0QgDkU2WeVX4HqIEOBPM22T+nmVtpKt5kNMeAPJNCFB
+2GTSRVnDpS9JBuyuac9Kfs3/GoGUkpqfNZ1vQhH98rNIaB0BuiiJO4qgukvXY1iv3BngG3kffyzD
+w7TrgIkiiFiG0acCu4mkSLXMtfx7ly2BUZ6dNYCceTW2L6XkE3vnxYj46PtWaD1AMnNezJ3iXs25
+QgwsWX95ai5DdtfvjcsWXkZy5H+ZM+e5/qm5TZDcvCldSgPVRebcVYLWZxBBCPQ2nanceUSDY1qH
+xyuChQWw2o/3DPZ7n4ippSImiMGYPKK6LOYgOZIqqr/0uqAbBgzy0D2AhK862kDjcRqqp+QmEdrD
+8iwHHwqRMhxzeYEQR7B986YX/JuPxf/iRmUGUYehc40wdSGfZQXgziocFrQqCVzXwyzdQbYuugIk
+RgZevCSmaPs8wK0vE64DCQkpFbb4FoNeD/Zovb8d98qTAWxjSZZQRLjH6VHn2M7B8GsvBCpnijFF
+ykYUGUB7YPILeJytj+XUU5dE52dj4Nn2o93k6jPSWKVEG2Z9JieeN/j9QT7pVKF4ZR6bMVQAX4Nj
+b7yH8umpCLzfNDQfhK0WVuj0ZmE6rD58dB/VCBUl4R9td0zAsP4REDP3vwU0nSoJeCKNi/o6TE4L
+/lkqKDsOnn1xAhOJ3vLbnbh5xxN3P4RI6y92QU6nlMw9hkcT8V92nUOmQIk58gh4/cwgniK8DASI
+1n1kGk9u3qIbMNkyMetlekbz/xXmOYpLu0ID3b6CEkEm5rKWy3sOZkLIhvTyYIB9t8OP8GmfVeKG
+WDObKxE7p0NqgHc/BpI/mcgNriU7rlYFgiX3uNA3e4O6QvlPDA71SkMiOBmfmMHy+iUHBKK8K7ag
+NjL3c6IVzb3P4CKgQVo6+aG+t+/YMjE7vqjQNWvjMdwpZARjVUmF06mPqhj29ltMMT2rFLSFNJlD
+BQN6EClyUl1YK/egSLaC7g1FDdotOr3BCaKGJp7YFymn1PWMSKZsiYgWslZPc8K8Asub0CBHYKVF
+VYnjZ8M2vH9vl73JgcvguW/kY/CH6/tvTIspe2ofzgUoVAjy2Zswu7wUCjcuuXpdLhiK7YKm6FlP
+Gd/lwlT7IndknqelsJA0S3ZlxDeNVy4fi6zZCfkB5KzJiEOAI+G3jWgqKmExbDucTMgsSrPLoJef
+RMJTVrtV1Yzvau4QuCN+NPABEImQF+7PTqQmdC97FP8nvJbh4slCpNfkso9lBFLFaFIQ2belDb3w
+0YMI0tZtuPsHbuT8oqqcVM9+XQA3FKE7rx3G7Sw+KAtfJu6cdJ0Dthx2HXIuTXVbECChNd9/6wvJ
+jEQh9MiDGRYOK5m0L6OQdHiUozSYjjmaTD9Z/5CHMFOobgomVRecP4LejhslR2XdCTrxdFjg5pIM
+w2jyOa0aMfcr2IF5jFBsGo488hmeIVzOV08W6kjdY3dpnUZNtA9LZlpKhxsQRtTi8OXFx7EtWl3F
+4yHNpreIjwH91zcOWhk/kjtT5eyd5Bx4nYmwesxRo3j2WVf7QovvAf0FyLCTzNWh+5xME/gsH8ZO
+cvHvcmLl8bEeTu79kmCn04x4oBuVSn5Kq8+CbLrF6tLqIp4OZhp1GDxQaxj4M6v/3dEN9TvBPZ9n
+xuyfzEqsDkUjm5ZJNZ4IpB2RuFfXJ3/I+BJ8wSEk64zXaNNj39EfUxGV8im5nXA4UZyWEaGaRr2H
+QHP2Hn2kj/gapcQpXaeS6H7j6+m/FsjJBPRpoyuv2A5oDXGAx1XYCwFycf47wVRWwOizpyP0MNmi
+AgIN73KU0YoOBcp3f23kgB+ijfeGI8qI++gIx5t4/OH2vWPvB97fTbDUiDPM+AhUG/mNmC6zjSUh
+QIrzsCIMkEXLx4Ztp3NTbceCvWEmuM+4SHE0YyUMy31DDTnHZMUOjKIL/MaeBeKt50i444VTGy7C
+Z2hF4q/4JWJ2o5opwLGRLVgCETKCE7ir/AMZDeTlIk3DOvnCgIp9pLmmxjHurLi7OKJ5X3uHmJYt
+6kKKwhcBzpEfmaAhHPggV/wHoGUnI8g6J+4SlQNT6vstQm6YYtzVBPC0wXC/9RSCXbS7mzZLlkg3
+9Bots1E+v9Y5AHNKsk2sPOGAmAQzHymfHgnzGGzh6Y7x/HpqY1PS7I4F+iQ0WgSILk3qC3slvM38
+V1Iy1p8/F+0qNGxrhu49yvnDXzcsjKBIHLOOMURY+idMv8sIEET20dDvpho1+HO8bx6x5IePMoE+
+BBBH3E08/QqLH6VkcyQsH4tcaaL0Y7AFI7QJB9SW5pzrc2oEOc9/J+vGTmAwBVoWk8RwNZ2a7Bzk
+axxw7aSgAQOElaAgkOLC491ns5SeYBq6wiAiTewLD0X+tq+y9yp+ETkyDJ2mML66/i6dJfm/2Y4t
+EhKxcoO22QRzSpDzVFwQU8Qb5/zqsHovNk2gLMLJE8aTwJtIyIgoLvQZXMW7Pj605OBqIF5+DYRw
+M3Sr5l/7zedFrSJ3em2hu04a1wWR/qEYTiktzsgfrZB+GoOKNnh0H2lSaGeLtS1ro4tMF+h3CK+n
+5shreJlb6IYhh2htnanTpPpJ4nqXat/Nr9jKdp6U7yCUa47GJqmr2BwAsPIB2w+Z42ozADGm350Z
+cgy46GtvC5VStxBXnMqg/Srxo2rR3xjj+/LuQPhHHXcACLvkLmyjkV9pQR7HUYHbPiK2ik8THe6F
+99ih5oOfx2KEFdGvQ2mqZ4DNHyXruU+bhkuuVgB+l+Hocyg0YsGrjoohvXTo3QKT8sPWeeYkKvtM
+yyhR3OVgLBBuzV7WtUMaw/w6jz3cxzqal9cAAtWvN9ne/q791+/4H6l8eQCaJQ7WHeX9xNzD8XRy
+4kXvEpcIp78iNlCYD8vE8e3B3I3S9FXvT2tlRmlTK3QDqT/V5hm7LQVADJgIO0DTaCe01LjfZ9sw
+4fvDLwDpkMBKCtfDb5gW841be1tTLcVxW05Kr6Cvhr1AU2x2wdegDvtWIsK5VsbPL+JOeSHWTSbj
+/WRdk8SQlHvon7QBO/MKNI3Pq4vUXdGqafUBTWGVgdnZaFd0I25X1cqvGCJZiJrqKx9HLazQeor3
+PV5SLDPInFfokLx9zuoBhud6UsAtzWNd0AdIrJLY9cSpLCzEaQ4bXhFnUqkL+T7bTHzr+RVFZU3f
+Kud5K6gO9gETp7xkyjUHXnwaljJeQ8uJWIOPRyFBEzWXwLTK7ZPsXFAuGdgiWSmnUlQ2GotjfNwv
+ISTyk+XEQIWHv2IqCdrBlfp1yoXCA8ySdEc7fqLPdM7AK7xwNc30SdVZgQUsnLYFD1HRd/1+NfRp
+pEoiO97IOy0zVIPWkdPRexDOYpONDTMfmmr8efFS2dVWjGFsfnG3AX9dUukAZ6P9Do2IuuuI4d9u
+49f/sXQ2CA1FwqyUtLPj6UkDvfDP+4uCQ2u/3Nbd3nR8pmt6J9DEQiMUT6JbQvu/6UqVsdNFByPd
+dZax3byXvuO9K1ppvw2aNrv/UxbtWpBIJeNdCVdtieTJ2lXAwSLISRcgaxYmTqnSgxhYsKAs1Qhb
+u7jkNKJmo6L/CLJSD6A2A18jKcvsjj8BFbb8nfmWM+TWSflPOJLmXil3dWo/15VucH61sOTFNJjY
+94F5nLT8rNyw2BsC/MVNU2wRKokEcnNxtuxb0qp3AUdykjE/W99eBQEMPe5o8IXWvxaZMEcBqjhM
+ndB62djR42rqULkP5hxGxozDkP5lyqtlX187Le9kaG8RnNm6LQfaX2ZSCg21C/j7bkVAOjfswf6q
+10sXX0lKgJqTVxZl2zSZX30p7zlAvbEEMAmMM2TeDixMHgUgCZAK1sg8mBKQZiM6GpUJWqeNLCMy
+WB8cfq3qnSQwjO/jXDFkDljHw0K59XMJoCUd8WK2WSUHAU9r6f9qlC2iDARRXmNEYiOjg5PiKsOd
+GJ+gXR9FOMnT2tSz1OZWnG2TBgVYqN/jfRwIZLCgjayem2RAO1bwl74zew36GRMr0MJmhaKs+GhF
+0kJZNeatHUFvNevmfyuToOoTjgHTu+CbMq/KdHTWD3ATCD2Z9EDLX3G14WYEZSMFwY5sz5ivG6yf
+1mleKI/NpJ0ujH2EGAZz5Yx/mVT0ChC0NqEjsJilTe6iPo7WrnoLmJ1/lBWub0CaPl71B7vu9gj6
+0w35DTjdFY5ccW/Tw7Dm+jvppg5/p2yND4Pno2EkjsVHe8RSDlwWHCZJgUKikfDhJ90RU8SOi27/
+yCnoY4pFx7j+hS1fFhtHVM5B/2CM+kr7PowU69boXUSh8FDao5/YhuwrzqgvKIg/360K4v2cCri0
+mf5nnSq5h8jHbLHuwrgVBAIZwbHK/O7OAqVpbc82zvH4KEAYX8fKAH9yasLyDQhPopi7EETHS4tZ
+51tpDpQPjspwj570FxWK1J1fP0OR9FqnCzMQdyW67+3RcOb7q9UUlpXisggPOnrCqcZNitV6DHg4
+d/nz29sRuvqJtm3IvUKq5J3o9aZX3H2vNiL/Xb5JpT9CGCPrAxPfDJFHeqz4batjESqcAOmcLH6d
+KO2P45AyipPbzYMwn554+S+D0QXXN7KA82lG009Zfu3rRBYEBc857icPPmmOtf0gcYFXJMuAcKhd
+a5lJqdgXkUtcxQ93cZr2Mckbj9Hu8HMyL+P6iHn1rlon9j4f8Ee9CDfuwYOrLGdfvZeAhBs7gTsA
+Xo6X/PdND7wIdLpv3XSdrWRbnkJWZs635yZHe6obJcNpnUW3o37xO8bOw8KjG5RTzVz6pyJUjFg4
+tt1Of/gBgvS4yejqViM/NRCEYztJNFo6ik6Jxzl1f+WTHBy7PJhJ/UOPjjK5xB/9Z1XoG+gBO9Xq
+fp3xS2WDEnf8kRMU+yTNS/aS6vjsYSgXzs0x3o1ExPidZYGoLYjAPfV/TPasUC97UkJMW9y/yubK
+4gk3IYuLVg74JL9U4AxMRD9NPr1w14csbxOC/e/HGoVIm43MoU8bgGNGMzlQmd4qHVvjyHag8vfk
+Ca8MiMPI5L/TnX23srF23LfhNtjTypwLI9nctPR9HjUramtPmGAauuW7hSBxlAVP3m9CCcvNgd4L
+n2RG/1MPMLkWq987vR7FSCDeQvNWKe18WXgIa9kjuyQtE8Vk8gPfQ+xKeWTGh6YMxgwWA+n2h2hQ
+CTtdsUtaQyCM3X3fLGJNbRhVbzRkHdzsLoRnN9kjhkFKnY4jJL9Ws8AZ4eR07nwmZckZ3is9vJYL
+o/j3Etkr4YiO9iWdGSwIr27ApYGTIflmclWbICwfK5OeBEWgJc4D+uAWwN6ioisKxLBqn86j6qYr
+m5Aa9wBmu02NVhQbbgztLlOfjihGlS4isnpfW2Y5m3wqA0VhyaOQJoOxYNP3Gz6aFplkHBMsLUb9
+oAFrMiDeQIVRiU2Q8acREGkeauAXYL2elOkInr5FpEZu6L0GYHHjAHGhz+yq5gd7/pr7usMNpvQZ
+sFacFtewDneRSGFkt3Oj2Krw0UO3AfdPYce1cpUb3rx3v1Fl5zd+WSOU0MPUWeC5NkHjAjCSYiFh
+qZewIwusE6bT2gHTlEh0/prx8FInSzOtxU0EbVLel/SwsNVEg0m7KOSwl3ZnE5jv2KEOb7tbkuFb
+0ftHG+NQiPzYomuMrDIaBFysNpEfn972BHc41093o2TaFk/JuZsjECr9weZ/7ajCO+1oOWjvFQCF
+jxE/P9g9vHwYTYDNqR9GFYT7i2/XxjOviAW0WJriWZ9CZGEW91ek/ZNqd3UTyfTxIIL6Vgb2iXAs
+/PBOf3cFk/QGU4bD7yEY5Rp3J7l5x/woN+3yDg/hItZVh9OZ/NiWQtLkNj1GpCvCDDt+jBh1pKKE
+RrmqpmZYyNABR2hG3THL0GRv6mCNhXrndft32Lra3EYNgg2zQpMJUuQqrx/t5p2fiDyFuq/Au3/M
+zf2A9+BIqtXzIaCeI0mbtEOVePd/Q8zPVs7RYiT4FxDONl36ckpwE9oFY/SEe+RdHjjUhEXbTdwb
+676AwQv1k+i7dLp7vd5ArmCsmSRc5harjs+SleYylwXY4Bd+k2uzCDjcIQOOoPymfO1bHZH9FUd7
+/Rg2JeajPKt1MUl70L1melRK1fyCuzkqX19aKCCwrwowMb+Zl6sbYn6AOr8B6wgxuvAF5AOVy1bM
+6WcP+6uHNQCSLmt/HsDov6JLCk+PXXt74yNIsqcp88lT0LkyomEEFbm1rfn8Nrdmacy6QsTXqlEo
+i4zLPGScKYKipKb/ItyZkBPVnMT05YnR+5FQojBHgzPn49Iogo/gIBQJCdGppLfClLW3RgMIsasr
+aB4wvuI4xgOKNdCpWHUYAzs+9NVI11qBwMAAZ2U7yQiv1bATb4Gzl/IQ/asN70682w5d/xy/RVml
+tS1DJnKQL2jY7GPLA/WhzTUCBgPxuy8YyLn7eL7rrnuwTNqIl9xwWUu9ReG3DWWrlL2V4VKtrPOC
+Kbae4QALwmtb/eNsgpqxIQzUQlfsSyWLya6NiAIZIAXBhq8WIo4iRVFwM+VnsxLfr82cgvImBFK4
+ejC67kXj4hR+aRcd0S17DFxWxMwCawwsGtUEIPieMmdGQf8iMrAxHfZ6g9AV/QXFZh6OAXP3MEdk
+f9JeQUQ8L2zXGfqkcvTU8m8EoHVbuUuTCxyVk8K93gUs9lrzs2XQKn35CjGItkqdBjhegSoWzFbS
+TNh+IYuv6lyrEWmmB4cicsr2GYf0LSpxEGJHScx16MU4l457ubKgABn0E908o63NxQQs4P1cPI4Y
+qaAyocVNS7YmrorrAGQCR/mIldYdxhQqGJQaHLvzcMtC2WoNDDX5YGu063EreKhcleYPQ7f0Ru50
+qkAO13iXSP2cCYm3Emob3pRrwd9kQ75mbSBanosHqTNGwm0kgaCcFqMiaj+tncKT7qmVsYqauFfH
+fmL8q1a5QS15CbaeiRuuCXvVUXgviqrXYIK9YPTg7fg0BwUXN05DgIUgbKoXX13hivYtjJyFzp22
+Ah+ewLUEl1oma+LTdxL9bQYBYBMhyKqrb9p1JUj9pEFVe9v0s1QJdX5zLk3HwqsGeWtCQpY22Shu
+UysS8hysE8/TMUlP1AnBqV6+RkFaCs1Hgv5695SM6xvBvVq8ZVgon6HgIMfywB5fq1+tFVai+kUl
+/8g/yq/DG9rjEAy0V9i7miytTzSc+gk48TzVNwlK+M0FGn9QTB6kmmm173KYNvRL3+Goc//Zp2Q3
+kRZt8BMEbjIpp7HDngJosBsXUy8tSXMhyZUqE7N5xMW/xekMzNgLVjWa1UJHeLEY0MFIuUvPZ3K5
+YE45wx0i2B9jp9JBAJL0Jw4SHVXNc2NIie3sToP8Xsysml2OfAfSoAcdmy+lZoEftdQnHyvRe+D6
+fxnjgodpnsKj53em+u7jowP5zQ9waOoVgzQuZPWtD5chrh/DDZU9ATY1d6PsZ9DRiD0MI0FSnQaD
+9dy3cXCkpXaTMe7cqQuaBiMo45GXYiES69WpZMeeWrVbqOlm8UZiixPYjddvqG8xobjMxItf9Fj0
+u2wsnBHN7lsZ6nxxTVveMDvQMgZjG6bMCjOoRrq0ZcTi4d8UgK2dscAybR3es2SQaBBknH6aBZhk
+2WRja3A3cCA+igQ7JOrz+mtiV/uXocXxUhcMph1PhkhgpYqayDhMsDo+VBlzku48I799AiaG5Gaz
+Niri4R8AHI/NYQDWc05Cz5uVwBLWgqksqjHoYLSq+zvCeYwyIaJ8mFsvPCTz8lKlLk9rcUmlqsRb
+K78Si7rOp9q/HcaVos+SD+dCbHGnmpWHjh7RRWzasQJURDlp4Rclcws1TYE3KR6vmDHj9FzfIs9K
+NnBSuwU4ULIiVC+lDvBMxb1fU3Pm7l9zoFJvD5LVEk6lqJYGQ3dxH1Z8ZT7Rii7gNVGDrsCMWWoZ
+h8KIQQ9YfxAqSpcFjz1aHBU6YVVJi50zwzbCo7r7HdJy68QoBl/HlvDTy3wtBpCE/vQPqUrQx2OG
+05lHbPMf5hzYL4hTH2PxXBjwDtMqpHpouX7Qyz/5D7vS8h0Lj9qWDXwS8iMpOhlFVGvDLUYWyzj8
+BoJ3OvLQfp4VqfOoJHFURSHO/uAAJ2ouytd83YJLLw0jOyIbQ7IUyDIfmQIjzjgHjCOezJvr/hTA
+/qaGBMFISKfSzjyWEvbF2YoDq3rH/OV+6rQRbld4ZD1Q2WG0TJEAN+7UgsFj79E7oymPyXotMAoE
+NvtjJ3NVSd3dIzkIFrdomwcEuj2y7iO+0swyBUI0NQxOUln+byIMUAtNBaXAyqyYG/l2ds8YlFIl
+gxf5SByK1SMxgEVxQcJqrk43HnkE9PiWu1rjBPvzwEiK7agO0D1xuafvTLYyfip5YuiGlMTfPgAf
+UruvE8/2ABur1pa4cxzsolwxgg0b7gsZPzwsmvUKyR/ldFooukj/McTTJbNZ35x/ZXQ63UWltvRJ
+QkJGLPR7gRzWvYqqjL1xDlVOEJUjC/Fk2LWZCfK7VkLJZkSjCNZFFXUZAIClBgAF/NW56iec+aJO
+mWncIAigyG7OqamKZYuPsXhfCas5c+gEt6Acb9Fc86dLn9Tvy51+wVzApsOhXRdXy6tRUAgwmIYP
+GyS3VOS53OfRhJOC2ad/kbXOHfZj1Js5W56svLNkSuNWZtBLfHpilP4bGVyP5NkSMZ8CD2m48r/a
+Dn3eLwzVL/uvD4jvCaYsDFxNSFVx8wpgNoDQj7iicGXKstiZZS9jFozaVrzTBgAwsm+meXUn8Tk+
+2lTh++uDHgNPytpUSocikSreQpK6PgVV0fe2/zqYMBgSXhk7ELuKGhS58qerLRPPAVu6lWbQJNgm
+rDgzWIOHw+dGeeXFEWHnXulnASbGL2HCpyp3N6sWccjE7yrsyPQ8K3w3MmQPSNvGdvR6wfhmcEst
+/6nmn+lPELMMSAF54zrRIzJoWLgedKKAN2nddBUg4ptSCOkTKhNAzDUS3VAorXa/RTLbLavBQalQ
+/0OLmsgiC2vDuE/FJrV0EGwr+ojHUHtwvha1IMNWm5ixuvyKu5ljj/s8hzMX34MPPIE6wD012i8f
+DT70kmWkCqmZCdDW87drGBMUEJqmyHd8K1XjqC7/7ceDXHjfBMsRTXCXrRUGJ1IFpp8nh3TVG3wh
+jzqVlA2x1M5s2DYxj6YVnOHXtAaFTvVpMq9PywLRudsRpZ8x+vC+NA3FPEdSnL960tmwf9tav80w
+JNXk009U7idAmzrPGLqI52a8u7mgdaUd5tNe9vDL6hY3UZHhfaZOIL5j1IN3PKGnwh9LwS68mmbX
+J4Lwqdc0NYIY2k11lCfAgROErKTiXtqfzA+atWm2sCvL+WUMM4XCmso83ZPX1gJRsB2+7FYH/Iie
+eJRdEB/9LUk9BIBri0VWxESbFr3fBkG7SGRW+dYdHoNU/1XQ60Rn2uk18obeBhpEYUPvlx69bt2j
+fjGhXExtIvuECm1+zLCak0b4C8Ypneb10tTr+BmDiUOKCVyIQblv4L+9y5e0hytPItcatX7/u3S9
+Ba8f4GYUzNIm0XWKCkK08Yrcv2IzVePCW1OoYMOEOi9Jp+EL3R5tZJGhzgEaWv6L5h+FOweRfWF+
+ulBICQubaCXQbBqAflYDbPeTr1mfPAjMNp8h5uMRHjY8xPDuUbxS8VXGgCEEqx7ZBCvOeCIugqVj
+s2pHTND0OqrdXJQ0pMPbPPDwRVknXhTd6uOmIlaaXHISUq3y5CwrdQsW7exJmiL792m0xvkMgVBT
+Wul1PcvDWQdZZKY5rnKSJziKao+mVLt8D2BdMkCCFdWm1csKr/xr8WTizAl3A8Ir0U75P4QFGiw1
+VvGPtCK4HAat3kgUFcNfW2i+Bc78aQ6dvlMvJQBA2N/JbMtTs704njeThA83rRWPQ5ubG6ApOHl6
+ruBsj6HezGL7hihJ/RpJ+HbcX9S0MrnOgFcrDA9sDIM53TK1YdF85h7wlHZtKJLDn6sueRudPmQ3
+UaJ2e2XMG1LSjJ+VpqnF7C1qZun78vulOhd/xkwdZW6+kCmElOfo/GnOZ/L870YMyXjXHbMmgDY0
+d10NvpGtJmWh5WdqPUyK2ChqOJ8Padfb7eIGLbG7Nwz7lKvu8fG/MJxnj0tzqyPksz5KZlpZDaZR
+VguIkBsY8QsaiD8UE2c9AGyE2br/UKv1NLVq0NzlfoR7oC3mzV6OTg/1rrGHgrV/f3WoQ/d3avfU
+oasuEDd3NRmeM1KAipNhkSPRBQIMAj0TaJYToiyYEyESUa0UjbQsQn8x2ais0g/aFn5OkiPi8jb0
+xRzRZcEMJOyHQv3IVCAv09EcFn6NmN3XugZrHQAUI/KQPX+GGxUmgby2R2b/rFS9yPBKpmekdCdH
+cVsACmT9Lj97x5FQW2Fb3CZUPjiTjPRXxS0LEHMgbVjYYPY+TzUakciBwISdnNzVxwRoO4a470bF
+fopzWIkJwtRm57jgeW6dlK/099omzJRk1jLFxwtuzQqK9aMZfSpfoooVOEH3X8dOv+7BZToFGWVf
+t+X7Xs1yV6vaRPeFB30fubRiMFzePf8N3Gt+LnZ0EF431FRSQbUajjKZNXvEd3iXSrr+b9yO59Mz
+StxzsEqz2z/0Y0F5raxb6Z5LfkgDo8TTm0lXlEaMVqXcod39V4N+OE3HKTRM5ilpSXFfiGFYF+2g
+pAaktRFWPTg+vqLKQKjhR03MZYd/6sDFdIs3OfjRwdMQdZ5k3AwRtxUKQ87CuqSVnQaW62iB533n
+uBcMXg/B8qofOKuYKeAueBseNRfEl8kp1Xq/C4OsPR4vc1cDEFt1MohoqFUpvcaIkNk/plIu7VNX
+OP+DEWvLx2XQaN5czw+RnMO0rndLOyG2LBwoOeqoi8lbRdqX9bgQ6GEJiKpeCk0+/pLxxCmpC37U
+Vhzay6LOf9o0Cdq0j0pSV0VO1VW4j6RMEtcqIcThU/2jVbQc+lVoAw3NTwIK4G2QtGTNHt+XnRHF
+6EAahSQ3j/+JAior0R8M82vTpzqLZYbIkJSvVTY4aQFjb7AFoXYhdg3xtUX4YC3NDjhxtD8kBhqF
+eh+xkVhIH06FRJrYsmIYMpyIoSceN697nB/+Yhk3pCxhjm4nXdCicZyKlRsH2aa/ZnoTodiuwaH4
+xS1KE1QNePLmvCRjwjJMm+ChMIBSg+zndsbm+JxNlF963VXdSuysw7/kEHAAn/N3ydZf6kXo0hvy
+8WzYXFufQojo6hNJPPrkKyhnxW2EzegqG/K0m1QyCV/0a558GMTDsgIl3i/RsYc918LX0fjbi1Mp
+UQ32LZ1F2vPczwYrUdgJTQOmdyxJASTcHFnZ0OS/GLVJxJC7U/w+fqqQupEl+HKxQE11xaAmEQhD
+dj2VDLalp/5TyY1BZx7iRDwYRMqE0bJF1wS8/S0AaVqqvSJFaCIDZF9cchibAcx03O0NOGxElDuK
+i5TBqeY+MQwKP85VEZu6UqpaoaE8ZFzolxqmQrj1xkDCZ/mEdizYCFUmSdZapAEYJQOLPRARk/Ip
+RgmKReY6OdlRsC4ziriaPrxLYPhVT0ephVjMcNsJAHPabBiO4DWockcy/glJOey+9olENJkOt8NS
+8GLJYhaIRqp/os9sGaEe2k/XhSwtXYWX0esI6f4pM47KI18vcKcthGEzDsmGzHj3eVhG8Qx3NJr9
+9t5PkRwsQVO0gHjP02wZdq7Q99Q9JFLTDtncsiBGg6cZ0VtiHBJLBiTXlhSxDdgsysY1sqfp+0eG
+X+uCujyUKlwoVBy+8bf9XNKAGTbGCRxw7WrQZo9jHsrWUCnmc7r5+flu2yseKxEQSgf34uKg+siV
+BWmVnECkBg5BBJEFwLCSRbzcM8MeVzQafatdZKBEa1fc4kMcmRrMvj1GHDLQfJWfWnntV6KE2UCA
+NUoFE7xYd/RD/dJexzHCr/dxXdRpmKYqynlnZz1w8ZMYrPv7DY6QH6Aea4ohytwjz6FiAk6gBZ5D
+85gB9eX7YCdMog74YgIMR65jhItfVVrML3KIxoHfIJblbqPoXvfcs1nDfW62CRyOA1aAnC8F3QoJ
+7i8wM2EJT9JV5e/8dQb2o8YJvAdkVCgmUtIWqPQPlMV1lLYsCGF37l7pM8BAU82WvKbu7/jnGTTB
+tr0J71vz4kLGk1upn87383VZKQJRHAF5Rj7aL54fFJVbB/rVqTKYJ6f8BcmMVljgygcZrb8DjH2x
+6PrR27aW5lWvYhnBl23CWAykDsxBy69aFHH3ITkHSOTGe4U9WktNnmW2le0qnEkyQ93PQoUzaI/0
+E2BY3/xlP9ttaRynkUQXpGbh/tdTdlVStr+MwMieynsio/AyFjm60j1H5VBzmaQt70elDByZO5gB
+POo0wKSbcPKfTlJa3F+32xR9X+0myC3KSUDxgWOvJAfpPDP22oQVtDmfM0OkLzGj4nGgbEF+L3gS
+TN3NERyzCJqxLlzvezkqGQpFm5lfyAy7RzJ0CReqEgH01B/569xx0e5nhQ5DwwPEowRFJvUOfWHD
+Pc5m4N5OEMEDliST4ntCux1WOLEysvAwJG3rWigTNmkodSiaIIxnEuYYBL6ojO8WyY6MHPMYvwhG
+mg+QnBNheeBBWfK0/PrzZxniXUN1UAL7lgBr9eAFN4VmqGNu1HNSvEiKy0CifdXFNBYfXOYZtktq
+mEE/yDWb2WeDmd858MNe4d881s0tasQsNsSD6fSUEOpBDxtfFeVRD2ohfeadEjYuUvImgSNxarGh
+O6OThBwsAZaNo+je3vY7OPlszTSmMMBuiytS4FM2jK0QNSXIwo9XjE2XsYOOZltDHBxfrRv08KKS
+sYtiNzMApPFJJC79CcoXqSK2+B25k3Fe+2AjpdL7ZTec3Qes2p4nqDGcSW8kxKpALyKO88ulwvah
+EG0r6nPzHy6muiqsdPJkzRdioEitIhDh6EYz9Hj85+UO29wEqi7jIEC4EKCxfih8W3logtyBVRg6
+Yu7eVXEdvZ0dD5oSDUtR3WNuT4opxEFzVeFncdhG40dNyL22jYodaHvbNXCE7eWNbCLSx/VeCego
+MzVZs/YEGnijd8OqlYReeKobdN2QB4CFWf+bfQDwgVUSEjrxN3YymJGkCylJMwbXkE2q8GGbU1YH
+hcETpfJPMnWXSJ6lYGqiWnMIA66KI2SeWwHr6f8xqtXSD6pU2Ka5kt3h1vu5EoRgsrnS0/c/3Wtb
+9CfUO2UFGuUYsWkVJQ/5wXxz0Hk8EWgvKV+eKTjxUrGMIoC6g/s+PlWA+WVRS6XzFvEw6yaxR2/W
+4N/f0DicPWIdWckOuv+ObTwphZvJ8QzdIQ05TjXUWAPJEKNv6QC0kY7uHyQCDLfSUIWSfgXfdHSC
+V3Ce/sgrSoBQrVW8aneN+MyJbBLpDOpQjxdvztS6ygOrVHAA50owM9qWf6T85bGb0nR3orXqrsm5
+c7vqIewsr6zsM8lzBfNIIVfnidqErIZtAHd0j5Q74f2q2ROWPbHvcaD9w7kpl3tbpohl1g1cL8XZ
+mUapfss91xxf+mY/v7GfHWlBtvj/x0ZC8PzXjwTLZoVNlvg7FXpQC9OpmBMhbtwJ9YY/jjDBpgFZ
+0siL7JqG6JXZRT5VLXCbj9UfyxbrR+gaTys+kzkCAAg3ABHVT96lBeBLvwhz+jhDKc9vIGRO8ghn
+oSofTbzvwF1tc0bef6zrAgWJTT5ITVMVxcodra/gwGR/0nfVuDtOWT+On7v84giH98Hf2Uzn1ux3
+vvl2UpCdlYLJEDIqPNABz2kp6X5zZUasQs7MN+I5pnH2GA8zMZFI5u+UCda1VUA2dTD5R9XelYuN
+KywZsJ1U0C0p3LTTtVGDqwiZq6rnOXDHFjG2p+2Yt6fpUqnUPMoEWH1I0hL1k7SReJkN5yw2X+8I
+/f237mq+iL99yfKxukjJx/JxP19wFPwxfA292mU338Qo17+j70NKPB81ZD46n3LgXQg+aJKrWjPs
+V2AmCmMU9HBRK52AQjBeph6QsnpQFJQc1g6/Dr9K1M0q7GYJTQyDztuKnFxGWZO6QpMSxCtNq/3K
+awQKLlz0ROTO+JkS2RtTZRBYu+kVsHby8ebuKXM0cIFjWWDsULoqMhT5eeWhvtltsqoz5p3IJGVl
+rn/vR6/zgReEEiAfCASJ16dgTHoD2MO/5xBKR5fbGl5qN8NCpG7ii8K54jzTjJ5CcnKWmkKC8IAI
+J0OU0crq6tiqVwLmLG5HZfUe/3XcImKj97cwyX2i8FLVaFQUefXNfKsbhNkPR8wz5sp0STKBNK9K
+tk1nbDGWBF+76xGUWKxYNj21cpM8xYtxubWipnF4QFWHfVUvSOn1DQ73RoX+vCQxfjH6EpP01mO+
+JHm1uxaljQWsorpgEYlgU+qeNNUSlc4uVto+BODVoAvEw6j9BQ/cZdSBwOoOqt4zBdMIyIJBCEv5
+9TNJi8XFV+3I2ondLjcF87JBA2R+E/B/nlLUQ2s8CTv20wzr4fBTulZ3Exj0iYx98jS0SloeH/Lj
+TINDh5+7LVMo4Shv11L77CheM7EEFwzlpAk4zj/BS2SEnkv6osO5qv5zLgsthgr6lHKHIbapeTPo
+ovZHms4vcH84BV7LrmHTOMH4GEmIfkMzz7OtiOS9GXje1CVipSACTwiemFAwuLQerKYT20s17W/1
+qrjNkq8eQQ1k7OodImjBlbXTeIR7PWZIhoII1nOZZnOd+X3116UEuq0MciNPDJSi4d5eiWAfEhYx
+zHngFSfaXMyqgP3+/5H9GzdyXskHINASzWcDtZrccSG0g/6bl+plMtjDl8ttVFFnok7BOv9Jd0qQ
+/sKIL8zd6ifDDzIp8iSnV3PBmsj+6sdTwowEuLMw3IunY/ynrmb4IAohO+/benhuNkvfB6pDizkW
+caursnat2Pgx7oJfNU3s/wiEUJv3w40q10WkJW11CPZrmZRACKHxif/xVWjdKt8FWrzod/ecJUWQ
+XNM9+UxOCDobL3cB8sJRYC9Htv+tYre+bwKfC2y6AkOOOwzSNt+D9wkSlkfHhrGYkfTUxNBeuIwl
+AOg+sYijjo755IPdVS9YexgVGxBt845bTQBdxYruztGUahPqGFV6CYQ0NZdB3UxR1nAgX2robjVu
+eeVzch05qyN+wMZvGKRZtHvjcVQw5f9JDTYwtJBj8yYqlnYnfK2UUcjM1M4PyZgBlJRKlfCjiero
+yHOoIvKStxU2ehqHvfYjVclLzFdd0xpvHT27ELfSWOW44v/FC3+yP9xXavFAJGnv6lpyA3QBvD7C
+nZLrgVYB1grtO3Blpd9pSxD5bIMW+uVmIM2MoKIifmDIZnmhzxgWmc25aHySC4ZldFMVJz49Fuh6
+ZCjJLkSAxMwxLoU6+eB2CgXzf3xucMUAbhWik5jknYL7KsoY8MOwfs4lbjNxvyFgDEXnJeoEwg8j
+HJYpeyrYSc2O/vSW3emV/m/8eMjMfnJNdy8DM7Di/nfy0cR6MsNl7fbXm2CUjQEdeZ6UunqsxcQP
+tAOvRooY/x10dDdY4z42ESYTnT0YQSaUS8T6q5Bg6+WbGl8Vr+ljpC55NJFGtZDsbY8B2q+KcZ0a
+mW9p0ZwgInrtKXDVz9U7bDiLItECDHI+D/oesWdWKGjf1ZM4mKbUwIAXbr9pJN3SBzIGsvWRVi/5
+Fo9QZVK8Lk5YWXLENQfMXbUxI0zn1/Z/KxY6KltfAbwuzVcESaUeoj0x5onAwdGr6dEWlZwQHS+D
+EDGPP+MEAQp92SpYYJOKep4rt8ClTJikITc9BqTkiai04avFKHGD4xA23WUgTmsahVIB9Fs4Fp0t
+wq9AR/A9PGW+ZikD7f5yA21KNImjj2Dmucp0W0lU98lWAX/gYBz9a6HboSYU/0GPC5IGpySLf4nK
+jtvgJdu3TYlth09WApQ/pIybmZCBc5q2AD8h14KYxhMuKsp+vlcUScBfLU/bAULLW993uXjtZd7j
+pd4n+RrXPTZoutnSS61uBXuXS67ssiLIOAU1fmR5z0Edtmt8j/JLcSpaZOM7k1jK5jZfUS46SphE
+MgjFz18ZxCcDhKlQK/R4BHd1Ygb5nc9lIa4K0wTbOGq6ejBf9h3kK+6aHHNY2dEPq6I2mpiYnD3f
+g6MUby3LWYJK9rXy3RxaYgXqMV/XH9LQUBwXdR/Kwu/0jC2t6Z57KHir034o81LA28lgiahyD7DN
+sU6/WxbwM2bWHI+oRKCurI33iF3DqXDPByYaikDnk4f+ODRREpX2NovZZXwiNw0QH91KYCbY0C5r
+4coQb4Pk0BzdyzWDU+CuWkGXN/uccHJm7Vw5ror2QTve7ADXX0/N13UxanxcC9pCgxDWq+L/cZH3
+mS3lb5vb86JqRnyDQJs+CtYxcDFBCyDrWqa/RVB3+ywgoki5yGo7A/FhuVism4HPY94kPuFcntEO
+4LZtXenqhU7/AX/YFO+llxa2qmkrduLxLO1ilj+8mnAXj+PfoZNwv2qQfBYaKGW31f1BvICD6uEQ
+3hd9HYd30pIAfsqdeqalawO+93xWObhnwQC30A87OXZfNrKnBTFC741GlP/SZ8sETH9nfvXhrdLf
+czJ1HzjbxpGgKY2atftwv6Wv9vCMM9IzfZvlZ6YeyBwGIGQ2phg8MyVG4Gy+pu7Fnw1+lSDH23wZ
+R9bh7CjTp2fLSYcl3UO5X4Lr4N8RgpCTXXYdA9s1aTP3O5KqVzKpvJQR4x3Tc8aaBh/G9mXhT1jW
+rqcZ2MnmZFC6c5HmWIWWgewqPJw4QVfPMnAOYfO7Jp7KUe0xhFGAkFz206XKdEBmBI3DGMgT+015
+wSnJnk2guZ0P2ieOsyWjg2M4yg73oKKI5ax/jeHh/T/i2JV8Kh9y5kycAfsk4z4A85wVz5Nt35c7
+iXocLjTd2VYiDAGc/0aG8nk/B+OePoGwgn2xpbt0ZsFEgbDOYTgaCP/+u7HTSgHzXngVOeZtuaiS
+Wfhgs3QoRmW9m5MyS+/PcfsFihpkyt1M3sEJ2PY1Dkh7IqY01mOHi1Lw4dAbjcUfA8ml0oi0iadz
+I5OnMRkeHKrs8Z6tASPLO8ZezAJRbxZs5IcAkX7t4CsEIDe6sszjpqBwvAsA2zp7fWIAFxU9NdKN
+nuBSuhqT2uSJLPBN0IXrJWJfDtbPhbVd2/GdUoYHi07WHVRtggHJDJKeJpMjK/ElvMpfW20v3l+F
+Nx3XPa/lqvkihFo4ivszutBWWTFeoS2zidi4JxbD9ntOCbTi4QyFDTDd+I4hYN/nD/KGVklVCT/H
+dx57UBpo2//OBa6mmA6JDLVt1xOnPptFvbblnInyX3v7KxK4/TgkPYS64R6fOEVT8bVMTKs6BCB6
++9RSVLMWjHktOT08Xq7VVxbYfqPNlRuhTQrAmIjd3HcCMQvhk2aiZrsnwj8syP5xJh1SHQpNOQph
+rG+tYA1a4rlAbxpe0SKsfcR5g+uhloPb9BzuXwmODWvhksMSSvhVWtYHVqgAt2DNak5/th9qQBiY
+WGGY31j9wnAQqpyWqXYHkfqaLIn1+8h+/a8ltV7zgZgSde1v3xaBLTX0r/2gV/1GCDjEYYSo9UuT
+JABi9MYNf2wMW24N8DbwACBqR2CsZe4FItbu39/ZRG/EykLrAxxNR39DPvAkCVt1R1z4A7OLscbm
+JGT7p2joH1kW6Aztulalc+/rBTP/z6BKnBx00fC0hYy0Qlrd//ShacRvMeIdk46bJKIT2fkSQ4+6
+gRD6c9ATO5Anz2OBcwbcWiG3wjLTSRKE/BRMQnVb0u6bw9RKVleryekPubDA7Hf4YvilZE3hnb+S
+5OgV8sEqSIKFEkdBBdgm4YsGeYgOZsjw193cNNsQhGSSz3qobv6IqRBrsUDV/LEikbpwtCVH9Qlj
+kPt8d0Gnmap8+pDuJv5Pa/mQLik2NzyrQ4E03C/bVHsxu9QrsSkzLoPslP02kdn0DyKGK+1NVeHN
+bbSS5A3A8z8OHVQlNwNiFLDjHTZzWkmXdFKWjpyNu2tOTAW+1fMFZKiSmkeoVD2iztH+Y+q53Lhr
+EVXCZ0nsFM9tgDEG1YB6d03fH73oxpGHV3ujaCMs1VJjzMKFkeQ5GVvsjFpT0dA+sFSsh8uIMopk
+4BB9CRlXm5zH7ObwytyGJkq4PVd6xE8pMrh9tXGQtVFo9bRl0Q/JuV704ENU3EOVjTYmLStwNB1g
+s6YegCxnl9TzfAVm8w8zYs1m8zpVtsRqvFnJdQ4nmyX58Furn4+RHs5gFf4nPYsB88/CnzJULTB6
+Tdd0i3rtTeBPNjrlZYJ/581tLSEh4svaCG7pAxE3MLQCspJfLBJNFcW7I2vmlmBHrqC500VGxXqY
+6mTXWcXbxmw+9V5OTV8hZMxXlFqKRJFRdBddDtj/eobI0e4PMvI+hvVRx97JMksIJEgEdfELnbVT
+9iyzImevw+pfOl1DnYNbjYTwHqoMnLCVk9W+XNN9rNgE594kD65SUrOQ8I3cgqfk/xjchGLmgVrf
+2icpudcQqF4nQ1eEALF4BVBni0yYlsgJE0V17ZRzuRTFj+Wj1hTYoq7k/9uL1Aza6wsl+840V44I
+b4DkOboMs6RQDdQ8rG+z0q4Ymv4hj+cm/o2oFi55G60qxLY0X+UfKH/5E/Y+Ub9P9nah4Z1OwnkK
+SxHCnusBG5Is1oUx32ImGIQfGozXrVPsJ8DSEg1fuqyfZhgvtuAriXkRUsgeOhEEoNgY7A4ga1Vc
+XNVs9VsmM7zjLEiBv9uDZHFrZcJxJbNBt/+RvSg+IvqDxaemtDRPT3qDszC3T4nSzAPPliWrspR5
+iaMhwFyJ+XlKbM+hBcrKW3ZIhBzq5l5bHwxPV4wJo3x8xJzl7dB8z0FG7mO61cmJ6jDkGEBzQ6ur
+zHH82ekacSQ9KlNUlmQP4llqcebb78xAswlg3wdW57iD8mdFBPErSS57QJYb4S9WhhuQ/nTBpTy7
+lKfOCNorTPD0umFdw1FK83F2tLjgKGiKwVYloB10uem2piuo6LY+uB7+x9b4QXfgthJ3FjwuByEC
+jbE0UrXg+SKn+zZZLlgV9LfnL3KxSrRKrd+E1+r/5kB2IM6100eBvZSpaiHaC5qS5AzzUYhs8x5M
+yrqe8NLintVKyP2we03MBe0YtVJVysmHb6yvHi09KP8jw5WEsO7BJZVliDtmMUREbZjSKgqLsSTO
+WPNGW1d4B4tOoUYjW4MyShS1lqZ8W/XJ5ynSRZ78XZzoB5HCrq6apSXoRV/Gri0Qzbl+bemJIz4S
+JPEIoKwU38VRFhSU9XE5cu7gGpy2vaF/CIcjczLEIH1EFJLeMuAEPs6mhA8dsPWOVjJ90GvWlVPj
+ZvKbNpXqEGhCeaqzVLZUdNvsrzZOLDgrgTyCmODs7H+qN/wW1tW3JHtTpdJhvPyqBjLFYJ8lWNRn
+SG9ndofYZMyEdA5cPhAlV6kI9iOwcjTpnntPK+jXVzDobl+3ei2+j7OPyQIOPlYDwLpFQhMwcw+l
+pCVVycF6Rnn+0fE1vsrOpy++qYQhBFPJ865WOyRUpDUNFW0KY7gbDha4Ya2a8cMvXTKZkB7U/jJB
+DbXUtipWs1UBMY3ACu1jH7SRu7pZar8bSdK33Cg4lGrnXI/gcPivFa+XlPiIL5hFaci17l+BJv3H
+qiE92ToBBKlzztqqg372pVx77eYDa9hFlUev3vqR0/7bv9KVU/M3jTaD130DGeIQkqRCCkdoTvu1
+90H/tLYivJEDrHo9hzKXuqmuNEDXtEmQ8QOhIIT2idcYVmU/0FI3iw2uWxJarP/lXF6xSZz/Dz81
+oGYPw8F48Aghrl+Zk8VIHJrpoGu4USdOHWdnsplqoTE3YA7qrO6wKyPIQ4EvamUtl/haNXhx/L1r
+XQ4w7sUsZwKUNAVrlXXKWPp7TtxgdZ8qFgy5I1fqgFOfs4lMbRd18hAXrieCBq2eBdc65nqiyAsH
+zipa4Z6l0Yx4nipCwVRT1ObeGT6dtMSW/r8UWFWzhJ35YXSoUGVebTkNGqJIUzqfD5UHsHmL6YVG
+SMJ8HZDrymEjHcLFrnmk6NMUakDb8Uxd+hcoqVn50dfPN54NtShr8QH6pLZWiJ3x1pLkEcJI7t3b
+fkYlZJxkpxSOfBhnBE1zLx8JdWSlrqhwgy1Sh743eQIrzbbckLoucSe8PqcdHEMzJmND0ELakdmJ
+xSTJSLSY/HYhz6qCLDY/FfS+/goa4f4PoFfEXn6EHePOk4VVdXGa1I8royK0kZAE/w6E83Ki+p9B
+TdShna5wFeMd/QtMAE9/MPtpDl7dSIktav71RRK/wcGA6tOLxvWWJMJB3s4KEF4gIOgeShC/RZK9
+HV/LEu5O4q5g8VTo310VQx5NvprtYFBgDhfZQPp4kLq3zukPVWxkoI3K4IeWVmtSX+/yIMU/KI3+
+2uA+3PNr1dKE7jWFZmzeSvWIPry+889Mm+85cUpkM22Np7HcMKrv/FTGtvW1v7Leujg8GRW4wnFX
+aPPsuCyNO0OJhYJKPaK3n1gz4T/fBx+CRhbJLba7SxNdm1Fln5k5X+PATzL8VXA1QsExUcKx26Dp
+7CcOL/Q3dOCu91Ym05OOseAyf9e9hkyUOK6slD88wB30qiiKfXbutmL4xpqvByd2/3POp6tCLT6c
+IAd9Exb47YMlNlCzjeHmL3UzDAJD/qc/WB/q17ajAji2NJVwwk4YM0T8AqFF6S9DkcoBkrYqfeq9
+xjWORJfkGMv0/QNa4WUd7esi0TIZMaKRnn9ugZD2EGySTt8zh0CPsfuS3l6sGn72jMLOuMUcyPe8
+60mIAUhgeUOCPqcPB/XWWs+qGqgO9Sjeae7VDMxa85fd4Tko2EVtpiGS2/iSkArIkykC6vXAmd4R
+ClEyJe4PysLVTAARocaUIwKwu5rq5nrT8lAJ+3JJxWEnvQQ+42EykSwdvp6ZuiQYacs9AAC0sRoX
+a7uaw4jq+KptwCdO/sU6og9Tt5fnsQ2MnJUo55zkb3HFOU/CUBxN+P8YrarJoJdfSic+c0A2hqm3
+RSdm7rpDx5MOe6tqojleFJK5WpTVCntI5vxpJYJpsj34RDDQTni+Cr4jyvoY/oU9/wWCc/o94zeW
+5/zPIufeVH0+85Wws+UrEVaEULpiHLDAl1xK5GVV3yqT82hkAi9HGAR9jue3SY5jZfAFWIRZbvw8
+DGz4nXZAL/27r7T3b5eSuZ1HoNMMLhXUDEx0m+uoQh4VBNb13z6pS1hWzIWPaf67sf2ehPa4d244
+IBAtILzjT55bCUjpgFw+exzYJOsfEvY5CHkYD987u4qCrjK8A5EWtPnfS37ZyC64xq9fqwXSTZz0
+emp2gSRw0Q5IBHMgLq5kMh2+Bn77GXKj7V70FY3E7+mjvMbJLlyHPK4pu3D6sig5cqiXACy+Z95Y
+g+Z8jUY1KnAxUTvXX7iw7MTKyUFcH76We7vzqdjsek3cAROavIs2zZQpYUJtsQo50E8Xt0LR1Yzc
+g3RsmlOo5oHFgEm/jYzCIrDG2e4nOMyR1Ow7yt5P11hv6fATzI2Mq1eCaDA81+yldO0mUQPKiH+X
+tYP/KteujgVfotuLSAsiHh3L4+O73JGVIirN+Goa5IE5bRSxHaQC40jRG3to7jwN1NKianq2f+TX
+m9gNvfAwgskrYWFYsP82qFNxn5/WSNh/a53dl6zF9qnPIBSwZ5hobv4JlfPF5TdtoF91qv+GStWu
+nUZZgD3muVnE+MNW9VtmPfWpTCDn+K9T7hhNVhaSBDmU6DfoCtkn0xmkgbmNS3ec2qkPyB8fHrks
+U2tXfDx1SeEuh8jvloH82Wc++DM5XjtS/kVdqFDB5Z9FDKh2CUu02YGIRc5T+o5voe7k8f0ni4zL
+7WdMuHMmmETUO5Yx8aKdvjYCwdVDCKuD2he8LS8I/ZTFDWj8BkJyDjGRV+nutsVkCcYcfcv+xz7G
+bPBhCpIP+93jgkhnqUXybA2l5hcL5ay8OQ3hx/H13HdMI8gHJh73ZLwD6o0EBLsJoinVQPSFQ8/Z
+VFX7IeK6P/8zqjrWkHTlFH/CU6C4PL1iM5VKGnvdIexxEWMfXB0m9cwERk5uccArxIUcj4YFprpA
+MJFm4tS4eGnsiihhloKD+n7F1GgcDTRE6XKfUOPlmP6Qz8fD0+3s862t8x9lMzsWr8PLhoP/4LMY
+ieqP9mBIEADqUeNS1drSzmVTggKaUFwnqA6CQEHL4+uTP71nkcfhcSzAnUm8kXkzD98niegYXX4+
+cCEH30MWB/bzCnJ/r8xeQMVrvQk+FVRE1TWcmSXsQykkclP8a6gjJaRllqvUb/KjhlKMcilXidzv
+pbvMvtzxzBduLhDXKfQg4DrJcIgsn2UtSXzMMA+M0MFC91WPtQBmwdZjtHb0KvWMC20DJ2DbBxD6
+Z8n6+v80YHr020Pbz0Xd9GN8QF/B7jtzi0x9Ood8Cmh39xwMlc5k/YTtUyN2R/Ct9B4a59m/x4Of
+2bdwW31lQfabE3YtSH1kEU1lUGMTY7te37ZsACV05ZTgtxmF3O6QkINvDnY3S9eLWbUYLwk4ZWLw
+IJwT7unyjWViPpTLPCqYZT8+6TVpjH3/kvGDAogK56D5xQJyeEFw9z5W95NhDY2gwPJ6veH8Pg8z
+ExW0XzvkXxkAnwC71Lc5cJWMD9LS/vEfykB9YLUTHAqlN2mz8nmoSF2gOuC3UD6m3HFiTTwoHVZv
+c0GS27nk1etiAMcPaXBCCZszYJTyz4UUA5675c5bgY4nydGndmhQVQ2kV+1pqLrFhUYbrwQWPWtP
+2EtU1VCRYQ4JzlKFluJZuZYJ0L7mbIT7lJw+sF9UDG5WpAWWh/VIJ62ueR3ce04uuJBc9dZS7kxn
+nSEeS+NF2oA+rYjnns7GAK91Ka+Wg81eigTOHw/piF5sWkAXS2ZE1GB4bgUe1RVu/0ugqBaTt9ve
+xzo5N/K9kaX9hP/Wwv2j4pREHnUU7mEvMiaIDU/3je+KWMLjs+BDtzDepYs7BQP6rFk4ZsXgKTJg
+xqUair2Cxe9o9FZBpc75SkVPEZ7sXvEJPQLMd/k4lZ5Tk7m02lZZTz/nAuIOf/EjJf+76mW59yn7
+qGFge1ukNfPah/Tzm4Oi57mdWMsRMM//iL0GIzZSVHh3Hg9kg2/H8r3vd6JlCp3Gmj7BjC+seufN
+HnIlXw9Gr/EFrYRA3AVVcErOk/r55zhXB0VIFTN7AjgVsBXQhUyjrUB8vnQQXtrJ91ZgdRL/HqME
+AoQcO0Extr4ZFK3rK/6wAUaQicbCkcPdBjC+YjUlGTRRnLUtK2CpYZbfWV8vdBLpL1A3THo1zzZT
++70xJrbZY8JzOgWpItVhsL5Uun6PuogSdakVbFUhnpUajN+KaGRmNouwozYYn7wvU4X7Lp7gInSc
+mUry4rqaigEBk1UyZMhGFInXyREsJ2SGwhO25/+w3cVxC7h1cjwn+oVyr1v5v/TRCoI2Vl+uvSU2
+D0BMqdNWjxjZxRhlcKemlsFEp2xjKDoOYtZqG0EIyRtut+3DcPCxdk/fSomvlQJcYBLzU9baT6/a
+VpyRhQ+EYW3+laUclLbYmvZaFGRGtnmLujUyoJQfbMf42aIg1kNskSI8P2p9yy/1jMbzwRI1+9mC
+uFWnxysA0BS02dPiUrSBcFzEVqDXF/vNmYxn/b7y8Flw9f8hyHmRH+/oFetTanXAbqOOmYgxK/fR
+QnpfJ0nIDyvk2FpiJBlaO8Q9uxBH4EXZL3NNBe+BfrXSAzpodpq8klZb2Sdr6MMFbKn0JWnSAYbs
+FOv0hURKzZ2zJUXGb41HLKcpG5rN8c9YABgkRkaV+xkafyEJAEZjC89mlle2d7ncJL7K7Qo3/1GZ
+DNenSSct+0w2MbhM0YBb5dN7X+6C+5Khp84ee4BUyfVqbOniv9qVWumHB7P4ezDuLFGMklvpD8A5
+vjXJjrP8E3Z4qar39zt8sx3dDJlDNKIOYvdSEJ9T8MosjbZWX2+7mlOL1r41Ow/wxCg2QkSkNiNf
+7V1/5D0TM/DEaavKdf85yRR6nrq/eod4ENBQrrLy58AiBcn5+w1+RosnyYhNjj3BjLR5yKXPzrKd
+86H9W7OARtlAVypR+uJtSAn0U/TvcagMmfW0L58eUXbQEQUJDqSS+gR+K6MWluLtQEWSh3Tp7bJ/
+etRr+9tp74AJNFG3GxSDzfud/DEErsYR//2FzzaVFRZzgDE1DAeMWndx6bmB3gbUidRUp9KE7A3i
+D62UVoODyny4xGCvmUTdXr6VOxGSowuYl7YhvM2I4T2zDzriD9DSofCl1wff1LYguVhYxXqRX6AD
+3pMoQ/mROWHgK65/LPiTEs+jFex9+DYap2NcMtYXOqrLGM4reoXy+E35Gvmvhbcm8Y7mOKNXQNA5
+GtL3+/y+q30DgyZ62oiCjIFkWhURNfCboIM07RsgeWN4aCb6rkbRVH1bBtBAShZEa37N/4ubdK1a
+jOB4O7oJU/3NA7DlECWBep3tyXwlnQHmDQPICGEEJNsHoW0Odm/M314iXCSGi3wcaNSKSxgyryUq
+nK3UW4Xd2Yb6GcvR5Tf5XeE7xNlN6bH7L26o5UotUnfgFzy1i5ZPm3TqNtYzGg+yzP0bZhGnYf6T
+HR0V0SKNgKp/ykkCagyj7la4s10g7Xwve/rmIvbD9GR3flVvs3XQr8Km0/qTPIaJ1VflJvsHea8K
+Zroh61QkHkQL818RQrdDJ8GAYTySbFCu66lNUmueHSFdWaKsgmsfLnnu0huB2SSqR0O/2D/zItom
+b8xpH9AxNK0hFYdrPQU7ioI+w0APDwib8aHhWtwKccsLecTfNQBJJpxrmOZWmaNYa54icOJPDNDc
+6euzOs37rc533MIDzKheGb2A7gjq94c3Lchn8mxmYtatPylL/jjvQ+jxAEVn+RQscyorY5PCxqw4
+ziF/Jt9qHTKj/WieyHEfNLDKx3lrdaYqXd71LOMztNbSxgBUw3tkS921f9shZfUmgzM3HCqw9f6G
+YSXxXtBnFkYgDKiOSe4ZqUH0HQkH9L5pVg39dYobyCxqH05DCGQ8a2LYsmJksZ/WJd+s28SJ+yt7
+21fYr8P9PtAUXVMNRNWrrLfmWv0J6okkykFBQVel4YwlyxMJfwokUzDJ2B8l8ijiQL5vF+t2bSrf
+2Iyb6+EdqEpMZxAjCBq0S5VGobu5DqNbSdIwRjJlfxzQVw3OhqdYAM2RqIHPWGg/LNQ7fDB+S0ar
+h96551+y+G6g+xe7hULlBKSrf/IcJelU9y+MlHTjD4yjh6a3D8X5gqLlByKckd61202WRrnm6pEN
+/+2vJkkuXhaAG099Uz0UfJJmU49YV/1V5f7J7XNmx1guWBYe7L4Ero1TDygY8DwXbpAtUDRoM4+j
+N8sRPFQ0gJPAfKdEs51TlonVdcxfEfXh/uw0DZr3p6cfeaWWiCfyijypJ6470EDYCfStiSWzuvzh
+BM47fg59Twa6X6O+saOedrwK7d1revPZr40t04I5YBVAJqoaEqDBAvsY9XzHNEO3aOrZcW0i0zD0
+tWzN478bieHD3lvqC6Xn6J0VOfOFw8Lt9uEcfEst7ncoiLLjPmxP4vyQ3YBKa7tZdnnpS2lDgmyz
+YzU1m61jIoyeG1kpVYxkxWrqBi+dqG4ZpK6bSR/AK81EFqcpVd1X0soKk9t34LkhNL0drwuvz8QK
+Sgda8Z9X7m2a7fGPcXFPiUB38HpAYhTbwryrWRESBfE41I+S2XCPoXQyKfCJC7UdxIN5pL/rUuc2
+jHre98c4BqpfcLyDnYlA0q/GELF6Z1YXDz3wVoqgSvA/TJqH/202qYngeR/vYcjhjlvj7N8lUUQC
+It63O21WjGzdKRhgXHoiUyca5+2G3K5ORURL+rSXRKCc5Yw80VlxJn71Y6qRDGWqzu95/n1u9c05
+SOjxHNH8stuRwo3+q5cd9T+GUQRQWmZcLRP8t9uTWv0gum8tta+sN9sG0VRET+iB9JD7g6ArcS2e
+mWj1yvQ2UNp69Mqzb62R0u/bcUXXipsZNqLoOskIvddx35QVk0XmtPZXFMYeXcznoBI2e3UjRvmW
+qpsgefcNQyPvlffis6ZhaIj6urt4RhuYqRvPWrrIuGeO6BKJdBQCwWAhJg0WcwOROEtadP6JDunn
+8yEohds52ZqR9d/x3hgg9vmi+4R2fiCMcGi+u6QJfENu5hX86QWlQaA0+FAAqjs3TMfloiB9Ebfi
+fmUXMBAQDwJUILQzI7m0GKRU5XPHaKH5NdIY7e0IVzUuhDSEnG4KQwl0BTXgahnw1//HIDCGh3xP
+X8TfXSDbo79LPVMJDPD/BCgAr6FYosALs6Hih6Ok9W931k0dX80nbuy7cICDJB4+V9G6xcI9H6oR
+jcHYhCYt5NiULYAinr23yKEUyaR50PA71B7q+yGJ0ZuupoOCz5JowLhVljSC9+gzmzMGh4MXHwJ2
+/DLDXuBpn/PcLltmGeG2M165CoLqRGqQmN/xnrJ2+mhCd/xgvUY/EO7q/SNkYrIy3RHqwF3XR8A1
+NvGw7JNgy/cXTgcnEzBxLf3wsP2HvmyXy3PRJvjkMGugirzRTFq4XVk0VjKcX7XLoszFhth3yFB+
+M//6zcb4BvGX/j/dpVqAFSoyYT2+Ks1W7C4mmS8l7UUx/BDvG6zrX2uA90JUs8k4z9GH+uGHPK4G
+Ln9zmHwbHj9grR9dlsqBfxll+9xP98vO4ufM6DYkmNADONyHJqj+W0I22XjVUMJIKESoitKUrL8s
+6l2mp2Pqe5/xZBex/TWFGaMqFqWk0fY03hDVc+oJ34tFaLa7NwEI44e3fORZPsCLwJgXAu5t0mPk
+wEO6ICN7hpa45ITYmHrHjH2R/wKXWYtX/qgnuWIv6oeFtxe8xXyb+YdNqySmget2wC8j8Rm8mRH5
+wbGbI/XTkr36IrrT/mEQBCzyWH1aJ3VKPMiIEHGvKdG7MqNzyWQxtwdB92Thl2wyGIF+FHfauyvX
+6FcKhmBziFxxcl5vbIwgkKSOFXrA8zghTD7k95CvaW4Tmow6420uNUreXKG1srWKfUl+p0sKch6P
+s4wiwZuhLLQgKKl+4Zx6tksaUhhofSXNtzsCwAgNrbOvs/YjTh7+n0C04J1Va7ntDpSg1YFIqICj
+339BSzL0j61rTxf1bOARrmvlQGgZguFKs/hz4j/oT+53oOAUkfBBlSHGedj6blW0OmcBelvaT4S8
+G7FQwx4WhqrfdFRPQXK/FjXez/YsxknBEYEPnjN/vmnUd14k7oXB1lkqAvib1oc2oAKrqH1Fim18
+BvWd152OEfz8D9h+QamfUbDbhKRPYve48NokK0VpoPgZ/2saB/B+EH3YAR71nOBtQuopIJWxtiLQ
+lTlq8iAxkB5KyareWbtRoIIlBLrYSo4PA05A5/fvQnuoukJY4La2O3lUoUim51Vqr0X5bTY07SpC
+UwIVr4qVsLrEdEWNKr+Pq3TImFCvQ6jQq44q1Bo+Hz9UB/GHhrkAL4HsrxsGOs1czHBeFhhdYaAl
+V3qFe4p952HtXtwp0dbyn60rXdOYhIqA9tRZ9HCvvBMDuLN2nLH6s7Ap9Sf2102SBRdb81Cr1id7
+vOUfIe7B4cMc9ZBtM1dO2i+Yi1IkX+JoEUqZmSQ0ErIjIOq56V/oIdOEPLd82jLyTw7Xp6A56P13
+2HnEg+R9hjP6GbI3MaR3QelpEQdsr8swXOAsckt131cqTXhL1Acg+8fHWCEA9/AVU/GL6iVb2eu9
+X6FJRSdlAN5DE5TJkQtgmTDDdDk7Z2ibIHZ9herpZs1EdU4RahhhVePvUbJKKYtyRS1ddMljCp32
+40OFyZIkKfS7f7qCQ2vsKtaReATmI/87SEMSDJIOoKWFZJb+FcjmT5GW3mxraNEdUjajhJIPBYaW
+nny95I21qy8c04PTiGCpSx5Ptlkv2b1EYl9Ib5mWdY6Xy/hfSvP3gFrGU/DEy6Qvrs+84/qRFelD
+35y2Z5XHDdzdqQGAD2kOudobRxRVvz2X8QM7XngLWGxsXzQacVI7p5WUhARtiSi8EMGgvn/F5uza
+txjAFinuUNQcjCQ7hHUeiReQ4i7rbCeH2LH7m/QzW3JEbqje/hA9gW9KbZTOHI1r0K4OGyMAIkUO
+lg8/CmeZj0thZBC/akDzgMzse9pe1BV6aDvZnP3JZ8W4vJvLX3lwMq56PB+XZXiRjE/3+MZtK09O
+1a3EiKztxaKCMNOHHLokCHdDneH3DwqSxnD9742ONxO5cdQ9uk5QjTH0xyVo/taxXr0g0f5fgjNW
+3Sq=

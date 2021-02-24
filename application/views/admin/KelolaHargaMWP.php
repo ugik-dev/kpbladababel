@@ -1,578 +1,541 @@
-<div class="wrapper wrapper-content animated fadeInRight">
-  <div class="ibox ssection-container">
-    <div class="ibox-content">
-      <form class="form-inline" id="toolbar_form" onsubmit="return false;">
-        <button type="button" class="btn btn-success my-1 mr-sm-2" id="new_btn" disabled="disabled"><i class="fal fa-plus"></i> Tambah Harga MWP Baru</button>
-        <div class="bg-primary p-w-xs">.</div><span class="m-l-xs">Harga Petani</span>
-        <div class="bg-success p-w-xs m-l-sm">.</div><span class="m-l-xs">Harga FOB</span>
-      </form>
-    </div>
-  </div>
+<?php //00591
+// IONCUBE ENCODER 10.2 EVALUATION
+// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
+// IS NOT PRESENT IN PRODUCTION ENCODED FILES
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox">
-        <div class="ibox-content">
-          <div class="table-responsive">
-            <table id="HargaMWPTable" class="table table-bordered table-hover" style="padding:0px;font-size:11px">
-              <thead>
-                <tr>
-                  <th style="width: 10%;">Tanggal</th>
-                  <th style="width: 8%;">MQ</th>
-                  <th style="width: 8%;">MWP1</th>
-                  <th style="width: 8%;">MWP2</th>
-                  <th style="width: 8%;">ASTA</th>
-                  <th style="width: 8%;">ESA</th>
-                  <th style="width: 8%;">IPC</th>
-                  <th style="width: 8%;">SNI1</th>
-                  <th style="width: 8%;">SNI2</th>
-                  <th style="width: 8%;">ISO</th>
-                  <th style="width: 5%;">Action</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal inmodal" id="harga_mwp_modal" tabindex="-1" opd="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content animated fadeIn">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Kelola Harga MWP</h4>
-        <span class="info"></span>
-      </div>
-      <div class="modal-body" id="modal-body">
-        <form opd="form" id="harga_mwp_form" onsubmit="return false;" type="multipart" autocomplete="off">
-          <input type="hidden" id="id_harga_mwp" name="id_harga_mwp">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label for="tanggal_berlaku">Tanggal Berlaku</label>
-                <input type="text" class="form-control" placeholder="Tanggal Berlaku" id="tanggal_berlaku" name="tanggal_berlaku" required="required">
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="harga_mq_petani">MQ Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mq_petani" name="harga_mq_petani" >
-              </div>
-            </div>
-            
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="d_harga_mq_petani">MQ Petani (USD)</label>
-                <input type="number" min="0" step="0.001" placeholder="0" class="form-control" id="d_harga_mq_petani" name="d_harga_mq_petani" >
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="harga_sni1_petani">SNI1 Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_sni1_petani" name="harga_sni1_petani" >
-              </div>
-            </div>
-            <!-- <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_sni1_fob">SNI1 FOB (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_sni1_fob" name="harga_sni1_fob" >
-              </div>
-            </div> -->
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="d_harga_sni1_petani">SNI1 Petani (USD)</label>
-                <input type="number" min="0" step="0.001" placeholder="0" class="form-control" id="d_harga_sni1_petani" name="d_harga_sni1_petani" >
-              </div>
-            </div>
-            <!-- <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_sni1_fob">SNI1 FOB (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_sni1_fob" name="d_harga_sni1_fob" >
-              </div>
-            </div> -->
-
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="harga_sni2_petani">SNI2 Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_sni2_petani" name="harga_sni2_petani" >
-              </div>
-            </div>
-            <!-- <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_sni2_fob">SNI2 FOB (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_sni2_fob" name="harga_sni2_fob" >
-              </div>
-            </div> -->
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="d_harga_sni2_petani">SNI2 Petani (USD)</label>
-                <input type="number" min="0" step="0.001" placeholder="0" class="form-control" id="d_harga_sni2_petani" name="d_harga_sni2_petani" >
-              </div>
-            </div>
-            <!-- <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_sni2_fob">SNI2 FOB (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_sni2_fob" name="d_harga_sni2_fob" >
-              </div>
-            </div> -->
-<!--          
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_mwp1_petani">MWP1 Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mwp1_petani" name="harga_mwp1_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_mwp1_fob">MWP1 FOB (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mwp1_fob" name="harga_mwp1_fob" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_mwp1_petani">MWP1 Petani (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_mwp1_petani" name="d_harga_mwp1_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_mwp1_fob">MWP1 FOB (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_mwp1_fob" name="d_harga_mwp1_fob" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_mwp2_petani">MWP2 Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mwp2_petani" name="harga_mwp2_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_mwp2_fob">MWP2 FOB (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mwp2_fob" name="harga_mwp2_fob" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_mwp2_petani">MWP2 Petani (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_mwp2_petani" name="d_harga_mwp2_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_mwp2_fob">MWP2 FOB (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_mwp2_fob" name="d_harga_mwp2_fob" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_asta_petani">ASTA Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_asta_petani" name="harga_asta_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_asta_fob">ASTA FOB (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_asta_fob" name="harga_asta_fob" >
-              </div>
-            </div>
-
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_asta_petani">ASTA Petani (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_asta_petani" name="d_harga_asta_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_asta_fob">ASTA FOB (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_asta_fob" name="d_harga_asta_fob" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_esa_petani">ESA Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_esa_petani" name="harga_esa_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_esa_fob">ESA FOB (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_esa_fob" name="harga_esa_fob" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_esa_petani">ESA Petani (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_esa_petani" name="d_harga_esa_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_esa_fob">ESA FOB (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_esa_fob" name="d_harga_esa_fob" >
-              </div>
-            </div>
-
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_ipc_petani">IPC Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_ipc_petani" name="harga_ipc_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_ipc_fob">IPC FOB (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_ipc_fob" name="harga_ipc_fob" >
-              </div>
-            </div>
-
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_ipc_petani">IPC Petani (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_ipc_petani" name="d_harga_ipc_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_ipc_fob">IPC FOB (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_ipc_fob" name="d_harga_ipc_fob" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_iso_petani">ISO Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_iso_petani" name="harga_iso_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="harga_iso_fob">ISO FOB (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_iso_fob" name="harga_iso_fob" >
-              </div>
-            </div>
-
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_iso_petani">ISO Petani (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_iso_petani" name="d_harga_iso_petani" >
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label for="d_harga_iso_fob">ISO FOB (USD)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_iso_fob" name="d_harga_iso_fob" >
-              </div>
-            </div>
-
-          </div> -->
-
-          <button class="btn btn-success my-1 mr-sm-2" type="submit" id="add_btn" data-loading-text="Loading..."><strong>Tambah Harga</strong></button>
-          <button class="btn btn-success my-1 mr-sm-2" type="submit" id="save_edit_btn" data-loading-text="Loading..."><strong>Simpan Perubahan</strong></button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  $(document).ready(function() {
-    $('#kelola_harga_mwp').addClass('active');
-    // $('#setting_parm').addClass('active');
-
-
-    var toolbar = {
-      'form': $('#toolbar_form'),
-      'id_role': $('#toolbar_form').find('#id_role'),
-      'newBtn': $('#new_btn'),
-    }
-
-    var HargaMWPTable = $('#HargaMWPTable').DataTable({
-      'columnDefs': [{
-        targets: [0, 1, 2, 3, 4, 5, 6, 7, 8,9],
-        className: 'text-center'
-      }],
-      deferRender: true,
-      "ordering": false,
-    });
-
-    var harga_mwp_modal = {
-      'self': $('#harga_mwp_modal'),
-      'info': $('#harga_mwp_modal').find('.info'),
-      'form': $('#harga_mwp_modal').find('#harga_mwp_form'),
-      'addBtn': $('#harga_mwp_modal').find('#add_btn'),
-      'saveEditBtn': $('#harga_mwp_modal').find('#save_edit_btn'),
-      'id_harga_mwp': $('#harga_mwp_modal').find('#id_harga_mwp'),
-      'tanggal_berlaku': $('#harga_mwp_modal').find('#tanggal_berlaku'),
-      'harga_mwp1_petani': $('#harga_mwp_modal').find('#harga_mwp1_petani'),
-      'harga_mwp1_fob': $('#harga_mwp_modal').find('#harga_mwp1_fob'),
-      'harga_mq_petani': $('#harga_mwp_modal').find('#harga_mq_petani'),
-      'harga_mq_fob': $('#harga_mwp_modal').find('#harga_mq_fob'),
-      'harga_mwp2_petani': $('#harga_mwp_modal').find('#harga_mwp2_petani'),
-      'harga_mwp2_fob': $('#harga_mwp_modal').find('#harga_mwp2_fob'),
-      'harga_asta_petani': $('#harga_mwp_modal').find('#harga_asta_petani'),
-      'harga_asta_fob': $('#harga_mwp_modal').find('#harga_asta_fob'),
-      'harga_esa_petani': $('#harga_mwp_modal').find('#harga_esa_petani'),
-      'harga_esa_fob': $('#harga_mwp_modal').find('#harga_esa_fob'),
-      'harga_ipc_petani': $('#harga_mwp_modal').find('#harga_ipc_petani'),
-      'harga_ipc_fob': $('#harga_mwp_modal').find('#harga_ipc_fob'),
-      'harga_sni1_petani': $('#harga_mwp_modal').find('#harga_sni1_petani'),
-      'harga_sni1_fob': $('#harga_mwp_modal').find('#harga_sni1_fob'),
-      'harga_iso_petani': $('#harga_mwp_modal').find('#harga_iso_petani'),
-      'harga_iso_fob': $('#harga_mwp_modal').find('#harga_iso_fob'),
-      'harga_sni2_petani': $('#harga_mwp_modal').find('#harga_sni2_petani'),
-      'harga_sni2_fob': $('#harga_mwp_modal').find('#harga_sni2_fob'),
-
-      'd_harga_mwp1_petani': $('#harga_mwp_modal').find('#d_harga_mwp1_petani'),
-      'd_harga_mwp1_fob': $('#harga_mwp_modal').find('#d_harga_mwp1_fob'),
-      'd_harga_mq_petani': $('#harga_mwp_modal').find('#d_harga_mq_petani'),
-      'd_harga_mq_fob': $('#harga_mwp_modal').find('#d_harga_mq_fob'),
-      'd_harga_mwp2_petani': $('#harga_mwp_modal').find('#d_harga_mwp2_petani'),
-      'd_harga_mwp2_fob': $('#harga_mwp_modal').find('#d_harga_mwp2_fob'),
-      'd_harga_asta_petani': $('#harga_mwp_modal').find('#d_harga_asta_petani'),
-      'd_harga_asta_fob': $('#harga_mwp_modal').find('#hd_arga_asta_fob'),
-      'd_harga_esa_petani': $('#harga_mwp_modal').find('#d_harga_esa_petani'),
-      'd_harga_esa_fob': $('#harga_mwp_modal').find('#d_harga_esa_fob'),
-      'd_harga_ipc_petani': $('#harga_mwp_modal').find('#d_harga_ipc_petani'),
-      'd_harga_ipc_fob': $('#harga_mwp_modal').find('#d_harga_ipc_fob'),
-      'd_harga_sni1_petani': $('#harga_mwp_modal').find('#d_harga_sni1_petani'),
-      'd_harga_sni1_fob': $('#harga_mwp_modal').find('#d_harga_sni1_fob'),
-      'd_harga_sni2_petani': $('#harga_mwp_modal').find('#d_harga_sni2_petani'),
-      'd_harga_sni2_fob': $('#harga_mwp_modal').find('#d_harga_sni2_fob'),
-      'd_harga_iso_petani': $('#harga_mwp_modal').find('#d_harga_iso_petani'),
-      'd_harga_iso_fob': $('#harga_mwp_modal').find('#d_harga_iso_fob'),
-    }
-
-    harga_mwp_modal.tanggal_berlaku.datepicker({
-      todayBtn: "linked",
-      autoclose: true,
-      format: "yyyy-mm-dd"
-    });
-
-    var dataHargaMWP = {}
-
-    $.when(getAllHargaMWP()).then((e) => {
-      toolbar.newBtn.prop('disabled', false);
-    }).fail((e) => {
-      console.log(e)
-    });
-
-    function getAllHargaMWP() {
-      swal({
-        title: 'Loading harga_mwp...',
-        allowOutsideClick: false
-      });
-      swal.showLoading();
-      return $.ajax({
-        url: `<?php echo site_url('HargaMWPController/getAll/') ?>`,
-        'type': 'GET',
-        data: toolbar.form.serialize(),
-        success: function(data) {
-          swal.close();
-          var json = JSON.parse(data);
-          if (json['error']) {
-            return;
-          }
-          dataHargaMWP = json['data'];
-          renderHargaMWP(dataHargaMWP);
-        },
-        error: function(e) {}
-      });
-    }
-
-    function renderHargaMWP(data) {
-      if (data == null || typeof data != "object") {
-        console.log("HargaMWP::UNKNOWN DATA");
-        return;
-      }
-      var i = 0;
-
-      var renderData = [];
-      Object.values(data).sort((a, b) => new Date(b['tanggal_berlaku']) - new Date(a['tanggal_berlaku'])).forEach((harga_mwp) => {
-        var editButton = `
-        <a class="edit dropdown-item" data-id='${harga_mwp['id_harga_mwp']}'><i class='fa fa-pencil'></i> Edit Harga MWP</a>
-      `;
-        var deleteButton = `
-        <a class="delete dropdown-item" data-id='${harga_mwp['id_harga_mwp']}'><i class='fa fa-trash'></i> Hapus Harga MWP</a>
-      `;
-        var button = `
-        <div class="btn-group" opd="group">
-          <button id="action" type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class='fa fa-bars'></i></button>
-          <div class="dropdown-menu" aria-labelledby="action">
-            ${editButton}
-            ${deleteButton}
-          </div>
-        </div>
-      `;
-        renderData.push([harga_mwp['tanggal_berlaku'],
-          renderHargaPetani(harga_mwp['harga_mq_petani']) + renderHargaFOB(harga_mwp['harga_mq_fob']) +
-          renderHargaPetaniD(harga_mwp['d_harga_mq_petani']) + renderHargaFOBD(harga_mwp['d_harga_mq_fob']),
-          renderHargaPetani(harga_mwp['harga_mwp1_petani']) + renderHargaFOB(harga_mwp['harga_mwp1_fob']) +
-          renderHargaPetaniD(harga_mwp['d_harga_mwp1_petani']) + renderHargaFOBD(harga_mwp['d_harga_mwp1_fob']),
-  
-          renderHargaPetani(harga_mwp['harga_mwp2_petani']) + renderHargaFOB(harga_mwp['harga_mwp2_fob']) +
-          renderHargaPetaniD(harga_mwp['d_harga_mwp2_petani']) + renderHargaFOBD(harga_mwp['d_harga_mwp2_fob']),
-          renderHargaPetani(harga_mwp['harga_asta_petani']) + renderHargaFOB(harga_mwp['harga_asta_fob']) +
-          renderHargaPetaniD(harga_mwp['d_harga_asta_petani']) + renderHargaFOBD(harga_mwp['d_harga_asta_fob']),
-          renderHargaPetani(harga_mwp['harga_esa_petani']) + renderHargaFOB(harga_mwp['harga_esa_fob']) +
-          renderHargaPetaniD(harga_mwp['d_harga_esa_petani']) + renderHargaFOBD(harga_mwp['d_harga_esa_fob']),
-          renderHargaPetani(harga_mwp['harga_ipc_petani']) + renderHargaFOB(harga_mwp['harga_ipc_fob']) +
-          renderHargaPetaniD(harga_mwp['d_harga_ipc_petani']) + renderHargaFOBD(harga_mwp['d_harga_ipc_fob']),
-          renderHargaPetani(harga_mwp['harga_sni1_petani']) + renderHargaFOB(harga_mwp['harga_sni1_fob']) +
-          renderHargaPetaniD(harga_mwp['d_harga_sni1_petani']) + renderHargaFOBD(harga_mwp['d_harga_sni1_fob']),
-          renderHargaPetani(harga_mwp['harga_sni2_petani']) + renderHargaFOB(harga_mwp['harga_sni2_fob']) +
-          renderHargaPetaniD(harga_mwp['d_harga_sni2_petani']) + renderHargaFOBD(harga_mwp['d_harga_sni2_fob']),
-          renderHargaPetani(harga_mwp['harga_iso_petani']) + renderHargaFOB(harga_mwp['harga_iso_fob']) +
-          renderHargaPetaniD(harga_mwp['d_harga_iso_petani']) + renderHargaFOBD(harga_mwp['d_harga_iso_fob']),
-          button
-        ]);
-      });
-      HargaMWPTable.clear().rows.add(renderData).draw('full-hold');
-    }
-
-    function renderHargaPetani(harga) {
-      return `<div class="bg-primary">Rp. ${harga}</div>`;
-    }
-
-    function renderHargaFOB(harga) {
-      return `<div class="bg-success">Rp. ${harga}</div>`;
-    }
-
-    function renderHargaPetaniD(harga) {
-      return `<div class="bg-primary">USD ${harga}</div>`;
-    }
-
-    function renderHargaFOBD(harga) {
-      return `<div class="bg-success">USD ${harga}</div>`;
-    }
-
-    toolbar.newBtn.on('click', (e) => {
-      harga_mwp_modal.form.trigger('reset');
-      harga_mwp_modal.self.modal('show');
-      harga_mwp_modal.addBtn.show();
-      harga_mwp_modal.saveEditBtn.hide();
-    });
-    
-    HargaMWPTable.on('click', '.edit', function() {
-      harga_mwp_modal.form.trigger('reset');
-      harga_mwp_modal.self.modal('show');
-      harga_mwp_modal.addBtn.hide();
-      harga_mwp_modal.saveEditBtn.show();
-      
-      var currentData = dataHargaMWP[$(this).data('id')];
-      
-      harga_mwp_modal.d_harga_mq_petani.val(currentData['d_harga_mq_petani']);
-      harga_mwp_modal.harga_mq_petani.val(currentData['harga_mq_petani']);
-      
-      harga_mwp_modal.d_harga_sni1_petani.val(currentData['d_harga_sni1_petani']);
-      harga_mwp_modal.harga_sni1_petani.val(currentData['harga_sni1_petani']);
-      
-      harga_mwp_modal.d_harga_sni2_petani.val(currentData['d_harga_sni2_petani']);
-      harga_mwp_modal.harga_sni2_petani.val(currentData['harga_sni2_petani']);
-   
-      
-      harga_mwp_modal.id_harga_mwp.val(currentData['id_harga_mwp']);
-      harga_mwp_modal.tanggal_berlaku.val(currentData['tanggal_berlaku']);
-      // harga_mwp_modal.harga_sni1_fob.val(currentData['harga_sni1_fob']);
-      // harga_mwp_modal.harga_mq_fob.val(currentData['harga_mq_fob']);
-      // harga_mwp_modal.harga_mwp1_petani.val(currentData['harga_mwp1_petani']);
-      // harga_mwp_modal.harga_mwp1_fob.val(currentData['harga_mwp1_fob']);
-      // harga_mwp_modal.harga_mwp2_petani.val(currentData['harga_mwp2_petani']);
-      // harga_mwp_modal.harga_mwp2_fob.val(currentData['harga_mwp2_fob']);
-      // harga_mwp_modal.harga_asta_petani.val(currentData['harga_asta_petani']);
-      // harga_mwp_modal.harga_asta_fob.val(currentData['harga_asta_fob']);
-      // harga_mwp_modal.harga_esa_petani.val(currentData['harga_esa_petani']);
-      // harga_mwp_modal.harga_esa_fob.val(currentData['harga_esa_fob']);
-      // harga_mwp_modal.harga_ipc_petani.val(currentData['harga_ipc_petani']);
-      // harga_mwp_modal.harga_ipc_fob.val(currentData['harga_ipc_fob']);
-      // harga_mwp_modal.harga_sni2_fob.val(currentData['harga_sni2_fob']);
-      // harga_mwp_modal.harga_iso_petani.val(currentData['harga_iso_petani']);
-      // harga_mwp_modal.harga_iso_fob.val(currentData['harga_iso_fob']);
-
-      // harga_mwp_modal.harga_mwp1_petani.val(currentData['d_harga_mwp1_petani']);
-      // harga_mwp_modal.harga_mwp1_fob.val(currentData['d_harga_mwp1_fob']);
-      // harga_mwp_modal.d_harga_mq_fob.val(currentData['d_harga_mq_fob']);
-      // harga_mwp_modal.harga_mwp2_petani.val(currentData['d_harga_mwp2_petani']);
-      // harga_mwp_modal.harga_mwp2_fob.val(currentData['d_harga_mwp2_fob']);
-      // harga_mwp_modal.harga_asta_petani.val(currentData['d_harga_asta_petani']);
-      // harga_mwp_modal.harga_asta_fob.val(currentData['d_harga_asta_fob']);
-      // harga_mwp_modal.harga_esa_petani.val(currentData['d_harga_esa_petani']);
-      // harga_mwp_modal.harga_esa_fob.val(currentData['d_harga_esa_fob']);
-      // harga_mwp_modal.harga_ipc_petani.val(currentData['d_harga_ipc_petani']);
-      // harga_mwp_modal.harga_ipc_fob.val(currentData['d_harga_ipc_fob']);
-      // harga_mwp_modal.harga_sni1_fob.val(currentData['d_harga_sni1_fob']);
-      // harga_mwp_modal.harga_sni2_fob.val(currentData['d_harga_sni2_fob']);
-      // harga_mwp_modal.harga_iso_petani.val(currentData['d_harga_iso_petani']);
-      // harga_mwp_modal.harga_iso_fob.val(currentData['d_harga_iso_fob']);
-    });
-
-    harga_mwp_modal.form.submit(function(event) {
-      event.preventDefault();
-      var isAdd = harga_mwp_modal.addBtn.is(':visible');
-      var url = "<?= site_url('HargaMWPController/') ?>";
-      url += isAdd ? "add" : "edit";
-      var button = isAdd ? harga_mwp_modal.addBtn : harga_mwp_modal.saveEditBtn;
-
-      swal(saveConfirmation("Konfirmasi simpan", "Yakin akan menyimpan harga MWP ini", "Ya, Simpan!")).then((result) => {
-        if (!result.value) {
-          return;
-        }
-        buttonLoading(button);
-        $.ajax({
-          url: url,
-          'type': 'POST',
-          data: harga_mwp_modal.form.serialize(),
-          success: function(data) {
-            buttonIdle(button);
-            var json = JSON.parse(data);
-            if (json['error']) {
-              swal("Simpan Gagal", json['message'], "error");
-              return;
-            }
-            var harga_mwp = json['data']
-            dataHargaMWP[harga_mwp['id_harga_mwp']] = harga_mwp;
-            swal("Simpan Berhasil", "", "success");
-            renderHargaMWP(dataHargaMWP);
-            harga_mwp_modal.self.modal('hide');
-          },
-          error: function(e) {}
-        });
-      });
-    });
-
-    HargaMWPTable.on('click', '.delete', function() {
-      event.preventDefault();
-      var id = $(this).data('id');
-      swal(deleteConfirmation("Konfirmasi hapus", "Yakin akan menghapus harga MWP ini?", "Ya, Hapus!")).then((result) => {
-        if (!result.value) {
-          return;
-        }
-        $.ajax({
-          url: "<?= site_url('HargaMWPController/delete') ?>",
-          'type': 'POST',
-          data: {
-            'id_harga_mwp': id
-          },
-          success: function(data) {
-            var json = JSON.parse(data);
-            if (json['error']) {
-              swal("Delete Gagal", json['message'], "error");
-              return;
-            }
-            delete dataHargaMWP[id];
-            swal("Delete Berhasil", "", "success");
-            renderHargaMWP(dataHargaMWP);
-          },
-          error: function(e) {}
-        });
-      });
-    });
-  });
-</script>
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
