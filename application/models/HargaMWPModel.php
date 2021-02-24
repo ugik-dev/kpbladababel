@@ -1,158 +1,128 @@
-<?php
-defined('BASEPATH') or exit('No direct script access allowed');
+<?php //00591
+// IONCUBE ENCODER 10.2 EVALUATION
+// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
+// IS NOT PRESENT IN PRODUCTION ENCODED FILES
 
-class HargaMWPModel extends CI_Model
-{
-
-  public function getAll($filter = [])
-  {
-    $this->db->select("*");
-    $this->db->from("harga_mwp");
-    $this->db->order_by("tanggal_berlaku", "DESC");
-    if (!empty($filter['latest'])) $this->db->limit(1);
-    if (!empty($filter['latest3'])) {
-      $this->db->limit(1);
-      // $res = $this->db->get();
-      // return $res->result_array();
-    
-    }
-    $res = $this->db->get();
-    return DataStructure::keyValue($res->result_array(), 'id_harga_mwp');
-  }
-
-  public function get($id = NULL)
-  {
-    $row = $this->getAll(['id_harga_mwp' => $id]);
-    if (empty($row)) {
-      throw new UserException("Harga MWP yang kamu cari tidak ditemukan", USER_NOT_FOUND_CODE);
-    }
-    return $row[$id];
-  }
-
-
-  public function getStandarMutu()
-  {
-    $this->db->select("*");
-    $this->db->from("rinc_standart_mutu");
-    $res = $this->db->get();
-    return DataStructure::keyValue($res->result_array(), 'id_mutu');
-  }
-
-
-  public function getLatest()
-  {
-    $row = $this->getAll(['latest' => true]);
-    if (empty($row)) {
-      throw new UserException("Harga MWP yang kamu cari tidak ditemukan", USER_NOT_FOUND_CODE);
-    }
-    return reset($row);
-  }
-
-  public function getLatest3()
-  {
-    $this->db->select("*");
-    $this->db->from("harga_mwp");
-    $this->db->order_by("tanggal_berlaku", "DESC");
-    $this->db->limit(5);
-    if (!empty($filter['latest'])) $this->db->limit(1);
-    if (!empty($filter['latest3'])) {
-      // $res = $this->db->get();
-      // return $res->result_array();
-    
-    }
-    $res = $this->db->get();
-    return $res->result_array();
- }
-
-
-  public function add($data)
-  {
-    $this->db->insert('harga_mwp', DataStructure::slice($data, [
-      'tanggal_berlaku', 'harga_mwp1_petani', 'harga_mwp1_fob', 'harga_mwp2_petani', 'harga_mwp2_fob', 'harga_asta_petani', 'harga_asta_fob', 'harga_esa_petani', 'harga_esa_fob', 'harga_ipc_petani', 'harga_ipc_fob', 'harga_sni1_petani', 'harga_sni1_fob', 'harga_iso_petani', 'harga_iso_fob', 'd_harga_mwp1_petani',
-      'd_harga_mwp1_fob',
-      'd_harga_mwp2_petani',
-      'd_harga_mwp2_fob',
-      'd_harga_asta_petani',
-      'd_harga_asta_fob',
-      'd_harga_esa_petani',
-      'd_harga_esa_fob',
-      'd_harga_ipc_petani',
-      'd_harga_ipc_fob',
-      'd_harga_sni1_petani',
-      'd_harga_sni1_fob',
-      'd_harga_iso_petani',
-      'd_harga_iso_fob','harga_mq_petani','harga_mq_fob','d_harga_mq_petani','d_harga_mq_fob',
-      
-      'd_harga_sni2_petani',
-      'd_harga_sni2_fob',
-      
-      'harga_sni2_petani',
-      'harga_sni2_fob'
-    ]));
-    ExceptionHandler::handleDBError($this->db->error(), "Tambah Harga MWP gagal", "harga_mwp");
-
-    return $this->db->insert_id();
-  }
-
-  public function edit($data)
-  {
-    $this->db->where('id_harga_mwp', $data['id_harga_mwp']);
-    $this->db->update('harga_mwp', DataStructure::slice($data, [
-      'tanggal_berlaku',
-      'harga_mwp1_petani',
-      'harga_mwp1_fob',
-      'harga_mwp2_petani',
-      'harga_mwp2_fob',
-      'harga_asta_petani',
-      'harga_asta_fob',
-      'harga_esa_petani',
-      'harga_esa_fob',
-      'harga_ipc_petani',
-      'harga_ipc_fob',
-      'harga_sni1_petani',
-      'harga_sni1_fob',
-      'harga_sni2_petani',
-      'harga_sni2_fob',
-      'harga_iso_petani',
-      'harga_iso_fob',
-
-      'd_harga_mwp1_petani',
-      'd_harga_mwp1_fob',
-      'd_harga_mwp2_petani',
-      'd_harga_mwp2_fob',
-      'd_harga_asta_petani',
-      'd_harga_asta_fob',
-      'd_harga_esa_petani',
-      'd_harga_esa_fob',
-      'd_harga_ipc_petani',
-      'd_harga_ipc_fob',
-      'd_harga_sni1_petani',
-      'd_harga_sni1_fob',
-      'd_harga_sni2_petani',
-      'd_harga_sni2_fob',
-      'd_harga_iso_petani',
-      'd_harga_iso_fob',
-      'harga_mq_petani','harga_mq_fob','d_harga_mq_petani','d_harga_mq_fob'
-    ], TRUE));
-    ExceptionHandler::handleDBError($this->db->error(), "Edit Harga MWP gagal", "harga_mwp");
-
-    return $data['id_harga_mwp'];
-  }
-
-  public function edit_standar_mutu($data)
-  {
-    $this->db->where('id_mutu', $data['id_mutu']);
-    $this->db->update('rinc_standart_mutu', DataStructure::slice($data, ['cemaran_serangga', 'kerapatan', 'kadar_air', 'kadar_biji_enteng', 'kadar_benda_asing', 'kadar_cemaran', 'kadar_hitam_putih', 'e_colli', 'salmonella', 'kadar_piperin', 'kadar_minyak'], TRUE));
-    ExceptionHandler::handleDBError($this->db->error(), "Edit Standar Mutu gagal", "id_mutu");
-
-    return $data;
-  }
-
-  public function delete($data)
-  {
-    $this->db->where('id_harga_mwp', $data['id_harga_mwp']);
-    $this->db->delete('harga_mwp');
-
-    ExceptionHandler::handleDBError($this->db->error(), "Hapus Harga MWP", "harga_mwp");
-  }
-}
+if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
+?>
+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
