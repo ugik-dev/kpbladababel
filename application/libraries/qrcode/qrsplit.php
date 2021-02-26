@@ -1,204 +1,311 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+/*
+ * PHP QR Code encoder
+ *
+ * Input splitting classes
+ *
+ * Based on libqrencode C library distributed under LGPL 2.1
+ * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
+ *
+ * PHP QR Code is distributed under LGPL 3
+ * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
+ *
+ * The following data / specifications are taken from
+ * "Two dimensional symbol -- QR-code -- Basic Specification" (JIS X0510:2004)
+ *  or
+ * "Automatic identification and data capture techniques -- 
+ *  QR Code 2005 bar code symbology specification" (ISO/IEC 18004:2006)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ */
+    class QRsplit {
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+        public $dataStr = '';
+        public $input;
+        public $modeHint;
+
+        //----------------------------------------------------------------------
+        public function __construct($dataStr, $input, $modeHint) 
+        {
+            $this->dataStr  = $dataStr;
+            $this->input    = $input;
+            $this->modeHint = $modeHint;
+        }
+        
+        //----------------------------------------------------------------------
+        public static function isdigitat($str, $pos)
+        {    
+            if ($pos >= strlen($str))
+                return false;
+            
+            return ((ord($str[$pos]) >= ord('0'))&&(ord($str[$pos]) <= ord('9')));
+        }
+        
+        //----------------------------------------------------------------------
+        public static function isalnumat($str, $pos)
+        {
+            if ($pos >= strlen($str))
+                return false;
+                
+            return (QRinput::lookAnTable(ord($str[$pos])) >= 0);
+        }
+
+        //----------------------------------------------------------------------
+        public function identifyMode($pos)
+        {
+            if ($pos >= strlen($this->dataStr)) 
+                return QR_MODE_NUL;
+                
+            $c = $this->dataStr[$pos];
+            
+            if(self::isdigitat($this->dataStr, $pos)) {
+                return QR_MODE_NUM;
+            } else if(self::isalnumat($this->dataStr, $pos)) {
+                return QR_MODE_AN;
+            } else if($this->modeHint == QR_MODE_KANJI) {
+            
+                if ($pos+1 < strlen($this->dataStr)) 
+                {
+                    $d = $this->dataStr[$pos+1];
+                    $word = (ord($c) << 8) | ord($d);
+                    if(($word >= 0x8140 && $word <= 0x9ffc) || ($word >= 0xe040 && $word <= 0xebbf)) {
+                        return QR_MODE_KANJI;
+                    }
+                }
+            }
+
+            return QR_MODE_8;
+        } 
+        
+        //----------------------------------------------------------------------
+        public function eatNum()
+        {
+            $ln = QRspec::lengthIndicator(QR_MODE_NUM, $this->input->getVersion());
+
+            $p = 0;
+            while(self::isdigitat($this->dataStr, $p)) {
+                $p++;
+            }
+            
+            $run = $p;
+            $mode = $this->identifyMode($p);
+            
+            if($mode == QR_MODE_8) {
+                $dif = QRinput::estimateBitsModeNum($run) + 4 + $ln
+                     + QRinput::estimateBitsMode8(1)         // + 4 + l8
+                     - QRinput::estimateBitsMode8($run + 1); // - 4 - l8
+                if($dif > 0) {
+                    return $this->eat8();
+                }
+            }
+            if($mode == QR_MODE_AN) {
+                $dif = QRinput::estimateBitsModeNum($run) + 4 + $ln
+                     + QRinput::estimateBitsModeAn(1)        // + 4 + la
+                     - QRinput::estimateBitsModeAn($run + 1);// - 4 - la
+                if($dif > 0) {
+                    return $this->eatAn();
+                }
+            }
+            
+            $ret = $this->input->append(QR_MODE_NUM, $run, str_split($this->dataStr));
+            if($ret < 0)
+                return -1;
+
+            return $run;
+        }
+        
+        //----------------------------------------------------------------------
+        public function eatAn()
+        {
+            $la = QRspec::lengthIndicator(QR_MODE_AN,  $this->input->getVersion());
+            $ln = QRspec::lengthIndicator(QR_MODE_NUM, $this->input->getVersion());
+
+            $p = 0;
+            
+            while(self::isalnumat($this->dataStr, $p)) {
+                if(self::isdigitat($this->dataStr, $p)) {
+                    $q = $p;
+                    while(self::isdigitat($this->dataStr, $q)) {
+                        $q++;
+                    }
+                    
+                    $dif = QRinput::estimateBitsModeAn($p) // + 4 + la
+                         + QRinput::estimateBitsModeNum($q - $p) + 4 + $ln
+                         - QRinput::estimateBitsModeAn($q); // - 4 - la
+                         
+                    if($dif < 0) {
+                        break;
+                    } else {
+                        $p = $q;
+                    }
+                } else {
+                    $p++;
+                }
+            }
+
+            $run = $p;
+
+            if(!self::isalnumat($this->dataStr, $p)) {
+                $dif = QRinput::estimateBitsModeAn($run) + 4 + $la
+                     + QRinput::estimateBitsMode8(1) // + 4 + l8
+                      - QRinput::estimateBitsMode8($run + 1); // - 4 - l8
+                if($dif > 0) {
+                    return $this->eat8();
+                }
+            }
+
+            $ret = $this->input->append(QR_MODE_AN, $run, str_split($this->dataStr));
+            if($ret < 0)
+                return -1;
+
+            return $run;
+        }
+        
+        //----------------------------------------------------------------------
+        public function eatKanji()
+        {
+            $p = 0;
+            
+            while($this->identifyMode($p) == QR_MODE_KANJI) {
+                $p += 2;
+            }
+            
+            $ret = $this->input->append(QR_MODE_KANJI, $p, str_split($this->dataStr));
+            if($ret < 0)
+                return -1;
+
+            return $run;
+        }
+
+        //----------------------------------------------------------------------
+        public function eat8()
+        {
+            $la = QRspec::lengthIndicator(QR_MODE_AN, $this->input->getVersion());
+            $ln = QRspec::lengthIndicator(QR_MODE_NUM, $this->input->getVersion());
+
+            $p = 1;
+            $dataStrLen = strlen($this->dataStr);
+            
+            while($p < $dataStrLen) {
+                
+                $mode = $this->identifyMode($p);
+                if($mode == QR_MODE_KANJI) {
+                    break;
+                }
+                if($mode == QR_MODE_NUM) {
+                    $q = $p;
+                    while(self::isdigitat($this->dataStr, $q)) {
+                        $q++;
+                    }
+                    $dif = QRinput::estimateBitsMode8($p) // + 4 + l8
+                         + QRinput::estimateBitsModeNum($q - $p) + 4 + $ln
+                         - QRinput::estimateBitsMode8($q); // - 4 - l8
+                    if($dif < 0) {
+                        break;
+                    } else {
+                        $p = $q;
+                    }
+                } else if($mode == QR_MODE_AN) {
+                    $q = $p;
+                    while(self::isalnumat($this->dataStr, $q)) {
+                        $q++;
+                    }
+                    $dif = QRinput::estimateBitsMode8($p)  // + 4 + l8
+                         + QRinput::estimateBitsModeAn($q - $p) + 4 + $la
+                         - QRinput::estimateBitsMode8($q); // - 4 - l8
+                    if($dif < 0) {
+                        break;
+                    } else {
+                        $p = $q;
+                    }
+                } else {
+                    $p++;
+                }
+            }
+
+            $run = $p;
+            $ret = $this->input->append(QR_MODE_8, $run, str_split($this->dataStr));
+            
+            if($ret < 0)
+                return -1;
+
+            return $run;
+        }
+
+        //----------------------------------------------------------------------
+        public function splitString()
+        {
+            while (strlen($this->dataStr) > 0)
+            {
+                if($this->dataStr == '')
+                    return 0;
+
+                $mode = $this->identifyMode(0);
+                
+                switch ($mode) {
+                    case QR_MODE_NUM: $length = $this->eatNum(); break;
+                    case QR_MODE_AN:  $length = $this->eatAn(); break;
+                    case QR_MODE_KANJI:
+                        if ($hint == QR_MODE_KANJI)
+                                $length = $this->eatKanji();
+                        else    $length = $this->eat8();
+                        break;
+                    default: $length = $this->eat8(); break;
+                
+                }
+
+                if($length == 0) return 0;
+                if($length < 0)  return -1;
+                
+                $this->dataStr = substr($this->dataStr, $length);
+            }
+        }
+
+        //----------------------------------------------------------------------
+        public function toUpper()
+        {
+            $stringLen = strlen($this->dataStr);
+            $p = 0;
+            
+            while ($p<$stringLen) {
+                $mode = self::identifyMode(substr($this->dataStr, $p), $this->modeHint);
+                if($mode == QR_MODE_KANJI) {
+                    $p += 2;
+                } else {
+                    if (ord($this->dataStr[$p]) >= ord('a') && ord($this->dataStr[$p]) <= ord('z')) {
+                        $this->dataStr[$p] = chr(ord($this->dataStr[$p]) - 32);
+                    }
+                    $p++;
+                }
+            }
+
+            return $this->dataStr;
+        }
+
+        //----------------------------------------------------------------------
+        public static function splitStringToQRinput($string, QRinput $input, $modeHint, $casesensitive = true)
+        {
+            if(is_null($string) || $string == '\0' || $string == '') {
+                throw new Exception('empty string!!!');
+            }
+
+            $split = new QRsplit($string, $input, $modeHint);
+            
+            if(!$casesensitive)
+                $split->toUpper();
+                
+            return $split->splitString();
+        }
+    }

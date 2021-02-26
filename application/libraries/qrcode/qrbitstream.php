@@ -1,78 +1,180 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+/*
+ * PHP QR Code encoder
+ *
+ * Bitstream class
+ *
+ * Based on libqrencode C library distributed under LGPL 2.1
+ * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
+ *
+ * PHP QR Code is distributed under LGPL 3
+ * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ */
+     
+    class QRbitstream {
+    
+        public $data = array();
+        
+        //----------------------------------------------------------------------
+        public function size()
+        {
+            return count($this->data);
+        }
+        
+        //----------------------------------------------------------------------
+        public function allocate($setLength)
+        {
+            $this->data = array_fill(0, $setLength, 0);
+            return 0;
+        }
+    
+        //----------------------------------------------------------------------
+        public static function newFromNum($bits, $num)
+        {
+            $bstream = new QRbitstream();
+            $bstream->allocate($bits);
+            
+            $mask = 1 << ($bits - 1);
+            for($i=0; $i<$bits; $i++) {
+                if($num & $mask) {
+                    $bstream->data[$i] = 1;
+                } else {
+                    $bstream->data[$i] = 0;
+                }
+                $mask = $mask >> 1;
+            }
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+            return $bstream;
+        }
+        
+        //----------------------------------------------------------------------
+        public static function newFromBytes($size, $data)
+        {
+            $bstream = new QRbitstream();
+            $bstream->allocate($size * 8);
+            $p=0;
+
+            for($i=0; $i<$size; $i++) {
+                $mask = 0x80;
+                for($j=0; $j<8; $j++) {
+                    if($data[$i] & $mask) {
+                        $bstream->data[$p] = 1;
+                    } else {
+                        $bstream->data[$p] = 0;
+                    }
+                    $p++;
+                    $mask = $mask >> 1;
+                }
+            }
+
+            return $bstream;
+        }
+        
+        //----------------------------------------------------------------------
+        public function append(QRbitstream $arg)
+        {
+            if (is_null($arg)) {
+                return -1;
+            }
+            
+            if($arg->size() == 0) {
+                return 0;
+            }
+            
+            if($this->size() == 0) {
+                $this->data = $arg->data;
+                return 0;
+            }
+            
+            $this->data = array_values(array_merge($this->data, $arg->data));
+
+            return 0;
+        }
+        
+        //----------------------------------------------------------------------
+        public function appendNum($bits, $num)
+        {
+            if ($bits == 0) 
+                return 0;
+
+            $b = QRbitstream::newFromNum($bits, $num);
+            
+            if(is_null($b))
+                return -1;
+
+            $ret = $this->append($b);
+            unset($b);
+
+            return $ret;
+        }
+
+        //----------------------------------------------------------------------
+        public function appendBytes($size, $data)
+        {
+            if ($size == 0) 
+                return 0;
+
+            $b = QRbitstream::newFromBytes($size, $data);
+            
+            if(is_null($b))
+                return -1;
+
+            $ret = $this->append($b);
+            unset($b);
+
+            return $ret;
+        }
+        
+        //----------------------------------------------------------------------
+        public function toByte()
+        {
+        
+            $size = $this->size();
+
+            if($size == 0) {
+                return array();
+            }
+            
+            $data = array_fill(0, (int)(($size + 7) / 8), 0);
+            $bytes = (int)($size / 8);
+
+            $p = 0;
+            
+            for($i=0; $i<$bytes; $i++) {
+                $v = 0;
+                for($j=0; $j<8; $j++) {
+                    $v = $v << 1;
+                    $v |= $this->data[$p];
+                    $p++;
+                }
+                $data[$i] = $v;
+            }
+            
+            if($size & 7) {
+                $v = 0;
+                for($j=0; $j<($size & 7); $j++) {
+                    $v = $v << 1;
+                    $v |= $this->data[$p];
+                    $p++;
+                }
+                $data[$bytes] = $v;
+            }
+
+            return $data;
+        }
+
+    }

@@ -1,91 +1,103 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+/*
+| -------------------------------------------------------------------
+| Foreign Characters
+| -------------------------------------------------------------------
+| This file contains an array of foreign characters for transliteration
+| conversion used by the Text helper
+|
+*/
+$foreign_characters = array(
+	'/ä|æ|ǽ/' => 'ae',
+	'/ö|œ/' => 'oe',
+	'/ü/' => 'ue',
+	'/Ä/' => 'Ae',
+	'/Ü/' => 'Ue',
+	'/Ö/' => 'Oe',
+	'/À|Á|Â|Ã|Ä|Å|Ǻ|Ā|Ă|Ą|Ǎ|Α|Ά|Ả|Ạ|Ầ|Ẫ|Ẩ|Ậ|Ằ|Ắ|Ẵ|Ẳ|Ặ|А/' => 'A',
+	'/à|á|â|ã|å|ǻ|ā|ă|ą|ǎ|ª|α|ά|ả|ạ|ầ|ấ|ẫ|ẩ|ậ|ằ|ắ|ẵ|ẳ|ặ|а/' => 'a',
+	'/Б/' => 'B',
+	'/б/' => 'b',
+	'/Ç|Ć|Ĉ|Ċ|Č/' => 'C',
+	'/ç|ć|ĉ|ċ|č/' => 'c',
+	'/Д/' => 'D',
+	'/д/' => 'd',
+	'/Ð|Ď|Đ|Δ/' => 'Dj',
+	'/ð|ď|đ|δ/' => 'dj',
+	'/È|É|Ê|Ë|Ē|Ĕ|Ė|Ę|Ě|Ε|Έ|Ẽ|Ẻ|Ẹ|Ề|Ế|Ễ|Ể|Ệ|Е|Э/' => 'E',
+	'/è|é|ê|ë|ē|ĕ|ė|ę|ě|έ|ε|ẽ|ẻ|ẹ|ề|ế|ễ|ể|ệ|е|э/' => 'e',
+	'/Ф/' => 'F',
+	'/ф/' => 'f',
+	'/Ĝ|Ğ|Ġ|Ģ|Γ|Г|Ґ/' => 'G',
+	'/ĝ|ğ|ġ|ģ|γ|г|ґ/' => 'g',
+	'/Ĥ|Ħ/' => 'H',
+	'/ĥ|ħ/' => 'h',
+	'/Ì|Í|Î|Ï|Ĩ|Ī|Ĭ|Ǐ|Į|İ|Η|Ή|Ί|Ι|Ϊ|Ỉ|Ị|И|Ы/' => 'I',
+	'/ì|í|î|ï|ĩ|ī|ĭ|ǐ|į|ı|η|ή|ί|ι|ϊ|ỉ|ị|и|ы|ї/' => 'i',
+	'/Ĵ/' => 'J',
+	'/ĵ/' => 'j',
+	'/Ķ|Κ|К/' => 'K',
+	'/ķ|κ|к/' => 'k',
+	'/Ĺ|Ļ|Ľ|Ŀ|Ł|Λ|Л/' => 'L',
+	'/ĺ|ļ|ľ|ŀ|ł|λ|л/' => 'l',
+	'/М/' => 'M',
+	'/м/' => 'm',
+	'/Ñ|Ń|Ņ|Ň|Ν|Н/' => 'N',
+	'/ñ|ń|ņ|ň|ŉ|ν|н/' => 'n',
+	'/Ò|Ó|Ô|Õ|Ō|Ŏ|Ǒ|Ő|Ơ|Ø|Ǿ|Ο|Ό|Ω|Ώ|Ỏ|Ọ|Ồ|Ố|Ỗ|Ổ|Ộ|Ờ|Ớ|Ỡ|Ở|Ợ|О/' => 'O',
+	'/ò|ó|ô|õ|ō|ŏ|ǒ|ő|ơ|ø|ǿ|º|ο|ό|ω|ώ|ỏ|ọ|ồ|ố|ỗ|ổ|ộ|ờ|ớ|ỡ|ở|ợ|о/' => 'o',
+	'/П/' => 'P',
+	'/п/' => 'p',
+	'/Ŕ|Ŗ|Ř|Ρ|Р/' => 'R',
+	'/ŕ|ŗ|ř|ρ|р/' => 'r',
+	'/Ś|Ŝ|Ş|Ș|Š|Σ|С/' => 'S',
+	'/ś|ŝ|ş|ș|š|ſ|σ|ς|с/' => 's',
+	'/Ț|Ţ|Ť|Ŧ|τ|Т/' => 'T',
+	'/ț|ţ|ť|ŧ|т/' => 't',
+	'/Þ|þ/' => 'th',
+	'/Ù|Ú|Û|Ũ|Ū|Ŭ|Ů|Ű|Ų|Ư|Ǔ|Ǖ|Ǘ|Ǚ|Ǜ|Ũ|Ủ|Ụ|Ừ|Ứ|Ữ|Ử|Ự|У/' => 'U',
+	'/ù|ú|û|ũ|ū|ŭ|ů|ű|ų|ư|ǔ|ǖ|ǘ|ǚ|ǜ|υ|ύ|ϋ|ủ|ụ|ừ|ứ|ữ|ử|ự|у/' => 'u',
+	'/Ƴ|Ɏ|Ỵ|Ẏ|Ӳ|Ӯ|Ў|Ý|Ÿ|Ŷ|Υ|Ύ|Ϋ|Ỳ|Ỹ|Ỷ|Ỵ|Й/' => 'Y',
+	'/ẙ|ʏ|ƴ|ɏ|ỵ|ẏ|ӳ|ӯ|ў|ý|ÿ|ŷ|ỳ|ỹ|ỷ|ỵ|й/' => 'y',
+	'/В/' => 'V',
+	'/в/' => 'v',
+	'/Ŵ/' => 'W',
+	'/ŵ/' => 'w',
+	'/Ź|Ż|Ž|Ζ|З/' => 'Z',
+	'/ź|ż|ž|ζ|з/' => 'z',
+	'/Æ|Ǽ/' => 'AE',
+	'/ß/' => 'ss',
+	'/Ĳ/' => 'IJ',
+	'/ĳ/' => 'ij',
+	'/Œ/' => 'OE',
+	'/ƒ/' => 'f',
+	'/ξ/' => 'ks',
+	'/π/' => 'p',
+	'/β/' => 'v',
+	'/μ/' => 'm',
+	'/ψ/' => 'ps',
+	'/Ё/' => 'Yo',
+	'/ё/' => 'yo',
+	'/Є/' => 'Ye',
+	'/є/' => 'ye',
+	'/Ї/' => 'Yi',
+	'/Ж/' => 'Zh',
+	'/ж/' => 'zh',
+	'/Х/' => 'Kh',
+	'/х/' => 'kh',
+	'/Ц/' => 'Ts',
+	'/ц/' => 'ts',
+	'/Ч/' => 'Ch',
+	'/ч/' => 'ch',
+	'/Ш/' => 'Sh',
+	'/ш/' => 'sh',
+	'/Щ/' => 'Shch',
+	'/щ/' => 'shch',
+	'/Ъ|ъ|Ь|ь/' => '',
+	'/Ю/' => 'Yu',
+	'/ю/' => 'yu',
+	'/Я/' => 'Ya',
+	'/я/' => 'ya'
+);

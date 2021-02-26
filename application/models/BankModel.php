@@ -1,82 +1,44 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+class BankModel extends CI_Model {
+
+  public function getAll($filter = []){
+    $this->db->select('eks.*');
+    $this->db->from("kode_bank as eks");
+    $this->db->Order_by('id_bank','ASC');
+    if(!empty($filter['id_bank'])) $this->db->where('eks.id_bank', $filter['id_bank']);
+    $res = $this->db->get();
+    return DataStructure::keyValue($res->result_array(), 'id_bank');
+  }
+  
+	public function get($id = NULL){
+    $row = $this->getAll(['id_bank' => $id]);
+		if (empty($row)){
+			throw new UserException("Jenis Mutu yang kamu cari tidak ditemukan", USER_NOT_FOUND_CODE);
+		}
+		return $row[$id];
+  }
+  
+	public function add($data){
+    $this->db->insert('kode_bank', DataStructure::slice($data, ['nama_bank']));
+		ExceptionHandler::handleDBError($this->db->error(), "Tambah Bank gagal", "kode_bank");
+		
+		return $this->db->insert_id();
+  }
+  
+	public function edit($data){
+    $this->db->where('id_bank', $data['id_bank']);
+    $this->db->update('kode_bank', DataStructure::slice($data, ['nama_bank'], TRUE));
+		ExceptionHandler::handleDBError($this->db->error(), "Edit Bank gagal", "kode_bank");
+		
+		return $data['id_bank'];
+  }
+  
+	public function delete($data){
+		$this->db->where('id_bank', $data['id_bank']);
+		$this->db->delete('kode_bank');
+
+    ExceptionHandler::handleDBError($this->db->error(), "Hapus Bank gagal", "kode_bank");
+  }
+}

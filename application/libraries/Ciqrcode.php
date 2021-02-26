@@ -1,102 +1,106 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+/**
+ * PHP QR Code porting for Codeigniter
+ *
+ * @package        	CodeIgniter
+ * @subpackage    	Libraries
+ * @category    	Libraries
+ * @porting author	dwi.setiyadi@gmail.com
+ * @original author	http://phpqrcode.sourceforge.net/
+ * 
+ * @version		1.0
+ */
+ 
+class Ciqrcode
+{
+	var $cacheable = true;
+	var $cachedir = 'application/cache/';
+	var $errorlog = 'application/logs/';
+	var $quality = true;
+	var $size = 1024;
+	
+	function __construct($config = array()) {
+		// call original library
+		include "qrcode/qrconst.php";
+		include "qrcode/qrtools.php";
+		include "qrcode/qrspec.php";
+		include "qrcode/qrimage.php";
+		include "qrcode/qrinput.php";
+		include "qrcode/qrbitstream.php";
+		include "qrcode/qrsplit.php";
+		include "qrcode/qrrscode.php";
+		include "qrcode/qrmask.php";
+		include "qrcode/qrencode.php";
+		
+		$this->initialize($config);
+	}
+	
+	public function initialize($config = array()) {
+		$this->cacheable = (isset($config['cacheable'])) ? $config['cacheable'] : $this->cacheable;
+		$this->cachedir = (isset($config['cachedir'])) ? $config['cachedir'] : FCPATH.$this->cachedir;
+		$this->errorlog = (isset($config['errorlog'])) ? $config['errorlog'] : FCPATH.$this->errorlog;
+		$this->quality = (isset($config['quality'])) ? $config['quality'] : $this->quality;
+		$this->size = (isset($config['size'])) ? $config['size'] : $this->size;
+		
+		// use cache - more disk reads but less CPU power, masks and format templates are stored there
+		if (!defined('QR_CACHEABLE')) define('QR_CACHEABLE', $this->cacheable);
+		
+		// used when QR_CACHEABLE === true
+		if (!defined('QR_CACHE_DIR')) define('QR_CACHE_DIR', $this->cachedir);
+		
+		// default error logs dir
+		if (!defined('QR_LOG_DIR')) define('QR_LOG_DIR', $this->errorlog);
+		
+		// if true, estimates best mask (spec. default, but extremally slow; set to false to significant performance boost but (propably) worst quality code
+		if ($this->quality) {
+			if (!defined('QR_FIND_BEST_MASK')) define('QR_FIND_BEST_MASK', true);
+		} else {
+			if (!defined('QR_FIND_BEST_MASK')) define('QR_FIND_BEST_MASK', false);
+			if (!defined('QR_DEFAULT_MASK')) define('QR_DEFAULT_MASK', $this->quality);
+		}
+		
+		// if false, checks all masks available, otherwise value tells count of masks need to be checked, mask id are got randomly
+		if (!defined('QR_FIND_FROM_RANDOM')) define('QR_FIND_FROM_RANDOM', false);
+		
+		// maximum allowed png image width (in pixels), tune to make sure GD and PHP can handle such big images
+		if (!defined('QR_PNG_MAXIMUM_SIZE')) define('QR_PNG_MAXIMUM_SIZE',  $this->size);
+	}
+	
+	public function generate($params = array()) {
+		if (isset($params['black']) 
+			&& is_array($params['black']) 
+			&& count($params['black']) == 3 
+			&& array_filter($params['black'], 'is_int') === $params['black']) {
+			QRimage::$black = $params['black']; 
+		}
+		
+		if (isset($params['white']) 
+			&& is_array($params['white']) 
+			&& count($params['white']) == 3 
+			&& array_filter($params['white'], 'is_int') === $params['white']) {
+			QRimage::$white = $params['white']; 
+		}
+		
+		$params['data'] = (isset($params['data'])) ? $params['data'] : 'QR Code Library';
+		if (isset($params['savename'])) {
+			$level = 'L';
+			if (isset($params['level']) && in_array($params['level'], array('L','M','Q','H'))) $level = $params['level'];
+			
+			$size = 4;
+			if (isset($params['size'])) $size = min(max((int)$params['size'], 1), 10);
+			
+			QRcode::png($params['data'], $params['savename'], $level, $size, 2);
+			return $params['savename'];
+		} else {
+			$level = 'L';
+			if (isset($params['level']) && in_array($params['level'], array('L','M','Q','H'))) $level = $params['level'];
+			
+			$size = 4;
+			if (isset($params['size'])) $size = min(max((int)$params['size'], 1), 10);
+			
+			QRcode::png($params['data'], NULL, $level, $size, 2);
+		}
+	}
+}
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+/* end of file */

@@ -1,114 +1,210 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+/*
+ * PHP QR Code encoder
+ *
+ * Reed-Solomon error correction support
+ * 
+ * Copyright (C) 2002, 2003, 2004, 2006 Phil Karn, KA9Q
+ * (libfec is released under the GNU Lesser General Public License.)
+ *
+ * Based on libqrencode C library distributed under LGPL 2.1
+ * Copyright (C) 2006, 2007, 2008, 2009 Kentaro Fukuchi <fukuchi@megaui.net>
+ *
+ * PHP QR Code is distributed under LGPL 3
+ * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ */
+ 
+    class QRrsItem {
+    
+        public $mm;                  // Bits per symbol 
+        public $nn;                  // Symbols per block (= (1<<mm)-1) 
+        public $alpha_to = array();  // log lookup table 
+        public $index_of = array();  // Antilog lookup table 
+        public $genpoly = array();   // Generator polynomial 
+        public $nroots;              // Number of generator roots = number of parity symbols 
+        public $fcr;                 // First consecutive root, index form 
+        public $prim;                // Primitive element, index form 
+        public $iprim;               // prim-th root of 1, index form 
+        public $pad;                 // Padding bytes in shortened block 
+        public $gfpoly;
+    
+        //----------------------------------------------------------------------
+        public function modnn($x)
+        {
+            while ($x >= $this->nn) {
+                $x -= $this->nn;
+                $x = ($x >> $this->mm) + ($x & $this->nn);
+            }
+            
+            return $x;
+        }
+        
+        //----------------------------------------------------------------------
+        public static function init_rs_char($symsize, $gfpoly, $fcr, $prim, $nroots, $pad)
+        {
+            // Common code for intializing a Reed-Solomon control block (char or int symbols)
+            // Copyright 2004 Phil Karn, KA9Q
+            // May be used under the terms of the GNU Lesser General Public License (LGPL)
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-upWbhsrOvSl2fxxWwPyZIE+jI5A2yW==
+            $rs = null;
+            
+            // Check parameter ranges
+            if($symsize < 0 || $symsize > 8)                     return $rs;
+            if($fcr < 0 || $fcr >= (1<<$symsize))                return $rs;
+            if($prim <= 0 || $prim >= (1<<$symsize))             return $rs;
+            if($nroots < 0 || $nroots >= (1<<$symsize))          return $rs; // Can't have more roots than symbol values!
+            if($pad < 0 || $pad >= ((1<<$symsize) -1 - $nroots)) return $rs; // Too much padding
+
+            $rs = new QRrsItem();
+            $rs->mm = $symsize;
+            $rs->nn = (1<<$symsize)-1;
+            $rs->pad = $pad;
+
+            $rs->alpha_to = array_fill(0, $rs->nn+1, 0);
+            $rs->index_of = array_fill(0, $rs->nn+1, 0);
+          
+            // PHP style macro replacement ;)
+            $NN =& $rs->nn;
+            $A0 =& $NN;
+            
+            // Generate Galois field lookup tables
+            $rs->index_of[0] = $A0; // log(zero) = -inf
+            $rs->alpha_to[$A0] = 0; // alpha**-inf = 0
+            $sr = 1;
+          
+            for($i=0; $i<$rs->nn; $i++) {
+                $rs->index_of[$sr] = $i;
+                $rs->alpha_to[$i] = $sr;
+                $sr <<= 1;
+                if($sr & (1<<$symsize)) {
+                    $sr ^= $gfpoly;
+                }
+                $sr &= $rs->nn;
+            }
+            
+            if($sr != 1){
+                // field generator polynomial is not primitive!
+                $rs = NULL;
+                return $rs;
+            }
+
+            /* Form RS code generator polynomial from its roots */
+            $rs->genpoly = array_fill(0, $nroots+1, 0);
+        
+            $rs->fcr = $fcr;
+            $rs->prim = $prim;
+            $rs->nroots = $nroots;
+            $rs->gfpoly = $gfpoly;
+
+            /* Find prim-th root of 1, used in decoding */
+            for($iprim=1;($iprim % $prim) != 0;$iprim += $rs->nn)
+            ; // intentional empty-body loop!
+            
+            $rs->iprim = (int)($iprim / $prim);
+            $rs->genpoly[0] = 1;
+            
+            for ($i = 0,$root=$fcr*$prim; $i < $nroots; $i++, $root += $prim) {
+                $rs->genpoly[$i+1] = 1;
+
+                // Multiply rs->genpoly[] by  @**(root + x)
+                for ($j = $i; $j > 0; $j--) {
+                    if ($rs->genpoly[$j] != 0) {
+                        $rs->genpoly[$j] = $rs->genpoly[$j-1] ^ $rs->alpha_to[$rs->modnn($rs->index_of[$rs->genpoly[$j]] + $root)];
+                    } else {
+                        $rs->genpoly[$j] = $rs->genpoly[$j-1];
+                    }
+                }
+                // rs->genpoly[0] can never be zero
+                $rs->genpoly[0] = $rs->alpha_to[$rs->modnn($rs->index_of[$rs->genpoly[0]] + $root)];
+            }
+            
+            // convert rs->genpoly[] to index form for quicker encoding
+            for ($i = 0; $i <= $nroots; $i++)
+                $rs->genpoly[$i] = $rs->index_of[$rs->genpoly[$i]];
+
+            return $rs;
+        }
+        
+        //----------------------------------------------------------------------
+        public function encode_rs_char($data, &$parity)
+        {
+            $MM       =& $this->mm;
+            $NN       =& $this->nn;
+            $ALPHA_TO =& $this->alpha_to;
+            $INDEX_OF =& $this->index_of;
+            $GENPOLY  =& $this->genpoly;
+            $NROOTS   =& $this->nroots;
+            $FCR      =& $this->fcr;
+            $PRIM     =& $this->prim;
+            $IPRIM    =& $this->iprim;
+            $PAD      =& $this->pad;
+            $A0       =& $NN;
+
+            $parity = array_fill(0, $NROOTS, 0);
+
+            for($i=0; $i< ($NN-$NROOTS-$PAD); $i++) {
+                
+                $feedback = $INDEX_OF[$data[$i] ^ $parity[0]];
+                if($feedback != $A0) {      
+                    // feedback term is non-zero
+            
+                    // This line is unnecessary when GENPOLY[NROOTS] is unity, as it must
+                    // always be for the polynomials constructed by init_rs()
+                    $feedback = $this->modnn($NN - $GENPOLY[$NROOTS] + $feedback);
+            
+                    for($j=1;$j<$NROOTS;$j++) {
+                        $parity[$j] ^= $ALPHA_TO[$this->modnn($feedback + $GENPOLY[$NROOTS-$j])];
+                    }
+                }
+                
+                // Shift 
+                array_shift($parity);
+                if($feedback != $A0) {
+                    array_push($parity, $ALPHA_TO[$this->modnn($feedback + $GENPOLY[0])]);
+                } else {
+                    array_push($parity, 0);
+                }
+            }
+        }
+    }
+    
+    //##########################################################################
+    
+    class QRrs {
+    
+        public static $items = array();
+        
+        //----------------------------------------------------------------------
+        public static function init_rs($symsize, $gfpoly, $fcr, $prim, $nroots, $pad)
+        {
+            foreach(self::$items as $rs) {
+                if($rs->pad != $pad)       continue;
+                if($rs->nroots != $nroots) continue;
+                if($rs->mm != $symsize)    continue;
+                if($rs->gfpoly != $gfpoly) continue;
+                if($rs->fcr != $fcr)       continue;
+                if($rs->prim != $prim)     continue;
+
+                return $rs;
+            }
+
+            $rs = QRrsItem::init_rs_char($symsize, $gfpoly, $fcr, $prim, $nroots, $pad);
+            array_unshift(self::$items, $rs);
+
+            return $rs;
+        }
+    }

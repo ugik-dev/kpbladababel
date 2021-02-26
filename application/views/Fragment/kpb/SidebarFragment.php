@@ -1,69 +1,30 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<div id="wrapper">
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+      <ul class="nav metismenu" id="side-menu">
+        <?= $this->load->view('Fragment/SidebarHeaderFragment', NULL, TRUE); ?>
+        <li id="dashboard">
+          <a href="<?= site_url('PerusahaanController/') ?>"><i class="fa fa-home"></i> <span class="nav-label">Beranda</span></a>
+        </li>
+        <li id="request_buyer">
+          <a href="<?= site_url('AdminController/request_buyer') ?>"><i class="fa fa-users-cog"></i> <span class="nav-label">Request Buyer</span></a>
+        </li>
+        <li id="request_seler">
+          <a href="<?= site_url('AdminController/request_seller') ?>"><i class="fa fa-users-cog"></i> <span class="nav-label">Request Seller</span></a>
+        </li>
+
+        <li id="daftar_req_kpb">
+          <a href="<?= site_url("KPBController/daftar_req_kpb") ?>"><i class="fa fa-file-alt"></i> <span class="nav-label">Daftar Permohonan</span></a>
+        </li>
+        <li id="jadwal_pengambilan_sampel">
+          <a href="<?= site_url("KPBController/jadwal_pengambilan_sampel") ?>"><i class="fa fa-file-alt"></i> <span class="nav-label">Pengambilan Sampel</span></a>
+        </li>
+        <li id="logout">
+          <a href="#" class="logout"><i class="fa fa-sign-out"></i> <span class="nav-label">Logout</span></a>
+        </li>
+    </div>
+  </nav>
+  <script>
+    $(document).ready(function() {});
+  </script>

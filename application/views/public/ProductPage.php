@@ -1,70 +1,78 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<section id="products" class="gray-section p-w-xl">
+	<div class="row">
+		<div class="col-lg-12 text-center">
+			<div class="navy-line"></div>
+			<h1>Product List</h1>
+			<p>Some of the products from our customers</p>
+		</div>
+		<div class="row" id="product-list"></div>
+	</div>
+</section>
+<script>
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-i0XbqbBtgczmXf1O+L0xJcF2a4kE8Lg/DcntDG==
+$(document).ready(function () {
+
+	var product_list = $('#product-list');
+	$('#navbar-item').html(`
+		<li><a class="nav-link page-scroll" href="#page-top">Products</a></li>
+	`)
+    
+	initNavbar(0);
+
+  var dataProduct = {}
+
+  $.when(getAllProduct()).then((e) =>{
+  }).fail((e) => { console.log(e) });
+
+  function getAllProduct(){
+    swal({title: 'Loading product...', allowOutsideClick: false});
+    swal.showLoading();
+    return $.ajax({
+      url: `<?php echo site_url('ProductController/getAll/')?>`, 'type': 'GET',
+      data: {},
+      success: function (data){
+        swal.close();
+        var json = JSON.parse(data);
+        if(json['error']){
+          return;
+        }
+        dataProduct = json['data'];
+        renderProduct(dataProduct);
+      },
+      error: function(e) {}
+    });
+  }
+
+  function renderProduct(data){
+    if(data == null || typeof data != "object"){
+      console.log("Product::UNKNOWN DATA");
+      return;
+    }
+
+    product_list.empty();
+    Object.values(data).forEach((product) => {
+      product_list.append(`
+        <div class="col-sm-3">
+          <div class="ibox product-box" style="cursor:pointer" onclick="location.href='<?=site_url('product?id_product=');?>${product['id_product']}'">
+            <div class="ibox-title">
+              <h5>${product['nama_product']}</h5>
+            </div>
+            <div>
+              <div class="ibox-content no-padding border-left-right">
+                <div class="product-item" style="background-image:url('<?=base_url('uploads/cover_product/')?>${product['cover_product']}')"></div>
+              </div>
+              <div class="ibox-content profile-content">
+                <h4><strong>${product['nama_perusahaan']}</strong></h4>
+                <p>${product['deskripsi_product']}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `);
+    });
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,130 +1,158 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-a6r4VvjLkym199e=
+class HargaMWPModel extends CI_Model
+{
+
+  public function getAll($filter = [])
+  {
+    $this->db->select("*");
+    $this->db->from("harga_mwp");
+    $this->db->order_by("tanggal_berlaku", "DESC");
+    if (!empty($filter['latest'])) $this->db->limit(1);
+    if (!empty($filter['latest3'])) {
+      $this->db->limit(1);
+      // $res = $this->db->get();
+      // return $res->result_array();
+    
+    }
+    $res = $this->db->get();
+    return DataStructure::keyValue($res->result_array(), 'id_harga_mwp');
+  }
+
+  public function get($id = NULL)
+  {
+    $row = $this->getAll(['id_harga_mwp' => $id]);
+    if (empty($row)) {
+      throw new UserException("Harga MWP yang kamu cari tidak ditemukan", USER_NOT_FOUND_CODE);
+    }
+    return $row[$id];
+  }
+
+
+  public function getStandarMutu()
+  {
+    $this->db->select("*");
+    $this->db->from("rinc_standart_mutu");
+    $res = $this->db->get();
+    return DataStructure::keyValue($res->result_array(), 'id_mutu');
+  }
+
+
+  public function getLatest()
+  {
+    $row = $this->getAll(['latest' => true]);
+    if (empty($row)) {
+      throw new UserException("Harga MWP yang kamu cari tidak ditemukan", USER_NOT_FOUND_CODE);
+    }
+    return reset($row);
+  }
+
+  public function getLatest3()
+  {
+    $this->db->select("*");
+    $this->db->from("harga_mwp");
+    $this->db->order_by("tanggal_berlaku", "DESC");
+    $this->db->limit(5);
+    if (!empty($filter['latest'])) $this->db->limit(1);
+    if (!empty($filter['latest3'])) {
+      // $res = $this->db->get();
+      // return $res->result_array();
+    
+    }
+    $res = $this->db->get();
+    return $res->result_array();
+ }
+
+
+  public function add($data)
+  {
+    $this->db->insert('harga_mwp', DataStructure::slice($data, [
+      'tanggal_berlaku', 'harga_mwp1_petani', 'harga_mwp1_fob', 'harga_mwp2_petani', 'harga_mwp2_fob', 'harga_asta_petani', 'harga_asta_fob', 'harga_esa_petani', 'harga_esa_fob', 'harga_ipc_petani', 'harga_ipc_fob', 'harga_sni1_petani', 'harga_sni1_fob', 'harga_iso_petani', 'harga_iso_fob', 'd_harga_mwp1_petani',
+      'd_harga_mwp1_fob',
+      'd_harga_mwp2_petani',
+      'd_harga_mwp2_fob',
+      'd_harga_asta_petani',
+      'd_harga_asta_fob',
+      'd_harga_esa_petani',
+      'd_harga_esa_fob',
+      'd_harga_ipc_petani',
+      'd_harga_ipc_fob',
+      'd_harga_sni1_petani',
+      'd_harga_sni1_fob',
+      'd_harga_iso_petani',
+      'd_harga_iso_fob','harga_mq_petani','harga_mq_fob','d_harga_mq_petani','d_harga_mq_fob',
+      
+      'd_harga_sni2_petani',
+      'd_harga_sni2_fob',
+      
+      'harga_sni2_petani',
+      'harga_sni2_fob'
+    ]));
+    ExceptionHandler::handleDBError($this->db->error(), "Tambah Harga MWP gagal", "harga_mwp");
+
+    return $this->db->insert_id();
+  }
+
+  public function edit($data)
+  {
+    $this->db->where('id_harga_mwp', $data['id_harga_mwp']);
+    $this->db->update('harga_mwp', DataStructure::slice($data, [
+      'tanggal_berlaku',
+      'harga_mwp1_petani',
+      'harga_mwp1_fob',
+      'harga_mwp2_petani',
+      'harga_mwp2_fob',
+      'harga_asta_petani',
+      'harga_asta_fob',
+      'harga_esa_petani',
+      'harga_esa_fob',
+      'harga_ipc_petani',
+      'harga_ipc_fob',
+      'harga_sni1_petani',
+      'harga_sni1_fob',
+      'harga_sni2_petani',
+      'harga_sni2_fob',
+      'harga_iso_petani',
+      'harga_iso_fob',
+
+      'd_harga_mwp1_petani',
+      'd_harga_mwp1_fob',
+      'd_harga_mwp2_petani',
+      'd_harga_mwp2_fob',
+      'd_harga_asta_petani',
+      'd_harga_asta_fob',
+      'd_harga_esa_petani',
+      'd_harga_esa_fob',
+      'd_harga_ipc_petani',
+      'd_harga_ipc_fob',
+      'd_harga_sni1_petani',
+      'd_harga_sni1_fob',
+      'd_harga_sni2_petani',
+      'd_harga_sni2_fob',
+      'd_harga_iso_petani',
+      'd_harga_iso_fob',
+      'harga_mq_petani','harga_mq_fob','d_harga_mq_petani','d_harga_mq_fob'
+    ], TRUE));
+    ExceptionHandler::handleDBError($this->db->error(), "Edit Harga MWP gagal", "harga_mwp");
+
+    return $data['id_harga_mwp'];
+  }
+
+  public function edit_standar_mutu($data)
+  {
+    $this->db->where('id_mutu', $data['id_mutu']);
+    $this->db->update('rinc_standart_mutu', DataStructure::slice($data, ['cemaran_serangga', 'kerapatan', 'kadar_air', 'kadar_biji_enteng', 'kadar_benda_asing', 'kadar_cemaran', 'kadar_hitam_putih', 'e_colli', 'salmonella', 'kadar_piperin', 'kadar_minyak'], TRUE));
+    ExceptionHandler::handleDBError($this->db->error(), "Edit Standar Mutu gagal", "id_mutu");
+
+    return $data;
+  }
+
+  public function delete($data)
+  {
+    $this->db->where('id_harga_mwp', $data['id_harga_mwp']);
+    $this->db->delete('harga_mwp');
+
+    ExceptionHandler::handleDBError($this->db->error(), "Hapus Harga MWP", "harga_mwp");
+  }
+}

@@ -1,172 +1,268 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+class SecurityModel extends CI_Model {
+
+  public function apiKeyGuard(){
+    $headers = getallheaders();
+    if(!isset($headers['X-Api-Key']) || NetworkIO::$apiKeys['sim'] != $headers['X-Api-Key']){
+      header("HTTP/1.1 401 Unauthorized");
+      exit;
+    }
+  }
+
+  public function hasUserdataKeyGuard($key, $ajax = FALSE){
+    if($this->session->userdata($key) == NULL){
+      if($ajax) throw new UserException('Kamu tidak berhak mengakses resource ini', UNAUTHORIZED_CODE);
+      redirect($this->session->userdata('nama_controller'));
+    }
+  }
+
+  public function certainUserGuard($userIds = array(), $ajax = FALSE){
+    if(!in_array($this->session->userdata('id_user'), $userIds)){
+      if($ajax) throw new UserException('Kamu tidak berhak mengakses resource ini', UNAUTHORIZED_CODE);
+      redirect($this->session->userdata('nama_controller'));
+    }
+  }
+
+  public function usulanStepGuard($usulan, $step, $ajax = FALSE){
+    if($usulan['status_pengisian'] != $step){
+      if($ajax) throw new UserException('Kamu tidak berhak mengubah usulan pada tahap ini', UNAUTHORIZED_CODE);
+      redirect($this->session->userdata('nama_controller'));
+    }
+  }
+
+  public function guestOnlyGuard($ajax = false){
+    if($this->session->userdata('id_user')){
+      if($ajax) throw new UserException('Kamu tidak berhak mengakses resource ini', UNAUTHORIZED_CODE);
+      redirect($this->session->userdata('nama_controller'));
+    }
+  }
+
+  public function userOnlyGuard($ajax = false){
+    if(!$this->session->has_userdata('id_user')){
+      if($ajax) throw new UserException('Kamu tidak berhak mengakses resource ini', UNAUTHORIZED_CODE);
+      redirect('login');
+    }
+  }
+
+  public function roleOnlyGuard($role, $ajax = false){
+    if(strtolower($this->session->userdata('nama_role')) != $role){
+      if($ajax) throw new UserException('Kamu tidak berhak mengakses resource ini', UNAUTHORIZED_CODE);
+      redirect($this->session->userdata('nama_controller'));
+    }
+  }
+
+  public function rolesOnlyGuard($roles = [], $ajax = false){
+    if(!in_array(strtolower($this->session->userdata('nama_role')), $roles)){
+      if($ajax) throw new UserException('Kamu tidak berhak mengakses resource ini', UNAUTHORIZED_CODE);
+      redirect($this->session->userdata('nama_controller'));
+    }
+  }
+
+  public function pengusulSubTypeGuard($subTypes, $ajax = false){
+    foreach($subTypes as $sT){
+      if($this->session->userdata("id_{$sT}")) return;
+    }
+    if($ajax) throw new UserException('Kamu tidak berhak mengakses resource ini', UNAUTHORIZED_CODE);
+    redirect($this->session->userdata('nama_controller'));
+  }
+
+  public function checkUniquePosition($p, $pd){
+    if($pd['posisi'] != "KETUA"){
+      return TRUE;
+    }
+
+		foreach($p['dosen'] as $d){
+			if($d['posisi'] == "KETUA"){
+        throw new UserException('Posisi ketua tidak boleh lebih dari satu.', DUPLICATE_UNIQUE_POSISI_CODE);
+      }
+    }
+    return FALSE;
+	}
+
+  public function loginValidation(){
+    return array($this->idUser, $this->password);
+  }
+  
+  private $role = array(
+    'field' => 'nama_role',
+    'label' => 'Role',
+    'rules' => 'required|trim'
+  );
+
+  public function changePasswordValidation(){
+    return array($this->password, $this->repassword);
+  }
+
+  public function getPenelitian(){
+    return array($this->tahun);
+  }
+
+  public function addPenelitian(){
+    return array($this->idProgram, $this->tahun, $this->judul, $this->idSkema, $this->noSK);
+  }
+
+  public function editPenelitian(){
+    return array($this->idPenelitian, $this->idProgram, $this->tahun, $this->judul, 
+      $this->idSkema, $this->noSK);
+  }
+
+  public function deletePenelitian(){
+    return array($this->idPenelitian);
+  }
+
+  public function addPenelitianDosen(){
+    return array($this->idPenelitian, $this->idDosen, $this->posisi);
+  }
+
+  public function editPenelitianDosen(){
+    return array($this->idPenelitianDosen, $this->idPenelitian, $this->idDosen, $this->posisi);
+  }
+
+  public function deletePenelitianDosen(){
+    return array($this->idPenelitianDosen);
+  }
+
+  public function getPengabdian(){
+    return array($this->tahun);
+  }
+
+  public function addPengabdian(){
+    return array($this->idProgram, $this->tahun, $this->judul, $this->idSkema, $this->noSK);
+  }
+
+  public function editPengabdian(){
+    return array($this->idPengabdian, $this->idProgram, $this->tahun, $this->judul, 
+      $this->idSkema, $this->noSK);
+  }
+
+  public function deletePengabdian(){
+    return array($this->idPengabdian);
+  }
+
+  public function addPengabdianDosen(){
+    return array($this->idPengabdian, $this->idDosen, $this->posisi);
+  }
+
+  public function editPengabdianDosen(){
+    return array($this->idPengabdianDosen, $this->idPengabdian, $this->idDosen, $this->posisi);
+  }
+
+  public function deletePengabdianDosen(){
+    return array($this->idPengabdianDosen);
+  }
+
+  public function getKinerja(){
+    return array($this->tahun, $this->semester);
+  }
+
+  private $idPengabdianDosen = array(
+    'field' => 'id_pengabdian_dosen',
+    'label' => 'ID Pengabdian Dosen',
+    'rules' => 'required|trim'
+  );
+
+  private $idPengabdian = array(
+    'field' => 'id_pengabdian',
+    'label' => 'ID Pengabdian',
+    'rules' => 'required|trim'
+  );
+
+  private $posisi = array(
+    'field' => 'posisi',
+    'label' => 'Posisi',
+    'rules' => 'required|trim'
+  );
+
+  private $idPenelitianDosen = array(
+    'field' => 'id_penelitian_dosen',
+    'label' => 'ID Penelitian Dosen',
+    'rules' => 'required|trim'
+  );
+
+  private $idPenelitian = array(
+    'field' => 'id_penelitian',
+    'label' => 'ID Penelitian',
+    'rules' => 'required|trim'
+  );
+
+  private $idProgram = array(
+    'field' => 'id_program',
+    'label' => 'ID Program',
+    'rules' => 'required|trim'
+  );
+
+  private $idSkema = array(
+    'field' => 'id_skema',
+    'label' => 'ID Skema',
+    'rules' => 'required|trim'
+  );
+
+  private $judul = array(
+    'field' => 'judul',
+    'label' => 'Judul',
+    'rules' => 'required|trim'
+  );
+
+  private $idDosen = array(
+    'field' => 'id_dosen',
+    'label' => 'ID Dosen',
+    'rules' => 'required|trim'
+  );
+
+  private $tanggalKegiatan = array(
+    'field' => 'tanggal_kegiatan',
+    'label' => 'Tanggal Kegiatan',
+    'rules' => 'required|trim'
+  );
+
+  private $deskripsi = array(
+    'field' => 'deskripsi',
+    'label' => 'Deskripsi',
+    'rules' => 'required|trim',
+  );
+
+  private $noSK = array(
+    'field' => 'no_sk',
+    'label' => 'No SK',
+    'rules' => 'required|trim',
+  );
+
+  private $idUser = array(
+    'field' => 'username',
+    'label' => 'Username',
+    'rules' => 'required|trim',
+  );
+
+  private $password = array(
+    'field' => 'password',
+    'label' => 'Password',
+    'rules' => 'required|trim'
+  );
+
+  private $repassword = array(
+    'field' => 'repassword',
+    'label' => 'Konfirmasi Password',
+    'rules' => 'required|trim|matches[password]'
+  );
+
+  private $tahun = array(
+    'field' => 'tahun',
+    'label' => 'Tahun',
+    'rules' => 'required|trim|exact_length[4]'
+  );
+
+  private $semester = array(
+    'field' => 'semester',
+    'label' => 'Semester',
+    'rules' => 'required|trim'
+  );
+
+  private $bulan = array(
+    'field' => 'bulan',
+    'label' => 'Bulan',
+    'rules' => 'required|trim|max_length[2]'
+  );
+  
+}

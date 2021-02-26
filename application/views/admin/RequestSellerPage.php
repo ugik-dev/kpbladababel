@@ -1,191 +1,227 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox ssection-container">
+        <div class="ibox-content">
+            <form class="form-inline" id="toolbar_form" onsubmit="return false;">
+                <input type="hidden" id="is_not_self" name="is_not_self" value="1">
+                <select class="form-control mr-sm-2" name="id_jenis_perusahaan" id="id_jenis_perusahaan"></select>
+                <select class="form-control mr-sm-2" name="verificated" id="stat_verifikasi"></select>
+            </form>
+        </div>
+    </div>
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table id="FDataTable" class="table table-bordered table-hover" style="padding:0px">
+                            <thead>
+                                <tr>
+                                    <th style="width: 7%; text-align:center!important">ID</th>
+                                    <th style="width: 24%; text-align:center!important">Nama Perusahaan</th>
+                                    <th style="width: 24%; text-align:center!important">Alamat</th>
+                                    <th style="width: 16%; text-align:center!important">Jenis Usaha</th>
+                                    <th style="width: 16%; text-align:center!important">Status</th>
+                                    <th style="width: 5%; text-align:center!important">Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#request_seller').addClass('active');
+
+        var toolbar = {
+            'form': $('#toolbar_form'),
+            'id_jenis_perusahaan': $('#toolbar_form').find('#id_jenis_perusahaan'),
+            'stat_verifikasi': $('#toolbar_form').find('#stat_verifikasi'),
+            'id_opd': $('#toolbar_form').find('#id_opd'),
+        }
+
+        var FDataTable = $('#FDataTable').DataTable({
+            'columnDefs': [],
+            deferRender: true,
+            "order": [
+                [0, "desc"]
+            ]
+        });
+
+        var UserModal = {
+            'self': $('#user_modal'),
+            'info': $('#user_modal').find('.info'),
+            'form': $('#user_modal').find('#user_form'),
+            'addBtn': $('#user_modal').find('#add_btn'),
+            'saveEditBtn': $('#user_modal').find('#save_edit_btn'),
+            'idUser': $('#user_modal').find('#id_user'),
+            'username': $('#user_modal').find('#username'),
+            'nama': $('#user_modal').find('#nama'),
+            'password': $('#user_modal').find('#password'),
+            'id_jenis_perusahaan': $('#user_modal').find('#id_jenis_perusahaan'),
+            'opd': $('#user_modal').find('#opd'),
+        }
+
+        var dataRole = {}
+        var dataUser = {}
+
+        var swalSaveConfigure = {
+            title: "Konfirmasi simpan",
+            text: "Yakin akan menyimpan data ini?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#18a689",
+            confirmButtonText: "Ya, Simpan!",
+        };
+
+        var swalDeleteConfigure = {
+            title: "Konfirmasi hapus",
+            text: "Yakin akan menghapus data ini?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya, Hapus!",
+        };
+
+        $.when(getAllUser(), getAllJenisPerusahaan()).then((e) => {
+
+        }).fail((e) => {
+            console.log(e)
+        });
+
+        function getAllJenisPerusahaan() {
+            return $.ajax({
+                url: `<?php echo site_url('ParameterController/getAllJenisPerusahaan/') ?>`,
+                'type': 'POST',
+                data: {},
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    if (json['error']) {
+                        return;
+                    }
+                    dataJenisPerusahaan = json['data'];
+                    renderRoleSelectionFilter(dataJenisPerusahaan);
+                },
+                error: function(e) {}
+            });
+        }
+
+
+        function renderRoleSelectionFilter(data) {
+            toolbar.id_jenis_perusahaan.empty();
+            toolbar.id_jenis_perusahaan.append($('<option>', {
+                value: "",
+                text: "-- Semua Jenis Usaha --"
+            }));
+            Object.values(data).forEach((d) => {
+                toolbar.id_jenis_perusahaan.append($('<option>', {
+                    value: d['id_jenis_perusahaan'],
+                    text: d['id_jenis_perusahaan'] + ' :: ' + d['nama_jenis_perusahaan'],
+                }));
+            });
+
+            toolbar.stat_verifikasi.append($('<option>', {
+                value: "",
+                text: "-- Semua Status --"
+            }));
+            toolbar.stat_verifikasi.append($('<option>', {
+                value: 'Y',
+                text: 'Telah Diverifikasi',
+            }));
+            toolbar.stat_verifikasi.append($('<option>', {
+                value: 'N',
+                text: 'Belum Diverifikasi',
+            }));
+            toolbar.stat_verifikasi.append($('<option>', {
+                value: 'R',
+                text: 'Request Verifikasi',
+            }));
+        }
+
+
+
+        toolbar.id_jenis_perusahaan.on('change', (e) => {
+            UserModal.id_jenis_perusahaan.attr('readonly', !empty(toolbar.id_jenis_perusahaan.val()));
+            getAllUser();
+        });
+
+        toolbar.stat_verifikasi.on('change', (e) => {
+            getAllUser();
+        });
+
+        function getAllUser() {
+            swal({
+                title: 'Loading user...',
+                allowOutsideClick: false
+            });
+            swal.showLoading();
+            return $.ajax({
+                url: `<?php echo site_url('PerusahaanController/getAll/') ?>`,
+                'type': 'GET',
+                data: toolbar.form.serialize(),
+                success: function(data) {
+                    swal.close();
+                    var json = JSON.parse(data);
+                    if (json['error']) {
+                        return;
+                    }
+                    dataUser = json['data'];
+                    renderUser(dataUser);
+                },
+                error: function(e) {}
+            });
+        }
+
+        function renderUser(data) {
+            if (data == null || typeof data != "object") {
+                console.log("User::UNKNOWN DATA");
+                return;
+            }
+            var i = 0;
+
+            var renderData = [];
+            Object.values(data).forEach((user) => {
+                var button = `
+                <a type="button" class="btn btn-success my-1 mr-sm-3" href="<?php echo base_url() . 'index.php/PerusahaanController/detail?id_perusahaan='; ?>${user['id_perusahaan']}"><i class="fal fa-eye"></i>  </a>
+      `;
+                renderData.push([user['id_perusahaan'], user['nama_perusahaan'], user['lok_perusahaan_full'] + ', ' + user['lok_perusahaan_kec'] + ', ' + user['lok_perusahaan_kabkot'], user['nama_jenis_perusahaan'], statusVerifikasi(user['verificated']), button]);
+            });
+            FDataTable.clear().rows.add(renderData).draw('full-hold');
+        }
+
+        function resetUserModal() {
+            UserModal.form.trigger('reset');
+            UserModal.id_jenis_perusahaan.val(toolbar.id_jenis_perusahaan.val());
+            UserModal.opd.val(toolbar.id_opd.val() != -1 ? toolbar.id_opd.val() : "");
+        }
+
+        FDataTable.on('click', '.edit', function() {
+            resetUserModal();
+            UserModal.self.modal('show');
+            UserModal.addBtn.hide();
+            UserModal.saveEditBtn.show();
+            UserModal.password.prop('placeholder', '(Unchanged)')
+            UserModal.password.prop('required', false);
+
+            var currentData = dataUser[$(this).data('id')];
+            UserModal.idUser.val(currentData['id_user']);
+            UserModal.username.val(currentData['username']);
+            UserModal.nama.val(currentData['nama']);
+            UserModal.opd.val(currentData['id_opd']);
+        });
+
+        function statusVerifikasi(status) {
+            if (status == 'R')
+                return `<i class='fa fa-hourglass-start text-primary'>Request Verifikasi </i>`;
+            else if (status == 'Y')
+                return `<i class='fa fa-check text-success'> Telah Diverifikasi</i>`;
+            else
+                return `<i class='fa fa-edit text-warning'> Belum Diverifikasi</i>`;
+        }
+    });
+</script>

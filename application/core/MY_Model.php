@@ -1,164 +1,285 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-5d/S1WtU85GH6LVPd/LGSUcqwUotmIsk7zA1uG==
+class MY_Model extends CI_Model
+{
+	protected $data = [];
+
+	public function __construct()
+	{
+		parent::__construct();
+	}
+
+	/**
+	 * Method untuk menentukan jumlah baris yang berubah dari sebuah query.
+	 *
+	 * @return type Integer
+	 **/
+	public function affected_rows()
+	{
+		return $this->db->affected_rows();
+	}
+
+	/**
+	 * Method untuk mengambil data dari suatu table
+	 *
+	 * @return type Array of Object
+	 * @param Associative Array (opsional jika mengambil data berdasarkan kondisi)
+	 **/
+	public function get($cond = '',$order = 'DESC')
+	{
+		if (is_array($cond))
+			$this->db->where($cond);
+		if (is_string($cond) && strlen($cond) > 3)
+			$this->db->where($cond);
+
+		$this->db->order_by($this->data['primary_key'],$order);
+		$query = $this->db->get($this->data['table_name']);
+
+		return $query->result();
+	}
+
+	/**
+	 * Method untuk mengambil data dari suatu table dengan urutan tertentu
+	 *
+	 * @return type Array of Object
+	 * @param String (atribut yang menjadi acuan order)
+	 *		  String ("asc" dari terkecil, "desc" dari terbesar)
+	 * 		  Associative Array (opsional jika mengambil data berdasarkan kondisi)
+	 **/
+	public function get_by_order($ref, $order, $cond = '')
+	{
+		if (is_array($cond))
+			$this->db->where($cond);
+		if (is_string($cond) && strlen($cond) > 3)
+			$this->db->where($cond);
+
+		$this->db->order_by($ref, $order);
+		$query = $this->db->get($this->data['table_name']);
+
+		return $query->result();
+	}
+
+
+	/**
+	 * Method untuk mengambil 1 data dari suatu table dengan urutan tertentu
+	 *
+	 * @return type Array of Object
+	 * @param String (tabel yang menjadi acuan order)
+	 *		  String ("asc" dari terkecil, "desc" dari terbesar)
+	 * 		  Associative Array (opsional jika mengambil data berdasarkan kondisi)
+	 **/
+	public function get_by_order_limit($ref, $order, $cond = '')
+	{
+		if (is_array($cond))
+			$this->db->where($cond);
+
+		$this->db->order_by($ref, $order);
+		$this->db->limit(1);
+		$query = $this->db->get($this->data['table_name']);
+
+		return $query->row();
+	}
+
+	/**
+	 * Method untuk mengambil 1 data dari suatu table dengan urutan tertentu
+	 *
+	 * @return type Array of Object
+	 * @param String (tabel yang menjadi acuan order)
+	 *		  String ("asc" dari terkecil, "desc" dari terbesar)
+	 * 		  Associative Array (opsional jika mengambil data berdasarkan kondisi)
+	 **/
+	public function get_by_order_any_limit($ref, $order, $number, $cond = '')
+	{
+		if (is_array($cond))
+			$this->db->where($cond);
+
+		$this->db->order_by($ref, $order);
+		$this->db->limit($number);
+		$query = $this->db->get($this->data['table_name']);
+
+		return $query->result();
+	}
+	/**
+	 * Method untuk mengambil data dari suatu table
+	 *
+	 * @return type Object
+	 * @param Associative Array
+	 **/
+	public function get_row($cond)
+	{
+		$this->db->where($cond);
+		$query = $this->db->get($this->data['table_name']);
+
+		return $query->row();
+	}
+
+	/**
+	 * Method untuk insert data dari suatu table
+	 *
+	 * @return type void(?)
+	 * @param Associative Array
+	 **/
+	public function insert($data)
+	{
+		return $this->db->insert($this->data['table_name'], $data);
+	}
+
+	/**
+	 * Method untuk update data dari suatu table berdasarkan primary key
+	 *
+	 * @return type void(?)
+	 * @param 1 Mixed
+	 * @param 2 Associative Array
+	 **/
+	public function update($pk, $data)
+	{
+		$this->db->where($this->data['primary_key'], $pk);
+		return $this->db->update($this->data['table_name'], $data);
+	}
+
+	/**
+	 * Method untuk update data dari suatu table berdasarkan primary key
+	 *
+	 * @return type void(?)
+	 * @param 1 Associative Array
+	 * @param 2 Associative Array
+	 **/
+	public function update_where($cond, $data)
+	{
+		$this->db->where($cond);
+		return $this->db->update($this->data['table_name'], $data);
+	}
+
+	/**
+	 * Method untuk delete data dari suatu table berdasarkan primary key
+	 *
+	 * @return type void(?)
+	 * @param Mixed
+	 **/
+	public function delete($pk)
+	{
+		$this->db->where($this->data['primary_key'], $pk);
+		return $this->db->delete($this->data['table_name']);
+	}
+
+	/**
+	 * Method untuk delete data dari suatu table berdasarkan kondisi
+	 *
+	 * @return type void(?)
+	 * @param Associative Array
+	 **/
+	public function delete_by($cond)
+	{
+		$this->db->where($cond);
+		return $this->db->delete($this->data['table_name']);
+	}
+
+	/**
+	 * Method untuk mengambil data secara terurut berdasarkan primary key
+	 *
+	 * @return type Array of Object
+	 * @param String
+	 **/
+	public function getOrdered($order = 'ASC')
+	{
+		$query = $this->db->query('SELECT * FROM ' . $this->data['table_name'] . ' ORDER BY ' . $this->data['primary_key'] . ' ' . $order);
+		return $query->result();
+	}
+
+	/**
+	 * Method untuk mengambil data yang memiliki kemiripan dengan query
+	 *
+	 * @return type Array of Object
+	 * @param Associative Array
+	 **/
+	public function getDataLike($like)
+	{
+		$this->db->select('*');
+		$this->db->like($like);
+		$query = $this->db->get($this->data['table_name']);
+		return $query->result();
+	}
+
+	public function getDataJoin($tables, $jcond,$cond)
+	{
+		$this->db->select('*');
+		for ($i = 0; $i < count($tables); $i++)
+			$this->db->join($tables[$i], $jcond[$i]);
+
+		if (is_array($cond))
+			$this->db->where($cond);
+		return $this->db->get($this->data['table_name'])->result();
+	}
+
+	/**
+	 * Method untuk mengambil data berupa JSON API
+	 *
+	 * @return type Array of Object
+	 * @param String
+	 **/
+	public function getJSON($url)
+	{
+		$content = file_get_contents($url);
+		$data = json_decode($content);
+		return $data;
+	}
+
+
+	 /**
+	 * Method untuk melakukan form validation.
+	 *
+	 * @return boolean
+	 * @param config Array untuk form_validation
+	 **/
+	public function validate($conf)
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules($conf);
+		return $this->form_validation->run();
+	}
+
+	/**
+	 * Method untuk generate required input.
+	 *
+	 * @return boolean
+	 * @param array of string input names
+	 **/
+	public function required_input($input_names)
+	{
+		$rules = [];
+		foreach ($input_names as $input)
+		{
+			$rules []= [
+				'field'		=> $input,
+				'label'		=> ucfirst($input),
+				'rules'		=> 'required'
+			];
+		}
+
+		return $this->validate($rules);
+	}
+
+	/**
+	 * Method untuk get kolom.
+	 *
+	 * @return array
+	 * @param String kolom
+	 **/
+	public function get_col($col)
+	{
+		$query = $this->db->query('SELECT '.$col.' FROM ' . $this->data['table_name']);
+		return $query->result();
+	}
+
+	public function getDataFakultasByID($idfakultas)
+	{
+		$sql = "SELECT * FROM fakultas WHERE id_fakultas = '".$idfakultas."'";
+		$res = $this->db->query($sql);
+		return $res->result_array();
+	}
+
+}
+
+/* End of file MY_Model.php */
+/* Location: ./application/core/MY_Model.php */

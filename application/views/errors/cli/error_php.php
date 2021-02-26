@@ -1,69 +1,21 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+A PHP Error was encountered
+
+Severity:    <?php echo $severity, "\n"; ?>
+Message:     <?php echo $message, "\n"; ?>
+Filename:    <?php echo $filepath, "\n"; ?>
+Line Number: <?php echo $line; ?>
+
+<?php if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === TRUE): ?>
+
+Backtrace:
+<?php	foreach (debug_backtrace() as $error): ?>
+<?php		if (isset($error['file']) && strpos($error['file'], realpath(BASEPATH)) !== 0): ?>
+	File: <?php echo $error['file'], "\n"; ?>
+	Line: <?php echo $error['line'], "\n"; ?>
+	Function: <?php echo $error['function'], "\n\n"; ?>
+<?php		endif ?>
+<?php	endforeach ?>
+
+<?php endif ?>

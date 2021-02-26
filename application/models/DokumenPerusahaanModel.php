@@ -1,96 +1,91 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+class DokumenPerusahaanModel extends CI_Model
+{
+
+  public function getAll($filter = [])
+  {
+    $this->db->select("dp.*");
+    $this->db->from("v2_dok_perusahaan as dp");
+    // $this->db->join("jenis_dokumen_perusahaan as jdp", "jdp.id_jenis_dokumen_perusahaan = dp.id_jenis_dokumen_perusahaan", 'right');
+    if (!empty($this->session->userdata()['id_perusahaan'])) $this->db->where("dp.id_perusahaan", $this->session->userdata()['id_perusahaan']);
+    if (!empty($filter['id_perusahaan'])) $this->db->where('dp.id_perusahaan', $filter['id_perusahaan']);
+    if (!empty($filter['id_jenis_dokumen_perusahaan'])) $this->db->where('dp.id_jenis_dokumen_perusahaan', $filter['id_jenis_dokumen_perusahaan']);
+    if (!empty($filter['clue'])) {
+      $this->db->where("dp.nama_jenis_dokumen_perusahaan Like '%" . $filter['clue'] . "%'");
+
+      $res = $this->db->get();
+      $res = $res->result_array();
+      if (!empty($res[0]['dokumen_perusahaan'])) return $res[0];
+
+      return null;
+    }
+
+    // $this->db->select("dp.*, jdp.nama_jenis_dokumen_perusahaan");
+    // $this->db->from("dokumen_perusahaan as dp");
+    // $this->db->join("jenis_dokumen_perusahaan as jdp", "jdp.id_jenis_dokumen_perusahaan = dp.id_jenis_dokumen_perusahaan", 'right');
+    // if (!empty($this->session->userdata()['id_perusahaan'])) $this->db->where("dp.id_perusahaan", $this->session->userdata()['id_perusahaan']);
+
+    // if (!empty($filter['id_perusahaan'])) $this->db->where('dp.id_perusahaan', $filter['id_perusahaan']);
+    // if (!empty($filter['id_jenis_dokumen_perusahaan'])) $this->db->where('dp.id_jenis_dokumen_perusahaan', $filter['id_jenis_dokumen_perusahaan']);
+
+    // if (!empty($filter['is_get'])) {
+    //   $res = $this->db->get();
+    //   $res = $res->result_array();
+    //   return $res[0];
+    // }
+
+    $res = $this->db->get();
+    // return $res->result_array();
+    return DataStructure::keyValue($res->result_array(), 'id_jenis_dokumen_perusahaan');
+  }
+
+  public function get($id = NULL)
+  {
+    $row = $this->getAll(['id_dokumen_perusahaan' => $id]);
+    if (empty($row)) {
+      throw new UserException("Dokumen Perusahaan yang kamu cari tidak ditemukan", USER_NOT_FOUND_CODE);
+    }
+    return $row[$id];
+  }
+
+  public function add($data)
+  {
+    // try {
+    // throw new Exception('Database error! Error Code [' . 'adw' . '] Error: ');
+    // throw new UserException('Kamu tidak berhak mengakses resource ini');
+    $this->db->insert('dokumen_perusahaan', DataStructure::slice($data, ['id_jenis_dokumen_perusahaan', 'id_perusahaan', 'no_dokumen_perusahaan', 'dokumen_perusahaan']));
+    ExceptionHandler::handleDBError($this->db->error(), "Tambah Dokumen Perusahaan gagal", "dokumen_perusahaan");
+    $this->db->insert_id();
+    return $data['id_perusahaan'];
+    // echo $db_error;
+    // if (empty($db_error)) {
+    // throw new UserException($db_error);
+    // }
+    // throw new UserException('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+    //     return false; // unreachable retrun statement !!!
+    //   }
+    //   //  return $this->db->insert_id();
+    // } catch (Exception $e) {
+    // this will not catch DB related errors. But it will include them, because this is more general. 
+    // ExceptionHandler::handle($e);
+    // }
+  }
+  public function edit($data)
+  {
+    $this->db->where('id_dokumen_perusahaan', $data['id_dokumen_perusahaan']);
+    $this->db->update('dokumen_perusahaan', DataStructure::slice($data, ['no_dokumen_perusahaan', 'dokumen_perusahaan'], TRUE));
+    ExceptionHandler::handleDBError($this->db->error(), "Edit Dokumen gagal", "dokumen_perusahaan");
+
+    return $data['id_perusahaan'];
+  }
+
+  public function delete($data)
+  {
+    $this->db->where('id_dokumen_perusahaan', $data['id_dokumen_perusahaan']);
+    $this->db->delete('dokumen_perusahaan');
+
+    ExceptionHandler::handleDBError($this->db->error(), "Hapus Dokumen Perusahaan", "DokumenPerusahaan");
+  }
+}

@@ -1,333 +1,352 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox ssection-container">
+        <div class="ibox-content">
+            <form class="form-inline" id="toolbar_form" onsubmit="return false;">
+                <input type="hidden" id="is_not_self" name="is_not_self" value="1">
+                <select class="form-control mr-sm-2" name="id_jenis_perusahaan" id="id_jenis_perusahaan"></select>
+                <button type="button" class="btn btn-success my-1 mr-sm-2" id="new_btn" disabled="disabled"><i class="fal fa-plus"></i> Tambah DokumenPerusahaan Baru</button>
+            </form>
+        </div>
+    </div>
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table id="FDataTable" class="table table-bordered table-hover" style="padding:0px">
+                            <thead>
+                                <tr>
+                                    <th style="width: 7%; text-align:center!important">ID</th>
+                                    <th style="width: 24%; text-align:center!important">Nama Dokumen</th>
+                                    <th style="width: 24%; text-align:center!important">Persyaratan</th>
+                                    <th style="width: 16%; text-align:center!important">Status</th>
+                                    <th style="width: 16%; text-align:center!important">Type </th>
+                                    <th style="width: 5%; text-align:center!important">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal inmodal" id="jenis_dokumen_perusahaan_modal" tabindex="-1" opd="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Kelola DokumenPerusahaan</h4>
+                <span class="info"></span>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <form opd="form" id="jenis_dokumen_perusahaan_form" onsubmit="return false;" type="multipart" autocomplete="off">
+                    <input type="hidden" id="id_jenis_dokumen_perusahaan" name="id_jenis_dokumen_perusahaan">
+                    <div class="form-group">
+                        <label for="nama_jenis_dokumen_perusahaan">Nama Dokumen</label>
+                        <input type="text" placeholder="Nama Dokumen" class="form-control" id="nama_jenis_dokumen_perusahaan" name="nama_jenis_dokumen_perusahaan" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="judul">Jenis Perusahaan</label>
+                        <select class="form-control mr-sm-2" name="id_jenis_perusahaan" id="id_jenis_perusahaan" required="required"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="allow_type">Type </label>
+                        <select class="form-control mr-sm-2" name="allow_type" id="allow_type" required="required"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Active </label>
+                        <select class="form-control mr-sm-2" name="ACT" id="status" required="required"></select>
+                    </div>
+                    <button class="btn btn-success my-1 mr-sm-2" type="submit" id="add_btn" data-loading-text="Loading..."><strong>Tambah Data</strong></button>
+                    <button class="btn btn-success my-1 mr-sm-2" type="submit" id="save_edit_btn" data-loading-text="Loading..."><strong>Simpan Perubahan</strong></button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#kelola_jenis_dokumen_perusahaan').addClass('active');
+        $('#setting_parm').addClass('active');
+        var toolbar = {
+            'form': $('#toolbar_form'),
+            'id_jenis_perusahaan': $('#toolbar_form').find('#id_jenis_perusahaan'),
+            'id_opd': $('#toolbar_form').find('#id_opd'),
+            'newBtn': $('#new_btn'),
+        }
+
+        var FDataTable = $('#FDataTable').DataTable({
+            'columnDefs': [],
+            deferRender: true,
+            "order": [
+                [0, "desc"]
+            ]
+        });
+
+        var DokumenPerusahaanModal = {
+            'self': $('#jenis_dokumen_perusahaan_modal'),
+            'info': $('#jenis_dokumen_perusahaan_modal').find('.info'),
+            'form': $('#jenis_dokumen_perusahaan_modal').find('#jenis_dokumen_perusahaan_form'),
+            'addBtn': $('#jenis_dokumen_perusahaan_modal').find('#add_btn'),
+            'saveEditBtn': $('#jenis_dokumen_perusahaan_modal').find('#save_edit_btn'),
+            'id_jenis_dokumen_perusahaan': $('#jenis_dokumen_perusahaan_modal').find('#id_jenis_dokumen_perusahaan'),
+            'nama_jenis_dokumen_perusahaan': $('#jenis_dokumen_perusahaan_modal').find('#nama_jenis_dokumen_perusahaan'),
+            'status': $('#jenis_dokumen_perusahaan_modal').find('#status'),
+            'allow_type': $('#jenis_dokumen_perusahaan_modal').find('#allow_type'),
+
+            'password': $('#jenis_dokumen_perusahaan_modal').find('#password'),
+            'id_jenis_perusahaan': $('#jenis_dokumen_perusahaan_modal').find('#id_jenis_perusahaan'),
+            'opd': $('#jenis_dokumen_perusahaan_modal').find('#opd'),
+        }
+
+        var dataJenisPerusahaan = {}
+        var dataDokumenPerusahaan = {}
+
+        var swalSaveConfigure = {
+            title: "Konfirmasi simpan",
+            text: "Yakin akan menyimpan data ini?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#18a689",
+            confirmButtonText: "Ya, Simpan!",
+        };
+
+        var swalDeleteConfigure = {
+            title: "Konfirmasi hapus",
+            text: "Yakin akan menghapus data ini?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ya, Hapus!",
+        };
+        //, getAllDokumenPerusahaan()
+        $.when(getAllJenisPerusahaan(), getAllDokumenPerusahaan()).then((e) => {
+            toolbar.newBtn.prop('disabled', false);
+        }).fail((e) => {
+            console.log(e)
+        });
+
+        function getAllJenisPerusahaan() {
+            return $.ajax({
+                url: `<?php echo site_url('ParameterController/getAllJenisPerusahaan/') ?>`,
+                'type': 'POST',
+                data: {},
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    if (json['error']) {
+                        return;
+                    }
+                    dataJenisPerusahaan = json['data'];
+                    renderJenisPerusahaanSelectionFilter(dataJenisPerusahaan);
+                    renderJenisPerusahaanSelectionAdd(dataJenisPerusahaan);
+                },
+                error: function(e) {}
+            });
+        }
+
+        function renderJenisPerusahaanSelectionFilter(data) {
+            toolbar.id_jenis_perusahaan.empty();
+            toolbar.id_jenis_perusahaan.append($('<option>', {
+                value: "",
+                text: "-- Semua Jenis Perusahaan --"
+            }));
+            Object.values(data).forEach((d) => {
+                toolbar.id_jenis_perusahaan.append($('<option>', {
+                    value: d['id_jenis_perusahaan'],
+                    text: d['id_jenis_perusahaan'] + ' :: ' + d['nama_jenis_perusahaan'],
+                }));
+            });
+        }
+
+        function renderJenisPerusahaanSelectionAdd(data) {
+            DokumenPerusahaanModal.id_jenis_perusahaan.empty();
+            DokumenPerusahaanModal.id_jenis_perusahaan.append($('<option>', {
+                value: "",
+                text: "-- Pilih Jenis Perusahaan --"
+            }));
+            Object.values(data).forEach((d) => {
+                DokumenPerusahaanModal.id_jenis_perusahaan.append($('<option>', {
+                    value: d['id_jenis_perusahaan'],
+                    text: d['id_jenis_perusahaan'] + ' :: ' + d['nama_jenis_perusahaan'],
+                }));
+            });
+
+            DokumenPerusahaanModal.status.empty();
+            DokumenPerusahaanModal.status.append($('<option>', {
+                value: 'Y',
+                text: 'Active',
+            }));
+            DokumenPerusahaanModal.status.append($('<option>', {
+                value: 'N',
+                text: 'Non Active',
+            }));
+
+            DokumenPerusahaanModal.allow_type.empty();
+            DokumenPerusahaanModal.allow_type.append($('<option>', {
+                value: 'pdf',
+                text: '.pdf',
+            }));
+            DokumenPerusahaanModal.allow_type.append($('<option>', {
+                value: 'img',
+                text: '.jpg .jpeg .png ',
+            }));
+        }
+
+        toolbar.id_jenis_perusahaan.on('change', (e) => {
+            // DokumenPerusahaanModal.id_jenis_perusahaan.attr('readonly', !empty(toolbar.id_jenis_perusahaan.val()));
+            getAllDokumenPerusahaan();
+        });
+
+        function getAllDokumenPerusahaan() {
+            swal({
+                title: 'Loading jenis_dokumen_perusahaan...',
+                allowOutsideClick: false
+            });
+            swal.showLoading();
+            return $.ajax({
+                url: `<?php echo site_url('ParameterController/getAllJenisDokumenPerusahaan/') ?>`,
+                'type': 'GET',
+                data: toolbar.form.serialize(),
+                success: function(data) {
+                    swal.close();
+                    var json = JSON.parse(data);
+                    if (json['error']) {
+                        return;
+                    }
+                    dataDokumenPerusahaan = json['data'];
+                    renderDokumenPerusahaan(dataDokumenPerusahaan);
+                },
+                error: function(e) {}
+            });
+        }
+
+        function renderDokumenPerusahaan(data) {
+            if (data == null || typeof data != "object") {
+                console.log("DokumenPerusahaan::UNKNOWN DATA");
+                return;
+            }
+            var i = 0;
+
+            var renderData = [];
+            Object.values(data).forEach((jenis_dokumen_perusahaan) => {
+                var editButton = `
+        <a class="edit dropdown-item" data-id='${jenis_dokumen_perusahaan['id_jenis_dokumen_perusahaan']}'><i class='fa fa-pencil'></i> Edit DokumenPerusahaan</a>
+      `;
+                var deleteButton = `
+        <a class="delete dropdown-item" data-id='${jenis_dokumen_perusahaan['id_jenis_dokumen_perusahaan']}'><i class='fa fa-trash'></i> Hapus DokumenPerusahaan</a>
+      `;
+                var button = `
+        <div class="btn-group" opd="group">
+          <button id="action" type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class='fa fa-bars'></i></button>
+          <div class="dropdown-menu" aria-labelledby="action">
+            ${editButton}
+          
+          </div>
+        </div>
+      `;
+                renderData.push([jenis_dokumen_perusahaan['id_jenis_dokumen_perusahaan'], jenis_dokumen_perusahaan['nama_jenis_dokumen_perusahaan'], jenis_dokumen_perusahaan['nama_jenis_perusahaan'], jenis_dokumen_perusahaan['ACT'] == 'Y' ? 'Active' : 'Non Active', jenis_dokumen_perusahaan['allow_type'] == 'img' ? 'jpg jpeg png' : 'pdf', button]);
+            });
+            FDataTable.clear().rows.add(renderData).draw('full-hold');
+        }
+
+        function resetDokumenPerusahaanModal() {
+            DokumenPerusahaanModal.form.trigger('reset');
+            DokumenPerusahaanModal.id_jenis_perusahaan.val(toolbar.id_jenis_perusahaan.val());
+            DokumenPerusahaanModal.opd.val(toolbar.id_opd.val() != -1 ? toolbar.id_opd.val() : "");
+        }
+
+        toolbar.newBtn.on('click', (e) => {
+            resetDokumenPerusahaanModal();
+            DokumenPerusahaanModal.self.modal('show');
+            DokumenPerusahaanModal.addBtn.show();
+            DokumenPerusahaanModal.saveEditBtn.hide();
+        });
+
+        FDataTable.on('click', '.edit', function() {
+            resetDokumenPerusahaanModal();
+            DokumenPerusahaanModal.self.modal('show');
+            DokumenPerusahaanModal.addBtn.hide();
+            DokumenPerusahaanModal.saveEditBtn.show();
+            DokumenPerusahaanModal.password.prop('placeholder', '(Unchanged)')
+            DokumenPerusahaanModal.password.prop('required', false);
+
+            var currentData = dataDokumenPerusahaan[$(this).data('id')];
+            DokumenPerusahaanModal.id_jenis_dokumen_perusahaan.val(currentData['id_jenis_dokumen_perusahaan']);
+            DokumenPerusahaanModal.id_jenis_perusahaan.val(currentData['id_jenis_perusahaan']);
+            DokumenPerusahaanModal.allow_type.val(currentData['allow_type']);
+            DokumenPerusahaanModal.nama_jenis_dokumen_perusahaan.val(currentData['nama_jenis_dokumen_perusahaan']);
+        });
+
+        DokumenPerusahaanModal.form.submit(function(event) {
+            event.preventDefault();
+            var isAdd = DokumenPerusahaanModal.addBtn.is(':visible');
+            var url = "<?= site_url('ParameterController/') ?>";
+            url += isAdd ? "addJenisDokumenPerusahaan" : "editJenisDokumenPerusahaan";
+            var button = isAdd ? DokumenPerusahaanModal.addBtn : DokumenPerusahaanModal.saveEditBtn;
+
+            swal(swalSaveConfigure).then((result) => {
+                if (!result.value) {
+                    return;
+                }
+                buttonLoading(button);
+                $.ajax({
+                    url: url,
+                    'type': 'POST',
+                    data: DokumenPerusahaanModal.form.serialize(),
+                    success: function(data) {
+                        buttonIdle(button);
+                        var json = JSON.parse(data);
+                        if (json['error']) {
+                            swal("Simpan Gagal", json['message'], "error");
+                            return;
+                        }
+                        var jenis_dokumen_perusahaan = json['data']
+                        dataDokumenPerusahaan[jenis_dokumen_perusahaan['id_jenis_dokumen_perusahaan']] = jenis_dokumen_perusahaan;
+                        swal("Simpan Berhasil", "", "success");
+                        renderDokumenPerusahaan(dataDokumenPerusahaan);
+                        DokumenPerusahaanModal.self.modal('hide');
+                    },
+                    error: function(e) {}
+                });
+            });
+        });
+
+        FDataTable.on('click', '.delete', function() {
+            event.preventDefault();
+            var id = $(this).data('id');
+            swal(swalDeleteConfigure).then((result) => {
+                if (!result.value) {
+                    return;
+                }
+                $.ajax({
+                    url: "<?= site_url('DokumenPerusahaanController/deleteDokumenPerusahaan') ?>",
+                    'type': 'POST',
+                    data: {
+                        'id_jenis_dokumen_perusahaan': id
+                    },
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        if (json['error']) {
+                            swal("Delete Gagal", json['message'], "error");
+                            return;
+                        }
+                        delete dataDokumenPerusahaan[id];
+                        swal("Delete Berhasil", "", "success");
+                        renderDokumenPerusahaan(dataDokumenPerusahaan);
+                    },
+                    error: function(e) {}
+                });
+            });
+        });
+    });
+</script>

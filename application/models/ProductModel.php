@@ -1,108 +1,54 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-HR+cPvB2xEwqdzN1GG9vpOcMPvnsKrzXT4QYkyIayC+k9UR+U7ZAVoUlmWjo/qzRt8cBe05psvsh
-zB35w8kYh5kWurd2qs4NdVEAC97ErYms9372q7KRGrBSMIzvuqxP6I/6tzy0rumsm2u/TCivQDIG
-gnhqghmkcF27lDkvFbmLNoptkU1lWcoNoGwXGlOLDElnNn4XY5vlPfQELFQlViHNHSBsDwn0qyAg
-wR4755sKHVOacjZeJ/HtapaiJ8bba8EU4v/e5sMMe18Vet27HD39pgrz5Q75S4iqx5qd3c1GdHPe
-OyGnEJK6OicxqZlnS2Mb4VoRnP+bZk5JuUBvb+iU29wJQSlE+EnoWkrK7AER8H52OE52oeucp3eR
-/PaWOqst0C1XGh5i0YZLzAfRWaM00esNKSl+op2OdE3eBF2PzG36GWjCuA70Nro0VJhZSEZEzq+k
-o+iWf92nP6KuNeDnyqdYPYZY47xbKvo+suEaVdiRbQLgxVw3D3uvctU+XLp7LuGM92/yAd8Fm05c
-LBkHjkjF5+mJ736v86UOruhDI3WLhqBnH0M03yiFv3FM6rmThwY1EvSwJffAT06S5O2e+1afwAUn
-Rbcse+xAFZwA0t83H27gZ4Y6SDcTMXX6YOPnpNm3TW7AbByeFV5ZB1gLqlFy3ZWDlH1128mRxFMR
-/3wy/FaaMI4mfgcI1sa08pbK4w9rx/MUyq4YWsfJqhmpjXUQBR6QOefVuXWzUYgGFHBDZvkIFQWI
-QDk89VwurkCKnojAYjf/EQ3XNKJFmaPJqUK+8KqfI18x7MW9u6Z5ut0HDnYcEZQqaugr5KX5Y11W
-/JDwLcRIxVe6Blx9aVxHGQcMkfy0DgQ0sIWPTrBhXDkIOf+TZ6PUGEVPszbnLy1KC4ZnAL5gbPdH
-u8mZAMoPlBBH3oEtSNlf3i8SS1k+V8UvNrePmD5mUFIppGRUZA0e0vZB1nStksmmI0hc1N5vZWWo
-eWWM9No6VG7dNafxYJCtdfoz1w6OLDiEE1+Wu0oby67Bun1PIZdD5GZQ6Wod5Z9MpOpDewBCpb0D
-SFi5QN6znADja2fqSvFrDAe2ONsUnQK6fB/CyJksQqFfmnJNxGIcbgqJTP9YQjxnBxCS1ZBHglip
-e2YIl6rH/Z5+Qdw9VGqZB0Q2zuLy/Qq86S9j6dFpOHeNB0wpVRWmUOPLVmwStJ8IZjhluV5/3wyZ
-8dZ8ow/ZWnKmqmwq40Mi+sJj+DCQ/3TTiwu0MhObZxV2WdDzLHPeIVXKeAS34lWxcb8JqFm179Jj
-ABdDqC0XR7/LOk2iD68IA9J54Xmqp3lud6gyC9TZE3FltTbj5/R3WZk3itNoMhPXTyuA6Y5RiKXP
-kYtZzwun2vuX+3FvuBG6adCNfn9n15JXzpvIL4hz3XfcUL+Cw42bpCK8aGy+ucfz3Ab/M16uBdNb
-LhjthK64wLhNuoxGCfwEj78hW5DWpaeZIU7A3VZDqQHDg/aK1OKSYyHQkuplJ5IXh0BDw5ijuyr6
-+UZ6gjkv15FzrcR0xLqDNDarU/Fm5V/mUcyA+egr5+ADshejwhD2RxbUVNSe/oFOLAAJsYDN5Xk/
-yKKll5/qCMaxV6oH6vEWIvtKGe3cimTgDQV8NPVFD1XTpautcRFHKzIhZsBGvMQ361wv1zkE6zoK
-xamNi0C6xlakjaBygyReq3Me2GXZF/hG6NOg/xdLRrl1LQQqh84HMA2XlUMI5AjGm8e3dmPNZxu7
-g7WGfcu1qxk3FGzZkj9atND/PNgqvb0hk9nCnWsDhjcsAM3PGopCe0Yc4x2NVcC+ouZDzNcHuJUy
-ICRdFUsaTiCY2YyrPanbiJ35QlGKyCXuxzoCWC8A0McidCTAoIXGZw3+0jUJXpQANhzBOnZ7eRwA
-cRpOkvYR6lO+L63Ak/Sz+mTsQJHsip+5kba3MO13SbPdUhI+Zp8q6Or8p08r0HwXkVRAs5IiDw/z
-WpgHutEpkWSst1wF1V7ODK6Qs/ISHGBCVE5xTp0DAlZuZAA5BHZpexnjhEuJ41foUu90bkp1MdWj
-HDaIGMagAxseif1aauh+ZffVEQW8XFD3ByFuSB+3yUH73aJtIoQzQpO7tUydc2j6JpIO1+oH1Kpt
-JHSCUmbCOCvLmJ0wdZUfg9EvmiP4C7w6muFmVyaEdBrDZ9eDIf9WKd95kwykn4zThsJeVIlz3rDj
-QofSK4rR2+bX+4mBgJw6vqw1cgJrPcZlqbR7X+lP/B7Bur+8eWwMNH7Waz2gCRU4GOBGNlc8Iy5S
-RNYsa1qb0TVaiJMQTuNSye0JEEb58s4/ftgxdexrt4bV8eOA3pUahjKIlcT4mf0exRCTHShHuhZG
-ogdVv3dUl/dYFGLfrm9eRwgB3VspUosAX+5a3lheLS18GXoCwN3tKO5Jlyakx6CTSHQDijgS2ZEH
-kJMm9xBTWkm8ay5DvXWjI77R5JgBhFf0YAawtKaiDZEjebRVtPaL8JP4QnTxEdyDccQfX2cjNBES
-RPkW1+qdKDSvE4ELAcNfWdXXa5tIszkgWq/NqBhbNXTIUgEFFsGG2BITxWEP4RFPCNOSgl0UDuiG
-jYUcMgULeH5LR6gkbIpdrwsP8aOqZtk5c/CUF/R4d/bjwjykMeplrdJxe8ZSOaxF7+4VFHRFNGl6
-HeQ9sUC5Ww0+ADTYikibHSDvZo86vpx2iawiklvcjmADdqcSnsdMFtKI8v5Lk3gm2hJokHA9eDqF
-wFordBOsPyzOxWDpFXxXv2XQlbVG7XaW3r379UQC3Y0mTXc7+vDJBe7fn5NuLJ3VLyTzVcEcfuYF
-5a2cGhoyxX04edz9tNdstimZanWUeLswTQTPjFvq9P1eW9kS2ETUbB+8cgjSfawpbJ47VPIbBlUe
-PjatTLKAn7kihz99ChV/QWnqtN187zHhS3ZfgIfSlkLmkfsAWMEqg7aPsUuC0rfZ3/EFB9Vo3/NG
-g2FGpp7hRO57g2gWO/l2odBgs8P9kRIiuJKOqTkEYVSRlkyjqOw+OX5tvIUJO/LPByCpEQEdX7t9
-Z1olLqkOe4dqEtUPdWuA7aKBMOPQlYR1x7nAfR7rYr32vQn1ug0gpZtS77m8Jt9cEDu7L+aGOF02
-lNXOL8ZqhaHbgnAKZow2fmpRzmLH6fqHrMWSCvUHtsv55zrWSxxLceRchIcvbpDdjw+m1zFlOHFg
-IECZyKptT36aphpV6aM5Bh1kvUix8ciGb2CQRW52tWUj/zcFaaOj1Vo6BLbIZJq9Izu5OlaceyNI
-0l8/GOu903EVusxjlJhBuvAbK1UKHYVoMSXt4+L9yx17Hrjp2WYaNahLprsFLcH+c5aPagTxZMOW
-c00DYR9Ug0xowucpVKP05KX+ngySS+kgw9E31Do9iJJFHFlNE/7nNx6ZHmS2vtES/T0TsHOnsJNc
-ds1GtDWPN6etpOSd9/FTYzbJLa32bAt6jjtnQPqVZsUgnfffstv7mSbCQcnVac7FIZt20LtRwCRV
-YK4toGA+RDXXIBUSX5yGUdV8Qvo8k8G6/K8mbowDvHImE+3iEDUaX6Z4CISKd77J0DWQv7We4/Zi
-jXLx4AeRCE4fU0P6Z/V/FUj5f+9SQsLN43c6j1LqxK7HlboA7riXMHfrsFBApAx1xT3IZ19++DhW
-gRFTKWW5MaTQ91PrI3tQYTf8G458e9EfaqYFAOf+sc2XjpD+lMma6q5bBYiEs+GdUHARyqaXhxYm
-n+9sr7HmI85ZRQ/XstxoyDLjs6hjIryjPIE8vpaWejdkOBA7CyZ9QrVJ9V6DtqYwL1kscxijab3v
-Y80LD0KK//KYfvbbNazyE8nIG8PPMAkw9eMGIll528msuDmHtypMjcUxrmnHAre1oqcklyc8AAf8
-Ml7ggyvZ+kIw0x9CUP8H41ON3R1Lq5JSCyo34kkaRBISbNM12FLjtfLcINdcYRvv2EeZwkrwfHXP
-f4lhfQInwVIUcawGIUW8ulTszVzhWvz+4uqG4LSZBAgAjq/C9yUv3WUdT+QkSBl/Uv2ZOKANwCsJ
-AcgingwHrjq60lBMItgQ1Tit8Lpq/WQkgmWp1p9Ax80VDsUh5zy8/DT7iOZ3wg9gSpr4SGAla2r+
-IHW4u+iu/R2BNji1XDzuHLnqtV86oERxEO38xmQ3Cm1ldKnUXfSn3XpG0nWEVwB/PEAc6RTG3+IR
-xze4eclZRIDAP1KBjyr1JdBDwtvFxPtXH7VZXuMgA3hA+wINwQZwYdSRN7UCnuOc7jtZdfT016YL
-nT/3hJr8WqCltOAzOQ8Ynun+Vg2uiz5z43949QdyjoSF8Ygp3Qk4D7Ga/ToLHUgxX9hQXYttiLLE
-AySuA+FxhKZzCFL9/Tjp+vvehv2zTJQeKk8e/TXsfXKeqEcNXNKNXqpc5YlgkGKMisAMuPE0XNqs
-c4R4H2NKFckGJZk+GWGkzLPCZq+Ft8JIz8fDb5uYgzXt8JMdvmr3EZyBxz4Q+izT2qKIFxbVIFFB
-mtXZu9029rPWVusNoaASgu223rpRAjCALtJ0ST+N3rLh6TaEaDzHNrNqvY01VaKG44HIAvca+98b
-+0DCwkMPnMTyxYti1fENfx0UhL6Ajes5c9a98Q959CEBTUVzQrBGbYbIDb2JYXzM4nHyUFWaNW8x
-1+jFFpGhi+YHBGJiIisbI6jKL8O3+uhMGeCP95x89f7kzsg/YskVMYPnqhmKtDGGnbadMIJq5yrJ
-2ch4gLFC52Rj463sY2GMtc/KWHRiQt1nwSJqMbnQlwtmyPfwohbpXEWnaUeO9w0SQEMVBcz+SPtD
-AFEwVtqXtZ/gOOtNIX9FdD/FrE/T/Li5TWZzilbgwZtLZEhw6OMtVHmtVnqLNrX02IrXrIPW/5mp
-xlXyB9SkrmTAzHsWJ+WE/QXKtSpER+gNVEgAtQFZyvsCd0/LevKzrp9WBnSsRmrJl6PEeeJdppZT
-STZiJ2uUFq/tX44vhhC79nYtc2U1NIHUxOVmBlJfMbNvk6KigDvCuUHQG/Cs8yEFQOtacqbMbeQN
-yN1/b0e08HnESO5fKuwlkYCbACybn4GBXcultipxhR+mNbtzDDAiUT4zVT+5Mtn9oSUo9v6U9UEd
-IOae+Cr/7ldGa8+urjns7e0MQSZEXBtJyChD6qqV9IsH3Lca6pBZtjBnqQvq6N67EfBQ+ts0Y918
-EKjnd9i9eVn0dfUNNS342HN/oLmfr+LjP7gsLYVg4sY7TxjVNXDqNpeXuRK2LS0Pwh+KvQsGxly0
-qjMFfQS4gK9J5TlM8JNUi1iiFT9ld1NfniLjPEYgRUXQrztY7upDCdwIUsFbT5BMZkaHx+r98q+7
-UDw8j4Tsv8MCZoC7HryazypDHQwriw06MeiI6c2vM6OvmAfQ8ZWKBEB5CbIE6o0SyC6id984vYid
-QxU6vHXcJo9rTGhn/S4r1cAoacXM6GDfaaD/i8PeEBhJyTL49PyvEAdNtobnw51cNA7kEeAdKw0c
-qmonWeudHmtgFohTEsalSq83YJGf3RnxKMEG0Bly+1g86fbdyoPDjztHsMQVIyY+JLZyT42LRfAn
-kAW80CnOgAJgPjOmFZB4aUzzCqc5E8GgqCB3NBtOESYb//DLbBI3MaP6x6Au6BAbYDvDC4jJirDC
-vGLx2P24BIBmtjfTxC5zIUdT+ljE1MmpqO6fFgwV4IsNrmnekMOX1/mxNFSKqd2rWBYDrhYy7Blc
-XMYemfSK/q+8IgBmbnU50rCMwZ7NpDyYSYZDb1orGSfmGMyw3n+hWQCcyhUIBp2PEhqNwPJMhJPd
-As5uzbMaGtmZLuluauAscpkjIuklSpPxKDqHd97Et0TAEcqgjnRJiNhZxrIsb6xHDOqcCypsy6+A
-l78j8Lo3skCmZ6r+oZhCyr1CE34an/AUEfo2JLw0eygJqyEeqOrpOXrHLoioZWAPq1o1WA6UdRgE
-sQVS7otB40b4KfH7NlBOdfn1mw9z1US8/mZOUdRUAXcRQUbTfdZusS+iHu1Md9krN3zTfzlm/bd4
-lF8+1h/Qd3iYwikszg58G6noi3/Y2jBrW49JEaio3XQnknhRdzQI8CrM+NRif6cWeCMNHss7WxcK
-5szHklBoKlOlSFmOFPhBubXGY6sO1C7ITcenOP2IhuWx/nUhztwli8QqY1Wvzcs3yqU4pd8tAEEY
-qZOCp0JdunpbvaKBVLUelxWrIdK7PdQvGOvdmk3LCSPH7N2xZN52ecr+NHsd0efgi3wC7tmCK+gF
-9RRGhUSH/XbVd15eygWWqq2HyCaxKJ8Ww1cxP1enOQxdjXLC6MjK7lFmHPxbqZM891mfYmSwvUS/
-Re91S6s5U/GxKachRb0NiI9fqzef1L5JO51fUW5fcPqlfSBaeaFWFpsZD6EFZlkiQbMuMNE8qYN3
-Qdzhb6ed60De9IORAc5GMGc3DqK0KS59vX4hY1JxCXocsahYiTYUDJsiOVzoyBT86kyo+QjlmOm9
-uzpBo5A5iXQUhUGDdaTAILAazbNqdrRIzCv+lGmNWfG8UPj08mjIfPfklc4DonAHfWgKoOookqKO
-/QRMCbeoE4OUDjnrJNalDgbywzX4SXevtWmLFdTA2vT8IdPrLePKVAheIv5OW4+V2Kx391DAo5/D
-K47lPo1FUiraWhnt/JNCXkqjOs6px8BDBR5rjs2YRLOOVjjzcvNYm0gWSjMc/bphtxnWZekk4+Wh
-rAHv/KkvBQeUSz5plaTpqbMhtion0MK7mEjXjBY7U9INFfwKP8VqbriVGLyNpSNA17x+u8t9JLhd
-cEKzGFMOoRHCwlHXyVAkKnlJHUUweOdPid8p1e6T8FgdDbGXABzVmfU471AiqV92SG+O0BXy7rp0
-ak611ISR9CCUpbYK0rsjfu7/XlVuVNPKuk1jDzzhSvmN8Fpw2p1KCWOwrtY2jBGG42mokGyDxrGK
-EG5L/zpXdTFoPGqAoKeONXZQGyOzZwJGc+/DBJMdQ4dHy5FltJIguoVVzPIBCnsaCvDiWmKDRu0s
-zEH4D0578P63/2z8024wfg0HxndsCHJbXJ6RS9C103INCNOJvUiWKz4npa+gGEpQ7m1CCNtVDixx
-0K6wNPQhU3gI5kyhFP2rqDpV6N3N7escqNrHv6gDO2joG29Qbqm/ZuBrI9sD0YK7yWb07ezWVynE
-D2yEM0H1virU/9Fg3Spj/sVA2aTcFzi3roT5iGsMiRrqns1DTYSUr6l0wf10PAmbNvdDwtLY27Qx
-xOXrPL50HqMiogOCYmR4cZY3q6r53zFxmUADzy1pm1J/ebTLQdfmA/J8Z7yl4jYGE5PUNKPgPxI8
-vUcYvBoTBEjNthDirEaI9MFqC9JvEPO19tOS6d8CrFGnSsUWogvzLft2mIfefabmbt2ajnYSRu64
-gxmrfQxJazdk9Dwh5UJg5TO5u6A8wjU6C0TWx2hVCKwmroKeoajdRbBovaPH3YLh2yqWLL22L+nN
-4KDGFhi+Lo9ziSdrbe749eVZg9eSBwJYIshV7UZ8xU5DJSHsRpE990221JzC11BJRqyRPXXbKj85
-yr6hfPk7s9vVwTmeuRP66XSW2/MlBMCPntHbUlzSAQSt/SFxZk+0cwOzbn+iIJkCECO8u+9W5L5D
-H7RK7maB864VZjObM9Yro9tH1m==
+class ProductModel extends CI_Model {
+
+  public function getAll($filter = []){
+    $this->db->select("pro.*, ekr.nama_perusahaan, COALESCE(pro.cover_product, 'thumbnail-600x400.jpg') as cover_product");
+    $nama_role = !empty($this->session->userdata()['nama_role']) ? $this->session->userdata()['nama_role'] : NULL;
+    $id_perusahaan = !empty($this->session->userdata()['id_perusahaan']) ? $this->session->userdata()['id_perusahaan'] : NULL;
+    $this->db->select("@perusahaan := '{$id_perusahaan}' = pro.id_perusahaan", FALSE);
+    $this->db->select("IF(!@perusahaan, 'Bukan Perusahaan', NULL ) as edit_perusahaan_pr");
+    $this->db->from("product as pro");
+    $this->db->join("perusahaan as ekr", "ekr.id_perusahaan = pro.id_perusahaan");
+    if(!empty($filter['id_perusahaan'])) $this->db->where('pro.id_perusahaan', $filter['id_perusahaan']);
+    if(!empty($filter['id_product'])) $this->db->where('pro.id_product', $filter['id_product']);
+    if(!empty($filter['featured'])){
+      $this->db->limit(4);
+    }
+    $res = $this->db->get();
+    return DataStructure::keyValue($res->result_array(), 'id_product');
+  }
+  
+	public function get($id = NULL){
+    $row = $this->getAll(['id_product' => $id]);
+		if (empty($row)){
+			throw new UserException("Product yang kamu cari tidak ditemukan", USER_NOT_FOUND_CODE);
+		}
+		return $row[$id];
+  }
+  
+	public function add($data){
+    $this->db->insert('product', DataStructure::slice($data, ['id_perusahaan']));
+		ExceptionHandler::handleDBError($this->db->error(), "Tambah Product gagal", "product");
+		
+		return $this->db->insert_id();
+  }
+  
+	public function edit($data){
+    $this->db->where('id_product', $data['id_product']);
+    $this->db->set('cover_product', !empty($data['cover_product']) ? $data['cover_product'] : NULL);
+    $this->db->set('attachment_product', !empty($data['attachment_product']) ? $data['attachment_product'] : NULL);
+    $this->db->update('product', DataStructure::slice($data, ['nama_product', 'deskripsi_product'], TRUE));
+		ExceptionHandler::handleDBError($this->db->error(), "Edit Product gagal", "product");
+		
+		return $data['id_product'];
+  }
+  
+	public function delete($data){
+		$this->db->where('id_product', $data['id_product']);
+		$this->db->delete('product');
+
+    ExceptionHandler::handleDBError($this->db->error(), "Hapus Product", "Product");
+  }
+}

@@ -1,75 +1,98 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<?php
+/*
+ * PHP QR Code encoder
+ *
+ * Image output of code using GD2
+ *
+ * PHP QR Code is distributed under LGPL 3
+ * Copyright (C) 2010 Dominik Dzienia <deltalab at poczta dot fm>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ */
+ 
+    define('QR_IMAGE', true);
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
+    class QRimage {
+        
+        public static $black = array(255,255,255);
+        public static $white = array(0,0,0);
+
+        //----------------------------------------------------------------------
+        public static function png($frame, $filename = false, $pixelPerPoint = 4, $outerFrame = 4,$saveandprint=FALSE) 
+        {
+            $image = self::image($frame, $pixelPerPoint, $outerFrame);
+            
+            if ($filename === false) {
+                Header("Content-type: image/png");
+                ImagePng($image);
+            } else {
+                if($saveandprint===TRUE){
+                    ImagePng($image, $filename);
+                    header("Content-type: image/png");
+                    ImagePng($image);
+                }else{
+                    ImagePng($image, $filename);
+                }
+            }
+            
+            ImageDestroy($image);
+        }
+    
+        //----------------------------------------------------------------------
+        public static function jpg($frame, $filename = false, $pixelPerPoint = 8, $outerFrame = 4, $q = 85) 
+        {
+            $image = self::image($frame, $pixelPerPoint, $outerFrame);
+            
+            if ($filename === false) {
+                Header("Content-type: image/jpeg");
+                ImageJpeg($image, null, $q);
+            } else {
+                ImageJpeg($image, $filename, $q);            
+            }
+            
+            ImageDestroy($image);
+        }
+    
+        //----------------------------------------------------------------------
+        private static function image($frame, $pixelPerPoint = 4, $outerFrame = 4) 
+        {
+            $h = count($frame);
+            $w = strlen($frame[0]);
+            
+            $imgW = $w + 2*$outerFrame;
+            $imgH = $h + 2*$outerFrame;
+            
+            $base_image =ImageCreate($imgW, $imgH);
+            
+            $col[0] = ImageColorAllocate($base_image,QRImage::$black[0],QRImage::$black[1],QRImage::$black[2]);
+            $col[1] = ImageColorAllocate($base_image,QRImage::$white[0],QRImage::$white[1],QRImage::$white[2]);
+
+            imagefill($base_image, 0, 0, $col[0]);
+
+            for($y=0; $y<$h; $y++) {
+                for($x=0; $x<$w; $x++) {
+                    if ($frame[$y][$x] == '1') {
+                        ImageSetPixel($base_image,$x+$outerFrame,$y+$outerFrame,$col[1]); 
+                    }
+                }
+            }
+            
+            $target_image =ImageCreate($imgW * $pixelPerPoint, $imgH * $pixelPerPoint);
+            ImageCopyResized($target_image, $base_image, 0, 0, 0, 0, $imgW * $pixelPerPoint, $imgH * $pixelPerPoint, $imgW, $imgH);
+            ImageDestroy($base_image);
+            
+            return $target_image;
+        }
+    }

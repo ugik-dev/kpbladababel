@@ -1,71 +1,84 @@
-<?php //00591
-// IONCUBE ENCODER 10.2 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+<section id="newss" class="gray-section p-w-xl">
+	<div class="row">
+		<div class="col-lg-12 text-center">
+			<div class="navy-line"></div>
+			<h1>News</h1>
+			<!-- <p>Some of the newss from our customers</p> -->
+		</div>
+		<div class="col-lg-12" id="news-list"></div>
+	</div>
+</section>
+<script>
 
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo("Site error: the ".(php_sapi_name()=='cli'?'ionCube':'<a href="http://www.ioncube.com">ionCube</a>')." PHP Loader needs to be installed. This is a widely used PHP extension for running ionCube protected PHP code, website security and malware blocking.\n\nPlease visit ".(php_sapi_name()=='cli'?'get-loader.ioncube.com':'<a href="http://get-loader.ioncube.com">get-loader.ioncube.com</a>')." for install assistance.\n\n");exit(199);
-?>
-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
-hKe91PxsCp9IfGA27xu=
+$(document).ready(function () {
+
+	var news_list = $('#news-list');
+	$('#navbar-item').html(`
+		<li><a class="nav-link page-scroll" href="#page-top">News</a></li>
+	`)
+    
+	initNavbar(0);
+
+  var dataNews = {}
+
+  $.when(getAllNews()).then((e) =>{
+  }).fail((e) => { console.log(e) });
+
+  function getAllNews(){
+    swal({title: 'Loading news...', allowOutsideClick: false});
+    swal.showLoading();
+    return $.ajax({
+      url: `<?php echo site_url('NewsController/getAll/')?>`, 'type': 'GET',
+      data: {},
+      success: function (data){
+        swal.close();
+        var json = JSON.parse(data);
+        if(json['error']){
+          return;
+        }
+        dataNews = json['data'];
+        renderNews(dataNews);
+      },
+      error: function(e) {}
+    });
+  }
+
+  function renderNews(data){
+    if(data == null || typeof data != "object"){
+      console.log("News::UNKNOWN DATA");
+      return;
+    }
+
+    news_list.empty();
+    Object.values(data).forEach((news) => {
+      var panjang = news['berita_isi'];
+      // var p = panjang.substring(0, 1200);
+      var index_p = panjang.lastIndexOf("</p>",1200);
+      p = panjang.substring(0, index_p);
+           
+      news_list.append(`
+      <div class="col-sm-12">
+          <div class="ibox product-box" style="cursor:pointer" onclick="location.href='<?=site_url('newsx?id_news=');?>${news['berita_id']}'">
+            <div class="ibox-title text-center">
+              <h5>${news['berita_judul'] }</h5>
+            </div>
+            <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-5 ibox-content">
+              <div class="product-item" style="background-image:url('<?=base_url('assets/img/news/')?>${news['berita_image']}')"></div>
+              </div>
+              <div class="col-sm-7 ibox-content">
+                ${p}
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `);
+    });
+  }
+});
+</script>
+
+</body>
+</html>
