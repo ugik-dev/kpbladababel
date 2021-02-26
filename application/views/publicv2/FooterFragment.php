@@ -19,13 +19,13 @@
 						<div class="social-icon">
 							<ul class="icon-area">
 								<li class="social-nav">
-									<a href="#"><i class="icofont-facebook"></i></a>
+									<a href="https://www.facebook.com/kpblada.babel.1"><i class="icofont-facebook"></i></a>
 								</li>
-								<li class="social-nav">
+								<!-- <li class="social-nav">
 									<a href="#"><i class="icofont-twitter"></i></a>
-								</li>
+								</li> -->
 								<li class="social-nav">
-									<a href="#"><i class="icofont-pinterest"></i></a>
+									<a href="https://www.instagram.com/kpb.ladababel/"><i class="icofont-instagram"></i></a>
 								</li>
 								<li class="social-nav">
 									<a href="#"><i class="icofont-rss"></i></a>
@@ -51,8 +51,8 @@
 						<div class="col-lg-6 col-md-12 d-flex justify-content-start reunir-content-center">
 							<div class="footer-bottom-left">
 								<p>
-									Copyright © 2019.All Rights Reserved By
-									<a href="#">Reunir</a>
+									Copyright © 2021.All Rights Reserved By
+									<a href="#">KPB Lada Babel</a>
 								</p>
 							</div>
 						</div>

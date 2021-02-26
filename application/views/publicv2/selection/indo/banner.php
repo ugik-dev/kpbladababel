@@ -14,14 +14,15 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h3 class="banner-bottom-text">
-                            We help distribute papper export around the word.
+                        Kami membantu mendistribusikan ekspor kertas ke seluruh dunia.
+
                         </h3>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="get-start">
-                            <a href="<?= site_url('create_account') ?>">JOIN US</a>
+                            <a href="<?=site_url('create_account')?>">BERGABUNG DENGAN KAMI</a>
                         </div>
                     </div>
                 </div>
@@ -36,13 +37,10 @@
                             <div class="icon-box">
                                 <i class="ren-reguser"></i>
                             </div>
-                            <?php
-                            // var_dump($dataContent['d_harga_mwp1_petani'])
-                            ?>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="d-none counter"><?= $dataContent['harga'][0]['harga_mq_petani'] ?></span>
-                                <span class="counter"><?= $dataContent['harga'][0]['harga_mq_petani'] ?></span>
+                                <span class="d-none counter"><?=$dataContent['harga'][0]['harga_mq_petani']?></span>
+                                <span class="counter"><?=$dataContent['harga'][0]['harga_mq_petani']?></span>
                                 <h4>MQ Quality</h4>
                             </div>
                         </div>
@@ -66,7 +64,7 @@
                             </div>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="counter"><?= $dataContent['harga'][0]['harga_sni1_petani'] ?></span>
+                                <span class="counter"><?=$dataContent['harga'][0]['harga_sni1_petani']?></span>
                                 <h4>SNI 1</h4>
                             </div>
                         </div>
@@ -78,7 +76,7 @@
                             </div>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="counter"><?= $dataContent['harga'][0]['harga_sni2_petani'] ?></span>
+                                <span class="counter"><?=$dataContent['harga'][0]['harga_sni2_petani']?></span>
                                 <h4>SNI 2</h4>
                             </div>
                         </div>

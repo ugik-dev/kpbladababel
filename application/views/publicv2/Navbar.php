@@ -1,4 +1,5 @@
 <header class="header-section" id="header-section">
+
     <div class="header-top">
         <div class="container">
             <div class="row">
@@ -79,7 +80,7 @@
     <nav id="navbar" class="navbar navbar-expand-lg navbar-light reunir-navbar">
         <div class="container">
             <div class="logo-section">
-                <a class="logo-title navbar-brand" href="#"><img src="<?= base_url('assets/assets_v2/') ?>img/logo.png" alt="logo" />REUNIR</a>
+                <a class="logo-title navbar-brand" href="<?= base_url('') ?>"><img src="<?= base_url('assets/assets_v2/') ?>img/logo.png" alt="logo" />REUNIR</a>
             </div>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,7 +89,7 @@
             <div class="collapse navbar-collapse nav-main justify-content-end" id="navbarNav">
                 <ul class="navbar-nav" id="primary-menu">
                     <li class="nav-item active">
-                        <a class="nav-link active" href="#header-section">HOME
+                        <a class="nav-link active" href="<?= base_url('') ?>#header-section">HOME
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -116,20 +117,16 @@
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="#">BLOG</a>
                     </li> -->
-                    <li class="nav-item dropdown mr-1">
+
+                    <!-- <li class="nav-item dropdown mr-1">
                         <a class="nav-link dropdown-toggle " role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             TRADING
                         </a>
                         <ul class="dropdown-menu mr-1" style="background: #1c1646;">
                             <li class="nav-item"><a class='nav-link dropdown-item' style="width: 200px" href="http://mpms.kpbladababel.com/trading">PASAR BURSA LADA</a></li>
                             <li class="nav-item"> <a class='nav-link dropdown-item' style="width: 200px" href="http://pss.kpbladababel.com">SHIPPING & LAPORAN</a></li>
-                            <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
                         </ul>
-                        <!-- <div class="dropdown-menu dropdown-menu-dark">
-                            <a class='' style="width: 200px" href="http://mpms.kpbladababel.com/trading">PASAR BURSA LADA</a>
-                            <a class='nav-link' style="width: 200px" href="http://pss.kpbladababel.com">SHIPPING & LAPORAN</a>
-                        </div> -->
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="#contact-us-section"><?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
                                                                             echo "CONTACT";
@@ -142,7 +139,7 @@
                 </ul>
             </div>
             <div class="right-side-box">
-                <a class="join-btn" href="<?=site_url('login')?>">SIM KPB</a>
+                <a class="join-btn" href="<?= site_url('login') ?>">SIM KPB</a>
             </div>
         </div>
     </nav>

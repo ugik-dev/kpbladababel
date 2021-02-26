@@ -3,17 +3,17 @@
         <div class="row">
             <div class="col-lg-7">
                 <div class="about-left">
+
                     <div class="about-text">
-                        <h5 class="about-title">WELCOME TO KPB LADA BABEL</h5>
-                        <h2 class="about-subtitle">A few words About Us</h2>
+                        <h5 class="about-title">SELAMAT DATANG DI SISTEM INFORMASI KPB LADA BABEL</h5>
+                        <h2 class="about-subtitle">Sedikit tentang kami</h2>
                         <h5 class="about-details">
-                            Services to maintain the quality and authenticity of <span> Muntok White Pepper </span>products
-                            Creating prosperous and sustainable pepper farmers with fair marketing governance.
+                            Pelayanan untuk menjaga kualitas dan keaslian produk <span> Muntok White Pepper </span>
+                            Mewujudkan petani lada yang sejahtera dan berkelanjutan dengan tata kelola pemasaran yang adil.
                         </h5>
                         <p class="about-description">
-                            </p>
+                         </p>
                     </div>
-
                     <div class="about-box">
                         <div class="row text-center">
                             <div class="col-lg-4 col-md-4 col-sm-4">
@@ -23,9 +23,9 @@
                                             <i class="ren-efficiency"></i>
                                         </div>
                                     </div>
-                                    <h3>Efficiency</h3>
+                                    <h3>EFISIENSI</h3>
                                     <div class="hover-box hover-left">
-                                        <a href="#">READ MORE<i class="ren-arrowright"></i></a>
+                                        <a href="#">BACA SELENGKAPNYA<i class="ren-arrowright"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -33,12 +33,12 @@
                                 <div class="single-about-box">
                                     <div class="icon-box-outer bg-ex">
                                         <div class="icon-box">
-                                            <i class="ren-ethereum"></i>
+                                        <i class="ren-ethereum"></i>
                                         </div>
                                     </div>
-                                    <h3>Expierence</h3>
+                                    <h3>PENGALAMAN</h3>
                                     <div class="hover-box hover-top">
-                                        <a href="#">READ MORE<i class="ren-arrowright"></i></a>
+                                        <a href="#">BACA SELENGKAPNYA<i class="ren-arrowright"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -49,9 +49,9 @@
                                             <i class="ren-security"></i>
                                         </div>
                                     </div>
-                                    <h3>Security</h3>
+                                    <h3>KEAMANAN</h3>
                                     <div class="hover-box hover-right">
-                                        <a href="#">READ MORE<i class="ren-arrowright"></i></a>
+                                        <a href="#">BACA SELENGKAPNYA<i class="ren-arrowright"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -64,9 +64,9 @@
                                             <i class="ren-transparent"></i>
                                         </div>
                                     </div>
-                                    <h3>Transparent</h3>
+                                    <h3>TRANSPARAN</h3>
                                     <div class="hover-box hover-left">
-                                        <a href="#">READ MORE<i class="ren-arrowright"></i></a>
+                                        <a href="#">BACA SELENGKAPNYA<i class="ren-arrowright"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -77,9 +77,9 @@
                                             <i class="ren-simple"></i>
                                         </div>
                                     </div>
-                                    <h3>Simple</h3>
+                                    <h3>SEDERHANA</h3>
                                     <div class="hover-box hover-bottom">
-                                        <a href="#">READ MORE<i class="ren-arrowright"></i></a>
+                                        <a href="#">BACA SELENGKAPNYA<i class="ren-arrowright"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -90,9 +90,9 @@
                                             <i class="ren-compliant"></i>
                                         </div>
                                     </div>
-                                    <h3>Compliant</h3>
+                                    <h3>F</h3>
                                     <div class="hover-box hover-right">
-                                        <a href="#">READ MORE<i class="ren-arrowright"></i></a>
+                                        <a href="#">BACA SELENGKAPNYA<i class="ren-arrowright"></i></a>
                                     </div>
                                 </div>
                             </div>

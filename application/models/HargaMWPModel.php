@@ -64,6 +64,22 @@ class HargaMWPModel extends CI_Model
     return $res->result_array();
  }
 
+ public function getLatest1()
+  {
+    $this->db->select("*");
+    $this->db->from("harga_mwp");
+    $this->db->order_by("tanggal_berlaku", "DESC");
+    $this->db->limit(1);
+    // if (!empty($filter['latest'])) $this->db->limit(1);
+    // if (!empty($filter['latest3'])) {
+    //   // $res = $this->db->get();
+    //   // return $res->result_array();
+    
+    // }
+    $res = $this->db->get();
+    return $res->result_array();
+ }
+
 
   public function add($data)
   {

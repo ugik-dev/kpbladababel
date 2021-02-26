@@ -7,18 +7,18 @@ class PublicController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("ProductModel", 'NewsModel'));
+        $this->load->model(array("ProductModel", 'NewsModel','HargaMWPModel'));
         $this->load->helper(array('DataStructure', 'Validation'));
         $this->db->db_debug = TRUE;
     }
 
     public function index()
     {
-
         $dataContent['news'] = $this->NewsModel->getAll(array('last' => '1'));
+        $dataContent['harga'] = $this->HargaMWPModel->getLatest1();
         $this->load->view('PublicPage', [
             'title' => "Home",
-            'content' => 'public/LandingPage',
+            'content' => 'publicv2/LandingPage',
             'dataContent' => $dataContent
         ]);
     }
@@ -56,9 +56,9 @@ class PublicController extends CI_Controller
 
         $data = $this->NewsModel->get($input['id_news']);
         $this->load->view('PublicPage', [
-            'title' => "News {$data['berita_judul']}",
-            'content' => 'public/DetailNewsPage',
-            "contentData" => ['id_berita' => $input['id_news']]
+            'title' => "{$data['berita_judul']}",
+            'content' => 'publicv2/SingleBlog',
+            "contentData" => $data
         ]);
     }
 }

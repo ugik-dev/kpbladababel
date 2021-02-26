@@ -28,7 +28,7 @@ class NewsModel extends CI_Model{
         $this->db->select('berita_id, berita_image, berita_judul');
         $this->db->from("tbl_berita");
         $this->db->order_by('berita_id','desc');
-        $this->db->limit('3','asc');
+        $this->db->limit('2','asc');
         if(!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
         $res = $this->db->get();
        return $res->result_array();
