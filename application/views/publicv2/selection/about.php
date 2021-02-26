@@ -90,7 +90,7 @@
                                             <i class="ren-compliant"></i>
                                         </div>
                                     </div>
-                                    <h3>Compliant</h3>
+                                    <h3>PROFESSIONAL</h3>
                                     <div class="hover-box hover-right">
                                         <a href="#">READ MORE<i class="ren-arrowright"></i></a>
                                     </div>

@@ -9,7 +9,7 @@
                         <h5 class="investment-title">INVESTMENT OFFER</h5>
                         <h2 class="investment-subtitle">Our Investment Plans</h2>
                         <p class="investment-title-describe">
-                            Reunir provides a straightforward and transparent mechanism to
+                            KPB LADA BABEL provides a straightforward and transparent mechanism to
                             attract investments and make more profits.
                         </p>
                     </div>

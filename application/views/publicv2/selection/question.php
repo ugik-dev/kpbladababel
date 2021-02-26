@@ -32,7 +32,7 @@
                                 <div class="card-header questions-card-header" id="withdrawal-headingOne">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link questions-btn-link" data-toggle="collapse" data-target="#withdrawal-collapseOne" aria-expanded="true" aria-controls="questions-pills-basic-tab">
-                                            What Are The Main Advantages Of Reunir?
+                                            What Are The Main Advantages Of KPB LADA BABEL?
                                         </button>
                                     </h5>
                                 </div>
@@ -105,7 +105,7 @@
                                 <div class="card-header questions-card-header" id="investing-headingOne">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link questions-btn-link" data-toggle="collapse" data-target="#investing-collapseOne" aria-expanded="true" aria-controls="questions-pills-basic-tab">
-                                            What Are The Main Advantages Of Reunir?
+                                            What Are The Main Advantages Of KPB LADA BABEL?
                                         </button>
                                     </h5>
                                 </div>
@@ -178,7 +178,7 @@
                                 <div class="card-header questions-card-header" id="basic-headingOne">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link questions-btn-link" data-toggle="collapse" data-target="#basic-collapseOne" aria-expanded="true" aria-controls="questions-pills-basic-tab">
-                                            What Are The Main Advantages Of Reunir?
+                                            What Are The Main Advantages Of KPB LADA BABEL?
                                         </button>
                                     </h5>
                                 </div>
@@ -251,7 +251,7 @@
                                 <div class="card-header questions-card-header" id="referral-headingOne">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link questions-btn-link" data-toggle="collapse" data-target="#referral-collapseOne" aria-expanded="true" aria-controls="questions-pills-basic-tab">
-                                            What Are The Main Advantages Of Reunir?
+                                            What Are The Main Advantages Of KPB LADA BABEL?
                                         </button>
                                     </h5>
                                 </div>

@@ -7,12 +7,22 @@
                 <div class="contact-us-text">
                     <h5 class="contact-us-title">Contact Us</h5>
                     <h2 class="contact-us-subtitle">Get in Touch</h2>
-                    <p class="contact-us-title-describe">
-                        Please feel free to contact us through our support center.
-                        Simply choose the appropriate support options to send us your
-                        questions, concerns and/or feedback.Our customer service team is
-                        ready to overcome any issues that might occur.
-                    </p>
+                    <!-- <p class="contact-us-title-describe"> -->
+                        		<h4 >
+								Kantor Pemasaran Lada Provinsi Kepulauan Babel
+							</h4>
+							<p>
+								Jl. Pulau Bangka Kompleks Perkantoran Pemprov Babel, Ruko City Hall, Blok l-10<br>
+								Kota Pangkalpinang, Provinsi Kepulauan Bangka Belitung
+								<br>
+								<i class="icofont-phone"></i>
+								(0717) 911-2105
+							</p>
+							<p>
+
+							</p>
+					
+                    <!-- </p> -->
                 </div>
             </div>
         </div>

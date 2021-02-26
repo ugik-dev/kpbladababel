@@ -28,13 +28,13 @@
 									<a href="https://www.instagram.com/kpb.ladababel/"><i class="icofont-instagram"></i></a>
 								</li>
 								<li class="social-nav">
-									<a href="#"><i class="icofont-rss"></i></a>
+									<a href="whatsapp://send?abid=082123192019&text=Send%2C%20Message%2C%20from%2C%20!"><i class="icofont-whatsapp"></i></a>
 								</li>
 							</ul>
 						</div>
 						<div class="footer-text">
-							<h5 class="footer-title">Subscribe to Reunir</h5>
-							<h2 class="footer-subtitle">To Get Exclusive benefits</h2>
+							<h5 class="footer-title">Subscribe to KPB LADA BABEL</h5>
+							<h2 class="footer-subtitle">To Get Exclusive services</h2>
 						</div>
 					</div>
 				</div>
@@ -79,10 +79,10 @@
 </footer>
 <script src="<?= base_url('assets/assets_v2/') ?>js/app.js"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/jquery-3.3.1.min.js"></script>
-  <script src="<?= base_url('assets/assets_v2/') ?>js/bootstrap.min.js"></script>
-  <script src="<?= base_url('assets/assets_v2/') ?>js/wow.min.js"></script>
-  <script src="<?= base_url('assets/assets_v2/') ?>js/magnific-popup.min.js"></script>
-  <script src="<?= base_url('assets/assets_v2/') ?>js/main.js"></script>
+<script src="<?= base_url('assets/assets_v2/') ?>js/bootstrap.min.js"></script>
+<script src="<?= base_url('assets/assets_v2/') ?>js/wow.min.js"></script>
+<script src="<?= base_url('assets/assets_v2/') ?>js/magnific-popup.min.js"></script>
+<script src="<?= base_url('assets/assets_v2/') ?>js/main.js"></script>
 <script>
 	$(document).ready(function() {
 		$('body').scrollspy({
