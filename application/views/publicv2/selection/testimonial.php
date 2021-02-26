@@ -26,7 +26,7 @@
                         </div>
                         <div class="carousel-img">
                             <div class="img-outline">
-                                <img src="<?=base_url('assets/')?>img/saparudin2.png" alt="#" />
+                                <img src="<?=base_url('assets/')?>img/saparudin.jpg" alt="#" />
                                 <!-- <img src="img/table-img2.png" alt="#" /> -->
                             </div>
                         </div>
