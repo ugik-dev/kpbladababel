@@ -1,4 +1,4 @@
-<div class="preloader" id="preloader"></div>
+<!-- <div class="preloader" id="preloader"></div> -->
 
 <?php
 
