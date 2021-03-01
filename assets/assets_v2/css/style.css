@@ -353,7 +353,7 @@ html {
 .news-setcion {
   padding-top: 50px;
   padding-bottom: 100px;
-  background-image: url(../images/paralax.png);
+  /* background-image: url(../images/paralax.png); */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;

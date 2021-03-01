@@ -80,7 +80,7 @@
     <nav id="navbar" class="navbar navbar-expand-lg navbar-light reunir-navbar">
         <div class="container">
             <div class="logo-section">
-                <a class="logo-title navbar-brand" href="<?= base_url('') ?>"><img src="<?= base_url('assets/') ?>img/logo-kpb.png" alt="logo" />KPB-LADA</a>
+                <a class="logo-title navbar-brand" href="<?= base_url('') ?>"><img src="<?= base_url('assets/') ?>img/logo-kpb-sm.png" alt="logo" />KPB-LADA</a>
             </div>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
