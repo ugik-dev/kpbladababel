@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h3 class="banner-bottom-text">
-                        Kami membantu mendistribusikan ekspor kertas ke seluruh dunia.
+                        Kami membantu mendistribusikan ekspor lada ke seluruh dunia.
 
                         </h3>
                     </div>
