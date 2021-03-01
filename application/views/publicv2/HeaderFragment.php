@@ -25,7 +25,7 @@
     <!--icofont icon css-->
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/icofont.min.css">
     <!--magnific popup css-->
-    <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/magnific-popup.css">
+    <!-- <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/magnific-popup.css"> -->
     <!--google font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/fontawesome.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/animate.css">
-    <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/magnific-popup.css">
+    <!-- <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/magnific-popup.css"> -->
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/style.css">
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url('assets/') ?>css/bootstrap.min.css" rel="stylesheet">
