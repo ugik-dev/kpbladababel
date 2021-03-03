@@ -47,18 +47,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-lg-4 col-md-6 col-sm-6 text-center">
-                        <div class="single-statics no-borders">
-                            <div class="icon-box">
-                                <i class="ren-web"></i>
-                            </div>
-                            <div class="text-box">
-                                <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                 <span class="counter">178</span>
-                                <h4>SNI 1</h4>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="col-lg-4 col-md-6 col-sm-6 text-center">
                         <div class="single-statics">
                             <div class="icon-box">
@@ -66,9 +54,10 @@
                             </div>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="counter"><?= $dataContent['harga'][0]['harga_sni1_petani'] ?></span>
-                                <h4>SNI 1</h4>
+                                <span class="counter"><?= $dataContent['harga'][0]['harga_sni2_petani'] ?></span>
+                                <h4>SNI 2</h4>
                             </div>
+                           
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 text-center">
@@ -78,8 +67,8 @@
                             </div>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="counter"><?= $dataContent['harga'][0]['harga_sni2_petani'] ?></span>
-                                <h4>SNI 2</h4>
+                                <span class="counter"><?= $dataContent['harga'][0]['harga_sni1_petani'] ?></span>
+                                <h4>SNI 1</h4>
                             </div>
                         </div>
                     </div>
