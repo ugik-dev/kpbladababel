@@ -37,7 +37,7 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
     // $this->load->view('publicv2/selection/indo/deposit');
     // $this->load->view('publicv2/selection/indo/transaction');
     // $this->load->view('publicv2/selection/indo/download');
-    $this->load->view('publicv2/selection/testimonial');
+    $this->load->view('publicv2/selection/indo/testimonial');
     $this->load->view('publicv2/selection/indo/question');
     $this->load->view('publicv2/selection/indo/signup');
     $this->load->view('publicv2/selection/indo/contact');
