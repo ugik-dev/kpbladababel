@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/fontawesome.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/animate.css">
-    <!-- <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/magnific-popup.css"> -->
+    <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/magnific-popup.css">
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/style.css">
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url('assets/') ?>css/bootstrap.min.css" rel="stylesheet">

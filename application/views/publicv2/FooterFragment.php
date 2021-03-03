@@ -78,11 +78,11 @@
 	</div>
 </footer>
 <script src="<?= base_url('assets/assets_v2/') ?>js/app.js"></script>
-<!-- <script src="<?= base_url('assets/assets_v2/') ?>js/jquery-3.3.1.min.js"></script> -->
-<!-- <script src="<?= base_url('assets/assets_v2/') ?>js/bootstrap.min.js"></script> -->
-<!-- <script src="<?= base_url('assets/assets_v2/') ?>js/wow.min.js"></script> -->
-<!-- <script src="<?= base_url('assets/assets_v2/') ?>js/magnific-popup.min.js"></script> -->
-<!-- <script src="<?= base_url('assets/assets_v2/') ?>js/main.js"></script> -->
+<script src="<?= base_url('assets/assets_v2/') ?>js/jquery-3.3.1.min.js"></script>
+<script src="<?= base_url('assets/assets_v2/') ?>js/bootstrap.min.js"></script>
+<script src="<?= base_url('assets/assets_v2/') ?>js/wow.min.js"></script>
+<script src="<?= base_url('assets/assets_v2/') ?>js/magnific-popup.min.js"></script>
+<script src="<?= base_url('assets/assets_v2/') ?>js/main.js"></script>
 <script>
 	$(document).ready(function() {
 		$('body').scrollspy({

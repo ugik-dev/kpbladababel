@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <h3 class="banner-bottom-text">
-                        Kami membantu mendistribusikan ekspor lada ke seluruh dunia.
+                            Kami membantu mendistribusikan ekspor lada ke seluruh dunia.
 
                         </h3>
                     </div>
@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="get-start">
-                            <a href="<?=site_url('create_account')?>">BERGABUNG DENGAN KAMI</a>
+                            <a href="<?= site_url('create_account') ?>">BERGABUNG DENGAN KAMI</a>
                         </div>
                     </div>
                 </div>
@@ -39,8 +39,8 @@
                             </div>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="d-none counter"><?=$dataContent['harga'][0]['harga_mq_petani']?></span>
-                                <span class="counter"><?=$dataContent['harga'][0]['harga_mq_petani']?></span>
+                                <span class="d-none counter"><?= $dataContent['harga'][0]['harga_mq_petani'] ?></span>
+                                <span class="counter"><?= $dataContent['harga'][0]['harga_mq_petani'] ?></span>
                                 <h4>MQ Quality</h4>
                             </div>
                         </div>
@@ -64,8 +64,9 @@
                             </div>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="counter"><?=$dataContent['harga'][0]['harga_sni1_petani']?></span>
-                                <h4>SNI 1</h4>
+
+                                <span class="counter"><?= $dataContent['harga'][0]['harga_sni2_petani'] ?></span>
+                                <h4>SNI 2</h4>
                             </div>
                         </div>
                     </div>
@@ -76,8 +77,8 @@
                             </div>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="counter"><?=$dataContent['harga'][0]['harga_sni2_petani']?></span>
-                                <h4>SNI 2</h4>
+                                <span class="counter"><?= $dataContent['harga'][0]['harga_sni1_petani'] ?></span>
+                                <h4>SNI 1</h4>
                             </div>
                         </div>
                     </div>
