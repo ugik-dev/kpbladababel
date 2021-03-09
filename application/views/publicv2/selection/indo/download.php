@@ -1,6 +1,5 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
-<script src="<?= base_url('assets/assets_v2/js/Chart.min.js') ?>"></script>
-<script src="<?= base_url('assets/assets_v2/js/utils.js') ?>"></script>
+
 <!-- download section begin -->
 <section class="download-section">
     <div class="container">

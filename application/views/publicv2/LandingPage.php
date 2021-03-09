@@ -47,36 +47,6 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 
 <script>
     $(document).ready(function() {
-        // var HargaMWPTable = $('#HargaMWPTable').DataTable({
-        //     'columnDefs': [{
-        //         targets: [0, 1, 2],
-        //         className: 'text-center'
-        //     }],
-        //     deferRender: true,
-        //     "ordering": false,
-        //     "dom": "t"
-        // });
-
-        // var HargaMWPTable2 = $('#HargaMWPTable2').DataTable({
-        //     'columnDefs': [{
-        //         targets: [0, 1, 2, 3],
-        //         className: 'text-center'
-        //     }],
-        //     deferRender: true,
-        //     "ordering": false,
-        //     "dom": "t"
-        // });
-
-
-        // var StandarMutuTable = $('#StandarMutuTable').DataTable({
-        //     'columnDefs': [{
-        //         targets: [0, 1, 2],
-        //         className: 'text-center'
-        //     }],
-        //     deferRender: true,
-        //     "ordering": false,
-        //     "dom": "t"
-        // });
 
         var month = new Array();
         month[0] = "Jan";
@@ -91,7 +61,6 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
         month[9] = "Oct";
         month[10] = "Nov";
         month[11] = "Dec";
-        // console.log(n)
 
         getLatestHargaMWP();
 
@@ -133,21 +102,16 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
                     mq[i] = dx['harga_mq_petani']
                 sni1[i] = dx['harga_sni1_petani']
                 sni2[i] = dx['harga_sni2_petani']
-                // bn1=$('#banner_sni1')
-                // document.getElementById("banner_sni1").innerHTML = "Paragraph changed!";
-                // document.getElementById("banner_sni1").innerHTML = "Paragraph changed!";
                 if (i == 0) {
                     document.getElementById("banner_sni1").innerHTML =  dx['harga_sni1_petani'];
                     document.getElementById("banner_sni2").innerHTML =  dx['harga_sni2_petani'];
                     document.getElementById("banner_mq").innerHTML =  dx['harga_mq_petani'];
                     document.getElementById("banner_mq_none").innerHTML =  dx['harga_mq_petani'];
-                } // bn1.html(3)
-
+                } 
                 i++
             });
-            console.log(mq)
-            callmainme();
-
+            // console.log(mq)
+            
             var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             var config = {
                 type: 'line',
@@ -202,11 +166,14 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
                     }
                 }
             };
+            console.log(config)
 
-            window.onload = function() {
+            // window.onload = function() {
                 var ctx = document.getElementById('canvas').getContext('2d');
                 window.myLine = new Chart(ctx, config);
-            };
+            // };
+
+            callmainme();
 
         }
 
