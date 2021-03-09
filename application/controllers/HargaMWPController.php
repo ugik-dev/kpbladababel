@@ -28,6 +28,16 @@ class HargaMWPController extends CI_Controller {
     }
   }
 
+  
+  public function getLatestPrice(){
+    try{
+      $data = $this->HargaMWPModel->getLatestPrice($this->input->get());
+			echo json_encode(array("data" => $data));
+    } catch (Exception $e){
+      ExceptionHandler::handle($e);
+    }
+  }
+
   public function getLatest3(){
     try{
       $data = $this->HargaMWPModel->getLatest3();

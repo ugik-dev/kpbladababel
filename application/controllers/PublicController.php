@@ -14,12 +14,10 @@ class PublicController extends CI_Controller
 
     public function index()
     {
-        $dataContent['news'] = $this->NewsModel->getAll(array('last' => '1'));
-        $dataContent['harga'] = $this->HargaMWPModel->getLatest1();
         $this->load->view('PublicPage', [
             'title' => "Home",
             'content' => 'publicv2/LandingPage',
-            'dataContent' => $dataContent
+            // 'dataContent' => $dataContent
         ]);
     }
 

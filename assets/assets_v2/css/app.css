@@ -98,7 +98,7 @@
 .ren-google-play:before {
 	content: "a";
 }
-.ren-icon 3:before {
+.ren-icon :before {
 	content: "b";
 }
 .ren-income-report:before {
@@ -11074,7 +11074,7 @@ html {
 }
 .download-section {
 	position: relative;
-	margin-top: 15.375rem;
+	margin-top: 7rem;
 	margin-bottom: 7.5rem;
 }
 .download-section .download-text .download-title {

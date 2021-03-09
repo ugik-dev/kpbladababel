@@ -40,7 +40,7 @@ class UserController extends CI_Controller
 	public function loginProcess()
 	{
 		try {
-			// $this->SecurityModel->guestOnlyGuard(TRUE);
+			$this->SecurityModel->guestOnlyGuard(TRUE);
 			Validation::ajaxValidateForm($this->SecurityModel->loginValidation());
 
 			$loginData = $this->input->post();
@@ -57,13 +57,13 @@ class UserController extends CI_Controller
 	public function registerProcess()
 	{
 		try {
-			// $this->SecurityModel->guestOnlyGuard(TRUE);
-			Validation::ajaxValidateForm($this->SecurityModel->loginValidation());
+			$this->SecurityModel->guestOnlyGuard(TRUE);
+			// Validation::ajaxValidateForm($this->SecurityModel->loginValidation());
 
 			$data = $this->input->post();
 
 			$data = $this->UserModel->registerUser($data);
-			$this->email_send($data, 'registr');
+			// $this->email_send($data, 'registr');
 			echo json_encode(array("error" => FALSE, "user" => 'success'));
 		} catch (Exception $e) {
 			ExceptionHandler::handle($e);

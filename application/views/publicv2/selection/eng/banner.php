@@ -41,9 +41,9 @@
                             ?>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="d-none counter"><?= $dataContent['harga'][0]['harga_mq_petani'] ?></span>
-                                <span class="counter"><?= $dataContent['harga'][0]['harga_mq_petani'] ?></span>
-                                <h4>MQ Quality</h4>
+                                <span class="d-none counter" id="banner_mq_none"></span>
+                                <span class="counter" id="banner_mq"></span>
+                                <h4>Mixed Quality</h4>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="counter"><?= $dataContent['harga'][0]['harga_sni2_petani'] ?></span>
+                                <span class="counter" id="banner_sni2"></span>
                                 <h4>SNI 2</h4>
                             </div>
                            
@@ -67,7 +67,7 @@
                             </div>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="counter"><?= $dataContent['harga'][0]['harga_sni1_petani'] ?></span>
+                                <span class="counter" id="banner_sni1">></span>
                                 <h4>SNI 1</h4>
                             </div>
                         </div>

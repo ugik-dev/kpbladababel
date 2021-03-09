@@ -1,3 +1,4 @@
+function callmainme(){
 !(function (e) {
 	var t = {};
 	function n(i) {
@@ -15912,3 +15913,4 @@
 		e.exports = n;
 	},
 });
+}

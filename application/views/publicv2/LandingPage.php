@@ -7,6 +7,7 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 
     $this->load->view('publicv2/selection/eng/banner');
     $this->load->view('publicv2/selection/eng/calculate');
+    $this->load->view('publicv2/selection/eng/download');
     $this->load->view('publicv2/selection/eng/about');
     $this->load->view('publicv2/selection/eng/news');
     // $this->load->view('publicv2/selection/eng/tabmutu');
@@ -17,7 +18,6 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
     $this->load->view('publicv2/selection/eng/referral');
     // $this->load->view('publicv2/selection/eng/deposit');
     // $this->load->view('publicv2/selection/eng/transaction');
-    // $this->load->view('publicv2/selection/eng/download');
     $this->load->view('publicv2/selection/eng/testimonial');
     $this->load->view('publicv2/selection/eng/question');
     $this->load->view('publicv2/selection/eng/signup');
@@ -26,6 +26,7 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 
     $this->load->view('publicv2/selection/indo/banner');
     $this->load->view('publicv2/selection/indo/calculate');
+    $this->load->view('publicv2/selection/indo/download');
     $this->load->view('publicv2/selection/indo/about');
     $this->load->view('publicv2/selection/indo/news');
     // $this->load->view('publicv2/selection/indo/tabmutu');
@@ -36,7 +37,6 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
     $this->load->view('publicv2/selection/indo/referral');
     // $this->load->view('publicv2/selection/indo/deposit');
     // $this->load->view('publicv2/selection/indo/transaction');
-    // $this->load->view('publicv2/selection/indo/download');
     $this->load->view('publicv2/selection/indo/testimonial');
     $this->load->view('publicv2/selection/indo/question');
     $this->load->view('publicv2/selection/indo/signup');
@@ -45,126 +45,194 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 ?>
 
 
-<!-- <script>
+<script>
     $(document).ready(function() {
-        var lang = <?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
-                        echo "'en'";
-                    } else {
-                        echo "'in'";
-                    } ?>;
-        var product_list = $('#product-list');
-        var news_list = $('#news-list');
-        var current_date = $('#current_date');
-        //	<li><a class="nav-link page-scroll" href="#partners">Partners</a></li>
+        // var HargaMWPTable = $('#HargaMWPTable').DataTable({
+        //     'columnDefs': [{
+        //         targets: [0, 1, 2],
+        //         className: 'text-center'
+        //     }],
+        //     deferRender: true,
+        //     "ordering": false,
+        //     "dom": "t"
+        // });
 
-        current_date.html(new Date().toLocaleDateString());
-        var dataProduct = {}
-        var dataNews = {}
-
-        initNavbar(200);
-        $.when(getLatestHargaMWP(), getStandarMutu(), getAllProduct(), getAllNews()).then((e) => {}).fail((e) => {
-            console.log(e)
-        });
-
-        var HargaMWPTable = $('#HargaMWPTable').DataTable({
-            'columnDefs': [{
-                targets: [0, 1, 2],
-                className: 'text-center'
-            }],
-            deferRender: true,
-            "ordering": false,
-            "dom": "t"
-        });
-
-        var HargaMWPTable2 = $('#HargaMWPTable2').DataTable({
-            'columnDefs': [{
-                targets: [0, 1, 2, 3],
-                className: 'text-center'
-            }],
-            deferRender: true,
-            "ordering": false,
-            "dom": "t"
-        });
+        // var HargaMWPTable2 = $('#HargaMWPTable2').DataTable({
+        //     'columnDefs': [{
+        //         targets: [0, 1, 2, 3],
+        //         className: 'text-center'
+        //     }],
+        //     deferRender: true,
+        //     "ordering": false,
+        //     "dom": "t"
+        // });
 
 
-        var StandarMutuTable = $('#StandarMutuTable').DataTable({
-            'columnDefs': [{
-                targets: [0, 1, 2],
-                className: 'text-center'
-            }],
-            deferRender: true,
-            "ordering": false,
-            "dom": "t"
-        });
+        // var StandarMutuTable = $('#StandarMutuTable').DataTable({
+        //     'columnDefs': [{
+        //         targets: [0, 1, 2],
+        //         className: 'text-center'
+        //     }],
+        //     deferRender: true,
+        //     "ordering": false,
+        //     "dom": "t"
+        // });
+
+        var month = new Array();
+        month[0] = "Jan";
+        month[1] = "Feb";
+        month[2] = "Mar";
+        month[3] = "Apr";
+        month[4] = "May";
+        month[5] = "Jun";
+        month[6] = "Jul";
+        month[7] = "Ags";
+        month[8] = "Sep";
+        month[9] = "Oct";
+        month[10] = "Nov";
+        month[11] = "Dec";
+        // console.log(n)
+
+        getLatestHargaMWP();
 
         function getLatestHargaMWP() {
-            swal({
-                title: 'Loading harga_mwp...',
-                allowOutsideClick: false
-            });
-            swal.showLoading();
             return $.ajax({
-                url: `<?php echo site_url('HargaMWPController/getLatest3/') ?>`,
+                url: `<?php echo site_url('HargaMWPController/getLatestPrice/') ?>`,
                 'type': 'GET',
-                data: {},
+                data: {
+                    limit: 5
+                },
                 success: function(data) {
-                    swal.close();
+                    // swal.close();
                     var json = JSON.parse(data);
                     if (json['error']) {
                         return;
                     }
                     dataHargaMWP = json['data'];
-                    renderHargaMWP2(dataHargaMWP);
+                    renderChart(dataHargaMWP);
                 },
                 error: function(e) {}
             });
         }
 
-        function getLatestHargaMWP2() {
-            swal({
-                title: 'Loading harga_mwp...',
-                allowOutsideClick: false
+
+
+        function renderChart(data) {
+            i = 0;
+            lab = [];
+            mq = [];
+            sni1 = [];
+            sni2 = [];
+            Object.values(data).forEach((dx) => {
+                var d = new Date(dx['tanggal_berlaku']);
+                var n = month[d.getMonth()];
+                var day = d.getDay();
+                var y = d.getFullYear().toString().substr(-2)
+
+                lab[i] = day + ' ' + n + ' ' + y,
+                    mq[i] = dx['harga_mq_petani']
+                sni1[i] = dx['harga_sni1_petani']
+                sni2[i] = dx['harga_sni2_petani']
+                // bn1=$('#banner_sni1')
+                // document.getElementById("banner_sni1").innerHTML = "Paragraph changed!";
+                // document.getElementById("banner_sni1").innerHTML = "Paragraph changed!";
+                if (i == 0) {
+                    document.getElementById("banner_sni1").innerHTML =  dx['harga_sni1_petani'];
+                    document.getElementById("banner_sni2").innerHTML =  dx['harga_sni2_petani'];
+                    document.getElementById("banner_mq").innerHTML =  dx['harga_mq_petani'];
+                    document.getElementById("banner_mq_none").innerHTML =  dx['harga_mq_petani'];
+                } // bn1.html(3)
+
+                i++
             });
-            swal.showLoading();
-            return $.ajax({
-                url: `<?php echo site_url('HargaMWPController/getLatest3/') ?>`,
-                'type': 'GET',
-                data: {},
-                success: function(data) {
-                    swal.close();
-                    var json = JSON.parse(data);
-                    if (json['error']) {
-                        return;
-                    }
-                    dataHargaMWP2 = json['data'];
-                    renderHargaMWP2(dataHargaMWP2);
+            console.log(mq)
+            callmainme();
+
+            var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            var config = {
+                type: 'line',
+                data: {
+                    labels: lab,
+                    datasets: [{
+                        label: 'MQ',
+                        backgroundColor: window.chartColors.red,
+                        borderColor: window.chartColors.red,
+                        data: mq,
+                        fill: false,
+                    }, {
+                        label: 'SNI 2',
+                        fill: false,
+                        backgroundColor: window.chartColors.blue,
+                        borderColor: window.chartColors.blue,
+                        data: sni2,
+                    }, {
+                        label: 'SNI 1',
+                        fill: false,
+                        backgroundColor: window.chartColors.green,
+                        borderColor: window.chartColors.green,
+                        data: sni1,
+                    }]
                 },
-                error: function(e) {}
-            });
+                options: {
+                    responsive: true,
+
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: false,
+                                labelString: 'Month'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Rupiah'
+                            }
+                        }]
+                    }
+                }
+            };
+
+            window.onload = function() {
+                var ctx = document.getElementById('canvas').getContext('2d');
+                window.myLine = new Chart(ctx, config);
+            };
+
         }
 
-        function getStandarMutu() {
-            swal({
-                title: 'Loading standar_mutu...',
-                allowOutsideClick: false
-            });
-            swal.showLoading();
-            return $.ajax({
-                url: `<?php echo site_url('HargaMWPController/getStandarMutu/') ?>`,
-                'type': 'GET',
-                data: {},
-                success: function(data) {
-                    swal.close();
-                    var json = JSON.parse(data);
-                    if (json['error']) {
-                        return;
-                    }
-                    dataStandarMutu = json['data'];
-                    renderStandarMutu(dataStandarMutu);
-                },
-                error: function(e) {}
-            });
-        }
+
+        // function getStandarMutu() {
+        //     swal({
+        //         title: 'Loading standar_mutu...',
+        //         allowOutsideClick: false
+        //     });
+        //     swal.showLoading();
+        //     return $.ajax({
+        //         url: `<?php echo site_url('HargaMWPController/getStandarMutu/') ?>`,
+        //         'type': 'GET',
+        //         data: {},
+        //         success: function(data) {
+        //             swal.close();
+        //             var json = JSON.parse(data);
+        //             if (json['error']) {
+        //                 return;
+        //             }
+        //             dataStandarMutu = json['data'];
+        //             renderStandarMutu(dataStandarMutu);
+        //         },
+        //         error: function(e) {}
+        //     });
+        // }
 
 
         function renderHargaMWP(data) {
@@ -235,21 +303,18 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 
             StandarMutuTable.clear().rows.add(renderData).draw('full-hold');
         }
+        getAllNews();
 
         function getAllNews() {
-            swal({
-                title: 'Loading product...',
-                allowOutsideClick: false
-            });
-            swal.showLoading();
             return $.ajax({
                 url: `<?php echo site_url('NewsController/getAll/') ?>`,
                 'type': 'GET',
                 data: {
-                    featured: true
+                    // featured: true
+                    'last': '1',
                 },
                 success: function(data) {
-                    swal.close();
+                    // swal.close();
                     var json = JSON.parse(data);
                     if (json['error']) {
                         return;
@@ -267,43 +332,50 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
                 return;
             }
             var i = 0;
+            news_list = $('#news_canvas')
             news_list.empty();
-             // console.log(data);
+            // console.log(data);
             Object.values(data).forEach((news) => {
-                if (i < 2) {
-                    var panjang = news['berita_isi'];
-                    // var p = panjang.substring(0, 1200);
-                    var index_p = panjang.lastIndexOf("</p>", 1200);
-                    p = panjang.substring(0, index_p);
+                if (i % 2 == 0) {
                     news_list.append(`
-        <div class="col-sm-12">
-          <div class="ibox product-box">
-          <div class="card">
-            <div class="card-header" style="cursor:pointer" onclick="location.href='<?= site_url('newsx?id_news='); ?>${news['berita_id']}'">
-              <h5>${news['berita_judul']}</h5>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-3 ibox-content">
-                  <img src="<?= base_url('assets/img/news/') ?>${news['berita_image']}" class="img-fluid img-thumbnail" alt="...">
-                </div>
-                <div class="col-sm-9 ibox-content">
-                  <p class="card-text">
-                    ${p}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-          </div>
-        
-      `);
-                    i++;
+                    <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
+                        <div class="section-title wow fadeInLeft">
+                            <!-- <h4 class="subtitle">KPB Lada Babel Adakan Webinar Internasional dengan Tema “International Marketing Strategy of Muntok White Pepper Through Commodity Physical Market”</h4> -->
+                            <h2 class="title">${news['berita_judul']}</h2>
+                        </div>
+                    </div><!-- demo-single end -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="demo-single demo-single--height2">
+                            <div class="thumb wow fadeInRight">
+                                <img src="<?= base_url('assets/img/news/') ?>${news['berita_image']}" style="max-height:15rem" alt="demo-image">
+                                <a href="<?= site_url() . 'newsx?id_news=' ?>${news['berita_id']}" target="_blank" class="view-btn">News View</a>
+                            </div>
+                            <!-- <h4 class="caption"><a href="Reunir/index-animated-text.html">Home Animated Text</a></h4> -->
+                        </div>
+                    </div>  
+                    `);
+                } else {
+                    news_list.append(`
+                    <div class="col-lg-6 col-md-6">
+                        <div class="demo-single demo-single--height2  wow fadeInLeft">
+                            <div class="thumb">
+                            <img src="<?= base_url('assets/img/news/') ?>${news['berita_image']}" style="max-height:15rem" alt="demo-image">
+                                <a href="<?= site_url() . 'newsx?id_news=' ?>${news['berita_id']}" target="_blank" class="view-btn">News View</a>
+                            </div>
+                            <!-- <h4 class="caption"><a href="Reunir/index-video.html" target="_blank">Home Video</a></h4> -->
+                        </div>
+                    </div><!-- demo-single end -->
+                    <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
+                        <div class="section-title  wow fadeInRight">
+                            <h2 class="title">${news['berita_judul']}</h2>
+                        </div>
+                    </div><!-- demo-single end -->
+                    `);
                 }
+
+                i++;
             });
         }
-
 
         function getAllProduct() {
             swal({
@@ -360,4 +432,4 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 
 
     });
-</script> -->
+</script>
