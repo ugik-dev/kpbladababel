@@ -737,6 +737,7 @@ class PengirimanController extends CI_Controller
     $serv = $this->PengirimanModel->getEmailConfig();
     var_dump($serv);
   }
+
   public function email_send($data)
   {
     // $email = $registerData['email'];

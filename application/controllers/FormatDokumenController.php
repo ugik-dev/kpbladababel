@@ -1832,7 +1832,7 @@ class FormatDokumenController extends CI_Controller
       $textrun->addText('Deki Susanto ST', 'paragraph');
       $textrun->addTextBreak();
 
-     
+
       // Test Result
       $section = $phpWord->addSection(array(
         'marginLeft' => 1200, 'marginRight' => 600,
@@ -1856,7 +1856,7 @@ class FormatDokumenController extends CI_Controller
 
       $table->addRow();
       $table->addCell(400, $cellVCentered)->addText('No.', 'paragraph_bold', $noSpace_center);
-      $table->addCell(3000, $cellVCentered)->addText('Caracteristic', 'paragraph_bold', $noSpace_center);
+      $table->addCell(3000, $cellVCentered)->addText('Characteristic', 'paragraph_bold', $noSpace_center);
       $table->addCell(2000, $cellVCentered)->addText('Unit', 'paragraph_bold', $noSpace_center);
       $table->addCell(2000, $cellVCentered)->addText('Grade II Limit', 'paragraph_bold', $noSpace_center);
       $table->addCell(3000, $cellVCentered)->addText('Mean Test Result', 'paragraph_bold', $noSpace_center);
@@ -1869,7 +1869,7 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(null, $cellVCentered)->addText('Free from living and dead insects, also free from insects fragments.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Free from living and dead insects, also free from insects fragments.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.5.1', 'paragraph', $noSpace_center);
-     
+
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('2.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Bulk Density', 'paragraph', $noSpace);
@@ -1877,7 +1877,7 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(null, $cellVCentered)->addText('Min. 600', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('665', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.1', 'paragraph', $noSpace_center);
-     
+
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('3.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Extraneius matter, (w/w) max', 'paragraph', $noSpace);
@@ -1888,12 +1888,12 @@ class FormatDokumenController extends CI_Controller
 
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('4.', 'paragraph', $noSpace_center);
-      $table->addCell(null, $cellVCentered)->addText('Light barries, (w/w) max', 'paragraph', $noSpace);
+      $table->addCell(null, $cellVCentered)->addText('Light berries, (w/w) max', 'paragraph', $noSpace);
       $table->addCell(null, $cellVCentered)->addText('%', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('2,0', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('0,2', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.7.2.3', 'paragraph', $noSpace_center);
-      
+
       $table->addRow();
       $table->addCell(null, $cellVCentered)->addText('5.', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('Mouldy barries, (w/w) max', 'paragraph', $noSpace);
@@ -1949,7 +1949,7 @@ class FormatDokumenController extends CI_Controller
       $table->addCell(null, $cellVCentered)->addText('As the test result', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('2,4', 'paragraph', $noSpace_center);
       $table->addCell(null, $cellVCentered)->addText('SNI. 0004;2013.10.3', 'paragraph', $noSpace_center);
-      
+
       // Detail Report
       $section = $phpWord->addSection(array(
         'marginLeft' => 1200, 'marginRight' => 600,

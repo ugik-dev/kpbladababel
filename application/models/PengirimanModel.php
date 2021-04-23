@@ -45,14 +45,14 @@ class PengirimanModel extends CI_Model
     if (!empty($filter['tahun'])) $this->db->where('YEAR(eks.created_at)', $filter['tahun']);
     if (!empty($filter['status_proposal'])) $this->db->where('eks.status_proposal', $filter['status_proposal']);
     if (!empty($filter['sampel'])) $this->db->where('eks.id_tahap_proposal', '4');
-    if (!empty($filter['exstatus_proposal'])) $this->db->where("eks.status_proposal <> '".  $filter['exstatus_proposal']."'");
-    if (!empty($filter['bulan_laporan'])){
-      if (empty($filter['tahun_laporan']))throw new UserException("Masukkan Tahun", USER_NOT_FOUND_CODE);
- 
-      $fils = $filter['tahun_laporan'].'_'.$filter['bulan_laporan'];
-      $this->db->where('eks.date_kpb like "'.$fils.'%"');
+    if (!empty($filter['exstatus_proposal'])) $this->db->where("eks.status_proposal <> '" .  $filter['exstatus_proposal'] . "'");
+    if (!empty($filter['bulan_laporan'])) {
+      if (empty($filter['tahun_laporan'])) throw new UserException("Masukkan Tahun", USER_NOT_FOUND_CODE);
+
+      $fils = $filter['tahun_laporan'] . '_' . $filter['bulan_laporan'];
+      $this->db->where('eks.date_kpb like "' . $fils . '%"');
     }
-    
+
     if (!empty($filter['status_kpb_rek'])) $this->db->where('eks.status_kpb_rek', $filter['status_kpb_rek']);
     if (!empty($filter['status_kpb_rek_not'])) $this->db->where('eks.status_kpb_rek !=', $filter['status_kpb_rek_not']);
 
@@ -125,7 +125,7 @@ class PengirimanModel extends CI_Model
       $this->db->set('status_proposal', 'DITERIMA');
       $this->db->set('date_kpb_acc', $date);
       $this->db->set('id_tahap_proposal', 99);
-      $this->db->update('pengiriman', DataStructure::slice($data, ['status_kpb_rek', 'status_bp3l_rek', 'catatan_kpb_rek','dokumen_kpb_rek'], TRUE));
+      $this->db->update('pengiriman', DataStructure::slice($data, ['status_kpb_rek', 'status_bp3l_rek', 'catatan_kpb_rek', 'dokumen_kpb_rek'], TRUE));
     } else if ($data['status_kpb_rek'] == 'DITOLAK') {
       $this->db->set('status_proposal', 'DITOLAK');
       $this->db->set('date_kpb', $date);
@@ -236,8 +236,8 @@ class PengirimanModel extends CI_Model
 
   public function re_upload($data)
   {
-    $data[$data['parm']] = 
-    $this->db->set($data['parm'], $data['filename']);
+    $data[$data['parm']] =
+      $this->db->set($data['parm'], $data['filename']);
     $this->db->where('id_pengiriman', $data['id_pengiriman']);
     $this->db->update('pengiriman', DataStructure::slice($data, ['catatan_kpb_rek'], TRUE));
     ExceptionHandler::handleDBError($this->db->error(), "Upload Gagal!!", "pengiriman");
@@ -246,7 +246,7 @@ class PengirimanModel extends CI_Model
 
   public function upload_manifest($data)
   {
-  
+
     // $this->db->set($data['parm'], $data['filename']);
     $this->db->where('id_pengiriman', $data['id_pengiriman']);
     $this->db->update('pengiriman', DataStructure::slice($data, ['dokumen_manifest'], TRUE));
@@ -281,9 +281,6 @@ class PengirimanModel extends CI_Model
     $this->db->select('*');
     $this->db->from('config_email');
     $res = $this->db->get();
-    // $res = $res->result_array();
-    // var_dump($res);
-    // return $res;
     return DataStructure::keyValue($res->result_array(), 'type');
   }
 

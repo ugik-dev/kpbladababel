@@ -1,4 +1,21 @@
 <footer class="footer-section">
+	<div id="WAButton"></div>
+	<script type="text/javascript">
+		$(function() {
+			$('#WAButton').floatingWhatsApp({
+				phone: '+628127123225', //WhatsApp Business phone number
+				headerTitle: 'Chat with us on WhatsApp!', //Popup Title
+				message: "Nama : \nNIK : \nAlamat : \n\n Pertanyaan / Keluhan : ",
+				//  popupMessage: 'Nama : \nNIK:', //Popup Message
+				showPopup: true, //Enables popup display
+				buttonImage: '<img src="<?= base_url('assets/img/') ?>whatsapp.svg" />', //Button Image
+				//headerColor: 'crimson', //Custom header color
+				//backgroundColor: 'crimson', //Custom background button color
+				position: "right" //Position: left | right
+
+			});
+		});
+	</script>
 	<div class="overlay">
 		<div class="waveWrapper waveAnimation">
 			<div class="waveWrapperInner bgTop">
@@ -77,6 +94,7 @@
 		</div>
 	</div>
 </footer>
+
 <script src="<?= base_url('assets/assets_v2/') ?>js/app.js"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/jquery-3.3.1.min.js"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/bootstrap.min.js"></script>
