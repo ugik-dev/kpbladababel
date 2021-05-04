@@ -7,17 +7,21 @@ class PublicController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("ProductModel", 'NewsModel','HargaMWPModel'));
+        $this->load->model(array("ProductModel", 'NewsModel', 'HargaMWPModel'));
         $this->load->helper(array('DataStructure', 'Validation'));
         $this->db->db_debug = TRUE;
     }
 
     public function index()
     {
+        $dataContent['pricing'] = $this->HargaMWPModel->getLatestPrice(array('limit' => '10'));
+
+        // var_dump($pricing);
+        // die();
         $this->load->view('PublicPage', [
             'title' => "Home",
             'content' => 'publicv2/LandingPage',
-            // 'dataContent' => $dataContent
+            'dataContent' => $dataContent
         ]);
     }
 

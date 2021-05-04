@@ -1,21 +1,5 @@
 <footer class="footer-section">
-	<div id="WAButton"></div>
-	<script type="text/javascript">
-		$(function() {
-			$('#WAButton').floatingWhatsApp({
-				phone: '+628127123225', //WhatsApp Business phone number
-				headerTitle: 'Chat with us on WhatsApp!', //Popup Title
-				message: "Nama : \nNIK : \nAlamat : \n\n Pertanyaan / Keluhan : ",
-				//  popupMessage: 'Nama : \nNIK:', //Popup Message
-				showPopup: true, //Enables popup display
-				buttonImage: '<img src="<?= base_url('assets/img/') ?>whatsapp.svg" />', //Button Image
-				//headerColor: 'crimson', //Custom header color
-				//backgroundColor: 'crimson', //Custom background button color
-				position: "right" //Position: left | right
 
-			});
-		});
-	</script>
 	<div class="overlay">
 		<div class="waveWrapper waveAnimation">
 			<div class="waveWrapperInner bgTop">
@@ -101,6 +85,22 @@
 <script src="<?= base_url('assets/assets_v2/') ?>js/wow.min.js"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/magnific-popup.min.js"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/main.js"></script>
+<!-- <script type="text/javascript">
+	$(function() {
+		$('#WAButton').floatingWhatsApp({
+			phone: '+628127123225', //WhatsApp Business phone number
+			headerTitle: 'Chat with us on WhatsApp!', //Popup Title
+			message: "Nama : \nNIK : \nAlamat : \n\n Pertanyaan / Keluhan : ",
+			//  popupMessage: 'Nama : \nNIK:', //Popup Message
+			showPopup: true, //Enables popup display
+			buttonImage: '<img src="<?= base_url('assets/img/') ?>whatsapp.svg" />', //Button Image
+			//headerColor: 'crimson', //Custom header color
+			//backgroundColor: 'crimson', //Custom background button color
+			position: "right" //Position: left | right
+
+		});
+	});
+</script> -->
 <script>
 	$(document).ready(function() {
 		$('body').scrollspy({

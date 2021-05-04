@@ -39,7 +39,7 @@
                             </div>
                             <div class="text-box">
                                 <span style="font-size:2rem; color:white ; font-weight:bold ">Rp. </span>
-                                <span class="d-none counter"id="banner_mq_none"></span>
+                                <span class="d-none counter" id="banner_mq_none"></span>
                                 <span class="counter" id="banner_mq"></span>
                                 <h4>Mixed Quality</h4>
                             </div>

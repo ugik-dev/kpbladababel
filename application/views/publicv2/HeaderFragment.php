@@ -20,22 +20,28 @@
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="theme-color" content="#ffffff">
 
-   <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/icofont.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/icofont.min.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/app.css">
+
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/fontawesome.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/animate.css">
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/magnific-popup.css">
     <link rel="stylesheet" href="<?= base_url('assets/assets_v2/') ?>css/style.css">
-    <link href="<?= base_url('assets/assets_v2/') ?>css/floating-wpp.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
+    <!-- <link href="<?= base_url('assets/assets_v2/') ?>css/floating-wpp.css" rel="stylesheet"> -->
     <link href="<?= base_url('assets/') ?>css/bootstrap.min.css" rel="stylesheet">
+    <!-- <script src="<?= base_url('assets/assets_v2/') ?>js/floating-wpp.js"></script> -->
+
     <script src="<?= base_url('assets/') ?>js/jquery-3.1.1.min.js"></script>
-    <script src="<?= base_url('assets/assets_v2/') ?>js/floating-wpp.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
     <script src="<?= base_url('assets/assets_v2/js/Chart.min.js') ?>"></script>
     <script src="<?= base_url('assets/assets_v2/js/utils.js') ?>"></script>
-  
+
+
+
 </head>
 
 <body id="page-top" class="landing-page no-skin-config">

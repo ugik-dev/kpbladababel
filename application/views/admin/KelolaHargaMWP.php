@@ -60,20 +60,20 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="harga_mq_petani">MQ Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mq_petani" name="harga_mq_petani" >
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_mq_petani" name="harga_mq_petani">
               </div>
             </div>
-            
+
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="d_harga_mq_petani">MQ Petani (USD)</label>
-                <input type="number" min="0" step="0.001" placeholder="0" class="form-control" id="d_harga_mq_petani" name="d_harga_mq_petani" >
+                <input type="number" min="0" step="0.001" placeholder="0" class="form-control" id="d_harga_mq_petani" name="d_harga_mq_petani">
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="harga_sni1_petani">SNI1 Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_sni1_petani" name="harga_sni1_petani" >
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_sni1_petani" name="harga_sni1_petani">
               </div>
             </div>
             <!-- <div class="col-sm-3">
@@ -85,7 +85,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="d_harga_sni1_petani">SNI1 Petani (USD)</label>
-                <input type="number" min="0" step="0.001" placeholder="0" class="form-control" id="d_harga_sni1_petani" name="d_harga_sni1_petani" >
+                <input type="number" min="0" step="0.001" placeholder="0" class="form-control" id="d_harga_sni1_petani" name="d_harga_sni1_petani">
               </div>
             </div>
             <!-- <div class="col-sm-3">
@@ -98,7 +98,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="harga_sni2_petani">SNI2 Petani (Rp)</label>
-                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_sni2_petani" name="harga_sni2_petani" >
+                <input type="number" min="0" step="1" placeholder="0" class="form-control" id="harga_sni2_petani" name="harga_sni2_petani">
               </div>
             </div>
             <!-- <div class="col-sm-3">
@@ -110,7 +110,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="d_harga_sni2_petani">SNI2 Petani (USD)</label>
-                <input type="number" min="0" step="0.001" placeholder="0" class="form-control" id="d_harga_sni2_petani" name="d_harga_sni2_petani" >
+                <input type="number" min="0" step="0.001" placeholder="0" class="form-control" id="d_harga_sni2_petani" name="d_harga_sni2_petani">
               </div>
             </div>
             <!-- <div class="col-sm-3">
@@ -119,7 +119,7 @@
                 <input type="number" min="0" step="1" placeholder="0" class="form-control" id="d_harga_sni2_fob" name="d_harga_sni2_fob" >
               </div>
             </div> -->
-<!--          
+            <!--          
             <div class="col-sm-3">
               <div class="form-group">
                 <label for="harga_mwp1_petani">MWP1 Petani (Rp)</label>
@@ -271,8 +271,8 @@
 
           </div> -->
 
-          <button class="btn btn-success my-1 mr-sm-2" type="submit" id="add_btn" data-loading-text="Loading..."><strong>Tambah Harga</strong></button>
-          <button class="btn btn-success my-1 mr-sm-2" type="submit" id="save_edit_btn" data-loading-text="Loading..."><strong>Simpan Perubahan</strong></button>
+            <button class="btn btn-success my-1 mr-sm-2" type="submit" id="add_btn" data-loading-text="Loading..."><strong>Tambah Harga</strong></button>
+            <button class="btn btn-success my-1 mr-sm-2" type="submit" id="save_edit_btn" data-loading-text="Loading..."><strong>Simpan Perubahan</strong></button>
         </form>
       </div>
       <div class="modal-footer">
@@ -296,7 +296,7 @@
 
     var HargaMWPTable = $('#HargaMWPTable').DataTable({
       'columnDefs': [{
-        targets: [0, 1, 2, 3, 4, 5, 6, 7, 8,9],
+        targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
         className: 'text-center'
       }],
       deferRender: true,
@@ -416,7 +416,7 @@
           renderHargaPetaniD(harga_mwp['d_harga_mq_petani']) + renderHargaFOBD(harga_mwp['d_harga_mq_fob']),
           renderHargaPetani(harga_mwp['harga_mwp1_petani']) + renderHargaFOB(harga_mwp['harga_mwp1_fob']) +
           renderHargaPetaniD(harga_mwp['d_harga_mwp1_petani']) + renderHargaFOBD(harga_mwp['d_harga_mwp1_fob']),
-  
+
           renderHargaPetani(harga_mwp['harga_mwp2_petani']) + renderHargaFOB(harga_mwp['harga_mwp2_fob']) +
           renderHargaPetaniD(harga_mwp['d_harga_mwp2_petani']) + renderHargaFOBD(harga_mwp['d_harga_mwp2_fob']),
           renderHargaPetani(harga_mwp['harga_asta_petani']) + renderHargaFOB(harga_mwp['harga_asta_fob']) +
@@ -459,25 +459,25 @@
       harga_mwp_modal.addBtn.show();
       harga_mwp_modal.saveEditBtn.hide();
     });
-    
+
     HargaMWPTable.on('click', '.edit', function() {
       harga_mwp_modal.form.trigger('reset');
       harga_mwp_modal.self.modal('show');
       harga_mwp_modal.addBtn.hide();
       harga_mwp_modal.saveEditBtn.show();
-      
+
       var currentData = dataHargaMWP[$(this).data('id')];
-      
+
       harga_mwp_modal.d_harga_mq_petani.val(currentData['d_harga_mq_petani']);
       harga_mwp_modal.harga_mq_petani.val(currentData['harga_mq_petani']);
-      
+
       harga_mwp_modal.d_harga_sni1_petani.val(currentData['d_harga_sni1_petani']);
       harga_mwp_modal.harga_sni1_petani.val(currentData['harga_sni1_petani']);
-      
+
       harga_mwp_modal.d_harga_sni2_petani.val(currentData['d_harga_sni2_petani']);
       harga_mwp_modal.harga_sni2_petani.val(currentData['harga_sni2_petani']);
-   
-      
+
+
       harga_mwp_modal.id_harga_mwp.val(currentData['id_harga_mwp']);
       harga_mwp_modal.tanggal_berlaku.val(currentData['tanggal_berlaku']);
       // harga_mwp_modal.harga_sni1_fob.val(currentData['harga_sni1_fob']);

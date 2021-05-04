@@ -25,7 +25,8 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 } else {
 
     $this->load->view('publicv2/selection/indo/banner');
-    $this->load->view('publicv2/selection/indo/calculate');
+    // $this->load->view('publicv2/selection/indo/calculate');
+    $this->load->view('publicv2/selection/indo/transaction');
     $this->load->view('publicv2/selection/indo/download');
     $this->load->view('publicv2/selection/indo/about');
     $this->load->view('publicv2/selection/indo/news');
@@ -36,7 +37,6 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
     $this->load->view('publicv2/selection/indo/affiliate');
     $this->load->view('publicv2/selection/indo/referral');
     // $this->load->view('publicv2/selection/indo/deposit');
-    // $this->load->view('publicv2/selection/indo/transaction');
     $this->load->view('publicv2/selection/indo/testimonial');
     $this->load->view('publicv2/selection/indo/question');
     $this->load->view('publicv2/selection/indo/signup');
@@ -44,9 +44,73 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 }
 ?>
 
+<script>
+    function formatRupiah(angka, prefix) {
+        var number_string = angka.toString();
+        // split = [];
+        // split[0] = number_string.slice(0, -2);
+        // split[1] = number_string.slice(-2);
 
+        sisa = number_string.length % 3;
+        (rupiah = number_string.substr(0, sisa)),
+        (ribuan = number_string.substr(sisa).match(/\d{3}/gi));
+
+        // tambahkan titik jika yang di input sudah menjadi angka ribuan
+        if (ribuan) {
+            separator = sisa ? "." : "";
+            rupiah += separator + ribuan.join(".");
+        }
+
+        // rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+        return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+    }
+
+    var HargaMWPTable = $('#HargaMWPTable');
+
+    getTabelHarga();
+
+    function getTabelHarga() {
+        return $.ajax({
+            url: `<?php echo site_url('HargaMWPController/getLatestPrice/') ?>`,
+            'type': 'GET',
+            data: {
+                limit: 10
+            },
+            success: function(data) {
+                // swal.close();
+                var json = JSON.parse(data);
+                if (json['error']) {
+                    return;
+                }
+                data = json['data'];
+                renderTabelPrice(data);
+            },
+            error: function(e) {}
+        });
+    }
+
+    function renderTabelPrice(data) {
+        if (data == null || typeof data != "object") {
+            console.log("HargaMWP::UNKNOWN DATA");
+            return;
+        }
+        var i = 0;
+
+        var renderData = [];
+        Object.values(data).forEach((harga_mwp) => {
+            HargaMWPTable.append('<tr> <td>' +
+                harga_mwp['tanggal_berlaku'] + '</td><td>' + formatRupiah(harga_mwp['harga_mq_petani']) + '</td><td>' + formatRupiah(harga_mwp['harga_sni1_petani']) + '</td><td>' + formatRupiah(harga_mwp['harga_sni2_petani']) + '</td></tr>')
+
+        })
+
+        // HargaMWPTable.clear().rows.add(renderData).draw('full-hold');
+
+    }
+</script>
 <script>
     $(document).ready(function() {
+
+
 
         var month = new Array();
         month[0] = "Jan";
@@ -103,15 +167,15 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
                 sni1[i] = dx['harga_sni1_petani']
                 sni2[i] = dx['harga_sni2_petani']
                 if (i == 0) {
-                    document.getElementById("banner_sni1").innerHTML =  dx['harga_sni1_petani'];
-                    document.getElementById("banner_sni2").innerHTML =  dx['harga_sni2_petani'];
-                    document.getElementById("banner_mq").innerHTML =  dx['harga_mq_petani'];
-                    document.getElementById("banner_mq_none").innerHTML =  dx['harga_mq_petani'];
-                } 
+                    document.getElementById("banner_sni1").innerHTML = dx['harga_sni1_petani'];
+                    document.getElementById("banner_sni2").innerHTML = dx['harga_sni2_petani'];
+                    document.getElementById("banner_mq").innerHTML = dx['harga_mq_petani'];
+                    document.getElementById("banner_mq_none").innerHTML = dx['harga_mq_petani'];
+                }
                 i++
             });
             // console.log(mq)
-            
+
             var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             var config = {
                 type: 'line',
@@ -169,13 +233,15 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
             console.log(config)
 
             // window.onload = function() {
-                var ctx = document.getElementById('canvas').getContext('2d');
-                window.myLine = new Chart(ctx, config);
+            var ctx = document.getElementById('canvas').getContext('2d');
+            window.myLine = new Chart(ctx, config);
             // };
 
             callmainme();
 
         }
+
+
 
 
         // function getStandarMutu() {
