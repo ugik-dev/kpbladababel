@@ -1,20 +1,4 @@
-<!-- transaction section begin -->
 <section class="transaction-section">
-    <!-- <div class="right-img">
-        <img class="right-ellipse1" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-ellipse-01.png" alt="#" />
-        <img class="right-shape1" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-shape-01.png" alt="#" />
-        <img class="right-shape2" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-shape-01.png" alt="#" />
-        <img class="right-ellipse2" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-ellipse-02.png" alt="#" />
-    </div>
-    <div class="left-img">
-        <img class="left-ellipse1" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-ellipse-03.png" alt="#" />
-        <img class="left-ellipse2" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-ellipse-03.png" alt="#" />
-        <img class="left-ellipse3" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-ellipse-03.png" alt="#" />
-        <img class="left-shape1" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-shape-01.png" alt="#" />
-        <img class="left-shape2" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-shape-01.png" alt="#" />
-        <img class="left-shape3" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-shape-01.png" alt="#" />
-        <img class="left-shape4" src="<?= base_url('assets/assets_v2/') ?>img/transaction-bg-shape-01.png" alt="#" />
-    </div> -->
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-8">

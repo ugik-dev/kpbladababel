@@ -6,7 +6,8 @@
 if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 
     $this->load->view('publicv2/selection/eng/banner');
-    $this->load->view('publicv2/selection/eng/calculate');
+    // $this->load->view('publicv2/selection/eng/calculate');
+    $this->load->view('publicv2/selection/eng/transaction');
     $this->load->view('publicv2/selection/eng/download');
     $this->load->view('publicv2/selection/eng/about');
     $this->load->view('publicv2/selection/eng/news');
@@ -17,7 +18,6 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
     $this->load->view('publicv2/selection/eng/affiliate');
     $this->load->view('publicv2/selection/eng/referral');
     // $this->load->view('publicv2/selection/eng/deposit');
-    // $this->load->view('publicv2/selection/eng/transaction');
     $this->load->view('publicv2/selection/eng/testimonial');
     $this->load->view('publicv2/selection/eng/question');
     $this->load->view('publicv2/selection/eng/signup');
