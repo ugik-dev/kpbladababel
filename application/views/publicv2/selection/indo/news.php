@@ -10,7 +10,6 @@
             </div>
         </div>
         <div class="row mb-none-30" id="news_canvas">
-
         </div>
     </div>
 </section>

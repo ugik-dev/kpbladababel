@@ -3,7 +3,6 @@
         <div class="row">
             <div class="col-lg-7">
                 <div class="about-left">
-
                     <div class="about-text">
                         <h5 class="about-title">SELAMAT DATANG DI SISTEM INFORMASI KPB LADA BABEL</h5>
                         <h2 class="about-subtitle">Sedikit tentang kami</h2>
@@ -58,6 +57,8 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row text-center">
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="single-about-box">
                                     <div class="icon-box-outer bg-security">
@@ -71,8 +72,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row text-center">
+
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <div class="single-about-box">
                                     <div class="icon-box-outer bg-trans">
