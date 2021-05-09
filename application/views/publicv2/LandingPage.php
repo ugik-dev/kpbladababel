@@ -237,7 +237,7 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
             window.myLine = new Chart(ctx, config);
             // };
 
-            callmainme();
+            // callmainme();
 
         }
 
