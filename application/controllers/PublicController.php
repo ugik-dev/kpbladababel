@@ -25,6 +25,57 @@ class PublicController extends CI_Controller
         ]);
     }
 
+
+    public function about()
+    {
+        // $dataContent['pricing'] = $this->HargaMWPModel->getLatestPrice(array('limit' => '10'));
+
+        // var_dump($pricing);
+        // die();
+        $this->load->view('PublicPage', [
+            'title' => "About",
+            'page' => 'about',
+            'content' => 'publicv2/page/layout',
+            // 'dataContent' => $dataContent
+        ]);
+    }
+
+    public function services()
+    {
+        $this->load->view('PublicPage', [
+            'title' => "Pelayanan",
+            'page' => 'pelayanan',
+            'content' => 'publicv2/page/layout',
+        ]);
+    }
+
+    public function terms()
+    {
+        $this->load->view('PublicPage', [
+            'title' => "Syarat-Syarat",
+            'page' => 'terms',
+            'content' => 'publicv2/page/layout',
+        ]);
+    }
+
+    public function procedur()
+    {
+        $this->load->view('PublicPage', [
+            'title' => "Prosedur",
+            'page' => 'procedur',
+            'content' => 'publicv2/page/layout',
+        ]);
+    }
+
+    public function visi_misi()
+    {
+        $this->load->view('PublicPage', [
+            'title' => "Visi & Misi",
+            'page' => 'visi_misi',
+            'content' => 'publicv2/page/layout',
+        ]);
+    }
+
     public function products()
     {
         $this->load->view('PublicPage', [

@@ -93,26 +93,31 @@
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about-section"><?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
-                                                                        echo "ABOUT";
-                                                                    } else {
-                                                                        echo "TENTANG KITA";
-                                                                    } ?></a>
+                    <li class="nav-item active">
+                        <a class="nav-link active" href="<?= base_url('') ?>#patners-section">PATNERS
+                            <!-- <span class="sr-only">(current)</span> -->
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#affiliate-section"><?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
-                                                                            echo "PRODUCT";
-                                                                        } else {
-                                                                            echo "PRODUK";
-                                                                        } ?></a>
+                        <a class="nav-link" href="<?= base_url() ?>#about-section"><?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+                                                                                        echo "ABOUT";
+                                                                                    } else {
+                                                                                        echo "TENTANG KITA";
+                                                                                    } ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#investment-section"><?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
-                                                                            echo "NEWS";
-                                                                        } else {
-                                                                            echo "BERITA";
-                                                                        } ?></a>
+                        <a class="nav-link" href="<?= base_url() ?>#affiliate-section"><?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+                                                                                            echo "PRODUCT";
+                                                                                        } else {
+                                                                                            echo "PRODUK";
+                                                                                        } ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url() ?>#news-section"><?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+                                                                                        echo "NEWS";
+                                                                                    } else {
+                                                                                        echo "BERITA";
+                                                                                    } ?></a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="#">BLOG</a>

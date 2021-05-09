@@ -1,4 +1,4 @@
-<section class="choose-section">
+<section class="choose-section" id="patners-section">
     <div class="overlay">
         <div class="container-fruit text-center">
             <div class="row mr-0 ml-0 d-flex justify-content-center">
@@ -7,7 +7,7 @@
                         <h2 class="choose-subtitle">OUR PATNERS?</h2>
                         <h5 class="choose-title"> We, with our partner, intend to make your export bussiness go smoothly</h5>
                         <p class="choose-title-describe">
-                           
+
                         </p>
                     </div>
                 </div>
@@ -15,8 +15,8 @@
             <div class="choose-section-carousel">
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
-                            <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
+                        <div class="icon-box logo-patners">
+                            <img src="<?= base_url('assets/') ?>img/logo-babel.png" style="max-width: 100px" alt="#" />
                         </div>
                         <div class="text-box">
                             <h2 class="single-item-title">Pem. Prov. BABEL</h2>
@@ -26,11 +26,60 @@
                         </div>
                     </div>
                 </div>
-            <!-- </div> -->
-            <!-- <div class="choose-section-carousel"> -->
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
+                        <div class="icon-box logo-patners">
+                            <img src="<?= base_url('assets/') ?>img/b3s.png" alt="#" />
+                        </div>
+                        <div class="text-box">
+                            <h2 class="single-item-title">PT B3S</h2>
+                            <h3 class="single-item-description">
+                                PT Bumi Bangka Belitung Sejahtera
+                                Provinsi Kepulauan Bangka Belitung.
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="single-item">
+                        <div class="icon-box logo-patners">
+                            <img src="<?= base_url('assets/') ?>img/jfx.jpg" style="max-width: 200px" alt="#" />
+                        </div>
+                        <div class="text-box">
+                            <h2 class="single-item-title">PT BBJ</h2>
+                            <h3 class="single-item-description">
+                                PT. Bursa Berjangka Jakarta / <br>Jakarta Futures Exchange </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="single-item">
+                        <div class="icon-box logo-patners">
+                            <img src="<?= base_url('assets/') ?>img/kbi.png" style="max-width: 200px" alt="#" />
+                        </div>
+                        <div class="text-box">
+                            <h2 class="single-item-title">PT KBI</h2>
+                            <h3 class="single-item-description">
+                                PT. Kliring Berjangka Indonesia</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="single-item">
+                        <div class="icon-box logo-patners">
+                            <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
+                        </div>
+                        <div class="text-box">
+                            <h2 class="single-item-title">KPL</h2>
+                            <h3 class="single-item-description">
+                                Koperasi Petani Lada </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="single-item">
+                        <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
                         <div class="text-box">
@@ -43,7 +92,7 @@
                 </div>
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
+                        <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
                         <div class="text-box">
@@ -57,7 +106,7 @@
                 </div>
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
+                        <div class="icon-box logo-patners">
                             <img style="max-height: 100px;max-width: 100px;" src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
                         <div class="text-box">
@@ -71,21 +120,20 @@
                 </div>
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
-                            <img style="max-height: 5rem ;max-width: 5rem"  src="<?= base_url('assets/assets_v2/') ?>img/bp3l-logo-sm.png" alt="#" />
+                        <div class="icon-box logo-patners">
+                            <img style="max-height: 5rem ;max-width: 5rem" src="<?= base_url('assets/assets_v2/') ?>img/bp3l-logo-sm.png" alt="#" />
                         </div>
                         <div class="text-box">
                             <h2 class="single-item-title">BP3L</h2>
                             <h3 class="single-item-description">
-                                Provinsi Kepulauan Bangka Belitung.
-
+                                Badan Pengelolaan, Pengembangan dan Pemasaran Lada (BP3L)
                             </h3>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
+                        <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
                         <div class="text-box">
@@ -100,7 +148,7 @@
 
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
+                        <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
                         <div class="text-box">
@@ -114,7 +162,7 @@
                 </div>
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
+                        <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
                         <div class="text-box">
@@ -128,7 +176,7 @@
                 </div>
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
+                        <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
                         <div class="text-box">
@@ -141,7 +189,7 @@
                 </div>
                 <!-- <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
+                        <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/security.svg" alt="#" />
                         </div>
                         <div class="text-box">
@@ -154,20 +202,19 @@
                 </div> -->
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
+                        <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
                         <div class="text-box">
                             <h2 class="single-item-title">TP4L</h2>
                             <h3 class="single-item-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </h3>
+                                Tim Pembinaan, Pengawasan, Pengendalian Perdagangan Lada </h3>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="single-item">
-                        <div class="icon-box">
+                        <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
                         <div class="text-box">
@@ -178,20 +225,13 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col">
-                    <div class="single-item">
-                        <div class="icon-box">
-                            <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
-                        </div>
-                        <div class="text-box">
-                            <h2 class="single-item-title">TP4L</h2>
-                            <h3 class="single-item-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </h3>
-                        </div>
-                    </div>
-                </div> -->
+
             </div>
         </div>
     </div>
 </section>
+<style>
+    .logo-patners {
+        height: 150px;
+    }
+</style>
