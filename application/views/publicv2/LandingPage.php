@@ -166,12 +166,7 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
                     mq[i] = dx['harga_mq_petani']
                 sni1[i] = dx['harga_sni1_petani']
                 sni2[i] = dx['harga_sni2_petani']
-                if (i == 0) {
-                    document.getElementById("banner_sni1").innerHTML = dx['harga_sni1_petani'];
-                    document.getElementById("banner_sni2").innerHTML = dx['harga_sni2_petani'];
-                    document.getElementById("banner_mq").innerHTML = dx['harga_mq_petani'];
-                    document.getElementById("banner_mq_none").innerHTML = dx['harga_mq_petani'];
-                }
+
                 i++
             });
             // console.log(mq)

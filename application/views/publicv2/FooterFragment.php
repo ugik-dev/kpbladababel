@@ -79,7 +79,7 @@
 	</div>
 </footer>
 
-<script src="<?= base_url('assets/assets_v2/') ?>js/app.js"></script>
+<script src="<?= base_url('assets/assets_v2/') ?>js/app.js?v=0.2"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/jquery-3.3.1.min.js"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/bootstrap.min.js"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/wow.min.js"></script>

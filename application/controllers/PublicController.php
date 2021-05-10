@@ -15,8 +15,10 @@ class PublicController extends CI_Controller
     public function index()
     {
         $dataContent['pricing'] = $this->HargaMWPModel->getLatestPrice(array('limit' => '10'));
+        $dataContent['pricing_last'] =
+            $dataContent['pricing'][0];
 
-        // var_dump($pricing);
+        // echo json_encode($dataContent);
         // die();
         $this->load->view('PublicPage', [
             'title' => "Home",
