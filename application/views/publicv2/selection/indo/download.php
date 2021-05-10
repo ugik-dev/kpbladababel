@@ -8,7 +8,7 @@
                 <div class="download-text">
                     <h5 class="download-title">Belajar, Rencanakan, Investasikan Lada</h5>
                     <h2 class="download-subtitle">Our Smart</h2>
-                    
+
                 </div>
                 <div class="app-features">
                     <div style="width:75%;">
@@ -17,21 +17,21 @@
                 </div>
             </div>
             <div class="col-lg-5 col-md-5">
-                <div class="right-area">
-                    <img class="ellipse-01" src="<?= base_url('assets/assets_v2/') ?>img/download-bg-ellipse-01.png" alt="#" />
-                    <img class="ellipse-02" src="<?= base_url('assets/assets_v2/') ?>img/download-bg-ellipse-02.png" alt="#" />
+                <!-- <div class="right-area"> -->
+                <img class="center" src="<?= base_url('assets/img/') ?>bg-lada2.jpg" style="background-size: cover;margin-top: 100px;" alt="#" />
+                <!-- <img class="ellipse-01" src="<?= base_url('assets/assets_v2/') ?>img/download-bg-ellipse-01.png" alt="#" />
                     <img class="ellipse-03" src="<?= base_url('assets/assets_v2/') ?>img/download-bg-ellipse-03.png" alt="#" />
                     <img class="ellipse-04" src="<?= base_url('assets/assets_v2/') ?>img/download-bg-ellipse-04.png" alt="#" />
-                    <img class="smart-phone" src="<?= base_url('assets/assets_v2/') ?>img/download-smart-phone.png" alt="#" />
-                </div>
+                    <img class="smart-phone" src="<?= base_url('assets/assets_v2/') ?>img/download-smart-phone.png" alt="#" /> -->
+                <!-- </div> -->
             </div>
         </div>
     </div>
 </section>
 
 <script>
-		
-	</script>
+
+</script>
 <!-- <script>
     var lineChartData = {
         labels: ['1 Februari', '2 February', ' 3 February', ' 4 February', 'May'],

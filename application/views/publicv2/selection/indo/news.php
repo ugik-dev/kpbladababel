@@ -1,4 +1,4 @@
-<section class="news-setcion" id="news-section">
+<section class="news-setcion" id="news-section" style="background-image:url('<?= base_url() ?>assets/img/bg-lada9-st1.jpg') !important; background-size: cover:">
     <div class="container">
         <div class="row mr-0 ml-0 d-flex justify-content-center">
             <div class="col-xl-12 col-lg-12">

@@ -7,7 +7,7 @@
                         <h2 class="choose-subtitle">OUR PATNERS?</h2>
                         <h5 class="choose-title"> We, with our partner, intend to make your export bussiness go smoothly</h5>
                         <p class="choose-title-describe">
-                           
+
                         </p>
                     </div>
                 </div>
@@ -26,8 +26,8 @@
                         </div>
                     </div>
                 </div>
-            <!-- </div> -->
-            <!-- <div class="choose-section-carousel"> -->
+                <!-- </div> -->
+                <!-- <div class="choose-section-carousel"> -->
                 <div class="col">
                     <div class="single-item">
                         <div class="icon-box">
@@ -72,7 +72,7 @@
                 <div class="col">
                     <div class="single-item">
                         <div class="icon-box">
-                            <img style="max-height: 5rem ;max-width: 5rem"  src="<?= base_url('assets/assets_v2/') ?>img/bp3l-logo-sm.png" alt="#" />
+                            <img style="max-height: 5rem ;max-width: 5rem" src="<?= base_url('assets/assets_v2/') ?>img/bp3l-logo-sm.png" alt="#" />
                         </div>
                         <div class="text-box">
                             <h2 class="single-item-title">BP3L</h2>

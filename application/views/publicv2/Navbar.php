@@ -106,10 +106,10 @@
                                                                                     } ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url() ?>#affiliate-section"><?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
-                                                                                            echo "PRODUCT";
+                        <a class="nav-link" href="<?= base_url() ?>#pricing-section"><?php if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
+                                                                                            echo "PRICING";
                                                                                         } else {
-                                                                                            echo "PRODUK";
+                                                                                            echo "HARGA LADA";
                                                                                         } ?></a>
                     </li>
                     <li class="nav-item">

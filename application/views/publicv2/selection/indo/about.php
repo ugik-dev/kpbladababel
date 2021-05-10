@@ -107,7 +107,7 @@
             <div class="col-lg-5">
                 <div class="about-right">
                     <div class="video-box">
-                        <img src="<?= base_url('assets/assets_v2/') ?>img/about-bg.jpg" alt="#" />
+                        <img src="<?= base_url('assets/img/') ?>bg-lada8.svg" style="max-height: 700px;" alt="#" />
                         <div class="icon-box">
                             <a href="https://www.youtube.com/watch?v=dGnoG3owrW4" class="video-play-btn popup-video"><i class="ren-playicon"></i></a>
                         </div>

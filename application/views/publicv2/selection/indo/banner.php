@@ -1,5 +1,5 @@
 <section class="banner-section">
-    <div class="overlay ripple-container" style="background-image: url(<?= base_url('assets/img/slideshow_1.jpg') ?>)">
+    <div class="overlay ripple-container" style="background-image: url(<?= base_url('assets/img/bg-lada7.jpg') ?>)">
         <div class="container">
             <div class="total-slide">
                 <div class="row text-center">

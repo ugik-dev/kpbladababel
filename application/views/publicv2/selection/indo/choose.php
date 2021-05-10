@@ -14,7 +14,7 @@
             </div>
             <div class="choose-section-carousel">
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/') ?>img/logo-babel.png" style="max-width: 100px" alt="#" />
                         </div>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item  layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/') ?>img/b3s.png" alt="#" />
                         </div>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/') ?>img/jfx.jpg" style="max-width: 200px" alt="#" />
                         </div>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/') ?>img/kbi.png" style="max-width: 200px" alt="#" />
                         </div>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img style="max-height: 100px;max-width: 100px;" src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
@@ -119,7 +119,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img style="max-height: 5rem ;max-width: 5rem" src="<?= base_url('assets/assets_v2/') ?>img/bp3l-logo-sm.png" alt="#" />
                         </div>
@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
@@ -147,7 +147,7 @@
                 </div>
 
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
@@ -161,7 +161,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
@@ -175,7 +175,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
@@ -188,7 +188,8 @@
                     </div>
                 </div>
                 <!-- <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners"
+                >
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/security.svg" alt="#" />
                         </div>
@@ -201,7 +202,7 @@
                     </div>
                 </div> -->
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
@@ -213,7 +214,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="single-item">
+                    <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
                         </div>
@@ -233,5 +234,9 @@
 <style>
     .logo-patners {
         height: 150px;
+    }
+
+    .layout-patners {
+        min-height: 300px;
     }
 </style>

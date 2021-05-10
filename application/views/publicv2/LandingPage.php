@@ -25,11 +25,11 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 } else {
 
     $this->load->view('publicv2/selection/indo/banner');
-    // $this->load->view('publicv2/selection/indo/calculate');
-    $this->load->view('publicv2/selection/indo/transaction');
-    $this->load->view('publicv2/selection/indo/download');
     $this->load->view('publicv2/selection/indo/about');
+    // $this->load->view('publicv2/selection/indo/calculate');
     $this->load->view('publicv2/selection/indo/news');
+    $this->load->view('publicv2/selection/indo/download');
+    $this->load->view('publicv2/selection/indo/transaction'); //HARGA LADA
     // $this->load->view('publicv2/selection/indo/tabmutu');
     $this->load->view('publicv2/selection/indo/choose');
     $this->load->view('publicv2/selection/indo/invest');
@@ -230,9 +230,7 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
                     }
                 }
             };
-            console.log(config)
 
-            // window.onload = function() {
             var ctx = document.getElementById('canvas').getContext('2d');
             window.myLine = new Chart(ctx, config);
             // };
@@ -274,9 +272,7 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
                 return;
             }
             var i = 0;
-
             var renderData = [];
-
             renderData.push(["MWP1", "Rp " + dataHargaMWP['harga_mwp1_petani'] + ' || USD ' + dataHargaMWP['d_harga_mwp1_petani'], "Rp " + dataHargaMWP['harga_mwp1_fob'] + ' || USD ' + dataHargaMWP['d_harga_mwp1_fob']]);
             renderData.push(["MWP2", "Rp " + dataHargaMWP['harga_mwp2_petani'] + ' || USD ' + dataHargaMWP['d_harga_mwp2_petani'], "Rp" + dataHargaMWP['harga_mwp2_fob'] + ' || USD ' + dataHargaMWP['d_harga_mwp2_fob']]);
             renderData.push(["ASTA", "Rp " + dataHargaMWP['harga_asta_petani'] + ' || USD ' + dataHargaMWP['d_harga_asta_petani'], "Rp" + dataHargaMWP['harga_asta_fob'] + ' || USD ' + dataHargaMWP['d_harga_asta_fob']]);
