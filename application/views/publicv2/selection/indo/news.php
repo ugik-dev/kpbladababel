@@ -11,5 +11,13 @@
         </div>
         <div class="row mb-none-30" id="news_canvas">
         </div>
+        <div class="row d-flex justify-content-center">
+            <a href="<?= base_url() ?>index.php/other_news" class="btn btn-primary">
+                <h3>
+                    Berita Lainnya
+                </h3>
+            </a>
+        </div>
+    </div>
     </div>
 </section>

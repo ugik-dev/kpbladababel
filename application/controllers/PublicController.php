@@ -60,6 +60,18 @@ class PublicController extends CI_Controller
         ]);
     }
 
+    public function other_news($page = 1)
+    {
+        $dataContent['collect'] = $this->NewsModel->getAllPagger();
+        $title = "Berita";
+        $this->load->view('PublicPage', [
+            'title' => $title,
+            'dataContent' => $dataContent,
+            'page' => 'other_news',
+            'content' => 'publicv2/page/other_news',
+        ]);
+    }
+
     public function procedur()
     {
         $this->load->view('PublicPage', [

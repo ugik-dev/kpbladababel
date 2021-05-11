@@ -81,7 +81,7 @@
 
 <script src="<?= base_url('assets/assets_v2/') ?>js/app.js?v=0.2"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/jquery-3.3.1.min.js"></script>
-<script src="<?= base_url('assets/assets_v2/') ?>js/bootstrap.min.js"></script>
+<!-- <script src="<?= base_url('assets/assets_v2/') ?>js/bootstrap.min.js"></script> -->
 <script src="<?= base_url('assets/assets_v2/') ?>js/wow.min.js"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/magnific-popup.min.js"></script>
 <script src="<?= base_url('assets/assets_v2/') ?>js/main.js"></script>
@@ -102,22 +102,22 @@
 	});
 </script> -->
 <script>
-	$(document).ready(function() {
-		$('body').scrollspy({
-			target: '#navbar',
-			offset: 80
-		});
+	// $(document).ready(function() {
+	// 	$('body').scrollspy({
+	// 		target: '#navbar',
+	// 		offset: 80
+	// 	});
 
-		// Page scrolling feature
-		$('a.page-scroll').bind('click', function(event) {
-			var link = $(this);
-			$('html, body').stop().animate({
-				scrollTop: $(link.attr('href')).offset().top - 50
-			}, 500);
-			event.preventDefault();
-			$("#navbar").collapse('hide');
-		});
-	});
+	// 	// Page scrolling feature
+	// 	$('a.page-scroll').bind('click', function(event) {
+	// 		var link = $(this);
+	// 		$('html, body').stop().animate({
+	// 			scrollTop: $(link.attr('href')).offset().top - 50
+	// 		}, 500);
+	// 		event.preventDefault();
+	// 		$("#navbar").collapse('hide');
+	// 	});
+	// });
 
 	function initNavbar(changeOn) {
 		cbpAnimatedHeader = (function() {

@@ -48,6 +48,29 @@ class NewsModel extends CI_Model
     // return DataStructure::keyValue($res->result_array(), 'berita_id');
   }
 
+
+  public function getAllPagger($filter = [])
+  {
+    // if (!empty($filter['last'])) {
+    $this->db->select('berita_id, berita_image, berita_judul,berita_tanggal,substr(berita_isi,1,400) as berita_isi');
+    $this->db->from("tbl_berita");
+    $this->db->order_by('berita_id', 'desc');
+    $this->db->limit('4', 'asc');
+    if (!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
+    $res = $this->db->get();
+    return $res->result_array();
+    // }
+
+    // $this->db->select('*');
+    // $this->db->from("tbl_berita");
+    // $this->db->order_by('berita_id', 'desc');
+    // if (!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
+    // $res = $this->db->get();
+    // return $res->result_array();
+    // // return DataStructure::keyValue($res->result_array(), 'berita_id');
+  }
+
+
   public function get($id = NULL)
   {
     $row = $this->getAll(['berita_id' => $id]);

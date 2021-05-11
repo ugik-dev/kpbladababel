@@ -103,7 +103,6 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 
         })
 
-        // HargaMWPTable.clear().rows.add(renderData).draw('full-hold');
 
     }
 </script>
@@ -297,36 +296,7 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
         }
 
 
-        function renderStandarMutu(data) {
-            if (data == null || typeof data != "object") {
-                console.log("HargaMWP::UNKNOWN DATA");
-                return;
-            }
-            var i = 0;
 
-            var renderData = [];
-            renderData.push(["Cemaran Serangga (By count Maks)", data['1']['cemaran_serangga'], data['2']['cemaran_serangga'], data['3']['cemaran_serangga'], data['4']['cemaran_serangga'], data['5']['cemaran_serangga'], data['6']['cemaran_serangga'], data['7']['cemaran_serangga'], data['8']['cemaran_serangga']]);
-            renderData.push(["Kerapatan (g/1)", data['1']['kerapatan'], data['2']['kerapatan'], data['3']['kerapatan'], data['4']['kerapatan'], data['5']['kerapatan'], data['6']['kerapatan'], data['7']['kerapatan'], data['8']['kerapatan']]);
-            renderData.push(["Kadar Air (%)", data['1']['kadar_air'], data['2']['kadar_air'], data['3']['kadar_air'], data['4']['kadar_air'], data['5']['kadar_air'], data['6']['kadar_air'], data['7']['kadar_air'], data['8']['kadar_air']]);
-            renderData.push(["Kadar Biji Enteng (%)", data['1']['kadar_biji_enteng'], data['2']['kadar_biji_enteng'], data['3']['kadar_biji_enteng'], data['4']['kadar_biji_enteng'], data['5']['kadar_biji_enteng'], data['6']['kadar_biji_enteng'], data['7']['kadar_biji_enteng'], data['8']['kadar_biji_enteng']]);
-            renderData.push(["Kadar Benda Asing (%)", data['1']['kadar_benda_asing'], data['2']['kadar_benda_asing'], data['3']['kadar_benda_asing'], data['4']['kadar_benda_asing'], data['5']['kadar_benda_asing'], data['6']['kadar_benda_asing'], data['7']['kadar_benda_asing'], data['8']['kadar_benda_asing']]);
-            renderData.push(["Kadar Cemaran Kapang (%)", data['1']['kadar_cemaran'], data['2']['kadar_cemaran'], data['3']['kadar_cemaran'], data['4']['kadar_cemaran'], data['5']['kadar_cemaran'], data['6']['kadar_cemaran'], data['7']['kadar_cemaran'], data['8']['kadar_cemaran']]);
-            renderData.push(["Kadar Lada berwarna putih kehitaman (%)", data['1']['kadar_hitam_putih'], data['2']['kadar_hitam_putih'], data['3']['kadar_hitam_putih'], data['4']['kadar_hitam_putih'], data['5']['kadar_hitam_putih'], data['6']['kadar_hitam_putih'], data['7']['kadar_hitam_putih'], data['8']['kadar_hitam_putih']]);
-            renderData.push(["E Colli (MPN/g)", data['1']['e_colli'], data['2']['e_colli'], data['3']['e_colli'], data['4']['e_colli'], data['5']['e_colli'], data['6']['e_colli'], data['7']['e_colli'], data['8']['e_colli']]);
-            renderData.push(["Salmonella (Detection/25g)", data['1']['salmonella'], data['2']['salmonella'], data['3']['salmonella'], data['4']['salmonella'], data['5']['salmonella'], data['6']['salmonella'], data['7']['salmonella'], data['8']['salmonella']]);
-            renderData.push(["Kadar Piperin (%)", data['1']['kadar_piperin'], data['2']['kadar_piperin'], data['3']['kadar_piperin'], data['4']['kadar_piperin'], data['5']['kadar_piperin'], data['6']['kadar_piperin'], data['7']['kadar_piperin'], data['8']['kadar_piperin']]);
-            renderData.push(["Kadar Minyak Atsiri (%)", data['1']['kadar_minyak'], data['2']['kadar_minyak'], data['3']['kadar_minyak'], data['4']['kadar_minyak'], data['5']['kadar_minyak'], data['6']['kadar_minyak'], data['7']['kadar_minyak'], data['8']['kadar_minyak']]);
-
-            // Object.values(data).forEach((d) => {
-            //   renderData.push([d['nama_mutu'], d['cemaran_serangga'], d['kerapatan'], 
-            //   d['kadar_air'], d['kadar_biji_enteng'], d['kadar_benda_asing'], 
-            //   d['kadar_cemaran'], d['kadar_hitam_putih'], d['e_colli'], 
-            //   d['salmonella'], d['kadar_piperin'], d['kadar_minyak'] ]);
-
-            // });
-
-            StandarMutuTable.clear().rows.add(renderData).draw('full-hold');
-        }
         getAllNews();
 
         function getAllNews() {
@@ -361,20 +331,20 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
             // console.log(data);
             Object.values(data).forEach((news) => {
                 if (i % 2 == 0) {
+                    // href="<?= site_url() . 'newsx?id_news=' ?>${news['berita_id']}" 
                     news_list.append(`
-                    <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
-                        <div class="section-title wow fadeInLeft">
-                            <!-- <h4 class="subtitle">KPB Lada Babel Adakan Webinar Internasional dengan Tema “International Marketing Strategy of Muntok White Pepper Through Commodity Physical Market”</h4> -->
-                            <h2 class="title">${news['berita_judul']}</h2>
+                     <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center" onclick='location.href="<?= site_url() . 'newsx?id_news=' ?>${news['berita_id']}"'>
+                        <div class="section-title wow fadeInLeft" style="display: block !important" >
+                             <h2 href="<?= site_url() . 'newsx?id_news=' ?>${news['berita_id']}" target="_blank"  class="title">${news['berita_judul']}</h2>
                         </div>
-                    </div><!-- demo-single end -->
+                    </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="demo-single demo-single--height2">
                             <div class="thumb wow fadeInRight">
                                 <img src="<?= base_url('assets/img/news/') ?>${news['berita_image']}" style="max-height:15rem" alt="demo-image">
                                 <a href="<?= site_url() . 'newsx?id_news=' ?>${news['berita_id']}" target="_blank" class="view-btn">News View</a>
                             </div>
-                            <!-- <h4 class="caption"><a href="Reunir/index-animated-text.html">Home Animated Text</a></h4> -->
+                            <h4 class="caption"></h4>
                         </div>
                     </div>  
                     `);
@@ -386,11 +356,10 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
                             <img src="<?= base_url('assets/img/news/') ?>${news['berita_image']}" style="max-height:15rem" alt="demo-image">
                                 <a href="<?= site_url() . 'newsx?id_news=' ?>${news['berita_id']}" target="_blank" class="view-btn">News View</a>
                             </div>
-                            <!-- <h4 class="caption"><a href="Reunir/index-video.html" target="_blank">Home Video</a></h4> -->
-                        </div>
+                         </div>
                     </div><!-- demo-single end -->
-                    <div class="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
-                        <div class="section-title  wow fadeInRight">
+                    <div class="col-lg-6 col-md-6 col-sm-12 d-flex align-items-center justify-content-center"  onclick='location.href="<?= site_url() . 'newsx?id_news=' ?>${news['berita_id']}"'>
+                        <div class="section-title  wow fadeInRight"  style="display: block !important">
                             <h2 class="title">${news['berita_judul']}</h2>
                         </div>
                     </div><!-- demo-single end -->

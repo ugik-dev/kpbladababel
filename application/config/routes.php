@@ -57,6 +57,7 @@ $route['visi_misi'] = 'PublicController/visi_misi';
 $route['services'] = 'PublicController/services';
 $route['procedur'] = 'PublicController/procedur';
 $route['terms'] = 'PublicController/terms';
+$route['other_news'] = 'PublicController/other_news';
 $route['product'] = 'PublicController/product';
 $route['news'] = 'PublicController/news';
 $route['newsx'] = 'PublicController/newsx';
