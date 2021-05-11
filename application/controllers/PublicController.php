@@ -60,9 +60,15 @@ class PublicController extends CI_Controller
         ]);
     }
 
-    public function other_news($page = 1)
+    public function other_news()
     {
-        $dataContent['collect'] = $this->NewsModel->getAllPagger();
+        $filter = $this->input->get();
+        if (empty($filter['page'])) $filter['page'] = 1;
+        $dataContent['collect'] = $this->NewsModel->getAllPagger($filter);
+        $dataContent['count_pagger'] = $this->NewsModel->count_pagger($filter)[0]['count'];
+        $dataContent['select_pager'] = $filter['page'];
+        // echo json_encode($dataContent);
+
         $title = "Berita";
         $this->load->view('PublicPage', [
             'title' => $title,
@@ -71,6 +77,26 @@ class PublicController extends CI_Controller
             'content' => 'publicv2/page/other_news',
         ]);
     }
+
+    public function search()
+    {
+        $filter = $this->input->get();
+        if (empty($filter['page'])) $filter['page'] = 1;
+        $dataContent['collect'] = $this->NewsModel->getAllPagger($filter);
+        $dataContent['count_pagger'] = $this->NewsModel->count_pagger($filter)[0]['count'];
+        $dataContent['select_pager'] = $filter['page'];
+        $dataContent['key'] = $filter['key'];
+        // echo json_encode($dataContent);
+
+        $title = "Berita";
+        $this->load->view('PublicPage', [
+            'title' => $title,
+            'dataContent' => $dataContent,
+            'page' => 'other_news',
+            'content' => 'publicv2/page/other_news',
+        ]);
+    }
+
 
     public function procedur()
     {
@@ -117,15 +143,86 @@ class PublicController extends CI_Controller
         ]);
     }
 
-    public function newsx()
+    public function newsx($data_return = NULL)
     {
-        $input = $this->input->get();
-
+        if ($data_return != NULL) {
+            $input = $data_return['id_news'];
+        } else {
+            $input = $this->input->get();
+        }
         $data = $this->NewsModel->get($input['id_news']);
+        $this->NewsModel->post_show($input['id_news'], $data['total_show'] + 1);
+        $data['comentar'] = $this->NewsModel->getComentar(array('berita_id' => $input['id_news']));
+        $expiration = time() - 7200; // Two hour limit
+        $this->db->where('captcha_time < ', $expiration)
+            ->delete('captcha');
+
+        $this->load->helper('captcha');
+        $this->load->helper('string');
+        $vals = array(
+            'word'          => random_string('alpha', 8),
+            'img_path'      => APPPATH . '../assets/captcha/',
+            'img_url'       => base_url('assets/captcha/'),
+            'font_path'     => './path/to/fonts/texb.ttf',
+            'img_width'     => '150',
+            'img_height'    => 40,
+            'expiration'    => 7200,
+            'word_length'   => 8,
+            'font_size'     => 20,
+            'img_id'        => 'Imageid',
+            'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
+            'colors'        => array(
+                'background' => array(255, 255, 255),
+                'border' => array(255, 255, 255),
+                'text' => array(0, 0, 0),
+                'grid' => array(255, 40, 40)
+            )
+        );
+
+        // store image html code in a variable
+        $cap = create_captcha($vals);
+
+        $data_captca = array(
+            'captcha_time'  => $cap['time'],
+            'ip_address'    => $this->input->ip_address(),
+            'word'          => $cap['word']
+        );
+
+        $query = $this->db->insert_string('captcha', $data_captca);
+        $this->db->query($query);
+
+        $this->session->set_userdata('mycaptcha', $cap['word']);
+        $data['captcha'] = $cap['image'];
         $this->load->view('PublicPage', [
             'title' => "{$data['berita_judul']}",
             'content' => 'publicv2/SingleBlog',
             "contentData" => $data
         ]);
+    }
+
+    public function comentar()
+    {
+        $input = $this->input->post();
+        $expiration = time() - 7200; // Two hour limit
+        $this->db->where('captcha_time < ', $expiration)
+            ->delete('captcha');
+
+        $sql = 'SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time > ?';
+        $binds = array($input['captcha'], $this->input->ip_address(), $expiration);
+        $query = $this->db->query($sql, $binds);
+        $row = $query->row();
+
+        if ($row->count == 0) {
+            $this->session->set_flashdata('msg', 'Captcha Salah !!');
+            $this->session->set_flashdata('name', $input['name']);
+            $this->session->set_flashdata('email', $input['email']);
+            $this->session->set_flashdata('komentar', $input['komentar']);
+            redirect(base_url('index.php/newsx?id_news=') . $input['id_news']);
+            return;
+        }
+        $input['ip_address'] = $this->input->ip_address();
+        $this->NewsModel->post_comentar($input);
+        redirect(base_url('index.php/newsx?id_news=') . $input['id_news']);
     }
 }

@@ -26,6 +26,17 @@ class NewsModel extends CI_Model
     return $hsl;
   }
 
+  public function getComentar($filter = [])
+  {
+    $this->db->select('*');
+    $this->db->from("tbl_komentar");
+    $this->db->order_by('id_komentar', 'desc');
+    // if ($this->session->userdata('nama_role') != 'admin') $this->db->where('show', '1');
+    if (!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
+    $res = $this->db->get();
+    return $res->result_array();
+  }
+
 
   public function getAll($filter = [])
   {
@@ -51,23 +62,25 @@ class NewsModel extends CI_Model
 
   public function getAllPagger($filter = [])
   {
-    // if (!empty($filter['last'])) {
     $this->db->select('berita_id, berita_image, berita_judul,berita_tanggal,substr(berita_isi,1,400) as berita_isi');
     $this->db->from("tbl_berita");
     $this->db->order_by('berita_id', 'desc');
-    $this->db->limit('4', 'asc');
+    $this->db->limit(4, ($filter['page'] - 1) * 4, 'asc');
+    if (!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
+    if (!empty($filter['key'])) $this->db->where('berita_judul like "%' . $filter['key'] . '%" OR berita_isi like "%' . $filter['key'] . '%"');
+    $res = $this->db->get();
+    return $res->result_array();
+  }
+
+  public function count_pagger($filter = [])
+  {
+    $this->db->select('count(*) as count');
+    $this->db->from("tbl_berita");
+    $this->db->order_by('berita_id', 'desc');
+    if (!empty($filter['key'])) $this->db->where('berita_judul like "%' . $filter['key'] . '%" OR berita_isi like "%' . $filter['key'] . '%"');
     if (!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
     $res = $this->db->get();
     return $res->result_array();
-    // }
-
-    // $this->db->select('*');
-    // $this->db->from("tbl_berita");
-    // $this->db->order_by('berita_id', 'desc');
-    // if (!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
-    // $res = $this->db->get();
-    // return $res->result_array();
-    // // return DataStructure::keyValue($res->result_array(), 'berita_id');
   }
 
 
@@ -105,5 +118,25 @@ class NewsModel extends CI_Model
     $this->db->delete('tbl_berita');
 
     ExceptionHandler::handleDBError($this->db->error(), "Hapus News Post", "News");
+  }
+
+  public function post_comentar($data)
+  {
+    $data['berita_id'] = $data['id_news'];
+    // $data['berita_id'] = $data['id_news'];
+    $this->db->insert('tbl_komentar', DataStructure::slice($data, ['berita_id', 'name', 'email', 'ip_address', 'komentar']));
+    ExceptionHandler::handleDBError($this->db->error(), "Komentar Gagal", "komentar");
+
+    return $this->db->insert_id();
+  }
+
+  public function post_show($id, $count)
+  {
+    $this->db->where('berita_id', $id);
+    $this->db->set('total_show', $count);
+    $this->db->update('tbl_berita');
+    // ExceptionHandler::handleDBError($this->db->error(), "Edit Product gagal", "product");
+
+    // return $data['id_product'];
   }
 }

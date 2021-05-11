@@ -58,11 +58,28 @@
                     <div class="blog-pagination text-center">
                         <div class="pagination-border"></div>
                         <ul>
-                            <li><a href="#"><i class="icofont-simple-left"></i></a></li>
-                            <li><a class="active" href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#"><i class="icofont-simple-right"></i></a></li>
+                            <?php
+                            if (!empty($dataContent['key'])) {
+                                $url_s = site_url('search?key=') . $dataContent['key'] . '&page=';
+                            } else {
+                                $url_s = site_url('search?page=');
+                            }
+                            if ($dataContent['select_pager'] > 1) {
+                            ?>
+                                <li><a href="<?= $url_s . ($dataContent['select_pager'] - 1) ?>"><i class="icofont-simple-left"></i></a></li>
+                            <?php } ?>
+                            <?php
+                            $dataContent['count_pagger'] = $dataContent['count_pagger'] % 4;
+                            for ($i = 1; $i <= $dataContent['count_pagger']; $i++) {
+                            ?>
+                                <li><a class="<?php if ($dataContent['select_pager'] == $i) echo 'active' ?>" href="<?= $url_s . $i ?>"><?= $i ?></a></li>
+                            <?php
+                            }
+                            ?>
+                            <?php if ($dataContent['select_pager'] < $dataContent['count_pagger']) {
+                            ?>
+                                <li><a href="<?= $url_s . ($dataContent['select_pager'] + 1) ?>"><i class="icofont-simple-right"></i></a></li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>

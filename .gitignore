@@ -26,6 +26,8 @@
 /uploads/dokumen_manifest/*
 /application/cache/*
 /assets/qrcode/*
+/assets/captcha/*
+!/assets/captcha/
 /uploads/app/*
 /uploads/idp/*
 /application_old/*
