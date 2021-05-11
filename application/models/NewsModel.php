@@ -41,7 +41,7 @@ class NewsModel extends CI_Model
   public function getAll($filter = [])
   {
     if (!empty($filter['last'])) {
-      $this->db->select('berita_id, berita_image, berita_judul');
+      $this->db->select('berita_id, berita_image, berita_judul, , total_show');
       $this->db->from("tbl_berita");
       $this->db->order_by('berita_id', 'desc');
       $this->db->limit('4', 'asc');
@@ -62,7 +62,7 @@ class NewsModel extends CI_Model
 
   public function getAllPagger($filter = [])
   {
-    $this->db->select('berita_id, berita_image, berita_judul,berita_tanggal,substr(berita_isi,1,400) as berita_isi');
+    $this->db->select('berita_id, berita_image, berita_judul,berita_tanggal,substr(berita_isi,1,400) as berita_isi, total_show');
     $this->db->from("tbl_berita");
     $this->db->order_by('berita_id', 'desc');
     $this->db->limit(4, ($filter['page'] - 1) * 4, 'asc');

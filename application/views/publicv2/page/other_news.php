@@ -27,7 +27,16 @@
                                 <h3><a href="<?= site_url() . 'newsx?id_news=' . $berita['berita_id'] ?>"><?= $berita['berita_judul'] ?></a></h3>
                                 <p><?= strip_tags($berita['berita_isi']) ?> .. </p>
                                 <div class="date-btn-area">
-                                    <h6><a href="<?= site_url() . 'newsx?id_news=' . $berita['berita_id'] ?>"><i class="icofont-calendar"></i> <?= $berita['berita_tanggal'] ?></a><a href="#"></h6>
+
+                                    <h6>
+                                        <i class="icofont-eye"></i>
+                                        <span class="total-count"><?= $berita['total_show'] ?></span>
+                                    </h6>
+                                    <h6 style="margin-left: 10px;"><i class="icofont-calendar"></i> <?php
+                                                                                                    $res_date = new DateTime($berita['berita_tanggal']);
+                                                                                                    echo  $res_date->format('l, F d y h:i');
+                                                                                                    ?>
+                                    </h6>
                                     <a class="more-btn" href="<?= site_url() . 'newsx?id_news=' . $berita['berita_id'] ?>">Read More</a>
                                 </div>
                             </div>
