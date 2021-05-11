@@ -31,8 +31,7 @@ class NewsModel extends CI_Model
     $this->db->select('*');
     $this->db->from("tbl_komentar");
     $this->db->order_by('id_komentar', 'desc');
-    // if ($this->session->userdata('nama_role') != 'admin') 
-    $this->db->where('st_show', '1');
+    // if ($this->session->userdata('nama_role') != 'admin') $this->db->where('st_show', '1');
     if (!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
     $res = $this->db->get();
     return $res->result_array();
@@ -42,10 +41,18 @@ class NewsModel extends CI_Model
   public function getAll($filter = [])
   {
     if (!empty($filter['last'])) {
-      $this->db->select('berita_id, berita_image, berita_judul, , total_show');
+      $this->db->select('berita_id, berita_image, berita_judul, total_show');
       $this->db->from("tbl_berita");
       $this->db->order_by('berita_id', 'desc');
       $this->db->limit('4', 'asc');
+      if (!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
+      $res = $this->db->get();
+      return $res->result_array();
+    }
+    if (!empty($filter['sort'])) {
+      $this->db->select('berita_id, berita_image, berita_judul,berita_tanggal, total_show,substr(berita_isi,1,400) as berita_isi');
+      $this->db->from("tbl_berita");
+      $this->db->order_by('berita_id', 'desc');
       if (!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
       $res = $this->db->get();
       return $res->result_array();
@@ -145,10 +152,10 @@ class NewsModel extends CI_Model
   }
 
 
-  public function delete_comentar($id)
+  public function delete_comentar($id, $val)
   {
     $this->db->where('id_komentar', $id);
-    $this->db->set('st_show', 2);
+    $this->db->set('st_show', $val);
     $this->db->update('tbl_komentar');
     // ExceptionHandler::handleDBError($this->db->error(), "Edit Product gagal", "product");
 

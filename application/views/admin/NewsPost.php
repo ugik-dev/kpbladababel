@@ -84,7 +84,9 @@
         return $.ajax({
           url: `<?php echo site_url('NewsController/getAll/') ?>`,
           'type': 'GET',
-          data: {},
+          data: {
+            'sort': true
+          },
           success: function(data) {
             swal.close();
             var json = JSON.parse(data);
@@ -111,7 +113,11 @@
           // var p = panjang.substring(0, 1200);
           var index_p = panjang.lastIndexOf("</p>", 1200);
           p = panjang.substring(0, index_p);
-
+          if (news['berita_id'] < 0) {
+            btn_del = ``
+          } else {
+            btn_del = `<a type="button" class="delete btn btn-danger my-1 mr-sm-3" href='' data-id='${news['berita_id']}' ><i class="fal fa-trash"></i>  Hapus </a>`
+          }
           news_list.append(`
       <div class="col-sm-12">
           <div class="ibox product-box" style="cursor:pointer" >
@@ -129,8 +135,7 @@
               </div>
               <div class="col-sm-12 ibox-content">
                 
-             
-              <a type="button" class="delete btn btn-danger my-1 mr-sm-3" href='' data-id='${news['berita_id']}' ><i class="fal fa-trash"></i>  Hapus </a>
+             ${btn_del}
               <a type="button" class="btn btn-primary my-1 mr-sm-3" href="<?php echo base_url() . 'index.php/newsx?id_news='; ?>${news['berita_id']}"><i class="fal fa-eye"></i>  Lihat Post </a>
               <a type="button" class="btn btn-primary my-1 mr-sm-3" href="<?php echo base_url() . 'index.php/NewsController/edit_post?berita_id='; ?>${news['berita_id']}"><i class="fal fa-pencil"></i>  Edit</a>
             

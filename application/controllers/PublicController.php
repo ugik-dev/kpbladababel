@@ -30,33 +30,169 @@ class PublicController extends CI_Controller
 
     public function about()
     {
-        // $dataContent['pricing'] = $this->HargaMWPModel->getLatestPrice(array('limit' => '10'));
+        $input['id_news'] = '-5';
+        $data = $this->NewsModel->get($input['id_news']);
+        $this->NewsModel->post_show($input['id_news'], $data['total_show'] + 1);
+        $data['comentar'] = $this->NewsModel->getComentar(array('berita_id' => $input['id_news']));
+        $expiration = time() - 7200; // Two hour limit
+        $this->db->where('captcha_time < ', $expiration)
+            ->delete('captcha');
 
-        // var_dump($pricing);
-        // die();
+        $this->load->helper('captcha');
+        $this->load->helper('string');
+        $vals = array(
+            'word'          => random_string('alpha', 8),
+            'img_path'      => APPPATH . '../assets/captcha/',
+            'img_url'       => base_url('assets/captcha/'),
+            'font_path'     => './path/to/fonts/texb.ttf',
+            'img_width'     => '150',
+            'img_height'    => 40,
+            'expiration'    => 7200,
+            'word_length'   => 8,
+            'font_size'     => 20,
+            'img_id'        => 'Imageid',
+            'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
+            'colors'        => array(
+                'background' => array(255, 255, 255),
+                'border' => array(255, 255, 255),
+                'text' => array(0, 0, 0),
+                'grid' => array(255, 40, 40)
+            )
+        );
+
+        // store image html code in a variable
+        $cap = create_captcha($vals);
+
+        $data_captca = array(
+            'captcha_time'  => $cap['time'],
+            'ip_address'    => $this->input->ip_address(),
+            'word'          => $cap['word']
+        );
+
+        $query = $this->db->insert_string('captcha', $data_captca);
+        $this->db->query($query);
+
+        $this->session->set_userdata('mycaptcha', $cap['word']);
+        $data['captcha'] = $cap['image'];
+
         $this->load->view('PublicPage', [
-            'title' => "About",
-            'page' => 'about',
-            'content' => 'publicv2/page/layout',
-            // 'dataContent' => $dataContent
+            'title' => "{$data['berita_judul']}",
+            'content' =>
+            'publicv2/SingleBlog',
+            'contentData' => $data
         ]);
     }
 
     public function services()
     {
+        $input['id_news'] = '-2';
+        $data = $this->NewsModel->get($input['id_news']);
+        $this->NewsModel->post_show($input['id_news'], $data['total_show'] + 1);
+        $data['comentar'] = $this->NewsModel->getComentar(array('berita_id' => $input['id_news']));
+        $expiration = time() - 7200; // Two hour limit
+        $this->db->where('captcha_time < ', $expiration)
+            ->delete('captcha');
+
+        $this->load->helper('captcha');
+        $this->load->helper('string');
+        $vals = array(
+            'word'          => random_string('alpha', 8),
+            'img_path'      => APPPATH . '../assets/captcha/',
+            'img_url'       => base_url('assets/captcha/'),
+            'font_path'     => './path/to/fonts/texb.ttf',
+            'img_width'     => '150',
+            'img_height'    => 40,
+            'expiration'    => 7200,
+            'word_length'   => 8,
+            'font_size'     => 20,
+            'img_id'        => 'Imageid',
+            'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
+            'colors'        => array(
+                'background' => array(255, 255, 255),
+                'border' => array(255, 255, 255),
+                'text' => array(0, 0, 0),
+                'grid' => array(255, 40, 40)
+            )
+        );
+
+        // store image html code in a variable
+        $cap = create_captcha($vals);
+
+        $data_captca = array(
+            'captcha_time'  => $cap['time'],
+            'ip_address'    => $this->input->ip_address(),
+            'word'          => $cap['word']
+        );
+
+        $query = $this->db->insert_string('captcha', $data_captca);
+        $this->db->query($query);
+
+        $this->session->set_userdata('mycaptcha', $cap['word']);
+        $data['captcha'] = $cap['image'];
+
         $this->load->view('PublicPage', [
-            'title' => "Pelayanan",
-            'page' => 'pelayanan',
-            'content' => 'publicv2/page/layout',
+            'title' => "{$data['berita_judul']}",
+            'content' =>
+            'publicv2/SingleBlog',
+            'contentData' => $data
         ]);
     }
 
     public function terms()
     {
+        $input['id_news'] = '-4';
+        $data = $this->NewsModel->get($input['id_news']);
+        $this->NewsModel->post_show($input['id_news'], $data['total_show'] + 1);
+        $data['comentar'] = $this->NewsModel->getComentar(array('berita_id' => $input['id_news']));
+        $expiration = time() - 7200; // Two hour limit
+        $this->db->where('captcha_time < ', $expiration)
+            ->delete('captcha');
+
+        $this->load->helper('captcha');
+        $this->load->helper('string');
+        $vals = array(
+            'word'          => random_string('alpha', 8),
+            'img_path'      => APPPATH . '../assets/captcha/',
+            'img_url'       => base_url('assets/captcha/'),
+            'font_path'     => './path/to/fonts/texb.ttf',
+            'img_width'     => '150',
+            'img_height'    => 40,
+            'expiration'    => 7200,
+            'word_length'   => 8,
+            'font_size'     => 20,
+            'img_id'        => 'Imageid',
+            'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
+            'colors'        => array(
+                'background' => array(255, 255, 255),
+                'border' => array(255, 255, 255),
+                'text' => array(0, 0, 0),
+                'grid' => array(255, 40, 40)
+            )
+        );
+
+        // store image html code in a variable
+        $cap = create_captcha($vals);
+
+        $data_captca = array(
+            'captcha_time'  => $cap['time'],
+            'ip_address'    => $this->input->ip_address(),
+            'word'          => $cap['word']
+        );
+
+        $query = $this->db->insert_string('captcha', $data_captca);
+        $this->db->query($query);
+
+        $this->session->set_userdata('mycaptcha', $cap['word']);
+        $data['captcha'] = $cap['image'];
+
         $this->load->view('PublicPage', [
-            'title' => "Syarat-Syarat",
-            'page' => 'terms',
-            'content' => 'publicv2/page/layout',
+            'title' => "{$data['berita_judul']}",
+            'content' =>
+            'publicv2/SingleBlog',
+            'contentData' => $data
         ]);
     }
 
@@ -100,19 +236,114 @@ class PublicController extends CI_Controller
 
     public function procedur()
     {
+        $input['id_news'] = '-3';
+        $data = $this->NewsModel->get($input['id_news']);
+        $this->NewsModel->post_show($input['id_news'], $data['total_show'] + 1);
+        $data['comentar'] = $this->NewsModel->getComentar(array('berita_id' => $input['id_news']));
+        $expiration = time() - 7200; // Two hour limit
+        $this->db->where('captcha_time < ', $expiration)
+            ->delete('captcha');
+
+        $this->load->helper('captcha');
+        $this->load->helper('string');
+        $vals = array(
+            'word'          => random_string('alpha', 8),
+            'img_path'      => APPPATH . '../assets/captcha/',
+            'img_url'       => base_url('assets/captcha/'),
+            'font_path'     => './path/to/fonts/texb.ttf',
+            'img_width'     => '150',
+            'img_height'    => 40,
+            'expiration'    => 7200,
+            'word_length'   => 8,
+            'font_size'     => 20,
+            'img_id'        => 'Imageid',
+            'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
+            'colors'        => array(
+                'background' => array(255, 255, 255),
+                'border' => array(255, 255, 255),
+                'text' => array(0, 0, 0),
+                'grid' => array(255, 40, 40)
+            )
+        );
+
+        // store image html code in a variable
+        $cap = create_captcha($vals);
+
+        $data_captca = array(
+            'captcha_time'  => $cap['time'],
+            'ip_address'    => $this->input->ip_address(),
+            'word'          => $cap['word']
+        );
+
+        $query = $this->db->insert_string('captcha', $data_captca);
+        $this->db->query($query);
+
+        $this->session->set_userdata('mycaptcha', $cap['word']);
+        $data['captcha'] = $cap['image'];
+
         $this->load->view('PublicPage', [
-            'title' => "Prosedur",
-            'page' => 'procedur',
-            'content' => 'publicv2/page/layout',
+            'title' => "{$data['berita_judul']}",
+            'content' =>
+            'publicv2/SingleBlog',
+            'contentData' => $data
         ]);
     }
 
     public function visi_misi()
     {
+        $input['id_news'] = '-1';
+        $data = $this->NewsModel->get($input['id_news']);
+        $this->NewsModel->post_show($input['id_news'], $data['total_show'] + 1);
+        $data['comentar'] = $this->NewsModel->getComentar(array('berita_id' => $input['id_news']));
+        $expiration = time() - 7200; // Two hour limit
+        $this->db->where('captcha_time < ', $expiration)
+            ->delete('captcha');
+
+        $this->load->helper('captcha');
+        $this->load->helper('string');
+        $vals = array(
+            'word'          => random_string('alpha', 8),
+            'img_path'      => APPPATH . '../assets/captcha/',
+            'img_url'       => base_url('assets/captcha/'),
+            'font_path'     => './path/to/fonts/texb.ttf',
+            'img_width'     => '150',
+            'img_height'    => 40,
+            'expiration'    => 7200,
+            'word_length'   => 8,
+            'font_size'     => 20,
+            'img_id'        => 'Imageid',
+            'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+
+            'colors'        => array(
+                'background' => array(255, 255, 255),
+                'border' => array(255, 255, 255),
+                'text' => array(0, 0, 0),
+                'grid' => array(255, 40, 40)
+            )
+        );
+
+        // store image html code in a variable
+        $cap = create_captcha($vals);
+
+        $data_captca = array(
+            'captcha_time'  => $cap['time'],
+            'ip_address'    => $this->input->ip_address(),
+            'word'          => $cap['word']
+        );
+
+        $query = $this->db->insert_string('captcha', $data_captca);
+        $this->db->query($query);
+
+        $this->session->set_userdata('mycaptcha', $cap['word']);
+        $data['captcha'] = $cap['image'];
+
         $this->load->view('PublicPage', [
             'title' => "Visi & Misi",
             'page' => 'visi_misi',
-            'content' => 'publicv2/page/layout',
+            'content' =>
+            'publicv2/SingleBlog',
+            'contentData' => $data
         ]);
     }
 

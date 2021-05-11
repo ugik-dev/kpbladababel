@@ -41,10 +41,10 @@
                 </div>
                 <div class="col-md-4">
                     <div class="blog-sidebar">
-                        <?php $this->load->view('publicv2/widget/search') ?>
-                        <?php $this->load->view('publicv2/widget/categori') ?>
-                        <?php $this->load->view('publicv2/widget/archives') ?>
-                        <?php $this->load->view('publicv2/widget/tags') ?>
+                        <?php $this->load->view('publicv2/widget/search');
+                        //  $this->load->view('publicv2/widget/categori') 
+                        //  $this->load->view('publicv2/widget/archives') 
+                        $this->load->view('publicv2/widget/tags'); ?>
 
                         <!--end widget single-->
                         <!--start widget single-->

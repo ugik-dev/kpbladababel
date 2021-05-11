@@ -48,35 +48,80 @@
                     <!--end blog single-->
                     <!--start post comment wrap-->
                     <div class="post-comment-wrap">
-                        <h3>Comments (<?= count($contentData['comentar']) ?>)</h3>
+                        <h3>Comments (<?php
+                                        $count = 0;
+                                        foreach ($contentData['comentar'] as $key => $value) {
+                                            if ($value['st_show'] == '1') {
+                                                $count++;
+                                            }
+                                        }
+                                        echo $count;
+                                        ?>)</h3>
                         <!--start comment single-->
                         <!--start comment single-->
                         <?php foreach ($contentData['comentar'] as $comentar) {
 
+                            if (!empty($this->session->userdata()['nama_role']) && $this->session->userdata()['nama_role'] == 'admin') {
+                                if ($comentar['st_show'] == 1) {
                         ?>
-                            <div class="comment-single">
-                                <div class="comnt-text">
-                                    <?php if (!empty($this->session->userdata()['nama_role'])) {
-
-                                        if ($this->session->userdata()['nama_role'] == 'admin') {
+                                    <div class="comment-single">
+                                        <div class="comnt-text">
+                                            <?php
                                             echo '<div class="reply-icon">
-                                            <a href="' . site_url('NewsController/delete_comentar?id=') . $comentar['id_komentar'] . '&id_news=' . $contentData['berita_id'] . '">Delete <i class="icofont-trash"></i></a>
-                                            </div>';
-                                        }
-                                    } ?>
-                                    <!-- <div class="reply-icon">
-                                        <a href="#">Reply <i class="icofont-reply-all"></i></a>
-                                    </div> -->
-                                    <div class="comnt-info">
-                                        <h5><?= $comentar['name'] ?></h5>
-                                        <p><?= $comentar['date'] ?></p>
+                                            <a href="' . site_url('NewsController/hide_comentar?id=') . $comentar['id_komentar'] . '&id_news=' . $contentData['berita_id'] . '"> Hide <i class="icofont-eye"></i></a>
+                                            </div>'; ?>
+                                            <div class="comnt-info">
+                                                <h5><?= $comentar['name'] ?></h5>
+                                                <p><?= $comentar['date'] ?></p>
+                                            </div>
+                                            <p>
+                                                <?= nl2br($comentar['komentar'], false) ?>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <p>
-                                        <?= nl2br($comentar['komentar'], false) ?>
-                                    </p>
+                                <?php
+                                } else {
+                                ?>
+                                    <div class="comment-single" style="opacity: 0.9; background-color: #c4c2c2">
+                                        <div class="comnt-text">
+                                            <?php
+                                            echo '<div class="reply-icon">
+                                            <a href="' . site_url('NewsController/unhide_comentar?id=') . $comentar['id_komentar'] . '&id_news=' . $contentData['berita_id'] . '"> Un-Hide <i class="icofont-eye-blocked"></i></a>
+                                            </div>'; ?>
+                                            <div class="comnt-info">
+                                                <h5><?= $comentar['name'] ?></h5>
+                                                <p><?= $comentar['date'] ?></p>
+                                            </div>
+                                            <p>
+                                                <?= nl2br($comentar['komentar'], false) ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+
+                            <?php
+                                // if (!empty($this->session->userdata()['nama_role'])) {
+
+
+                                // }
+                            } else {
+
+                            ?>
+                                <div class="comment-single">
+                                    <div class="comnt-text">
+                                        <div class="comnt-info">
+                                            <h5><?= $comentar['name'] ?></h5>
+                                            <p><?= $comentar['date'] ?></p>
+                                        </div>
+                                        <p>
+                                            <?= nl2br($comentar['komentar'], false) ?>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php } ?>
+                        <?php }
+                        } ?>
                         <!--end comment single-->
                         <!--start comment form-->
                         <div class="comment-form">
@@ -114,8 +159,8 @@
                 <div class="col-md-4">
                     <div class="blog-sidebar">
                         <?php $this->load->view('publicv2/widget/search');
-                        $this->load->view('publicv2/widget/categori');
-                        $this->load->view('publicv2/widget/archives');
+                        // $this->load->view('publicv2/widget/categori');
+                        // $this->load->view('publicv2/widget/archives');
                         $this->load->view('publicv2/widget/tags'); ?>
                     </div>
                 </div>
