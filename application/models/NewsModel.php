@@ -31,7 +31,8 @@ class NewsModel extends CI_Model
     $this->db->select('*');
     $this->db->from("tbl_komentar");
     $this->db->order_by('id_komentar', 'desc');
-    // if ($this->session->userdata('nama_role') != 'admin') $this->db->where('show', '1');
+    // if ($this->session->userdata('nama_role') != 'admin') 
+    $this->db->where('st_show', '1');
     if (!empty($filter['berita_id'])) $this->db->where('berita_id', $filter['berita_id']);
     $res = $this->db->get();
     return $res->result_array();
@@ -103,13 +104,16 @@ class NewsModel extends CI_Model
 
   public function edit($data)
   {
-    $this->db->where('id_product', $data['id_product']);
-    $this->db->set('cover_product', !empty($data['cover_product']) ? $data['cover_product'] : NULL);
-    $this->db->set('attachment_product', !empty($data['attachment_product']) ? $data['attachment_product'] : NULL);
-    $this->db->update('product', DataStructure::slice($data, ['nama_product', 'deskripsi_product'], TRUE));
-    ExceptionHandler::handleDBError($this->db->error(), "Edit Product gagal", "product");
+    // var_dump($data);
+    // die();
+    $this->db->where('berita_id', $data['berita_id']);
+    if (!empty($data['berita_judul'])) $this->db->set('berita_judul', $data['berita_judul']);
+    if (!empty($data['berita_isi'])) $this->db->set('berita_isi', $data['berita_isi']);
+    if (!empty($data['berita_image'])) $this->db->set('berita_image', $data['berita_image']);
+    $this->db->update('tbl_berita');
+    ExceptionHandler::handleDBError($this->db->error(), "Edit Berita Gagal", "berita");
 
-    return $data['id_product'];
+    return $data['berita_id'];
   }
 
   public function delete($data)
@@ -135,6 +139,17 @@ class NewsModel extends CI_Model
     $this->db->where('berita_id', $id);
     $this->db->set('total_show', $count);
     $this->db->update('tbl_berita');
+    // ExceptionHandler::handleDBError($this->db->error(), "Edit Product gagal", "product");
+
+    // return $data['id_product'];
+  }
+
+
+  public function delete_comentar($id)
+  {
+    $this->db->where('id_komentar', $id);
+    $this->db->set('st_show', 2);
+    $this->db->update('tbl_komentar');
     // ExceptionHandler::handleDBError($this->db->error(), "Edit Product gagal", "product");
 
     // return $data['id_product'];

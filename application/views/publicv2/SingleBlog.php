@@ -56,9 +56,17 @@
                         ?>
                             <div class="comment-single">
                                 <div class="comnt-text">
+                                    <?php if (!empty($this->session->userdata()['nama_role'])) {
+
+                                        if ($this->session->userdata()['nama_role'] == 'admin') {
+                                            echo '<div class="reply-icon">
+                                            <a href="' . site_url('NewsController/delete_comentar?id=') . $comentar['id_komentar'] . '&id_news=' . $contentData['berita_id'] . '">Delete <i class="icofont-trash"></i></a>
+                                            </div>';
+                                        }
+                                    } ?>
                                     <!-- <div class="reply-icon">
-                                    <a href="#">Reply <i class="icofont-reply-all"></i></a>
-                                </div> -->
+                                        <a href="#">Reply <i class="icofont-reply-all"></i></a>
+                                    </div> -->
                                     <div class="comnt-info">
                                         <h5><?= $comentar['name'] ?></h5>
                                         <p><?= $comentar['date'] ?></p>
