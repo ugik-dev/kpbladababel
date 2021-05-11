@@ -27,7 +27,7 @@
 /application/cache/*
 /assets/qrcode/*
 /assets/captcha/*
-!/assets/captcha/
+!/assets/captcha/default.jpg
 /uploads/app/*
 /uploads/idp/*
 /application_old/*
