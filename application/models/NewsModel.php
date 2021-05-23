@@ -157,8 +157,5 @@ class NewsModel extends CI_Model
     $this->db->where('id_komentar', $id);
     $this->db->set('st_show', $val);
     $this->db->update('tbl_komentar');
-    // ExceptionHandler::handleDBError($this->db->error(), "Edit Product gagal", "product");
-
-    // return $data['id_product'];
   }
 }

@@ -29,7 +29,8 @@
                 <div class="col">
                     <div class="single-item  layout-patners">
                         <div class="icon-box logo-patners">
-                            <img src="<?= base_url('assets/') ?>img/b3s.png" alt="#" />
+                            <img style="max-height: 7rem ;max-width: 7rem" src="<?= base_url('assets/') ?>img/b3s_new.jpeg" alt="#" />
+                            <!-- <img src="<?= base_url('assets/') ?>img/b3s_new.png" alt="#" /> -->
                         </div>
                         <div class="text-box">
                             <h2 class="single-item-title">PT B3S</h2>
@@ -68,7 +69,8 @@
                 <div class="col">
                     <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
-                            <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
+                            <img style="max-height: 7rem ;max-width: 7rem" src="<?= base_url('assets/') ?>img/koperasi.jpeg" alt="#" />
+                            <!-- <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" /> -->
                         </div>
                         <div class="text-box">
                             <h2 class="single-item-title">KPL</h2>
@@ -80,7 +82,38 @@
                 <div class="col">
                     <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
-                            <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
+                            <img style="max-height: 7rem ;max-width: 7rem" src="<?= base_url('assets/') ?>img/tp4l.jpeg" alt="#" />
+                            <!-- <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" /> -->
+                        </div>
+                        <div class="text-box">
+                            <h2 class="single-item-title">TP4L</h2>
+                            <h3 class="single-item-description">
+                                Tim Pembinaan, Pengawasan, Pengendalian Perdagangan Lada </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="single-item layout-patners">
+                        <div class="icon-box logo-patners">
+                            <img style="max-height: 7rem ;max-width: 7rem" src="<?= base_url('assets/') ?>img/dewanrempah.jpeg" alt="#" />
+                            <!-- <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" /> -->
+                        </div>
+                        <div class="text-box">
+                            <h2 class="single-item-title">Dewan Perwakilan Rempah</h2>
+                            <h3 class="single-item-description">
+                                Provinsi Bangka Belitung.
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col">
+                    <div class="single-item layout-patners">
+                        <div class="icon-box logo-patners">
+                            <img src="<?= base_url('assets/') ?>img/logo-babel.png" style="max-width: 100px" alt="#" />
+                            <!-- <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" /> -->
                         </div>
                         <div class="text-box">
                             <h2 class="single-item-title">Disperindag</h2>
@@ -93,7 +126,8 @@
                 <div class="col">
                     <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
-                            <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
+                            <img src="<?= base_url('assets/') ?>img/logo-babel.png" style="max-width: 100px" alt="#" />
+                            <!-- <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" /> -->
                         </div>
                         <div class="text-box">
                             <h2 class="single-item-title">BPSMB</h2>
@@ -107,7 +141,8 @@
                 <div class="col">
                     <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
-                            <img style="max-height: 100px;max-width: 100px;" src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
+                            <img src="<?= base_url('assets/') ?>img/logo-babel.png" style="max-width: 100px" alt="#" />
+                            <!-- <img style="max-height: 100px;max-width: 100px;" src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" /> -->
                         </div>
                         <div class="text-box">
                             <h2 class="single-item-title">Balai Karantina</h2>
@@ -121,7 +156,7 @@
                 <div class="col">
                     <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
-                            <img style="max-height: 5rem ;max-width: 5rem" src="<?= base_url('assets/assets_v2/') ?>img/bp3l-logo-sm.png" alt="#" />
+                            <img style="max-height: 7rem ;max-width: 7rem" src="<?= base_url('assets/assets_v2/') ?>img/bp3l-logo-sm.png" alt="#" />
                         </div>
                         <div class="text-box">
                             <h2 class="single-item-title">BP3L</h2>
@@ -187,46 +222,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col">
-                    <div class="single-item layout-patners"
-                >
-                        <div class="icon-box logo-patners">
-                            <img src="<?= base_url('assets/assets_v2/') ?>img/security.svg" alt="#" />
-                        </div>
-                        <div class="text-box">
-                            <h2 class="single-item-title">Kope</h2>
-                            <h3 class="single-item-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </h3>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="col">
-                    <div class="single-item layout-patners">
-                        <div class="icon-box logo-patners">
-                            <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
-                        </div>
-                        <div class="text-box">
-                            <h2 class="single-item-title">TP4L</h2>
-                            <h3 class="single-item-description">
-                                Tim Pembinaan, Pengawasan, Pengendalian Perdagangan Lada </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="single-item layout-patners">
-                        <div class="icon-box logo-patners">
-                            <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
-                        </div>
-                        <div class="text-box">
-                            <h2 class="single-item-title">Dewan Perwakilan Rempah</h2>
-                            <h3 class="single-item-description">
-                                Provinsi Bangka Belitung.
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
