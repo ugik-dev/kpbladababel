@@ -63,7 +63,7 @@ class UserController extends CI_Controller
 			$data = $this->input->post();
 
 			$data = $this->UserModel->registerUser($data);
-			// $this->email_send($data, 'registr');
+			$this->email_send($data, 'registr');
 			echo json_encode(array("error" => FALSE, "user" => 'success'));
 		} catch (Exception $e) {
 			ExceptionHandler::handle($e);
