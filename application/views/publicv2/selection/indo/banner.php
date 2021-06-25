@@ -60,7 +60,6 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 text-center">
                         <div class="single-statics">
-                            <?php var_dump($dataContent['pricing_last']) ?>
                             <div class="icon-box">
                                 <i class="ren-people"></i>
                             </div>
