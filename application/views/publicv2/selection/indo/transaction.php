@@ -39,8 +39,8 @@
                         <tr>
                             <th style="width : 30%">Tanggal</th>
                             <th style="width : 30%">Mixed Quality</th>
-                            <th style="width : 300px">SNI 1</th>
                             <th style="width : 300px">SNI 2</th>
+                            <th style="width : 300px">SNI 1</th>
                         </tr>
                     </thead>
                     <tbody id="HargaMWPTable">
