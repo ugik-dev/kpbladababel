@@ -181,7 +181,7 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <!-- <div class="col">
                     <div class="single-item layout-patners">
                         <div class="icon-box logo-patners">
                             <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
@@ -208,20 +208,8 @@
                             </h3>
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="single-item layout-patners">
-                        <div class="icon-box logo-patners">
-                            <img src="<?= base_url('assets/assets_v2/') ?>img/customer-service.svg" alt="#" />
-                        </div>
-                        <div class="text-box">
-                            <h2 class="single-item-title">Koperasi</h2>
-                            <h3 class="single-item-description">
-                                Petani Lada Bangka Belitung.
-                            </h3>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
+
             </div>
         </div>
     </div>
