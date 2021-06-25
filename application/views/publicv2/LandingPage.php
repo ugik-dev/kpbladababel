@@ -99,7 +99,7 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
         var renderData = [];
         Object.values(data).forEach((harga_mwp) => {
             HargaMWPTable.append('<tr> <td>' +
-                harga_mwp['tanggal_berlaku'] + '</td><td>' + formatRupiah(harga_mwp['harga_mq_petani'], 'Rp. ') + '</td><td>' + formatRupiah(harga_mwp['harga_sni1_petani'], 'Rp. ') + '</td><td>' + formatRupiah(harga_mwp['harga_sni2_petani'], 'Rp. ') + '</td></tr>')
+                harga_mwp['tanggal_berlaku'] + '</td><td>' + formatRupiah(harga_mwp['harga_sni1_petani'], 'Rp. ') + '</td><td>' + formatRupiah(harga_mwp['harga_mq_petani'], 'Rp. ') + '</td><td>' + formatRupiah(harga_mwp['harga_sni2_petani'], 'Rp. ') + '</td></tr>')
 
         })
 
