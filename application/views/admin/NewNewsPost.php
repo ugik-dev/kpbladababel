@@ -17,6 +17,10 @@
 <script type="text/javascript">
   $(function() {
     $('#news_post').addClass('active');
-    CKEDITOR.replace('ckeditor');
+
+    CKEDITOR.replace('ckeditor', {
+      filebrowserImageBrowseUrl: '<?php echo base_url('assets/kcfinder/browse.php'); ?>',
+      height: '400px'
+    });
   });
 </script>
