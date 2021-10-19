@@ -10,27 +10,31 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center">
             <div class="col-lg-7 col-md-11">
-                <ul class="nav nav-pills mb-3 justify-content-center transaction-bnt-outline" id="transaction-pills-tab" role="tablist">
-                    <li class="nav-item transaction-nav-item">
-                        <a class="nav-link transaction-nav-link active" id="transaction-pills-deposits-tab" data-toggle="pill" href="#pills-deposits" role="tab" aria-controls="pills-deposits" aria-selected="true">
-                            <span class="d-flex align-items-center"><i class="ren-deposits d-flex align-items-center"></i>LAST<br />DEPOSITS</span>
-                        </a>
-                    </li>
-                    <li class="nav-item transaction-nav-item">
-                        <a class="nav-link transaction-nav-link" id="transaction-pills-withdrawal-tab" data-toggle="pill" href="#pills-withdrawals" role="tab" aria-controls="pills-withdrawal" aria-selected="false">
-                            <span class="d-flex align-items-center"><i class="ren-investo d-flex align-items-center"></i>TOP<br />WITHDRAWALS</span>
-                        </a>
-                    </li>
-                    <li class="nav-item transaction-nav-item">
-                        <a class="nav-link transaction-nav-link" id="transaction-pills-investing-tab" data-toggle="pill" href="#pills-invest" role="tab" aria-controls="pills-invest" aria-selected="false">
-                            <span class="d-flex align-items-center"><i class="ren-people3 d-flex align-items-center"></i>LAST<br />INVESTORS</span>
-                        </a>
-                    </li>
-                </ul>
+                <form id="filter_harga">
+
+                    <ul class="nav nav-pills mb-3 justify-content-center transaction-bnt-outline" id="transaction-pills-tab" role="tablist">
+                        <li class="nav-item transaction-nav-item filter_harga" data-filter="harian">
+                            <div class="form-group row mb-0">
+                                <label for="inputEmail3" class="col-sm-1 col-form-label">Dari:</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control transaction-nav-link mb-0" name="start" id="start" placeholder="">
+                                    <input type="hidden" id="limit" name="limit" value="10">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item transaction-nav-item filter_harga" data-filter="harian">
+                            <div class="form-group row mb-0">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Sampai:</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control transaction-nav-link" name="end" id="end" placeholder="">
+                                </div>
+                            </div>
+                        </li>
+                </form>
             </div>
-        </div> -->
+        </div>
 
         <div class="row">
             <div class="col-lg-12">

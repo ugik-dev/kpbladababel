@@ -14,7 +14,7 @@ class HargaMWPModel extends CI_Model
       $this->db->limit(1);
       // $res = $this->db->get();
       // return $res->result_array();
-    
+
     }
     $res = $this->db->get();
     return DataStructure::keyValue($res->result_array(), 'id_harga_mwp');
@@ -58,13 +58,13 @@ class HargaMWPModel extends CI_Model
     if (!empty($filter['latest3'])) {
       // $res = $this->db->get();
       // return $res->result_array();
-    
+
     }
     $res = $this->db->get();
     return $res->result_array();
- }
+  }
 
- public function getLatest1()
+  public function getLatest1()
   {
     $this->db->select("*");
     $this->db->from("harga_mwp");
@@ -74,27 +74,33 @@ class HargaMWPModel extends CI_Model
     // if (!empty($filter['latest3'])) {
     //   // $res = $this->db->get();
     //   // return $res->result_array();
-    
+
     // }
     $res = $this->db->get();
     return $res->result_array();
- }
+  }
 
- public function getLatestPrice($filter = [])
- {
-   $this->db->select("id_harga_mwp,tanggal_berlaku,harga_mq_petani,harga_sni1_petani,harga_sni2_petani");
-   $this->db->from("harga_mwp");
-   $this->db->order_by("tanggal_berlaku", "DESC");
-   if(!empty($filter['limit']))$this->db->limit($filter['limit']);
-   // if (!empty($filter['latest'])) $this->db->limit(1);
-   // if (!empty($filter['latest3'])) {
-   //   // $res = $this->db->get();
-   //   // return $res->result_array();
-   
-   // }
-   $res = $this->db->get();
-   return $res->result_array();
-}
+  public function getLatestPrice($filter = [])
+  {
+    $this->db->select("id_harga_mwp,tanggal_berlaku,harga_mq_petani,harga_sni1_petani,harga_sni2_petani");
+    $this->db->from("harga_mwp");
+    $this->db->order_by("tanggal_berlaku", "DESC");
+    if (!empty($filter['limit'])) $this->db->limit($filter['limit']);
+    if (!empty($filter['start'])) $this->db->where('tanggal_berlaku >=', $filter['start']);
+    if (!empty($filter['end'])) $this->db->where('tanggal_berlaku <=', $filter['end']);
+    // if (!empty($filter['filterday'])) {
+    //   if (!empty($filter['filterday'])) {
+    //   }
+    // }
+    // if (!empty($filter['latest'])) $this->db->limit(1);
+    // if (!empty($filter['latest3'])) {
+    //   // $res = $this->db->get();
+    //   // return $res->result_array();
+
+    // }
+    $res = $this->db->get();
+    return $res->result_array();
+  }
 
 
   public function add($data)
@@ -113,11 +119,11 @@ class HargaMWPModel extends CI_Model
       'd_harga_sni1_petani',
       'd_harga_sni1_fob',
       'd_harga_iso_petani',
-      'd_harga_iso_fob','harga_mq_petani','harga_mq_fob','d_harga_mq_petani','d_harga_mq_fob',
-      
+      'd_harga_iso_fob', 'harga_mq_petani', 'harga_mq_fob', 'd_harga_mq_petani', 'd_harga_mq_fob',
+
       'd_harga_sni2_petani',
       'd_harga_sni2_fob',
-      
+
       'harga_sni2_petani',
       'harga_sni2_fob'
     ]));
@@ -164,7 +170,7 @@ class HargaMWPModel extends CI_Model
       'd_harga_sni2_fob',
       'd_harga_iso_petani',
       'd_harga_iso_fob',
-      'harga_mq_petani','harga_mq_fob','d_harga_mq_petani','d_harga_mq_fob'
+      'harga_mq_petani', 'harga_mq_fob', 'd_harga_mq_petani', 'd_harga_mq_fob'
     ], TRUE));
     ExceptionHandler::handleDBError($this->db->error(), "Edit Harga MWP gagal", "harga_mwp");
 

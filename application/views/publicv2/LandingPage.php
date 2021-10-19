@@ -45,6 +45,17 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 ?>
 
 <script>
+    filter_harga = $('.filter_harga');
+
+    var filter_harga = {
+        'form': $('#filter_harga'),
+        'start': $('#filter_harga').find('#start'),
+        'end': $('#filter_harga').find('#end'),
+        'limit': $('#filter_harga').find('#limit'),
+        // 'limit': $('#lim'),
+    }
+
+
     function formatRupiah(angka, prefix) {
         var number_string = angka.toString();
         // split = [];
@@ -69,13 +80,11 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
 
     getTabelHarga();
 
-    function getTabelHarga() {
+    function getTabelHarga(filterday = '') {
         return $.ajax({
             url: `<?php echo site_url('HargaMWPController/getLatestPrice/') ?>`,
             'type': 'GET',
-            data: {
-                limit: 10
-            },
+            data: filter_harga.form.serialize(),
             success: function(data) {
                 // swal.close();
                 var json = JSON.parse(data);
@@ -95,16 +104,20 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
             return;
         }
         var i = 0;
-
         var renderData = [];
         Object.values(data).forEach((harga_mwp) => {
             HargaMWPTable.append('<tr> <td>' +
                 harga_mwp['tanggal_berlaku'] + '</td><td>' + formatRupiah(harga_mwp['harga_mq_petani'], 'Rp. ') + '</td><td>' + formatRupiah(harga_mwp['harga_sni2_petani'], 'Rp. ') + '</td><td>' + formatRupiah(harga_mwp['harga_sni1_petani'], 'Rp. ') + '</td></tr>')
 
         })
-
-
     }
+
+    filter_harga.start.on('change', function() {
+        // var currentData = $(this).data('filter');
+        // console.log(currentData)
+        HargaMWPTable.html('');
+        getTabelHarga()
+    })
 </script>
 <script>
     $(document).ready(function() {
@@ -276,6 +289,7 @@ if (!empty($_COOKIE['lang_set']) && $_COOKIE['lang_set'] == 'en') {
             renderData.push(["ISO", "Rp " + dataHargaMWP['harga_iso_petani'] + ' || USD ' + dataHargaMWP['d_harga_iso_petani'], "Rp" + dataHargaMWP['harga_iso_fob'] + ' || USD ' + dataHargaMWP['d_harga_iso_fob']]);
             HargaMWPTable.clear().rows.add(renderData).draw('full-hold');
         }
+
 
         function renderHargaMWP2(data) {
             if (data == null || typeof data != "object") {
