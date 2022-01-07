@@ -3,6 +3,8 @@
     <div class="ibox-content">
       <form class="form-inline" id="toolbar_form" onsubmit="return false;">
         <select class="form-control mr-sm-2" name="tahun" id="tahun">
+          <option value='2022'>2022</option>
+          <option value='2021'>2021</option>
           <option value='2020'>2020</option>
           <option value='2019'>2019</option>
         </select>
@@ -42,69 +44,84 @@
 </div>
 
 <script>
-$(document).ready(function() {
-  $('#daftar_req_ksop').addClass('active');
+  $(document).ready(function() {
+    $('#daftar_req_ksop').addClass('active');
 
-  var toolbar = {
-    'form': $('#toolbar_form'),
-    'tahun': $('#toolbar_form').find('#tahun'),
-    'status': $('#toolbar_form').find('#status'),
-    'newBtn': $('#new_btn'),
-  }
-
-  var req_ksop_datatable = $('#req_ksop_datatable').DataTable({
-    'columnDefs': [{ targets: [2, 3, 4, 5], className: 'text-center'}],
-    deferRender: true,
-    "order": [[ 0, "desc" ]]
-  });
-
-  var dataReqKSOP = {}
-
-  toolbar.tahun.on('change', (e) => { getAllReqKSOP(); });
-  toolbar.status.on('change', (e) => { getAllReqKSOP(); });
-
-  $.when(getAllReqKSOP()).then((e) =>{
-    toolbar.newBtn.prop('disabled', false);
-  }).fail((e) => { console.log(e) });
-  
-  function getAllReqKSOP(){
-    swal({title: 'Loading Permohonan KSOP...', allowOutsideClick: false});
-    swal.showLoading();
-    return $.ajax({
-      url: `<?php echo site_url('ReqKSOPController/getAll/')?>`, 'type': 'GET',
-      data: toolbar.form.serialize(),
-      success: function (data){
-        swal.close();
-        var json = JSON.parse(data);
-        if(json['error']){
-          return;
-        }
-        dataReqKSOP = json['data'];
-        renderReqKSOP(dataReqKSOP);
-      },
-      error: function(e) {}
-    });
-  }
-
-  function renderReqKSOP(data){
-    if(data == null || typeof data != "object"){
-      console.log("Pengiriman::UNKNOWN DATA");
-      return;
+    var toolbar = {
+      'form': $('#toolbar_form'),
+      'tahun': $('#toolbar_form').find('#tahun'),
+      'status': $('#toolbar_form').find('#status'),
+      'newBtn': $('#new_btn'),
     }
-    var i = 0;
-    
-    var renderData = [];
-    Object.values(data).reverse().forEach((req_ksop) => {
-      var button = `
-        <a class="btn btn-success btn-sm" href="<?=site_url('ReqKSOPController/detail')?>?id_req_ksop=${req_ksop['id_req_ksop']}"><i class='fa fa-angle-double-right'></i></a>
-      `;
-      var rangkuman_pengiriman = downloadButton("<?=site_url('PengirimanController/info_word/?id_pengiriman=')?>", req_ksop['id_pengiriman'], false);
-      var dokumen_permohonan = downloadButton("<?=base_url('uploads/dokumen_req_ksop/')?>", req_ksop['dokumen_req_ksop'], false);
-      var tanggal_balasan = req_ksop['tanggal_balasan'] ? req_ksop['tanggal_balasan'] : '-';
-      var status = statusPermohonan(req_ksop['status']);
-      renderData.push([req_ksop['nama_perusahaan'], req_ksop['nama_pengiriman'], rangkuman_pengiriman, dokumen_permohonan, status, button]);
+
+    var req_ksop_datatable = $('#req_ksop_datatable').DataTable({
+      'columnDefs': [{
+        targets: [2, 3, 4, 5],
+        className: 'text-center'
+      }],
+      deferRender: true,
+      "order": [
+        [0, "desc"]
+      ]
     });
-    req_ksop_datatable.clear().rows.add(renderData).draw('full-hold');
-  }
-});
+
+    var dataReqKSOP = {}
+
+    toolbar.tahun.on('change', (e) => {
+      getAllReqKSOP();
+    });
+    toolbar.status.on('change', (e) => {
+      getAllReqKSOP();
+    });
+
+    $.when(getAllReqKSOP()).then((e) => {
+      toolbar.newBtn.prop('disabled', false);
+    }).fail((e) => {
+      console.log(e)
+    });
+
+    function getAllReqKSOP() {
+      swal({
+        title: 'Loading Permohonan KSOP...',
+        allowOutsideClick: false
+      });
+      swal.showLoading();
+      return $.ajax({
+        url: `<?php echo site_url('ReqKSOPController/getAll/') ?>`,
+        'type': 'GET',
+        data: toolbar.form.serialize(),
+        success: function(data) {
+          swal.close();
+          var json = JSON.parse(data);
+          if (json['error']) {
+            return;
+          }
+          dataReqKSOP = json['data'];
+          renderReqKSOP(dataReqKSOP);
+        },
+        error: function(e) {}
+      });
+    }
+
+    function renderReqKSOP(data) {
+      if (data == null || typeof data != "object") {
+        console.log("Pengiriman::UNKNOWN DATA");
+        return;
+      }
+      var i = 0;
+
+      var renderData = [];
+      Object.values(data).reverse().forEach((req_ksop) => {
+        var button = `
+        <a class="btn btn-success btn-sm" href="<?= site_url('ReqKSOPController/detail') ?>?id_req_ksop=${req_ksop['id_req_ksop']}"><i class='fa fa-angle-double-right'></i></a>
+      `;
+        var rangkuman_pengiriman = downloadButton("<?= site_url('PengirimanController/info_word/?id_pengiriman=') ?>", req_ksop['id_pengiriman'], false);
+        var dokumen_permohonan = downloadButton("<?= base_url('uploads/dokumen_req_ksop/') ?>", req_ksop['dokumen_req_ksop'], false);
+        var tanggal_balasan = req_ksop['tanggal_balasan'] ? req_ksop['tanggal_balasan'] : '-';
+        var status = statusPermohonan(req_ksop['status']);
+        renderData.push([req_ksop['nama_perusahaan'], req_ksop['nama_pengiriman'], rangkuman_pengiriman, dokumen_permohonan, status, button]);
+      });
+      req_ksop_datatable.clear().rows.add(renderData).draw('full-hold');
+    }
+  });
 </script>
