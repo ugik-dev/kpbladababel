@@ -160,12 +160,12 @@ class UserController extends CI_Controller
 			$this->SecurityModel->pengusulSubTypeGuard(['dosen_tendik'], TRUE);
 			// Validation::ajaxValidateForm($this->SecurityModel->deleteDosenTendik());
 
-			$CP = $this->input->post();
-			if (md5($CP['old_password']) != $this->session->userdata('password')) {
-				throw new UserException('Password Lama Salah', 0);
-			}
-			$this->UserModel->changePassword($CP);
-			$this->session->set_userdata('password', md5($CP['password']));
+			// $CP = $this->input->post();
+			// if (md5($CP['old_password']) != $this->session->userdata('password')) {
+			// 	throw new UserException('Password Lama Salah', 0);
+			// }
+			// $this->UserModel->changePassword($CP);
+			// $this->session->set_userdata('password', md5($CP['password']));
 			echo json_encode(array());
 		} catch (Exception $e) {
 			ExceptionHandler::handle($e);

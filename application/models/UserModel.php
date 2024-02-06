@@ -200,8 +200,8 @@ class UserModel extends CI_Model
 
 	public function editUser($data)
 	{
-		if (!empty($data['password'])) $this->db->set('hash_pwd', $data['password']);
-		if (!empty($data['password'])) $this->db->set('password', md5($data['password']));
+		// if (!empty($data['password'])) $this->db->set('hash_pwd', $data['password']);
+		// if (!empty($data['password'])) $this->db->set('password', md5($data['password']));
 		$this->db->set(DataStructure::slice($data, ['username', 'nama', 'id_role']));
 		$this->db->where('id_user', $data['id_user']);
 		$this->db->update('user');
@@ -213,8 +213,8 @@ class UserModel extends CI_Model
 
 	public function deleteUser($data)
 	{
-		$this->db->where('id_user', $data['id_user']);
-		$this->db->delete('user');
+		// $this->db->where('id_user', $data['id_user']);
+		// $this->db->delete('user');
 
 		ExceptionHandler::handleDBError($this->db->error(), "Hapus User", "User");
 	}

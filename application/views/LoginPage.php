@@ -29,7 +29,8 @@
     <div class="col-md-6">
       <div class="ibox-content">
         <form id="loginForm" class="m-t" role="form">
-          <!-- <h3>Masuk</h3> -->
+          <h3> username : admin</h3>
+          <h3> password : admin</h3>
           <div class="form-group">
             <input type="text" class="form-control" name="username" placeholder="Username" required="required" autocomplete="username">
           </div>
