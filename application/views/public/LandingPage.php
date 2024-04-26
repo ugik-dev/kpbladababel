@@ -406,7 +406,7 @@
     </div>
     <div class="row">
       <div class="col-lg-12 text-center">
-        <a href="mailto:muntokwhitepepper@kpbladababel.com" class="btn btn-primary">Send us mail</a>
+        <a href="mailto:muntokwhitepepper@kpbladababel.co.id" class="btn btn-primary">Send us mail</a>
         <p class="m-t-sm">
           Or follow us on social platform
         </p>
@@ -451,8 +451,8 @@
             <i class='fa fa-shopping-cart'></i> Trading
             </a>
             <div class="dropdown-menu bg-primary" >
-            <a class='nav-link page-scroll' style="width: 200px" href="http://mpms.kpbladababel.com/trading">TRADING BURSA LADA</a>
-            <a class='nav-link page-scroll' style="width: 200px" href="http://pss.kpbladababel.com">SHIPPING & REPORT</a> 
+            <a class='nav-link page-scroll' style="width: 200px" href="http://mpms.kpbladababel.co.id/trading">TRADING BURSA LADA</a>
+            <a class='nav-link page-scroll' style="width: 200px" href="http://pss.kpbladababel.co.id">SHIPPING & REPORT</a> 
             </div>
         </li>
         <li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
@@ -472,8 +472,8 @@
             <i class='fa fa-shopping-cart'></i> TRADING
             </a>
             <div class="dropdown-menu bg-primary" >
-            <a class='nav-link page-scroll' style="width: 200px" href="http://mpms.kpbladababel.com/trading">PASAR BURSA LADA</a>
-            <a class='nav-link page-scroll' style="width: 200px" href="http://pss.kpbladababel.com">SHIPPING & LAPORAN</a> 
+            <a class='nav-link page-scroll' style="width: 200px" href="http://mpms.kpbladababel.co.id/trading">PASAR BURSA LADA</a>
+            <a class='nav-link page-scroll' style="width: 200px" href="http://pss.kpbladababel.co.id">SHIPPING & LAPORAN</a> 
             </div>
         </li>
         <li><a class="nav-link page-scroll" href="#contact">Kontak</a></li>
@@ -489,8 +489,8 @@
     // 	<li><a class="nav-link page-scroll" href="#products">Products</a></li>
     // 	<li><a class="nav-link page-scroll" href="#news">News</a></li>
     // 	<li><a class="nav-link page-scroll" href="#contact">Contact</a></li>
-    //   <li><a class='nav-link page-scroll' href="http://mpms.kpbladababel.com/trading"><i class='fa fa-shopping-cart'></i> TRADING BURSA LADA</a></li>
-    //   <li><a class='nav-link page-scroll' href="http://pss.kpbladababel.com"><i class='fa fa-archive'></i> SHIPPING & REPORT</a></li>
+    //   <li><a class='nav-link page-scroll' href="http://mpms.kpbladababel.co.id/trading"><i class='fa fa-shopping-cart'></i> TRADING BURSA LADA</a></li>
+    //   <li><a class='nav-link page-scroll' href="http://pss.kpbladababel.co.id"><i class='fa fa-archive'></i> SHIPPING & REPORT</a></li>
     //   <li><a class='nav-link page-scroll' href="<?= site_url('login') ?>"><i class='fa fa-sign-in'></i> IG MWP & LAB</a></li>
 
     var dataProduct = {}
@@ -513,7 +513,7 @@
 
     var HargaMWPTable2 = $('#HargaMWPTable2').DataTable({
       'columnDefs': [{
-        targets: [0, 1, 2,3],
+        targets: [0, 1, 2, 3],
         className: 'text-center'
       }],
       deferRender: true,
@@ -630,11 +630,12 @@
       var i = 0;
       // d = data
       var renderData = [];
-    Object.values(data).forEach((d) => {
+      Object.values(data).forEach((d) => {
         renderData.push([d['tanggal_berlaku'],
-       'Rp '+ d['harga_mq_petani'], 
-       'Rp '+d['harga_sni1_petani'], 
-       'Rp '+d['harga_sni2_petani']]) 
+          'Rp ' + d['harga_mq_petani'],
+          'Rp ' + d['harga_sni1_petani'],
+          'Rp ' + d['harga_sni2_petani']
+        ])
       });
       // renderData.push(["MWP1", "Rp " + dataHargaMWP['harga_mwp1_petani'] + ' || USD ' + dataHargaMWP['d_harga_mwp1_petani'], "Rp " + dataHargaMWP['harga_mwp1_fob'] + ' || USD ' + dataHargaMWP['d_harga_mwp1_fob']]);
       // renderData.push(["MWP2", "Rp " + dataHargaMWP['harga_mwp2_petani'] + ' || USD ' + dataHargaMWP['d_harga_mwp2_petani'], "Rp" + dataHargaMWP['harga_mwp2_fob'] + ' || USD ' + dataHargaMWP['d_harga_mwp2_fob']]);

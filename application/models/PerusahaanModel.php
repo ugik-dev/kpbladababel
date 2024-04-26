@@ -89,6 +89,10 @@ class PerusahaanModel extends CI_Model
     if (!empty($filter['verificated'])) $this->db->where("eks.verificated", $filter['verificated']);
 
     $res = $this->db->get();
+    ExceptionHandler::handleDBError($this->db->error(), "gagal", "pengiriman");
+
+    // phpinfo();
+    // die();
     return DataStructure::keyValue($res->result_array(), 'id_perusahaan');
   }
 
@@ -152,26 +156,25 @@ class PerusahaanModel extends CI_Model
 
   public function cekUserByEmailBuyer2($data)
   {
-      $this->db->select("count(email) as count");
-      $this->db->from('buyer as u');
-      $this->db->where('u.email', $data['email']);
-      $res = $this->db->get();
-      $row = $res->result_array();
-      if ($row[0]['count'] > 1) {
-          throw new UserException("Email yang kamu daftarkan sudah ada", USER_NOT_FOUND_CODE);
-      }
+    $this->db->select("count(email) as count");
+    $this->db->from('buyer as u');
+    $this->db->where('u.email', $data['email']);
+    $res = $this->db->get();
+    $row = $res->result_array();
+    if ($row[0]['count'] > 1) {
+      throw new UserException("Email yang kamu daftarkan sudah ada", USER_NOT_FOUND_CODE);
+    }
   }
   public function cekUserByEmailSeller($data)
   {
 
-      $this->db->select("count(email) as count");
-      $this->db->from('perusahaan as u');
-      $this->db->where('u.email', $data['email']);
-      $res = $this->db->get();
-      $row = $res->result_array();
-      if ($row[0]['count'] > 0) {
-          throw new UserException("Email yang kamu daftarkan sudah ada", USER_NOT_FOUND_CODE);
-      }
+    $this->db->select("count(email) as count");
+    $this->db->from('perusahaan as u');
+    $this->db->where('u.email', $data['email']);
+    $res = $this->db->get();
+    $row = $res->result_array();
+    if ($row[0]['count'] > 0) {
+      throw new UserException("Email yang kamu daftarkan sudah ada", USER_NOT_FOUND_CODE);
+    }
   }
-
 }

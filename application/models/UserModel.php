@@ -22,6 +22,7 @@ class UserModel extends CI_Model
 		if (isset($filter['just_roles'])) $this->db->where_in('u.id_role', $filter['just_roles']);
 		if (!empty($filter['id_role'])) $this->db->where('u.id_role', $filter['id_role']);
 		$res = $this->db->get();
+		ExceptionHandler::handleDBError($this->db->error(), "gagal", "datas");
 		return DataStructure::keyValue($res->result_array(), 'id_user');
 	}
 

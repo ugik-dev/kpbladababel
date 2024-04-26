@@ -6,7 +6,7 @@
 <h6>
     PROSEDUR LAYANAN KANTOR PEMASRAN BERSAMA LADA PROVINSI BANGKA BELITUNG
 </h6>
-<p>1. Penjual/Pengusaha akan melakukan registrasi secara online di website KPB yaitu https://kpbladababel.com/
+<p>1. Penjual/Pengusaha akan melakukan registrasi secara online di website KPB yaitu https://kpbladababel.co.id/
 <p>2. Penjual/Pengusaha melakukan Kerjasama dengan penandatangan KSO (Kerja Sama Operasional) dengan PT.BBBS (BUMD) Provinsi Bangka Belitung.
 <p> 3. Penjual/Pengusaha mendaftar sebagai Pelaku Usaha Lada Terdaftar ke KPB-LADA sesuai dengan persayaratan yang berlaku.
 <p> 4. Kemudian apabila persyaratan telah terpenuhi maka KPB-Lada akan mengkonfirmasi dan mengaktifkan akun Penjual/Pengusaha Lada.

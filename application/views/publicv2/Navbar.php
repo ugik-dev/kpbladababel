@@ -15,7 +15,7 @@
                             <li class="header-left-list">
                                 <p class="header-left-text">
                                     <span class="header-left-icon">
-                                        <i class="icofont-email"></i> </span>admin@kpbladababel.com
+                                        <i class="icofont-email"></i> </span>admin@kpbladababel.co.id
                                 </p>
                             </li>
                         </ul>
@@ -128,8 +128,8 @@
                             TRADING
                         </a>
                         <ul class="dropdown-menu mr-1" style="background: #1c1646;">
-                            <li class="nav-item"><a class='nav-link dropdown-item' style="width: 200px" href="http://mpms.kpbladababel.com/trading">PASAR BURSA LADA</a></li>
-                            <li class="nav-item"> <a class='nav-link dropdown-item' style="width: 200px" href="http://pss.kpbladababel.com">SHIPPING & LAPORAN</a></li>
+                            <li class="nav-item"><a class='nav-link dropdown-item' style="width: 200px" href="http://mpms.kpbladababel.co.id/trading">PASAR BURSA LADA</a></li>
+                            <li class="nav-item"> <a class='nav-link dropdown-item' style="width: 200px" href="http://pss.kpbladababel.co.id">SHIPPING & LAPORAN</a></li>
                         </ul>
                     </li> -->
                     <li class="nav-item">

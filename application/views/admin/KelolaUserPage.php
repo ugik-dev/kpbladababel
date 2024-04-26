@@ -194,6 +194,7 @@
         data: toolbar.form.serialize(),
         success: function(data) {
           swal.close();
+          console.log(data)
           var json = JSON.parse(data);
           if (json['error']) {
             return;
@@ -206,6 +207,7 @@
     }
 
     function renderUser(data) {
+      console.log(data)
       if (data == null || typeof data != "object") {
         console.log("User::UNKNOWN DATA");
         return;

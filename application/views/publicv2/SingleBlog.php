@@ -35,7 +35,7 @@
                                 <div class="post-social-share">
                                     <ul>
                                         <li><span>SHARE:</span></li>
-                                        <li><a href="https://www.facebook.com/sharer/sharer.php?u=https://kpbladababel.com/index.php/newsx?id_news=<?= $contentData['berita_id'] ?>&t=TITLE"><i class="icofont-facebook"></i></a></li>
+                                        <li><a href="https://www.facebook.com/sharer/sharer.php?u=https://kpbladababel.co.id/index.php/newsx?id_news=<?= $contentData['berita_id'] ?>&t=TITLE"><i class="icofont-facebook"></i></a></li>
                                         <li><a href="#"><i class="icofont-twitter"></i></a></li>
                                         <li><a href="#"><i class="icofont-google-plus"></i></a></li>
                                         <li><a href="#"><i class="icofont-pinterest"></i></a></li>

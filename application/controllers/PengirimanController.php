@@ -751,72 +751,72 @@ class PengirimanController extends CI_Controller
     if ($data['id_tahap_proposal'] == '1') {
       $send['to'] = $serv['kpb']['username']; //KPB
       $send['subject'] = $subject = 'Permohonan Sertifikat IG dan Pengujian Mutu ' . $data['nama_perusahaan'];
-      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.co.id/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
       $emailContent .= '';
       $emailContent .= '<br> Dengan ini kami menginfokan bahwa ada pemohonan baru kepada anda. ';
       $emailContent .= '<br> Diharapkan untuk cek pada website KPB LADA BABEL. ';
       // $emailContent .= '<br> Waktu : '.$this->convertDateTime2($data['tanggal_record']);
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
-      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.co.id/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.co.id</a></p></td></tr></table></body></html>";
       $send['message'] = $emailContent;
     } else if ($data['id_tahap_proposal'] == '2') {
       $send['to'] = $serv['bp3l']['username']; //BP3L
 
       $send['subject'] = $subject = 'Permohonan Sertifikat IG ' . $data['nama_perusahaan'];
-      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.co.id/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
       $emailContent .= '';
       $emailContent .= '<br> Dengan ini kami menginfokan bahwa ada pemohonan baru kepada anda. ';
       $emailContent .= '<br> Diharapkan untuk cek pada website KPB LADA BABEL. ';
       // $emailContent .= '<br> Waktu : '.$this->convertDateTime2($data['tanggal_record']);
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
-      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.co.id/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.co.id</a></p></td></tr></table></body></html>";
       $send['message'] = $emailContent;
       if ($data['status_kpb_rek'] == 'DITOLAK') {
         $send['to'] = $data['email']; //PERUSAHAAN
         $send['subject'] = $subject = 'Pemberitahun Permohonan Ditolak';
-        $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+        $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.co.id/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
         $emailContent .= '<tr><td style="height:20px"></td></tr>';
         $emailContent .= '';
         $emailContent .= '<br> Dengan ini kami menginfokan bahwa permohonan anda ditolak. ';
         $emailContent .= '<br> Diharapkan untuk cek pada website KPB LADA BABEL. ';
         // $emailContent .= '<br> Waktu : '.$this->convertDateTime2($data['tanggal_record']);
         $emailContent .= '<tr><td style="height:20px"></td></tr>';
-        $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+        $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.co.id/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.co.id</a></p></td></tr></table></body></html>";
         $send['message'] = $emailContent;
       }
     } else if ($data['id_tahap_proposal'] == '3') {
       $send['to'] = $serv['bpsmb']['username']; //MUTU
 
       $send['subject'] = $subject = 'Permohonan Pengujian Mutu ' . $data['nama_perusahaan'];
-      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.co.id/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
       $emailContent .= '';
       $emailContent .= '<br> Dengan ini kami menginfokan bahwa ada pemohonan baru kepada anda. ';
       $emailContent .= '<br> Diharapkan untuk cek pada website KPB LADA BABEL. ';
       // $emailContent .= '<br> Waktu : '.$this->convertDateTime2($data['tanggal_record']);
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
-      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.co.id/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.co.id</a></p></td></tr></table></body></html>";
       $send['message'] = $emailContent;
       if ($data['status_bp3l_rek'] == 'DITOLAK') {
         $send['to'] = $data['email']; //PERUSAHAAN
         $send['subject'] = $subject = 'Pemberitahun Permohonan Ditolak';
-        $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+        $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.co.id/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
         $emailContent .= '<tr><td style="height:20px"></td></tr>';
         $emailContent .= '';
         $emailContent .= '<br> Dengan ini kami menginfokan bahwa permohonan anda ditolak. ';
         $emailContent .= '<br> Diharapkan untuk cek pada website KPB LADA BABEL. ';
         // $emailContent .= '<br> Waktu : '.$this->convertDateTime2($data['tanggal_record']);
         $emailContent .= '<tr><td style="height:20px"></td></tr>';
-        $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+        $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.co.id/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.co.id</a></p></td></tr></table></body></html>";
         $send['message'] = $emailContent;
       }
     } else if ($data['id_tahap_proposal'] == '4') {
       $send['to'] = $serv['bp3l']['username'] . ',' . $serv['bpsmb']['username'] . ',' . $serv['kpb']['username']; //kpb bp3l bpsmb
       if (!empty($data['email']))  $send['to'] .= ', ' . $data['email'];
       $send['subject'] = $subject = 'Pemberitahun Pengambilan Sampel';
-      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.co.id/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
       $emailContent .= '';
       $emailContent .= '<br> Dengan ini kami menginfokan bahwa untuk melakukan pengambilan sampel; ';
@@ -827,60 +827,60 @@ class PengirimanController extends CI_Controller
       $emailContent .= '<br> Diharapkan untuk cek pada website KPB LADA BABEL. ';
       // $emailContent .= '<br> Waktu : '.$this->convertDateTime2($data['tanggal_record']);
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
-      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.co.id/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.co.id</a></p></td></tr></table></body></html>";
       $send['message'] = $emailContent;
 
       if ($data['status_bpsmb_mutu'] == 'DITOLAK') {
         $send['to'] = $data['email']; //PERUSAHAAN
         $send['subject'] = $subject = 'Pemberitahun Permohonan Ditolak';
-        $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+        $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.co.id/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
         $emailContent .= '<tr><td style="height:20px"></td></tr>';
         $emailContent .= '';
         $emailContent .= '<br> Dengan ini kami menginfokan bahwa permohonan anda ditolak. ';
         $emailContent .= '<br> Diharapkan untuk cek pada website KPB LADA BABEL. ';
         // $emailContent .= '<br> Waktu : '.$this->convertDateTime2($data['tanggal_record']);
         $emailContent .= '<tr><td style="height:20px"></td></tr>';
-        $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+        $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.co.id/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.co.id</a></p></td></tr></table></body></html>";
         $send['message'] = $emailContent;
       }
     } else if ($data['id_tahap_proposal'] == '5') {
       $send['to'] = 'bp3l.babel.indonesia@gmail.com'; //BP3L
 
       $send['subject'] = $subject = 'Pemberitahun Hasil Uji Mutu';
-      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.co.id/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
       $emailContent .= '';
       $emailContent .= '<br> Dengan ini kami menginfokan bahwa ada hasil uji mutu dari BPSMB yang sudah keluar. ';
       $emailContent .= '<br> Diharapkan untuk cek pada website KPB LADA BABEL. ';
       // $emailContent .= '<br> Waktu : '.$this->convertDateTime2($data['tanggal_record']);
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
-      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.co.id/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.co.id</a></p></td></tr></table></body></html>";
       $send['message'] = $emailContent;
     } else if ($data['id_tahap_proposal'] == '6') {
       $send['to'] = 'kpb.ladababel@gmail.com'; //KPB
 
       $send['subject'] = $subject = 'Pemberitahun Hasil Uji Mutu dan Sertifikat IG';
-      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.co.id/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
       $emailContent .= '';
       $emailContent .= '<br> Dengan ini kami menginfokan bahwa ada hasil uji mutu dan sertifikat IG yang sudah keluar. ';
       $emailContent .= '<br> Diharapkan untuk cek pada website KPB LADA BABEL. ';
       // $emailContent .= '<br> Waktu : '.$this->convertDateTime2($data['tanggal_record']);
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
-      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.co.id/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.co.id</a></p></td></tr></table></body></html>";
       $send['message'] = $emailContent;
     } else if ($data['id_tahap_proposal'] == '99') {
       $send['to'] = $data['email']; //PERUSAHAAN
 
       $send['subject'] = $subject = 'Pemberitahun KPB LADA BABEL';
-      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.com/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
+      $emailContent = '<!DOCTYPE><html><head></head><body><table width="600px" style="border:1px solid #cccccc;margin: auto;border-spacing:0;"><tr><td style="background:#F00000;padding-left:3%"><img src="http://kpbladababel.co.id/assets/img/logo-kpb.png" width="60px" vspace=0 /></td></tr>';
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
       $emailContent .= '';
       $emailContent .= '<br> Dengan ini kami menginfokan bahwa hasil uji mutu dan sertifikat IG anda sudah keluar. ';
       $emailContent .= '<br> Diharapkan untuk cek pada website KPB LADA BABEL. ';
       // $emailContent .= '<br> Waktu : '.$this->convertDateTime2($data['tanggal_record']);
       $emailContent .= '<tr><td style="height:20px"></td></tr>';
-      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.com/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.com</a></p></td></tr></table></body></html>";
+      $emailContent .= "<tr><td style='background:#000000;color: #999999;padding: 2%;text-align: center;font-size: 13px;'><p style='margin-top:1px;'><a href='kpbladababel.co.id/index.php/login' target='_blank' style='text-decoration:none;color: #60d2ff;'>kpbladababel.co.id</a></p></td></tr></table></body></html>";
       $send['message'] = $emailContent;
     }
 
